@@ -1,21 +1,23 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../components/NavbarHome";
+
 
 const Informasi = () => {
     return (
         <>
+            {/* Navbar */}
             <Navbar />
-            <div className="container mx-auto px-4 py-8 pt-24">
+
+            <div className="container mx-auto px-4 py-8 pt-10">
                 <h1 className="text-3xl font-bold text-[#214C1E] mb-6 text-center">Informasi Media</h1>
                 
                 <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
                 <div className="flex items-center mb-4 justify-center sm:justify-start">
-  <i className="ri-information-line text-2xl text-[#1D6F35] mr-2"></i>
-  <h2 className="text-2xl font-semibold text-[#1D6F35] text-center sm:text-left">
-    Detail Media Pembelajaran
-  </h2>
-</div>
+                <i className="ri-information-line text-2xl text-[#1D6F35] mr-2"></i>
+                <h2 className="text-2xl font-semibold text-[#1D6F35] text-center sm:text-left">
+                    Detail Media Pembelajaran
+                </h2>
+                </div>
 
                     <p className="text-gray-700 mb-4 text-center sm:text-left">
                         Media pembelajaran ini dibuat untuk memenuhi persyaratan dalam menyelesaikan program Strata-1 Pendidikan Komputer dengan judul:
@@ -44,7 +46,12 @@ const Informasi = () => {
                     </ul>
                 </div>
             </div>
-            <Footer />
+            
+            {/* Footer */}
+            <footer className="bg-gray-100 p-4 text-center text-[#1D6F35] w-full">
+                <span className="font-bold">AnalyticsLearn</span> © 2025 PilkomMedia
+            </footer>
+
         </>
     );
 };

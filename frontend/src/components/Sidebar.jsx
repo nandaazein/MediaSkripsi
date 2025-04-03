@@ -1,261 +1,354 @@
-// import { useState } from "react";
+// import React, { useState, useEffect } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faBookOpen,
+//   faSearch,
+//   faChartBar,
+//   faCompress,
+//   faTable,
+//   faTasks,
+//   faChevronDown,
+//   faCircle,
+// } from "@fortawesome/free-solid-svg-icons";
 
-// const Sidebar = () => {
-//   const [open, setOpen] = useState(false);
-//   const [submenuOpen, setSubmenuOpen] = useState({
-//     pendahuluan: false,
-//     pencarian: false,
-//     visualisasi: false,
-//     peringkasan: false,
-//     pengelolaan: false,
-//     uji: false,
-//   });
+// export const Sidebar = () => {
+//   const [openDropdown, setOpenDropdown] = useState(null);
+//   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+//   const [isScrolled, setIsScrolled] = useState(false);
 
-//   // Fungsi untuk toggle submenu
-//   const toggleSubmenu = (key) => {
-//     setSubmenuOpen((prev) => ({
-//       ...prev,
-//       [key]: !prev[key],
-//     }));
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth <= 768);
+//     };
+    
+//     const handleScroll = () => {
+//       setIsScrolled(window.scrollY > 50);
+//     };
+
+//     window.addEventListener("resize", handleResize);
+//     window.addEventListener("scroll", handleScroll);
+
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+
+//   const toggleDropdown = (index) => {
+//     setOpenDropdown(openDropdown === index ? null : index);
 //   };
 
+//   const menuItems = [
+//     {
+//       icon: faBookOpen,
+//       title: "Pendahuluan",
+//       subItems: ["Pengantar Bab", "Pendahuluan", "Mengenal Analisis Data", "Pendekatan Computational Thinking"],
+//     },
+//     {
+//       icon: faSearch,
+//       title: "Pencarian Data",
+//       subItems: ["Pencarian dengan Fungsi Lookup", "Latihan", "Pencarian dengan Fungsi Reference", "Latihan", "Evaluasi"],
+//     },
+//     {
+//       icon: faChartBar,
+//       title: "Visualisasi Data",
+//       subItems: ["Visualisasi Data", "Latihan"],
+//     },
+//     {
+//       icon: faCompress,
+//       title: "Peringkasan Data",
+//       subItems: ["Peringkasan Data", "Latihan"],
+//     },
+//     {
+//       icon: faTable,
+//       title: "Pengelolaan Data",
+//       subItems: ["Sorting & Filtering", "Latihan"],
+//     },
+//     {
+//       icon: faTasks,
+//       title: "Evaluasi",
+//     },
+//   ];
+
 //   return (
-//     <div className="flex mt-10 fixed">
-//       {/* Sidebar */}
-//       <div
-//         className={`${open ? "w-64" : "w-20"}  h-auto min-h-screen transition-all duration-300 relative `}
-//         style={{ backgroundColor: "#214C1E" }} // Hijau Tua
-//       >
-//         {/* Tombol Toggle */}
-//         <button
-//           className={`absolute top-9 right-0 transform translate-x-1/2 w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded-full shadow-md transition-transform ${
-//             !open ? "rotate-180" : ""
-//           } hover:bg-gray-200`}
-//           onClick={() => setOpen(!open)}
-//         >
-//           <i className="ri-arrow-right-s-line text-black"></i>
-//         </button>
-
-//         {/* Header Daftar Materi */}
-//         {open && (
-//           <h2 className="text-white text-lg font-semibold text-center mt-10">
-//             Daftar Materi
-//           </h2>
-//         )}
-
-//         {/* Menu */}
-//         <ul className="mt-6">
-//           {/* Pendahuluan */}
-//           <li
-//             className="flex items-center p-3 text-white cursor-pointer hover:bg-gray-600 rounded-md"
-//             onClick={() => toggleSubmenu("pendahuluan")}
-//           >
-//             <i className="ri-book-line text-xl"></i>
-//             <span className={`ml-4 ${!open ? "hidden" : ""} text-sm`}>
-//               Pendahuluan
-//             </span>
+//     <aside
+//       className={`bg-gray-100 border-gray-200 shadow-sm p-4 transition-all  duration-200 ease-in-out 
+//         ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"} 
+//         ${isScrolled ? "top-0" : "top-16"}`}
+//     >
+//       <h2 className="text-sm font-bold text-center text-[#255F38] mb-4">DAFTAR MATERI</h2>
+//       <ul className="space-y-2">
+//         {menuItems.map((item, index) => (
+//           <li key={index}>
+//             <button
+//               className="flex items-center justify-between w-full p-2 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer font-medium text-base"
+//               onClick={() => toggleDropdown(index)}
+//             >
+//               <div className="flex items-center">
+//                 <div className="w-6 h-6 bg-[#255F38] text-white rounded-md flex items-center justify-center mr-3">
+//                   <FontAwesomeIcon icon={item.icon} size="sm" />
+//                 </div>
+//                 {item.title}
+//               </div>
+//               {item.subItems && (
+//                 <FontAwesomeIcon
+//                   icon={faChevronDown}
+//                   size="sm"
+//                   className={`transition-transform duration-200 ease-in-out ${openDropdown === index ? "rotate-180" : ""}`}
+//                 />
+//               )}
+//             </button>
+//             {openDropdown === index && item.subItems && (
+//               <ul className="pl-10 space-y-2 mt-1 text-gray-600 text-sm">
+//                 {item.subItems.map((sub, subIndex) => (
+//                   <li key={subIndex} className="flex items-center gap-2 p-2 hover:text-gray-900 cursor-pointer">
+//                     <FontAwesomeIcon icon={faCircle} size="xs" />
+//                     {sub}
+//                   </li>
+//                 ))}
+//               </ul>
+//             )}
 //           </li>
-//           {submenuOpen.pendahuluan && open && (
-//             <ul className="ml-10 text-white text-sm">
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Pengantar Bab Analisis Data
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Pendahuluan Bab Analisis Data
-//               </li>
-//             </ul>
-//           )}
-
-//           {/* Pencarian Data */}
-//           <li
-//             className="flex items-center p-3 text-white cursor-pointer hover:bg-gray-600 rounded-md"
-//             onClick={() => toggleSubmenu("pencarian")}
-//           >
-//             <i className="ri-search-line text-xl"></i>
-//             <span className={`ml-4 ${!open ? "hidden" : ""} text-sm`}>
-//               Pencarian Data
-//             </span>
-//           </li>
-//           {submenuOpen.pencarian && open && (
-//             <ul className="ml-10 text-white text-sm">
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Pencarian dengan Fungsi Lookup (Vlookup dan Hlookup)
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Pencarian dengan Fungsi Reference (Index, Match, Choose)
-//               </li>
-//             </ul>
-//           )}
-
-//           {/* Visualisasi Data */}
-//           <li
-//             className="flex items-center p-3 text-white cursor-pointer hover:bg-gray-600 rounded-md"
-//             onClick={() => toggleSubmenu("visualisasi")}
-//           >
-//             <i className="ri-bar-chart-line text-xl"></i>
-//             <span className={`ml-4 ${!open ? "hidden" : ""} text-sm`}>
-//               Visualisasi Data
-//             </span>
-//           </li>
-//           {submenuOpen.visualisasi && open && (
-//             <ul className="ml-10 text-white text-sm">
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Peran Analisis Data
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Membuat Grafik
-//               </li>
-//             </ul>
-//           )}
-
-//           {/* Peringkasan Data */}
-//           <li
-//             className="flex items-center p-3 text-white cursor-pointer hover:bg-gray-600 rounded-md"
-//             onClick={() => toggleSubmenu("peringkasan")}
-//           >
-//             <i className="ri-list-check-2 text-xl"></i>
-//             <span className={`ml-4 ${!open ? "hidden" : ""} text-sm`}>
-//               Peringkasan Data
-//             </span>
-//           </li>
-//           {submenuOpen.peringkasan && open && (
-//             <ul className="ml-10 text-white text-sm">
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Fungsi SUMIF & SUMIFS
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Fungsi COUNTIF & COUNTIFS
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Pivot Table 1D & 2D
-//               </li>
-//             </ul>
-//           )}
-
-//           {/* Pengelolaan Data */}
-//           <li
-//             className="flex items-center p-3 text-white cursor-pointer hover:bg-gray-600 rounded-md"
-//             onClick={() => toggleSubmenu("pengelolaan")}
-//           >
-//             <i className="ri-folder-line text-xl"></i>
-//             <span className={`ml-4 ${!open ? "hidden" : ""} text-sm`}>
-//               Pengelolaan Data
-//             </span>
-//           </li>
-//           {submenuOpen.pengelolaan && open && (
-//             <ul className="ml-10 text-white text-sm">
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Membuat Tabel
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Sorting Data
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Filtering Data
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Menghitung Total
-//               </li>
-//             </ul>
-//           )}
-
-//           {/* Uji Kompetensi */}
-//           <li
-//             className="flex items-center p-3 text-white cursor-pointer hover:bg-gray-600 rounded-md"
-//             onClick={() => toggleSubmenu("uji")}
-//           >
-//             <i className="ri-award-line text-xl"></i>
-//             <span className={`ml-4 ${!open ? "hidden" : ""} text-sm`}>
-//               Uji Kompetensi
-//             </span>
-//           </li>
-//           {submenuOpen.uji && open && (
-//             <ul className="ml-10 text-white text-sm">
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Soal Pilihan Ganda
-//               </li>
-//               <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-//                 Soal HOTS
-//               </li>
-//             </ul>
-//           )}
-//         </ul>
-//       </div>
-//     </div>
+//         ))}
+//       </ul>
+//     </aside>
 //   );
 // };
 
 // export default Sidebar;
 
+// import React, { useState, useEffect } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faBookOpen,
+//   faSearch,
+//   faChartBar,
+//   faCompress,
+//   faTable,
+//   faTasks,
+//   faChevronDown,
+// } from "@fortawesome/free-solid-svg-icons";
 
-import { useState } from "react";
+// export const Sidebar = () => {
+//   const [openDropdown, setOpenDropdown] = useState(null);
+//   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+//   const [isScrolled, setIsScrolled] = useState(false);
 
-const Sidebar = ({ open, setOpen }) => {
-  const [submenuOpen, setSubmenuOpen] = useState({
-    pendahuluan: false,
-    pencarian: false,
-    visualisasi: false,
-    peringkasan: false,
-    pengelolaan: false,
-    uji: false,
-  });
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth <= 768);
+//     };
+    
+//     const handleScroll = () => {
+//       setIsScrolled(window.scrollY > 50);
+//     };
 
-  const toggleSubmenu = (key) => {
-    setSubmenuOpen((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
+//     window.addEventListener("resize", handleResize);
+//     window.addEventListener("scroll", handleScroll);
+
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+
+//   const toggleDropdown = (index) => {
+//     setOpenDropdown(openDropdown === index ? null : index);
+//   };
+
+//   const menuItems = [
+//     {
+//       icon: faBookOpen,
+//       title: "Pendahuluan",
+//       subItems: ["Pengantar Bab Analisis Data", "Pendahuluan", "Mengenal Analisis Data", "Pendekatan Computational Thinking", "Contoh Penerapan CT"],
+//     },
+//     {
+//       icon: faSearch,
+//       title: "Pencarian Data",
+//       subItems: ["Pencarian dengan Fungsi Lookup", "Contoh Penerapan Fungsi Lookup", "Aktivitas Siswa", "Mari Berlatih",
+//         "Pencarian dengan Fungsi Reference", "Contoh Penerapan Fungsi Reference", "Aktivitas Siswa", "Mari Berlatih", "Evaluasi"],
+//     },
+//     {
+//       icon: faChartBar,
+//       title: "Visualisasi Data",
+//       subItems: ["Visualisasi Data", "Latihan"],
+//     },
+//     {
+//       icon: faCompress,
+//       title: "Peringkasan Data",
+//       subItems: ["Peringkasan Data", "Latihan"],
+//     },
+//     {
+//       icon: faTable,
+//       title: "Pengelolaan Data",
+//       subItems: ["Sorting & Filtering", "Latihan"],
+//     },
+//     {
+//       icon: faTasks,
+//       title: "Evaluasi",
+//     },
+//   ];
+
+//   return (
+//     <aside
+//       className={`bg-gray-100 border-gray-200 shadow-sm p-4 transition-all duration-200 ease-in-out 
+//         ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"} 
+//         ${isScrolled ? "top-0" : "top-16"}`}
+//     >
+//       <h2 className="text-sm font-bold text-center text-[#255F38] mb-4">DAFTAR MATERI</h2>
+//       <ul className="space-y-2">
+//         {menuItems.map((item, index) => (
+//           <li key={index}>
+//             <button
+//               className="flex items-center justify-between w-full p-2 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer font-medium text-base"
+//               onClick={() => toggleDropdown(index)}
+//             >
+//               <div className="flex items-center">
+//                 <div className="w-6 h-6 bg-[#255F38] text-white rounded-md flex items-center justify-center mr-3">
+//                   <FontAwesomeIcon icon={item.icon} size="sm" />
+//                 </div>
+//                 {item.title}
+//               </div>
+//               {item.subItems && (
+//                 <FontAwesomeIcon
+//                   icon={faChevronDown}
+//                   size="sm"
+//                   className={`transition-transform duration-200 ease-in-out ${openDropdown === index ? "rotate-180" : ""}`}
+//                 />
+//               )}
+//             </button>
+//             {openDropdown === index && item.subItems && (
+//               <ul className="bg-gray-50 rounded-lg mt-2">
+//                 {item.subItems.map((sub, subIndex) => (
+//                   <li key={subIndex} className="flex items-center gap-2 px-4 py-2 text-gray-700 border-b last:border-b-0">
+//                     ○ {sub}
+//                   </li>
+//                 ))}
+//               </ul>
+//             )}
+//           </li>
+//         ))}
+//       </ul>
+//     </aside>
+//   );
+// };
+
+// export default Sidebar;
+
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBookOpen,
+  faSearch,
+  faChartBar,
+  faCompress,
+  faTable,
+  faTasks,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
+
+export const Sidebar = () => {
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const toggleDropdown = (index) => {
+    setOpenDropdown(openDropdown === index ? null : index);
   };
 
+  const menuItems = [
+    {
+      icon: faBookOpen,
+      title: "Pendahuluan",
+      subItems: ["Pengantar Bab Analisis Data", "Pendahuluan", "Mengenal Analisis Data", "Pendekatan Computational Thinking", "Contoh Penerapan CT"],
+    },
+    {
+      icon: faSearch,
+      title: "Pencarian Data",
+      subItems: ["Pencarian dengan Fungsi Lookup", "Contoh Penerapan Fungsi Lookup", "Aktivitas Siswa", "Mari Berlatih",
+        "Pencarian dengan Fungsi Reference", "Contoh Penerapan Fungsi Reference", "Aktivitas Siswa", "Mari Berlatih", "Evaluasi"],
+    },
+    {
+      icon: faChartBar,
+      title: "Visualisasi Data",
+      subItems: ["Visualisasi Data", "Latihan"],
+    },
+    {
+      icon: faCompress,
+      title: "Peringkasan Data",
+      subItems: ["Peringkasan Data", "Latihan"],
+    },
+    {
+      icon: faTable,
+      title: "Pengelolaan Data",
+      subItems: ["Sorting & Filtering", "Latihan"],
+    },
+    {
+      icon: faTasks,
+      title: "Evaluasi",
+    },
+  ];
+
   return (
-    <div
-      className={`fixed top-0 left-0 h-full transition-all duration-300 ${
-        open ? "w-64" : "w-20"
-      }`}
-      style={{ backgroundColor: "#214C1E" }}
+    <aside
+      className={`bg-gray-100 border-gray-200 shadow-sm p-4 transition-all duration-200 ease-in-out 
+        ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"} 
+        ${isScrolled ? "top-0" : "top-16"}`}
     >
-      {/* Tombol Toggle */}
-      <button
-        className={`absolute top-9 right-[-15px] w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded-full shadow-md transition-transform ${
-          open ? "" : "rotate-180"
-        } hover:bg-gray-200`}
-        onClick={() => setOpen(!open)}
-      >
-        <i className="ri-arrow-right-s-line text-black"></i>
-      </button>
-
-      {/* Header Daftar Materi */}
-      {open && (
-        <h2 className="text-white text-lg font-semibold text-center mt-10">
-          Daftar Materi
-        </h2>
-      )}
-
-      {/* Menu */}
-      <ul className="mt-6">
-        <li
-          className="flex items-center p-3 text-white cursor-pointer hover:bg-gray-600 rounded-md"
-          onClick={() => toggleSubmenu("pendahuluan")}
-        >
-          <i className="ri-book-line text-xl"></i>
-          <span className={`ml-4 ${!open ? "hidden" : ""} text-sm`}>
-            Pendahuluan
-          </span>
-        </li>
-        {submenuOpen.pendahuluan && open && (
-          <ul className="ml-10 text-white text-sm">
-            <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-              Pengantar Bab Analisis Data
-            </li>
-            <li className="p-2 cursor-pointer hover:bg-gray-700 rounded-md">
-              Pendahuluan Bab Analisis Data
-            </li>
-          </ul>
-        )}
+      <h2 className="text-sm font-bold text-center text-[#255F38] mb-4">DAFTAR MATERI</h2>
+      <ul className="space-y-2">
+        {menuItems.map((item, index) => (
+          <li key={index}>
+            <button
+              className="flex items-center justify-between w-full p-2 text-gray-700 hover:bg-gray-200 rounded-lg cursor-pointer font-normal text-base"
+              onClick={() => toggleDropdown(index)}
+            >
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-[#255F38] text-white rounded-md flex items-center justify-center mr-3">
+                  <FontAwesomeIcon icon={item.icon} size="sm" />
+                </div>
+                {item.title}
+              </div>
+              {item.subItems && (
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  size="sm"
+                  className={`transition-transform duration-200 ease-in-out ${openDropdown === index ? "rotate-180" : ""}`}
+                />
+              )}
+            </button>
+            {openDropdown === index && item.subItems && (
+              <ul className="bg-gray-50 rounded-lg mt-2">
+                {item.subItems.map((sub, subIndex) => (
+                  <li key={subIndex} className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm hover:bg-gray-200 cursor-pointer">
+                    ○ {sub}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
       </ul>
-    </div>
+    </aside>
   );
 };
 
 export default Sidebar;
-

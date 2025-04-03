@@ -1,39 +1,37 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/Materi/Layout";
 
 const BerlatihPeringkasan = () => {
   return (
     <Layout>
-      <h1 className="text-xl md:text-2xl sm:text-lg font-bold mb-5 text-center text-green-800">
-        PERINGKASAN DATA
-      </h1>
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Petunjuk Mengerjakan */}
+        
+        {/* Container untuk Instruksi */}
         <div className="bg-white shadow-md rounded-lg p-5 border-2 border-green-800 mt-5">
-          <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3 border-b-2 border-green-800 inline-block px-3">
-            Cara Mengerjakan
-          </h2>
-          <ol className="list-decimal list-inside text-gray-600 text-sm md:text-base">
-            <li>Urutkan kembali langkah-langkah tersebut dengan menuliskan angka urutannya pada kolom Nomor.</li>
-            <li>Tulis setiap langkah dalam sel pada kolom Langkah Algoritma dengan urutan yang sudah diperbaiki.</li>
-          </ol>
-        </div>
-
-        {/* Latihan: Menyusun Langkah Membuat Chart */}
-        <div className="bg-white shadow-md rounded-lg p-5 border-2 border-green-800 mt-5">
-          <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3 border-b-2 border-green-800 inline-block px-3">
-            Latihan: Menyusun Langkah Membuat Chart
+          <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3">
+            💡 Instruksi
           </h2>
           <ul className="list-disc list-inside text-gray-600 text-sm md:text-base">
-            <li>Pilih jenis chart yang sesuai, misalnya Column Chart untuk membandingkan data.</li>
-            <li>Siapkan data dan pastikan tabel sudah rapi sesuai kategori.</li>
-            <li>Buat chart dengan memilih menu Insert lalu klik jenis chart yang diinginkan.</li>
-            <li>Periksa apakah chart sudah jelas dan mudah dibaca.</li>
-            <li>Pilih semua data yang akan dibuat chart.</li>
+            <li>Gunakan fungsi yang sesuai untuk menjawab pertanyaan berikut.</li>
+            <li>Tuliskan rumusnya di sel yang sesuai dan pastikan hasilnya benar.</li>
+            <li>Unduh file kemudian kumpulkan pada tempat yang sudah disediakan.</li>
           </ul>
         </div>
 
-        {/* Zoho Sheet Embed dengan Penjelasan */}
+        {/* Container untuk Soal Latihan */}
+        <div className="bg-white shadow-md rounded-lg p-5 border-2 border-green-800 mt-5">
+          <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3">
+            ❓ Soal Latihan
+          </h2>
+          <ol className="list-decimal list-inside text-gray-600 text-sm md:text-base">
+            <li>Hitung total penjualan untuk kategori "Minuman" menggunakan fungsi SUMIF.</li>
+            <li>Hitung total penjualan untuk kategori "Minuman" di kota "Jakarta" menggunakan fungsi SUMIFS.</li>
+            <li>Hitung jumlah produk yang termasuk dalam kategori "Makanan" menggunakan fungsi COUNTIF.</li>
+            <li>Hitung jumlah produk dalam kategori "Makanan" yang berada di kota "Bandung" menggunakan fungsi COUNTIFS.</li>
+          </ol>
+          
+        </div>
+
+        {/* Zoho Sheet Embed */}
         <div className="mt-8 bg-white shadow-md rounded-lg p-5 border-2 border-green-800">
           <div className="flex justify-center">
             <iframe 
@@ -47,6 +45,19 @@ const BerlatihPeringkasan = () => {
           </div>
         </div>
 
+        <div className="mt-8 bg-white shadow-md rounded-lg p-5 border-2 border-green-800">
+          <div className="flex justify-center">
+            <iframe 
+              width="100%" 
+              height="400" 
+              style={{ border: '1px solid #e7e7e7' }} 
+              frameBorder="0" 
+              scrolling="no" 
+              src="https://sheet.zohopublic.com/sheet/published/8wieo22dcc489c0fe4968ad9dcc9b8d9c0178?mode=embed">
+            </iframe>
+          </div>
+        </div>
+
         {/* Tombol Selanjutnya */}
         <div className="flex justify-end mt-5 sm:mt-7">
           <a 
@@ -56,6 +67,7 @@ const BerlatihPeringkasan = () => {
             Selanjutnya
           </a>
         </div>
+
       </div>
     </Layout>
   );
