@@ -20,7 +20,7 @@
 //     const handleResize = () => {
 //       setIsMobile(window.innerWidth <= 768);
 //     };
-    
+
 //     const handleScroll = () => {
 //       setIsScrolled(window.scrollY > 50);
 //     };
@@ -72,8 +72,8 @@
 
 //   return (
 //     <aside
-//       className={`bg-gray-100 border-gray-200 shadow-sm p-4 transition-all  duration-200 ease-in-out 
-//         ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"} 
+//       className={`bg-gray-100 border-gray-200 shadow-sm p-4 transition-all  duration-200 ease-in-out
+//         ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"}
 //         ${isScrolled ? "top-0" : "top-16"}`}
 //     >
 //       <h2 className="text-sm font-bold text-center text-[#255F38] mb-4">DAFTAR MATERI</h2>
@@ -138,7 +138,7 @@
 //     const handleResize = () => {
 //       setIsMobile(window.innerWidth <= 768);
 //     };
-    
+
 //     const handleScroll = () => {
 //       setIsScrolled(window.scrollY > 50);
 //     };
@@ -191,8 +191,8 @@
 
 //   return (
 //     <aside
-//       className={`bg-gray-100 border-gray-200 shadow-sm p-4 transition-all duration-200 ease-in-out 
-//         ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"} 
+//       className={`bg-gray-100 border-gray-200 shadow-sm p-4 transition-all duration-200 ease-in-out
+//         ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"}
 //         ${isScrolled ? "top-0" : "top-16"}`}
 //     >
 //       <h2 className="text-sm font-bold text-center text-[#255F38] mb-4">DAFTAR MATERI</h2>
@@ -234,7 +234,6 @@
 // };
 
 // export default Sidebar;
-
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -246,6 +245,7 @@ import {
   faTasks,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 export const Sidebar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -256,7 +256,7 @@ export const Sidebar = () => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -278,32 +278,46 @@ export const Sidebar = () => {
     {
       icon: faBookOpen,
       title: "Pendahuluan",
-      subItems: ["Pengantar Bab Analisis Data", "Pendahuluan", "Mengenal Analisis Data", "Pendekatan Computational Thinking", "Contoh Penerapan CT"],
+      subItems: [
+        { title: "Pengantar Bab Analisis Data", path: "/pengantar-bab" },
+        { title: "Pendahuluan", path: "/pendahuluan" },
+        { title: "Mengenal Analisis Data", path: "/mengenal-analisis" },
+        { title: "Pendekatan Computational Thinking", path: "/pengenalan-ct" },
+        { title: "Contoh Penerapan CT", path: "/penerapan-ct" },
+      ],
     },
     {
       icon: faSearch,
       title: "Pencarian Data",
-      subItems: ["Pencarian dengan Fungsi Lookup", "Contoh Penerapan Fungsi Lookup", "Aktivitas Siswa", "Mari Berlatih",
-        "Pencarian dengan Fungsi Reference", "Contoh Penerapan Fungsi Reference", "Aktivitas Siswa", "Mari Berlatih", "Evaluasi"],
+      subItems: [
+        { title: "Pencarian dengan Fungsi Lookup", path: "/pencarian-lookup" },
+        { title: "Contoh Penerapan Fungsi Lookup", path: "/contoh-lookup" },
+        { title: "Aktivitas Siswa", path: "/aktivitas-lookup" },
+        { title: "Mari Berlatih", path: "/berlatih-lookup" },
+        { title: "Petunjuk Kuis 1", path: "/petunjuk-kuis1" },
+        { title: "Kuis 1", path: "/quiz1" },
+        { title: "Feedback 1", path: "/feedback1" },
+      ],
     },
     {
       icon: faChartBar,
       title: "Visualisasi Data",
-      subItems: ["Visualisasi Data", "Latihan"],
+      subItems: [{ title: "Visualisasi Data", path: "/visualisasi-data" }],
     },
     {
       icon: faCompress,
       title: "Peringkasan Data",
-      subItems: ["Peringkasan Data", "Latihan"],
+      subItems: [{ title: "Peringkasan Data", path: "/peringkasan-data" }],
     },
     {
       icon: faTable,
       title: "Pengelolaan Data",
-      subItems: ["Sorting & Filtering", "Latihan"],
+      subItems: [{ title: "Sorting & Filtering", path: "/sorting-filtering" }],
     },
     {
       icon: faTasks,
       title: "Evaluasi",
+      subItems: [],
     },
   ];
 
@@ -313,7 +327,9 @@ export const Sidebar = () => {
         ${isMobile ? "w-full" : "w-64 fixed left-0 h-screen"} 
         ${isScrolled ? "top-0" : "top-16"}`}
     >
-      <h2 className="text-sm font-bold text-center text-[#255F38] mb-4">DAFTAR MATERI</h2>
+      <h2 className="text-sm font-bold text-center text-[#255F38] mb-4">
+        DAFTAR MATERI
+      </h2>
       <ul className="space-y-2">
         {menuItems.map((item, index) => (
           <li key={index}>
@@ -327,19 +343,26 @@ export const Sidebar = () => {
                 </div>
                 {item.title}
               </div>
-              {item.subItems && (
+              {item.subItems.length > 0 && (
                 <FontAwesomeIcon
                   icon={faChevronDown}
                   size="sm"
-                  className={`transition-transform duration-200 ease-in-out ${openDropdown === index ? "rotate-180" : ""}`}
+                  className={`transition-transform duration-200 ease-in-out ${
+                    openDropdown === index ? "rotate-180" : ""
+                  }`}
                 />
               )}
             </button>
-            {openDropdown === index && item.subItems && (
+            {openDropdown === index && item.subItems.length > 0 && (
               <ul className="bg-gray-50 rounded-lg mt-2">
                 {item.subItems.map((sub, subIndex) => (
-                  <li key={subIndex} className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm hover:bg-gray-200 cursor-pointer">
-                    ○ {sub}
+                  <li
+                    key={subIndex}
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm hover:bg-gray-200 cursor-pointer"
+                  >
+                    <Link to={sub.path} className="flex items-center gap-2">
+                      ○ {sub.title}
+                    </Link>
                   </li>
                 ))}
               </ul>

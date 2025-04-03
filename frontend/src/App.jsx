@@ -1,18 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React from "react"; 
+import React from "react";
 
-
+// Main Landing
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import Materi from "./pages/Materi";
 import Informasi from "./pages/Informasi";
-
+// Pendahuluan
 import PengantarBab from "./pages/Pendahuluan/PengantarBab";
 import Pendahuluan from "./pages/Pendahuluan/Pendahuluan";
 import MengenalAnalisisData from "./pages/Pendahuluan/MengenalAnalisis";
 import PengenalanCT from "./pages/Pendahuluan/PengenalanCT";
 import PenerapanCT from "./pages/Pendahuluan/PenerapanCT";
-
+// Sub 1
 import PencarianLookup from "./pages/PencarianData/PencarianLookup";
 import ContohLookup from "./pages/PencarianData/ContohLookup";
 import AktivitasLookup from "./pages/PencarianData/AktivitasLookup";
@@ -20,9 +20,8 @@ import BerlatihLookup from "./pages/PencarianData/BerlatihLookup";
 import PetunjukQuiz1 from "./pages/PencarianData/PetunjukQuiz1";
 import Quiz from "./pages/PencarianData/Quiz1";
 import Feedback1 from "./pages/PencarianData/Feedback1";
-
+// Sub 2
 import VisualisasiData from "./pages/VisualisasiData/VisualisasiData";
-
 
 function App() {
   return (
@@ -39,7 +38,7 @@ function App() {
         <Route path="/mengenal-analisis" element={<MengenalAnalisisData />} />
         <Route path="/pengenalan-ct" element={<PengenalanCT />} />
         <Route path="/penerapan-ct" element={<PenerapanCT />} />
-        
+
         {/* PENCARIAN */}
         <Route path="/pencarian-lookup" element={<PencarianLookup />} />
         <Route path="/contoh-lookup" element={<ContohLookup />} />
@@ -51,13 +50,6 @@ function App() {
 
         {/* VISUALISASI DATA */}
         <Route path="/visualisasi-data" element={<VisualisasiData />} />
-
-       
-
-
-        
-      
-
       </Routes>
     </BrowserRouter>
   );
