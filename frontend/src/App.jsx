@@ -22,6 +22,17 @@ import Quiz from "./pages/PencarianData/Quiz1";
 import Feedback1 from "./pages/PencarianData/Feedback1";
 // Sub 2
 import VisualisasiData from "./pages/VisualisasiData/VisualisasiData";
+import ContohPenerapan from "./pages/VisualisasiData/ContohPenerapanVisualisasiData";
+import AktivitasSiswaVisualisasi from "./pages/VisualisasiData/AktivitasSiswaVisualisasi";
+import MariBerlatihVisualisasi from "./pages/VisualisasiData/MariBerlatihVisualisasi";
+import PetunjukKuis2 from "./pages/VisualisasiData/PetunjukKuis2";
+import Kuis2 from "./pages/VisualisasiData/Kuis2";
+import Feedback2 from "./pages/VisualisasiData/Feedback2";
+
+// Sub 3
+import PeringkasanData from "./pages/PeringkasanData/PeringkasanData";
+import PengenalanPola from "./pages/PeringkasanData/PengenalanPola";
+import ContohPenerapanPeringkasan from "./pages/PeringkasanData/ContohPenerapanPeringkasan";
 
 function App() {
   return (
@@ -50,7 +61,29 @@ function App() {
 
         {/* VISUALISASI DATA */}
         <Route path="/visualisasi-data" element={<VisualisasiData />} />
-        <Route path="/visualisasi-data" element={<VisualisasiData />} />
+        <Route
+          path="/contoh-penerapan-visualisasi-data"
+          element={<ContohPenerapan />}
+        />
+        <Route
+          path="/aktivitas-siswa-visualisasi"
+          element={<AktivitasSiswaVisualisasi />}
+        />
+        <Route
+          path="/mari-berlatih-visualisasi"
+          element={<MariBerlatihVisualisasi />}
+        />
+        <Route path="/petunjuk-kuis2" element={<PetunjukKuis2 />} />
+        <Route path="/kuis2" element={<Kuis2 />} />
+        <Route path="/feedback2" element={<Feedback2 />} />
+
+        {/* PERINGKASAN DATA SUB 3  */}
+        <Route path="/peringkasan-data" element={<PeringkasanData />} />
+        <Route path="/pengenalan-pola" element={<PengenalanPola />} />
+        <Route
+          path="/penerapan-peringkasan"
+          element={<ContohPenerapanPeringkasan />}
+        />
       </Routes>
     </BrowserRouter>
   );

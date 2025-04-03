@@ -302,7 +302,33 @@ export const Sidebar = () => {
     {
       icon: faChartBar,
       title: "Visualisasi Data",
-      subItems: [{ title: "Visualisasi Data", path: "/visualisasi-data" }],
+      subItems: [
+        { title: "Visualisasi Data", path: "/visualisasi-data" },
+        {
+          title: "Contoh Penerapan Visualisasi Data",
+          path: "/contoh-penerapan-visualisasi-data",
+        },
+        {
+          title: "Aktivitas Siswa",
+          path: "/aktivitas-siswa-visualisasi",
+        },
+        {
+          title: "Mari Berlatih",
+          path: "/mari-berlatih-visualisasi",
+        },
+        {
+          title: "Pentunjuk Kuis ",
+          path: "/pentunjuk-kuis2",
+        },
+        {
+          title: "Kuis",
+          path: "/kuis2",
+        },
+        {
+          title: "Feedback",
+          path: "/feedback2",
+        },
+      ],
     },
     {
       icon: faCompress,
