@@ -123,11 +123,11 @@ export default function PeringkasanData() {
           <section className="bg-gray-100 rounded p-4 mt-4 shadow-lg">
             <h3 className="font-semibold text-[#255F38]">1. SUMIF</h3>
             <p>Menjumlahkan data dengan satu syarat.</p>
-            <pre className="bg-gray-200 p-2 rounded">
+            <pre className="bg-gray-200 p-2 rounded text-gray-800">
               =SUMIF(range, criteria, sum_range)
             </pre>
-            <p>
-              <strong>Keterangan:</strong>
+            <p className="text-gray-700">
+              Keterangan:
             </p>
             <ul className="list-disc list-inside ml-6 text-gray-700">
               <li>
@@ -148,12 +148,12 @@ export default function PeringkasanData() {
           <section className="bg-gray-100 rounded p-4 mt-4 shadow-lg">
             <h3 className="font-semibold text-[#255F38]">2. SUMIFS</h3>
             <p>Menjumlahkan data dengan lebih dari satu syarat.</p>
-            <pre className="bg-gray-200 p-2 rounded">
+            <pre className="bg-gray-200 p-2 rounded text-gray-800">
               =SUMIFS(sum_range, criteria_range1, criteria1, criteria_range2,
               criteria2)
             </pre>
-            <p>
-              <strong>Keterangan:</strong>
+            <p className="text-gray-700">
+              Keterangan:
             </p>
             <ul className="list-disc list-inside ml-6 text-gray-700">
               <li>
@@ -179,11 +179,11 @@ export default function PeringkasanData() {
           <section className="bg-gray-100 rounded p-4 mt-4 shadow-lg">
             <h3 className="font-semibold text-[#255F38]">3. COUNTIF</h3>
             <p>Menghitung jumlah data dengan satu syarat.</p>
-            <pre className="bg-gray-200 p-2 rounded">
+            <pre className="bg-gray-200 p-2 rounded text-gray-800">
               =COUNTIF(range, criteria)
             </pre>
-            <p>
-              <strong>Keterangan:</strong>
+            <p className="text-gray-700">
+              Keterangan:
             </p>
             <ul className="list-disc list-inside ml-6 text-gray-700">
               <li>
@@ -199,11 +199,11 @@ export default function PeringkasanData() {
           <section className="bg-gray-100 rounded p-4 mt-4 shadow-lg">
             <h3 className="font-semibold text-[#255F38]">4. COUNTIFS</h3>
             <p>Menghitung jumlah data dengan lebih dari satu syarat.</p>
-            <pre className="bg-gray-200 p-2 rounded">
+            <pre className="bg-gray-200 p-2 rounded text-gray-800">
               =COUNTIFS(criteria_range1, criteria1, criteria_range2, criteria2)
             </pre>
-            <p>
-              <strong>Keterangan:</strong>
+            <p className="text-gray-700">
+              Keterangan:
             </p>
             <ul className="list-disc list-inside ml-6 text-gray-700">
               <li>

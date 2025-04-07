@@ -328,7 +328,10 @@ export const Sidebar = () => {
     {
       icon: faCompress,
       title: "Peringkasan Data",
-      subItems: [{ title: "Peringkasan Data", path: "/peringkasan-data" }],
+      subItems: [
+        { title: "Peringkasan Data", path: "/peringkasan-data" },
+        { title: "Penerapan Peringkasan Data", path: "/penerapan-peringkasan" },
+      ],
     },
     {
       icon: faTable,

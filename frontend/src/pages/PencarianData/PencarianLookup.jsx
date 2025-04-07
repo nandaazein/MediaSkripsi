@@ -64,29 +64,54 @@ export default function PencarianLookup() {
          <p className=" text-gray-700 pl-10 mt-0">Data yang digunakan untuk pencarian harus tersedia dalam tabel dengan format yang benar.</p>
 
       <p className="text-gray-700 text-sm md:text-base pl-6 font-semibold mb-1">3.	Menentukan jenis fungsi lookup yang digunakan</p>
-      <div className="border-2 border-green-700 p-4 text-center">
-        <p className="font-bold text-green-900">VLOOKUP</p>
-        <p className="text-gray-800">
-          =VLOOKUP(<span className="italic">lookup_value, table_array, col_index_num, [range_lookup]</span>)
-        </p>
-        <br />
-        <p className="font-bold text-green-900">HLOOKUP</p>
-        <p className="text-gray-800">
-          =HLOOKUP(<span className="italic">lookup_value, table_array, row_index_num, [range_lookup]</span>)
-        </p>
-      </div>
-      <p className="text-gray-700 mt-3">Keterangan:</p>
-      <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1">
-        <li><span className="font-semibold">lookup_value</span> adalah nilai yang akan dicari.</li>
-        <li><span className="font-semibold">table_array</span> adalah rentang tabel tempat pencarian dilakukan.</li>
-        <li><span className="font-semibold">col_index_num / row_index_num</span> adalah posisi kolom/baris tempat data diambil.</li>
-        <li><span className="font-semibold">range_lookup</span> → <span className="italic font-bold">TRUE</span> untuk pencarian nilai mendekati, <span className="italic font-bold">FALSE</span> untuk pencarian nilai persis.</li>
-      </ul>
-      <p className="text-gray-700 text-sm md:text-base pl-6 font-semibold mb-1">4.	Menentukan posisi data dalam tabel referensi</p>
-        <p className=" text-gray-700 pl-10 mt-0">Kolom atau baris yang berisi informasi yang ingin diambil harus diketahui posisinya.</p>
 
-      <p className="text-gray-700 text-sm md:text-base pl-6 font-semibold mb-1">5.	Melakukan pencarian menggunakan funggsi lookup</p>
-        <p className=" text-gray-700 pl-10 mt-0">Fungsi Lookup diterapkan untuk mencari data yang sesuai dengan referensi yang diberikan.</p>
+      <div className="">
+        <section className="bg-gray-100 rounded p-4 mt-4 shadow-lg">
+          <h3 className="font-semibold text-[#255F38]">1. VLOOKUP</h3>
+          <p>Mencari nilai dalam kolom pertama tabel dan mengembalikan nilai dari kolom yang ditentukan.</p>
+          <pre className="bg-gray-200 p-2 rounded text-gray-800">
+            =VLOOKUP(<span className="italic">lookup_value, table_array, col_index_num, [range_lookup]</span>)
+          </pre>
+          <p className="text-gray-700">Keterangan:</p>
+          <ul className="list-disc list-inside ml-6 text-gray-700">
+            <li>
+              <strong>lookup_value:</strong> Nilai yang akan dicari dalam kolom pertama tabel.
+            </li>
+            <li>
+              <strong>table_array:</strong> Rentang tabel tempat pencarian dilakukan.
+            </li>
+            <li>
+              <strong>col_index_num:</strong> Nomor kolom dari mana nilai yang ingin diambil.
+            </li>
+            <li>
+              <strong>range_lookup:</strong> <span className="italic font-bold">TRUE</span> untuk pencarian nilai mendekati, <span className="italic font-bold">FALSE</span> untuk pencarian nilai persis.
+            </li>
+          </ul>
+        </section>
+
+        <section className="bg-gray-100 rounded p-4 mt-4 shadow-lg">
+          <h3 className="font-semibold text-[#255F38]">2. HLOOKUP</h3>
+          <p>Mencari nilai dalam baris pertama tabel dan mengembalikan nilai dari baris yang ditentukan.</p>
+          <pre className="bg-gray-200 p-2 rounded text-gray-800">
+            =HLOOKUP(<span className="italic">lookup_value, table_array, row_index_num, [range_lookup]</span>)
+          </pre>
+          <p className="text-gray-700">Keterangan:</p>
+          <ul className="list-disc list-inside ml-6 text-gray-700">
+            <li>
+              <strong>lookup_value:</strong> Nilai yang akan dicari dalam baris pertama tabel.
+            </li>
+            <li>
+              <strong>table_array:</strong> Rentang tabel tempat pencarian dilakukan.
+            </li>
+            <li>
+              <strong>row_index_num:</strong> Nomor baris dari mana nilai yang ingin diambil.
+            </li>
+            <li>
+              <strong>range_lookup:</strong> <span className="italic font-bold">TRUE</span> untuk pencarian nilai mendekati, <span className="italic font-bold">FALSE</span> untuk pencarian nilai persis.
+            </li>
+          </ul>
+        </section>
+      </div>
     </div>
 
     {/* Pengenalan Pola */}

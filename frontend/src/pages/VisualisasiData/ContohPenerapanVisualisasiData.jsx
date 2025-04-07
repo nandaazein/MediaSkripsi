@@ -255,21 +255,15 @@ const ContohPenerapanVisualisasiData = () => {
           </li>
         </ul>
 
-
         <div className="w-full flex justify-center px-4">
           <div
             id="spreadsheet"
             className="w-full max-w-full md:max-w-screen-md" 
             style={{ height: "600px" }}
           ></div>
-        </div>
-
-       
+        </div>    
   </div>
   
-
-
-
       {/* Kesimpulan dan Analisis */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
