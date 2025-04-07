@@ -16,7 +16,7 @@ const PengantarBab = () => {
         <h2 className="font-bold text-lg text-[#255F38] flex items-center">
           <i className="ri-flag-line text-[#255F38] text-xl mr-2"></i> Capaian Pembelajaran
         </h2>
-        <p className="mt-2">
+        <p className="mt-2 text-gray-700">
           Pada akhir fase D, peserta didik mampu mengakses, mengolah, mengelola, dan menganalisis data
           secara efisien, terstruktur, dan sistematis untuk menginterpretasi dan memprediksi sekumpulan
           data dari situasi konkret sehari-hari dengan menggunakan perkakas TIK atau manual.
@@ -28,7 +28,7 @@ const PengantarBab = () => {
         <h2 className="font-bold text-[#255F38] text-lg flex items-center">
           <i className="ri-check-double-line text-[#255F38] text-xl mr-2"></i> Tujuan Pembelajaran
         </h2>
-        <ul className="list-disc pl-6 mt-2">
+        <ul className="list-disc pl-6 mt-2 text-gray-700">
           <li>Peserta didik mampu memahami konsep analisis data dan pentingnya dalam pengolahan informasi.</li>
           <li>Peserta didik mampu menerapkan Computational Thinking (CT) dalam analisis data.</li>
           <li>Peserta didik mampu menggunakan fungsi pencarian data.</li>

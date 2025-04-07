@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Layout from "../../components/QuizLayout";
+import Layout from "../../components/Layout";
 
 export default function Feedback() {
   const location = useLocation();

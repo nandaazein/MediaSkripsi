@@ -6,12 +6,15 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import Materi from "./pages/Materi";
 import Informasi from "./pages/Informasi";
+import Spreadsheet from "./pages/Spreadsheet";
+
 // Pendahuluan
 import PengantarBab from "./pages/Pendahuluan/PengantarBab";
 import Pendahuluan from "./pages/Pendahuluan/Pendahuluan";
 import MengenalAnalisisData from "./pages/Pendahuluan/MengenalAnalisis";
 import PengenalanCT from "./pages/Pendahuluan/PengenalanCT";
 import PenerapanCT from "./pages/Pendahuluan/PenerapanCT";
+
 // Sub 1
 import PencarianLookup from "./pages/PencarianData/PencarianLookup";
 import ContohLookup from "./pages/PencarianData/ContohLookup";
@@ -20,19 +23,22 @@ import BerlatihLookup from "./pages/PencarianData/BerlatihLookup";
 import PetunjukQuiz1 from "./pages/PencarianData/PetunjukQuiz1";
 import Quiz from "./pages/PencarianData/Quiz1";
 import Feedback1 from "./pages/PencarianData/Feedback1";
+
 // Sub 2
 import VisualisasiData from "./pages/VisualisasiData/VisualisasiData";
 import ContohPenerapan from "./pages/VisualisasiData/ContohPenerapanVisualisasiData";
 import AktivitasSiswaVisualisasi from "./pages/VisualisasiData/AktivitasSiswaVisualisasi";
-import MariBerlatihVisualisasi from "./pages/VisualisasiData/MariBerlatihVisualisasi";
+import BerlatihVisualisasi from "./pages/VisualisasiData/BerlatihVisualisasi";
 import PetunjukKuis2 from "./pages/VisualisasiData/PetunjukKuis2";
 import Kuis2 from "./pages/VisualisasiData/Kuis2";
 import Feedback2 from "./pages/VisualisasiData/Feedback2";
 
 // Sub 3
 import PeringkasanData from "./pages/PeringkasanData/PeringkasanData";
-import PengenalanPola from "./pages/PeringkasanData/PengenalanPola";
 import ContohPenerapanPeringkasan from "./pages/PeringkasanData/ContohPenerapanPeringkasan";
+
+// Sub 4
+
 
 function App() {
   return (
@@ -62,29 +68,21 @@ function App() {
         {/* VISUALISASI DATA */}
         <Route path="/visualisasi-data" element={<VisualisasiData />} />
         <Route
-          path="/contoh-penerapan-visualisasi-data"
-          element={<ContohPenerapan />}
-        />
-        <Route
-          path="/aktivitas-siswa-visualisasi"
-          element={<AktivitasSiswaVisualisasi />}
-        />
-        <Route
-          path="/mari-berlatih-visualisasi"
-          element={<MariBerlatihVisualisasi />}
-        />
+          path="/contoh-penerapan-visualisasi-data" element={<ContohPenerapan />}/>
+        <Route path="/aktivitas-visualisasi" element={<AktivitasSiswaVisualisasi />}/>
+        <Route path="/mari-berlatih-visualisasi" element={<BerlatihVisualisasi />}/>
         <Route path="/petunjuk-kuis2" element={<PetunjukKuis2 />} />
         <Route path="/kuis2" element={<Kuis2 />} />
         <Route path="/feedback2" element={<Feedback2 />} />
 
         {/* PERINGKASAN DATA SUB 3  */}
         <Route path="/peringkasan-data" element={<PeringkasanData />} />
-        <Route path="/pengenalan-pola" element={<PengenalanPola />} />
-        <Route
-          path="/penerapan-peringkasan"
-          element={<ContohPenerapanPeringkasan />}
-        />
+        <Route path="/penerapan-peringkasan" element={<ContohPenerapanPeringkasan />}/>
+        <Route path="/spreadsheet" element={<Spreadsheet />} />
+
+        {/* PENGELOLAAN DATA SUB 4 */}
       </Routes>
+   
     </BrowserRouter>
   );
 }

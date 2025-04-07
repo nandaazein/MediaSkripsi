@@ -1,7 +1,113 @@
 import Layout from "../../components/Layout";
+import { useEffect } from "react";
 import { Lightbulb, BarChart, Filter, Code, CheckCircle } from "lucide-react";
+import chart from "../../assets/Visualisasi/chart.png";
+import switchh from "../../assets/Visualisasi/switchh.png";
 
 const ContohPenerapanVisualisasiData = () => {
+  useEffect(() => {
+    // Tambah stylesheet jika belum ada
+    if (!document.querySelector('link[href="https://cdn.syncfusion.com/ej2/19.1.56/material.css"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://cdn.syncfusion.com/ej2/19.1.56/material.css";
+      document.head.appendChild(link);
+    }
+
+    // Tambah script jika belum ada
+    if (!document.querySelector('script[src="https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js"]')) {
+      const script = document.createElement("script");
+      script.src = "https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js";
+      script.async = true;
+      script.onload = () => {
+        if (window.ej && window.ej.spreadsheet && !document.querySelector("#spreadsheet .e-spreadsheet")) {
+          new window.ej.spreadsheet.Spreadsheet({
+            sheets: [
+              {
+                name: "Sheet1",
+                columns: [
+                  { width: 80 },
+                  { width: 120 },
+                  { width: 220 },
+                ],
+                rows: [
+                  {
+                    cells: [
+                      {
+                        value: "Bulan",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                      {
+                        value: "Penjualan (Rp)",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                      {
+                        value: "Rata-rata Pembelian per Transaksi",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Januari", style: { textAlign: "center" } },
+                      { value: 5000000, format: "#,##0", style: { textAlign: "center" } },
+                      { value: 20000, format: "#,##0.00", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Februari", style: { textAlign: "center" } },
+                      { value: 6500000, format: "#,##0", style: { textAlign: "center" } },
+                      { value: 21667, format: "#,##0.00", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Maret", style: { textAlign: "center" } },
+                      { value: 7000000, format: "#,##0", style: { textAlign: "center" } },
+                      { value: 21875, format: "#,##0.00", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "April", style: { textAlign: "center" } },
+                      { value: 6200000, format: "#,##0", style: { textAlign: "center" } },
+                      { value: 21379, format: "#,##0.00", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Mei", style: { textAlign: "center" } },
+                      { value: 8000000, format: "#,##0", style: { textAlign: "center" } },
+                      { value: 22857, format: "#,##0.00", style: { textAlign: "center" } },
+                    ],
+                  },
+                ],
+              },
+            ],
+            
+          }).appendTo("#spreadsheet");
+        }
+      };
+      document.body.appendChild(script);
+    }
+  }, []);
+
   return (
     <Layout>
       {/* Header judul */}
@@ -147,9 +253,22 @@ const ContohPenerapanVisualisasiData = () => {
             Analisis hasilnya → Amati pola pada grafik untuk melihat tren
             kenaikan atau penurunan penjualan.
           </li>
-          <li>EMBED EXCEL</li>
         </ul>
-      </div>
+
+
+        <div className="w-full flex justify-center px-4">
+          <div
+            id="spreadsheet"
+            className="w-full max-w-full md:max-w-screen-md" 
+            style={{ height: "600px" }}
+          ></div>
+        </div>
+
+       
+  </div>
+  
+
+
 
       {/* Kesimpulan dan Analisis */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
@@ -185,72 +304,71 @@ const ContohPenerapanVisualisasiData = () => {
 
       {/* Modifikasi Chart */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <CheckCircle className="w-5 h-5 mr-2" /> MODIFIKASI CHART
-        </div>
-        <p className=" mt-4 text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
-          Setelah membuat grafik, kita bisa memodifikasi tampilannya agar lebih
-          informatif.
-        </p>
-        <div className="flex flex-col items-center mt-6">
-          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center ">
-            <thead>
-              <tr className="bg-[#255F38] text-white">
-                <th className="border border-green-600 px-4 py-2">Langkah</th>
-                <th className="border border-green-600 px-4 py-2">Tampilan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2 text-justify">
-                  Mengubah Tipe Chart Sebagai contoh, ubah chart Column menjadi
-                  Bar chart untuk kelompok data yang sama.
-                  <ol className="list-decimal pl-6 mt-2">
-                    <li>Pilih chart Column yang sudah dibuat.</li>
-                    <li>
-                      Pada tab Chart Design, klik Chart Type, lalu pilih jenis
-                      chart yang sesuai dengan kebutuhan.
-                    </li>
-                  </ol>
-                </td>
-                <td>
-                  <div className="mt-4 border border-gray-300 p-2">
-                    <img
-                      src="path-to-image/chart-example-1.png"
-                      alt="Contoh Chart"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2 text-justify">
-                  Beralih dari Column ke Row atau sebaliknya Pada grafik Column
-                  Chart yang ditampilkan, jika ingin menampilkan kolom
-                  berdasarkan bulan (bukan berdasarkan produk), lakukan langkah
-                  berikut:
-                  <ol className="list-decimal pl-6 mt-2">
-                    <li>Pilih Column Chart yang sudah dibuat.</li>
-                    <li>
-                      Pada tab Chart Design, klik Switch Row/Column untuk
-                      menukar susunan data pada chart.
-                    </li>
-                  </ol>
-                </td>
-                <td className="border border-green-600 px-4 py-2">
-                  <div className="mt-4 border border-gray-300 p-2">
-                    <img
-                      src="path-to-image/chart-example-2.png"
-                      alt="Contoh Chart"
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+  <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+    <CheckCircle className="w-5 h-5 mr-2" /> MODIFIKASI CHART
+  </div>
+  <p className="mt-4 text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
+    Setelah membuat grafik, kita bisa memodifikasi tampilannya agar lebih
+    informatif.
+  </p>
+  <div className="flex flex-col items-center mt-6">
+    <table className="border-collapse border border-green-800 w-full md:w-4/5 text-center">
+      <thead>
+        <tr className="bg-[#255F38] text-white">
+          <th className="border border-green-600 px-4 py-2">Langkah</th>
+          <th className="border border-green-600 px-4 py-2">Tampilan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr className="bg-green-50">
+          <td className="border border-green-600 px-4 py-2 text-justify">
+            Mengubah Tipe Chart. Sebagai contoh, ubah chart Column menjadi Bar chart
+            untuk kelompok data yang sama.
+            <ol className="list-decimal pl-6 mt-2">
+              <li>Pilih chart Column yang sudah dibuat.</li>
+              <li>
+                Pada tab Chart Design, klik Chart Type, lalu pilih jenis chart
+                yang sesuai dengan kebutuhan.
+              </li>
+            </ol>
+          </td>
+          <td className="border border-green-600 px-4 py-2">
+            <div className="mt-4 border border-gray-300 p-2">
+              <img
+                src={chart}
+                alt="Contoh Chart"
+                className="w-[500px] h-[300px] object-contain mx-auto"
+              />
+            </div>
+          </td>
+        </tr>
+        <tr className="bg-white">
+          <td className="border border-green-600 px-4 py-2 text-justify">
+            Beralih dari Column ke Row atau sebaliknya. Pada grafik Column Chart
+            yang ditampilkan, jika ingin menampilkan kolom berdasarkan bulan
+            (bukan berdasarkan produk), lakukan langkah berikut:
+            <ol className="list-decimal pl-6 mt-2">
+              <li>Pilih Column Chart yang sudah dibuat.</li>
+              <li>
+                Pada tab Chart Design, klik Switch Row/Column untuk menukar
+                susunan data pada chart.
+              </li>
+            </ol>
+          </td>
+          <td className="border border-green-600 px-4 py-2">
+            <div className="mt-4 border border-gray-300 p-2">
+              <img
+                src={switchh}
+                alt="Contoh Chart"
+                className="w-[500px] h-[300px] object-contain mx-auto"
+              />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8">
@@ -261,7 +379,7 @@ const ContohPenerapanVisualisasiData = () => {
           ← Sebelumnya
         </a>
         <a
-          href="/aktivitas-siswa-visualisasi"
+          href="/aktivitas-visualisasi"
           className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
         >
           Selanjutnya →

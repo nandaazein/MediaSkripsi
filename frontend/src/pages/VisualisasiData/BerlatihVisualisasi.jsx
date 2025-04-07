@@ -1,324 +1,251 @@
-// import Layout from "../../components/Layout";
+import { useState, useEffect } from "react";
+import Layout from "../../components/Layout";
 
-// const BerlatihVisualisasi = () => {
-//   return (
-//     <Layout>
-//       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-//         {/* Judul Halaman */}
-//         <h1 className="text-xl md:text-2xl sm:text-lg font-bold mb-5 text-center text-green-800">
-//           Mari Berlatih Visualisasi Data
-//         </h1>
-
-//         {/* Container untuk Instruksi */}
-//         <div className="bg-white shadow-md rounded-lg p-5 border-2 border-green-800 mt-5">
-//           <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3">
-//             💡 Instruksi
-//           </h2>
-//           <ul className="list-disc list-inside text-gray-600 text-sm md:text-base">
-//             <li>Urutkan langkah-langkah yang benar untuk membuat visualisasi data.</li>
-//             <li>Isi kolom produk untuk melengkapi data sebelum membuat grafik.</li>
-//             <li>Unduh file kemudian kumpulkan pada tempat yang sudah disediakan.</li>
-//           </ul>
-//         </div>
-
-//         {/* Container untuk Soal Latihan */}
-//         <div className="bg-white shadow-md rounded-lg p-5 border-2 border-green-800 mt-5">
-//           <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3">
-//             ❓ Soal Latihan
-//           </h2>
-//           <ol className="list-decimal list-inside text-gray-600 text-sm md:text-base">
-//             <li>
-//               Urutkan langkah acak di bawah ini, lalu isi di dalam tabel yang sudah disediakan:
-//               <ul className="list-disc ml-5 mt-2">
-//                 <li>Pilih jenis chart yang sesuai, misalnya Bar Chart untuk membandingkan data.</li>
-//                 <li>Siapkan data dan pastikan tabel sudah rapi sesuai kategori.</li>
-//                 <li>Buat chart dengan memilih menu "Insert" lalu klik jenis chart yang diinginkan.</li>
-//                 <li>Periksa apakah chart sudah jelas dan mudah dibaca.</li>
-//                 <li>Pilih semua data yang akan dibuat chart.</li>
-//               </ul>
-//             </li>
-//             <li className="mt-3">
-//               Isi kolom "Produk" di tabel agar data bisa divisualisasikan dengan lebih jelas.
-//             </li>
-//           </ol>
-//         </div>
-
-//         {/* Zoho Sheet Embed */}
-//         <div className="mt-8 bg-white shadow-md rounded-lg p-5 border-2 border-green-800">
-//           <div className="flex justify-center">
-//             <iframe 
-//               width="100%" 
-//               height="400" 
-//               style={{ border: "1px solid #f3f3f3" }} 
-//               frameBorder="0" 
-//               scrolling="no" 
-//               src="https://sheet.zohopublic.com/sheet/published/cc5ltdf04b9ecd4ab435297b87f7f67bb2d88?mode=embed">
-//             </iframe>
-//           </div>
-//         </div>
-
-//         {/* Tombol Selanjutnya */}
-//         <div className="flex justify-end mt-5 sm:mt-7">
-//           <a 
-//             href="/pencarian-data" 
-//             className="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-sm sm:text-base"
-//           >
-//             Selanjutnya
-//           </a>
-//         </div>
-//       </div>
-//     </Layout>
-//   );
-// };
-
-// export default BerlatihVisualisasi;
-
-
-// import React, { useEffect, useRef } from "react";
-// import Layout from "../../components/Layout";
-
-// const BerlatihVisualisasi = () => {
-//   const spreadsheetRef = useRef(null);
-
-//   useEffect(() => {
-//     const loadSyncfusion = async () => {
-//       if (!document.querySelector('link[href="https://cdn.syncfusion.com/ej2/19.1.56/material.css"]')) {
-//         const link = document.createElement("link");
-//         link.rel = "stylesheet";
-//         link.href = "https://cdn.syncfusion.com/ej2/19.1.56/material.css";
-//         document.head.appendChild(link);
-//       }
-
-//       if (!window.ej) {
-//         const script = document.createElement("script");
-//         script.src = "https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js";
-//         script.async = true;
-//         script.onload = () => initializeSpreadsheet();
-//         document.body.appendChild(script);
-//       } else {
-//         initializeSpreadsheet();
-//       }
-//     };
-
-//     const initializeSpreadsheet = () => {
-//       if (spreadsheetRef.current && !spreadsheetRef.current.dataset.initialized) {
-//         spreadsheetRef.current.dataset.initialized = "true";
-//         new window.ej.spreadsheet.Spreadsheet({
-//           sheets: [
-//             {
-//               name: "Data Visualisasi",
-//               columns: [{ width: 120 }, { width: 150 }, { width: 150 }, { width: 150 }],
-//               rows: [
-//                 {
-//                   cells: [
-//                     { value: "Bulan", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center", border: "1px solid black" } },
-//                     { value: "Produk A (Rp)", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center", border: "1px solid black" } },
-//                     { value: "Produk B (Rp)", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center", border: "1px solid black" } },
-//                     { value: "Produk C (Rp)", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center", border: "1px solid black" } },
-//                   ],
-//                 },
-//                 { 
-//                   cells: [
-//                     { value: "Januari", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 4000000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 5500000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 3200000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } } 
-//                   ] 
-//                 },
-//                 { 
-//                   cells: [
-//                     { value: "Februari", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 5200000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 6000000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 3500000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } } 
-//                   ] 
-//                 },
-//                 { 
-//                   cells: [
-//                     { value: "Maret", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 5800000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 6700000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 4100000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } } 
-//                   ] 
-//                 },
-//                 { 
-//                   cells: [
-//                     { value: "April", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 5000000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 6500000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 3900000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } } 
-//                   ] 
-//                 },
-//                 { 
-//                   cells: [
-//                     { value: "Mei", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 6500000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 7200000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } }, 
-//                     { value: 4600000, format: "#,##0", style: { textAlign: "center", border: "1px solid black" } } 
-//                   ] 
-//                 },
-//               ],
-              
-//             },
-//           ],
-//         }).appendTo(spreadsheetRef.current);
-//       }
-//     };
-
-//     loadSyncfusion();
-//   }, []);
-
-//   return (
-//     <Layout>
-//       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-//         <h1 className="text-xl md:text-2xl font-bold mb-5 text-center text-green-800">
-//           Mari Berlatih Visualisasi Data
-//         </h1>
-
-//         <div className="bg-white shadow-md rounded-lg p-5 border-2 border-green-800 mt-5">
-//           <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3">
-//             📊 Tabel Data Penjualan
-//           </h2>
-//           <div className="flex justify-center">
-//           <div
-//   ref={spreadsheetRef}
-//   id="spreadsheet"
-//   style={{
-//     width: "90% !important",
-//     maxWidth: "100% !important",
-//     height: "600px",
-//     marginTop: "30px",
-//     marginBottom: "30px",
-//     overflow: "auto",
-//   }}
-// ></div> 
-//           </div>
-//         </div>
-
-//         <div className="flex justify-end mt-5 sm:mt-7">
-//           <a 
-//             href="/pencarian-data" 
-//             className="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-sm sm:text-base"
-//           >
-//             Selanjutnya
-//           </a>
-//         </div>
-//       </div>
-//     </Layout>
-//   );
-// };
-
-// export default BerlatihVisualisasi;
-
-import React, { useEffect, useRef } from "react";
-import Layout from "../../components/Materi/Layout";
-
-const BerlatihVisualisasi = () => {
-  const spreadsheetRef = useRef(null);
-
+export default function ChartLesson() {
   useEffect(() => {
-    const loadSyncfusion = async () => {
-      // Cek apakah CSS sudah dimuat
-      if (!document.querySelector('link[href="https://cdn.syncfusion.com/ej2/19.1.56/material.css"]')) {
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = "https://cdn.syncfusion.com/ej2/19.1.56/material.css";
-        document.head.appendChild(link);
-      }
+    // Tambah stylesheet jika belum ada
+    if (!document.querySelector('link[href="https://cdn.syncfusion.com/ej2/19.1.56/material.css"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://cdn.syncfusion.com/ej2/19.1.56/material.css";
+      document.head.appendChild(link);
+    }
 
-      // Cek apakah script sudah ada
-      if (!window.ej) {
-        const script = document.createElement("script");
-        script.src = "https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js";
-        script.async = true;
-        script.onload = () => initializeSpreadsheet();
-        document.body.appendChild(script);
-      } else {
-        initializeSpreadsheet();
-      }
-    };
+    // Tambah script jika belum ada
+    if (!document.querySelector('script[src="https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js"]')) {
+      const script = document.createElement("script");
+      script.src = "https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js";
+      script.async = true;
+      script.onload = () => {
+        if (window.ej && window.ej.spreadsheet && !document.querySelector("#spreadsheet .e-spreadsheet")) {
+          const borderStyle = {
+            border: "1px solid #ccc",
+            textAlign: "center"
+          };
 
-    const initializeSpreadsheet = () => {
-      console.log("Inisialisasi Spreadsheet...");
-
-      if (spreadsheetRef.current && !spreadsheetRef.current.dataset.initialized) {
-        spreadsheetRef.current.dataset.initialized = "true";
-
-        const spreadsheet = new window.ej.spreadsheet.Spreadsheet({
-          sheets: [
-            {
-              name: "Data Visualisasi",
-              columns: [
-                { width: 120 },
-                { width: 150 },
-                { width: 150 },
-                { width: 150 },
-              ],
-              rows: [
-                {
-                  cells: [
-                    { value: "Bulan", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center" } },
-                    { value: "Produk A (Rp)", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center" } },
-                    { value: "Produk B (Rp)", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center" } },
-                    { value: "Produk C (Rp)", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center" } },
-                  ],
-                },
-                { cells: [{ value: "Januari" }, { value: 4000000 }, { value: 5500000 }, { value: 3200000 }] },
-                { cells: [{ value: "Februari" }, { value: 5200000 }, { value: 6000000 }, { value: 3500000 }] },
-                { cells: [{ value: "Maret" }, { value: 5800000 }, { value: 6700000 }, { value: 4100000 }] },
-                { cells: [{ value: "April" }, { value: 5000000 }, { value: 6500000 }, { value: 3900000 }] },
-                { cells: [{ value: "Mei" }, { value: 6500000 }, { value: 7200000 }, { value: 4600000 }] },
-              ],
-            },
-          ],
-        });
-
-        spreadsheet.appendTo(spreadsheetRef.current);
-      }
-    };
-
-    loadSyncfusion();
+          new window.ej.spreadsheet.Spreadsheet({
+            sheets: [
+              {
+                name: "Data Ekstrakurikuler",
+                columns: [
+                  { width: 60 },
+                  { width: 200 },
+                  { width: 160 }
+                ],
+                rows: [
+                  {
+                    cells: [
+                      {
+                        value: "No",
+                        style: { ...borderStyle, fontWeight: "bold", color: "white", backgroundColor: "darkgreen" },
+                      },
+                      {
+                        value: "Nama Ekstrakurikuler",
+                        style: { ...borderStyle, fontWeight: "bold", color: "white", backgroundColor: "darkgreen" },
+                      },
+                      {
+                        value: "Jumlah Anggota",
+                        style: { ...borderStyle, fontWeight: "bold", color: "white", backgroundColor: "darkgreen" },
+                      },
+                    ]
+                  },
+                  ...[
+                    ["1", "Pramuka", "45"],
+                    ["2", "Paskibra", "30"],
+                    ["3", "Futsal", "38"],
+                    ["4", "PMR", "25"],
+                    ["5", "Bahasa Inggris Club", "20"],
+                    ["6", "Karya Ilmiah Remaja", "15"],
+                  ].map(([no, nama, jumlah]) => ({
+                    cells: [
+                      { value: no, style: borderStyle },
+                      { value: nama, style: borderStyle },
+                      { value: jumlah, style: borderStyle }
+                    ]
+                  }))
+                ]
+              }
+            ]
+          }).appendTo("#spreadsheet");
+        }
+      };
+      document.body.appendChild(script);
+    }
   }, []);
+
+  const [answers, setAnswers] = useState({
+    decomposition: "",
+    pattern: "",
+    abstraction: "",
+    algorithm: ""
+  });
+
+  const [feedback, setFeedback] = useState({
+    decomposition: "",
+    pattern: "",
+    abstraction: "",
+    algorithm: ""
+  });
+
+  const correctAnswers = {
+    decomposition: "nama ekstrakurikuler dan jumlah anggota",
+    pattern: "pramuka dan karya ilmiah remaja",
+    abstraction: "kolom nomor",
+    algorithm: "diagram kolom"
+  };
+
+  const handleChange = (field, value) => {
+    setAnswers((prev) => ({ ...prev, [field]: value }));
+    setFeedback((prev) => ({ ...prev, [field]: "" }));
+  };
+
+  const checkAnswer = (field) => {
+    const userInput = answers[field].toLowerCase().replace(/\s+/g, "");
+    const correctInput = correctAnswers[field].toLowerCase().replace(/\s+/g, "");
+    const isCorrect = userInput.includes(correctInput);
+    setFeedback((prev) => ({
+      ...prev,
+      [field]: isCorrect ? "✅ Jawaban benar!" : "❌ Coba lagi, ya!"
+    }));
+  };
+
+  const allCorrect = Object.values(feedback).every((val) =>
+    val.includes("✅")
+  );
+  
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-xl md:text-2xl font-bold mb-5 text-center text-green-800">
-          Mari Berlatih Visualisasi Data
-        </h1>
+      <h1 className="text-xl md:text-2xl text-center font-bold mb-4 p-4 bg-[#255F38] text-white rounded">
+        Mari Berlatih: Visualisasi Data
+      </h1>
 
-        <div className="bg-white shadow-md rounded-lg p-5 border-2 border-green-800 mt-5">
-          <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-3">
-            📊 Tabel Data Penjualan
-          </h2>
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-6">
+        <strong>Petunjuk:</strong> Baca studi kasus di bawah ini, lalu jawab pertanyaan pada setiap bagian yang mewakili langkah-langkah berpikir komputasional. Klik tombol <em>“Periksa”</em> untuk mengetahui apakah jawabanmu sudah tepat. Jangan khawatir, kamu bisa mencoba lagi jika belum benar!
+      </p>
 
-          <div className="flex justify-center">
-            <div
-              ref={spreadsheetRef}
-              id="spreadsheet"
-              style={{
-                width: "80%",
-                maxWidth: "800px",
-                height: "600px",
-                marginTop: "30px",
-                marginBottom: "30px",
-                overflow: "auto",
-              }}
-            />
-          </div>
+      {/* Studi Kasus */}
+      <section className="p-6 bg-white rounded shadow-lg">
+        <h2 className="text-lg font-semibold text-green-700">Studi Kasus</h2>
+        <p className="text-gray-700 text-sm md:text-base mt-2 text-justify leading-relaxed px-4">
+          Sebagai pengurus OSIS, kamu diminta membuat laporan untuk kepala sekolah
+          mengenai minat siswa terhadap kegiatan ekstrakurikuler.
+          Data jumlah anggota tiap ekstrakurikuler sudah dicatat, namun sulit dipahami
+          hanya dari tabel. Untuk membantu analisis, kamu ingin menampilkan data ini dalam bentuk
+          diagram agar lebih mudah dibaca dan dipresentasikan.
+        </p>
+
+        <div className="w-full flex justify-center px-4 mt-5">
+          <div
+            id="spreadsheet"
+            className="w-full max-w-full md:max-w-screen-md" 
+            style={{ height: "600px" }}
+          ></div>
         </div>
+        
+      </section>
 
-        <div className="flex justify-end mt-5 sm:mt-7">
-          <a 
-            href="/pencarian-data" 
-            className="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-sm sm:text-base"
+      {/* Fungsi membuat section */}
+      {[
+        {
+          key: "decomposition",
+          title: "1. Dekomposisi",
+          question:
+            "Apa saja informasi penting yang kamu butuhkan dari tabel untuk membuat grafik?",
+          points: [
+            "Identifikasi elemen-elemen penting dari data (misalnya nama kegiatan dan jumlah peserta)",
+            "Tentukan bagian mana dari data yang akan digunakan dalam grafik"
+          ]
+        },
+        {
+          key: "pattern",
+          title: "2. Pengenalan Pola",
+          question:
+            "Ekstrakurikuler mana yang paling banyak peminatnya? Dan mana yang paling sedikit?",
+          points: [
+            "Bandingkan jumlah anggota tiap ekstrakurikuler",
+            "Temukan pola yang menonjol (tertinggi dan terendah)"
+          ]
+        },
+        {
+          key: "abstraction",
+          title: "3. Abstraksi",
+          question:
+            "Kolom atau informasi apa yang bisa diabaikan karena tidak dibutuhkan dalam grafik?",
+          points: [
+            "Tentukan mana informasi yang tidak relevan untuk visualisasi",
+            "Hilangkan data yang tidak diperlukan agar grafik lebih fokus"
+          ]
+        },
+        {
+          key: "algorithm",
+          title: "4. Algoritma",
+          question:
+            "Jenis grafik apa yang paling cocok untuk menampilkan data di atas?",
+          points: [
+            "Tentukan jenis grafik yang paling tepat untuk membandingkan data kategori",
+            "Alasan pemilihan jenis grafik harus sesuai dengan tujuan penyajian"
+          ]
+        }
+      ].map(({ key, title, question, points }) => (
+        <section key={key} className="p-6 bg-white rounded shadow-lg mt-6">
+          <h3 className="text-md font-semibold text-green-700">{title}</h3>
+          <p className="text-gray-700 mt-3 leading-relaxed">
+            <strong>Pertanyaan:</strong> {question}
+          </p>
+          <ul className="list-disc ml-6 text-gray-700 mt-2 text-sm md:text-base">
+            {points.map((point, idx) => (
+              <li key={idx}>{point}</li>
+            ))}
+          </ul>
+          <input
+            className="border border-green-400 p-2 rounded w-full mt-3"
+            placeholder="Jawaban Anda"
+            value={answers[key]}
+            onChange={(e) => handleChange(key, e.target.value)}
+          />
+          <button
+            className="mt-2 bg-[#3B855B] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
+            onClick={() => checkAnswer(key)}
           >
-            Selanjutnya
-          </a>
-        </div>
+            Periksa
+          </button>
+          {feedback[key] && (
+            <p
+              className={`mt-2 ${
+                feedback[key].includes("✅") ? "text-green-600" : "text-red-500"
+              }`}
+            >
+              {feedback[key]}
+            </p>
+          )}
+        </section>
+      ))}
+
+      {/* Navigasi */}
+      <div className="flex justify-between mt-10 px-4">
+        <a
+          href="/aktivitas-visualisasi"
+          className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600"
+        >
+          ← Sebelumnya
+        </a>
+        <a
+          href={allCorrect ? "/petunjuk-kuis-visualisasi" : "#"}
+          className={`px-5 py-2 rounded-lg text-white ${
+            allCorrect
+              ? "bg-[#255F38] hover:bg-[#1E4D2E]"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
+          onClick={(e) => {
+            if (!allCorrect) e.preventDefault();
+          }}
+        >
+          Mulai Kuis →
+        </a>
       </div>
+
+
     </Layout>
   );
-};
-
-export default BerlatihVisualisasi;
+}

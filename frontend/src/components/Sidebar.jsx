@@ -282,21 +282,20 @@ export const Sidebar = () => {
         { title: "Pengantar Bab Analisis Data", path: "/pengantar-bab" },
         { title: "Pendahuluan", path: "/pendahuluan" },
         { title: "Mengenal Analisis Data", path: "/mengenal-analisis" },
-        { title: "Pendekatan Computational Thinking", path: "/pengenalan-ct" },
-        { title: "Contoh Penerapan CT", path: "/penerapan-ct" },
+        { title: "Computational Thinking", path: "/pengenalan-ct" },
+        { title: "Penerapan CT", path: "/penerapan-ct" },
       ],
     },
     {
       icon: faSearch,
       title: "Pencarian Data",
       subItems: [
-        { title: "Pencarian dengan Fungsi Lookup", path: "/pencarian-lookup" },
-        { title: "Contoh Penerapan Fungsi Lookup", path: "/contoh-lookup" },
+        { title: "Pencarian Fungsi Lookup", path: "/pencarian-lookup" },
+        { title: "Penerapan Fungsi Lookup", path: "/contoh-lookup" },
         { title: "Aktivitas Siswa", path: "/aktivitas-lookup" },
         { title: "Mari Berlatih", path: "/berlatih-lookup" },
         { title: "Petunjuk Kuis 1", path: "/petunjuk-kuis1" },
-        { title: "Kuis 1", path: "/quiz1" },
-        { title: "Feedback 1", path: "/feedback1" },
+        { title: "Kuis 1", path: "/quiz1" }
       ],
     },
     {
@@ -305,12 +304,12 @@ export const Sidebar = () => {
       subItems: [
         { title: "Visualisasi Data", path: "/visualisasi-data" },
         {
-          title: "Contoh Penerapan Visualisasi Data",
+          title: "Penerapan Visualisasi Data",
           path: "/contoh-penerapan-visualisasi-data",
         },
         {
           title: "Aktivitas Siswa",
-          path: "/aktivitas-siswa-visualisasi",
+          path: "/aktivitas-visualisasi",
         },
         {
           title: "Mari Berlatih",
@@ -323,11 +322,7 @@ export const Sidebar = () => {
         {
           title: "Kuis",
           path: "/kuis2",
-        },
-        {
-          title: "Feedback",
-          path: "/feedback2",
-        },
+        }
       ],
     },
     {
