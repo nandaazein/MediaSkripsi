@@ -331,6 +331,9 @@ export const Sidebar = () => {
       subItems: [
         { title: "Peringkasan Data", path: "/peringkasan-data" },
         { title: "Penerapan Peringkasan Data", path: "/penerapan-peringkasan" },
+        { title: "Aktivitas Siswa", path: "/aktivitas-peringkasan" },
+        { title: "Mari Berlatih", path: "/berlatih-peringkasan" },
+        { title: "Kuis 3", path: "/quiz3" },
       ],
     },
     {

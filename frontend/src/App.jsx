@@ -36,7 +36,7 @@ import Feedback2 from "./pages/VisualisasiData/Feedback2";
 // Sub 3
 import PeringkasanData from "./pages/PeringkasanData/PeringkasanData";
 import ContohPenerapanPeringkasan from "./pages/PeringkasanData/ContohPenerapanPeringkasan";
-
+import AktivitasPeringkasan from "./pages/PeringkasanData/AktivitasPeringkasan";
 // Sub 4
 
 
@@ -78,6 +78,7 @@ function App() {
         {/* PERINGKASAN DATA SUB 3  */}
         <Route path="/peringkasan-data" element={<PeringkasanData />} />
         <Route path="/penerapan-peringkasan" element={<ContohPenerapanPeringkasan />}/>
+        <Route path="/aktivitas-peringkasan" element={<AktivitasPeringkasan />} />
         <Route path="/spreadsheet" element={<Spreadsheet />} />
 
         {/* PENGELOLAAN DATA SUB 4 */}

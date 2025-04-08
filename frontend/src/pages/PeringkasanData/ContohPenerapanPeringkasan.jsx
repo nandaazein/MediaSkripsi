@@ -287,8 +287,6 @@ const ContohPeringkasan = () => {
       <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12  p-4 bg-[#255F38] text-white ">
         Contoh Penerapan Fungsi COUNTIF
       </h1>
-
-      
       
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
         Kamu sedang mencatat semua film yang kamu tonton selama liburan. Di spreadsheet, kamu menuliskan 
@@ -411,6 +409,144 @@ const ContohPeringkasan = () => {
           <li> Pastikan kriteria ejaannya benar agar hasil akurat.</li>
         </ul>
       </div>
+
+
+      {/* Header judul */}
+      <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
+        Contoh Penerapan Fungsi COUNTIFS
+      </h1>
+
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
+        Sebagai anggota OSIS, kamu diminta untuk mendata kehadiran peserta dalam kegiatan "Senam Pagi". 
+        Kamu mencatat data peserta yang berisi <span className="font-semibold">nama, kelas, jenis kelamin,</span> dan 
+        <span className="font-semibold"> status kehadiran</span>. Sekarang kamu ingin mengetahui 
+        <span className="font-semibold"> berapa siswa perempuan dari kelas 8A yang hadir</span>. 
+        Untuk itu, kamu akan menggunakan fungsi <span className="font-semibold">COUNTIFS</span>.
+      </p>
+
+      {/* Tabel Data */}
+      <div className="flex flex-col items-center mt-6">
+        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel. Kehadiran Peserta Senam Pagi</p>
+        <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center text-sm">
+          <thead>
+            <tr className="bg-[#255F38] text-white">
+              <th className="border border-green-600 px-4 py-2">No</th>
+              <th className="border border-green-600 px-4 py-2">Nama</th>
+              <th className="border border-green-600 px-4 py-2">Kelas</th>
+              <th className="border border-green-600 px-4 py-2">Jenis Kelamin</th>
+              <th className="border border-green-600 px-4 py-2">Kehadiran</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [1, "Alya", "8A", "Perempuan", "Hadir"],
+              [2, "Raka", "8A", "Laki-laki", "Hadir"],
+              [3, "Salsa", "8A", "Perempuan", "Hadir"],
+              [4, "Bima", "8A", "Laki-laki", "Tidak Hadir"],
+              [5, "Nadia", "8B", "Perempuan", "Hadir"],
+              [6, "Farhan", "8B", "Laki-laki", "Hadir"],
+              [7, "Nisa", "8A", "Perempuan", "Hadir"],
+              [8, "Iqbal", "8C", "Laki-laki", "Tidak Hadir"],
+              [9, "Zahra", "8A", "Perempuan", "Tidak Hadir"],
+              [10, "Putri", "8A", "Perempuan", "Hadir"],
+            ].map((row, index) => (
+              <tr key={index} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
+                {row.map((cell, i) => (
+                  <td key={i} className="border border-green-600 px-4 py-2">{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Penyelesaian CT */}
+      <div className="space-y-8 mt-10">
+        {/* CT - Dekomposisi */}
+        <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
+          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+            <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
+          </div>
+          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+            <li>Tabel berisi nama, kelas, jenis kelamin, dan kehadiran siswa.</li>
+            <li>Kriteria: kelas = 8A, jenis kelamin = Perempuan, kehadiran = Hadir.</li>
+          </ul>
+        </div>
+
+        {/* CT - Pengenalan Pola */}
+        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+            <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
+          </div>
+          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+            <li>Setiap baris mewakili 1 siswa dengan 3 informasi utama: kelas, jenis kelamin, dan kehadiran.</li>
+            <li>Data dapat difilter berdasarkan ketiga kolom tersebut.</li>
+          </ul>
+        </div>
+
+        {/* CT - Abstraksi */}
+        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+            <Filter className="w-5 h-5 mr-2" /> Abstraksi
+          </div>
+          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+            <li>Fokus pada baris yang memiliki kelas = 8A, jenis kelamin = Perempuan, dan kehadiran = Hadir.</li>
+            <li>Gunakan fungsi COUNTIFS untuk menghitung jumlah data yang memenuhi 3 kriteria sekaligus.</li>
+          </ul>
+        </div>
+
+        {/* CT - Algoritma */}
+        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+            <Code className="w-5 h-5 mr-2" /> Algoritma
+          </div>
+          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+            <li>Pilih sel kosong (misalnya G2).</li>
+            <li>Masukkan rumus:
+              <div className="bg-gray-100 p-2 rounded mt-1">
+                =COUNTIFS(C2:C11;"8A";D2:D11;"Perempuan";E2:E11;"Hadir")
+              </div>
+            </li>
+            <li>Tekan Enter untuk mendapatkan jumlah siswa perempuan 8A yang hadir.</li>
+          </ul>
+        </div>
+
+        {/* (Opsional iframe sheet jika kamu ingin embed file spreadsheet) */}
+        <div className="flex justify-center">
+          <iframe 
+            width="80%" 
+            height="400" 
+            style={{ border: '1px solid #e7e7e7' }} 
+            frameBorder="0" 
+            scrolling="no" 
+            src="https://sheet.zohopublic.com/sheet/published/2vh2060ce0212595c458d974d5650e70b5a3f?mode=embed">
+          </iframe>
+        </div>
+      </div>
+
+      {/* CT - Kesimpulan dan Analisis */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan & Analisis
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-6">
+          Fungsi COUNTIFS sangat membantu untuk menghitung data yang memenuhi lebih dari satu syarat secara akurat.
+        </p>
+        <p className="text-gray-700 font-semibold text-sm md:text-base">Analisis:</p>
+        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-4 space-y-2">
+          <li>Lebih mudah dan pasti karena tidak menggunakan simbol pencocokan (wildcard).</li>
+          <li>Membantu OSIS atau guru melihat jumlah peserta aktif secara cepat.</li>
+          <li>Dapat digunakan dalam berbagai kegiatan, seperti lomba, upacara, atau pelatihan.</li>
+        </ul>
+      </div>
+
+
+
+    
+
+
+
+    
 
 
 
