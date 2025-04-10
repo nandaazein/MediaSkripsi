@@ -199,13 +199,13 @@ export default function ChartLesson() {
             ))}
           </ul>
           <input
-            className="border border-green-400 p-2 rounded w-full mt-3"
+            className="border p-2 rounded w-full mt-3"
             placeholder="Jawaban Anda"
             value={answers[key]}
             onChange={(e) => handleChange(key, e.target.value)}
           />
           <button
-            className="mt-2 bg-[#3B855B] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
+            className="mt-2 bg-[#255F38] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
             onClick={() => checkAnswer(key)}
           >
             Periksa

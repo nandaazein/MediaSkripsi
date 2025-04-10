@@ -141,7 +141,7 @@ const AktivitasPeringkasan = () => {
       <div className="px-4 mb-6">
         <p className="text-gray-700 text-sm md:text-base mb-2">3. Isi bagian-bagian dari fungsi COUNTIF berikut untuk menghitung jumlah produk kategori "Alat Tulis":</p>
         <div className="space-y-2">
-          <input type="text" placeholder="Range (misal: A2;A9)" className="border p-2 rounded w-full" value={jawaban3a} onChange={(e) => setJawaban3a(e.target.value)} />
+          <input type="text" placeholder="Range (misal: A2:A9)" className="border p-2 rounded w-full" value={jawaban3a} onChange={(e) => setJawaban3a(e.target.value)} />
           <input type="text" placeholder="Kriteria (misal: 'Makanan')" className="border p-2 rounded w-full" value={jawaban3b} onChange={(e) => setJawaban3b(e.target.value)} />
           <input type="text" placeholder="Hasil (misal: 4)" className="border p-2 rounded w-full" value={jawaban3c} onChange={(e) => setJawaban3c(e.target.value)} />
         </div>

@@ -53,7 +53,7 @@ export default function VlookupLesson() {
       </h1>
 
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-6">
-        <strong>Petunjuk:</strong> Baca studi kasus di bawah ini, lalu jawab pertanyaan pada setiap bagian yang mewakili langkah-langkah berpikir komputasional. Klik tombol <em>“Cek”</em> untuk mengetahui apakah jawabanmu sudah tepat. Jangan khawatir, kamu bisa mencoba lagi jika belum benar!
+        <strong>Petunjuk:</strong> Baca studi kasus di bawah ini, lalu jawab pertanyaan pada setiap bagian yang mewakili langkah-langkah berpikir komputasional. Klik tombol <em>“Periksa”</em> untuk mengetahui apakah jawabanmu sudah tepat. Jangan khawatir, kamu bisa mencoba lagi jika belum benar!
       </p>
 
       {/* Studi Kasus */}
@@ -129,16 +129,16 @@ export default function VlookupLesson() {
             ))}
           </ul>
           <input
-            className="border border-green-400 p-2 rounded w-full mt-3"
+            className="border p-2 rounded w-full mt-3"
             placeholder="Jawaban Anda"
             value={answers[key]}
             onChange={(e) => handleChange(key, e.target.value)}
           />
           <button
-            className="mt-2 bg-[#3B855B] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
+            className="mt-2 bg-[#255F38] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
             onClick={() => checkAnswer(key)}
           >
-            Cek
+            Periksa
           </button>
           {renderFeedback(key)}
         </section>

@@ -339,7 +339,7 @@ export const Sidebar = () => {
     {
       icon: faTable,
       title: "Pengelolaan Data",
-      subItems: [{ title: "Sorting & Filtering", path: "/sorting-filtering" }],
+      subItems: [{ title: "Sorting & Filtering", path: "/pengelolaan-data" }],
     },
     {
       icon: faTasks,

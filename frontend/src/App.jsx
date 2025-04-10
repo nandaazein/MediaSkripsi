@@ -38,6 +38,7 @@ import PeringkasanData from "./pages/PeringkasanData/PeringkasanData";
 import ContohPenerapanPeringkasan from "./pages/PeringkasanData/ContohPenerapanPeringkasan";
 import AktivitasPeringkasan from "./pages/PeringkasanData/AktivitasPeringkasan";
 // Sub 4
+import PengelolaanData from "./pages/PengelolaanData/PengelolaanData";
 
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
         <Route path="/spreadsheet" element={<Spreadsheet />} />
 
         {/* PENGELOLAAN DATA SUB 4 */}
+        <Route path="/pengelolaan-data" element={<PengelolaanData />} />
       </Routes>
    
     </BrowserRouter>
