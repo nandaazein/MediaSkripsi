@@ -18,6 +18,8 @@ import PenerapanCT from "./pages/Pendahuluan/PenerapanCT";
 // Sub 1
 import PencarianLookup from "./pages/PencarianData/PencarianLookup";
 import ContohLookup from "./pages/PencarianData/ContohLookup";
+import PencarianReference from "./pages/PencarianData/PencarianReference";
+import ContohReference from "./pages/PencarianData/ContohReference";
 import AktivitasLookup from "./pages/PencarianData/AktivitasLookup";
 import BerlatihLookup from "./pages/PencarianData/BerlatihLookup";
 import PetunjukQuiz1 from "./pages/PencarianData/PetunjukQuiz1";
@@ -60,6 +62,8 @@ function App() {
         {/* PENCARIAN */}
         <Route path="/pencarian-lookup" element={<PencarianLookup />} />
         <Route path="/contoh-lookup" element={<ContohLookup />} />
+        <Route path="/pencarian-reference" element={<PencarianReference />} />
+        <Route path="/contoh-reference" element={<ContohReference />} />
         <Route path="/aktivitas-lookup" element={<AktivitasLookup />} />
         <Route path="/berlatih-lookup" element={<BerlatihLookup />} />
         <Route path="/petunjuk-kuis1" element={<PetunjukQuiz1 />} />

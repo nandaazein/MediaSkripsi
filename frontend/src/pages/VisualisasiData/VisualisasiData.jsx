@@ -301,14 +301,6 @@ export default function VisualisasiData() {
             banyak, data akan sulit dianalisis.
           </li>
         </ul>
-        <p className="text-gray-700 text-sm md:text-base mt-2 text-justify">
-          📌 Contoh:
-        </p>
-        <p className="text-gray-700 text-sm md:text-base pl-10">
-          Jika ingin membandingkan nilai ujian beberapa siswa, cukup tampilkan
-          nama siswa dan nilai ujian. Nama guru atau jenis soal tidak perlu
-          dimasukkan karena tidak relevan dalam perbandingan nilai.
-        </p>
       </div>
 
       {/* ALGORITMA */}
@@ -323,7 +315,6 @@ export default function VisualisasiData() {
           <li>Siapkan data dalam bentuk tabel.</li>
           <li>Pilih data yang akan divisualisasikan.</li>
           <li>Klik menu "Insert Chart" dan pilih jenis grafik yang sesuai.</li>
-          <li>Sesuaikan label, warna, dan judul agar lebih informatif.</li>
           <li>
             Periksa kembali grafik dan lakukan modifikasi jika diperlukan.
           </li>

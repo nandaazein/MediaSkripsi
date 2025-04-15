@@ -164,108 +164,107 @@ export default function PengelolaanData() {
       </div>
 
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-  <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-    <Code className="w-5 h-5 mr-2" /> Algoritma
-  </div>
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Code className="w-5 h-5 mr-2" /> Algoritma
+        </div>
 
-  <p className="text-gray-600 text-sm md:text-base mt-4 text-justify">
-    Setelah kita memahami data yang tersedia dan menentukan informasi yang ingin kita cari, kita bisa membuat langkah-langkah sistematis untuk menerapkan sorting dan filtering di spreadsheet.
-  </p>
+        <p className="text-gray-600 text-sm md:text-base mt-4 text-justify">
+          Setelah kita memahami data yang tersedia dan menentukan informasi yang ingin kita cari, kita bisa membuat langkah-langkah sistematis untuk menerapkan sorting dan filtering di spreadsheet.
+        </p>
 
-  <p className="text-gray-700 text-sm md:text-base mt-4">
-    📌 **Sorting (Pengurutan)** – Mengurutkan Data dari Nilai Tertinggi ke Terendah:
-  </p>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          📌 Sorting (Pengurutan) – Mengurutkan Data dari Nilai Tertinggi ke Terendah:
+        </p>
 
-  <div className="flex flex-col items-center mt-4">
-    <p className="text-gray-600 text-sm text-center mb-2 italic">
-      Tabel 5. Contoh Data untuk Sorting
-    </p>
-    <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-      <thead>
-        <tr className="bg-[#255F38] text-white">
-          <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-          <th className="border border-green-600 px-4 py-2">Nilai Tugas</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="bg-green-50">
-          <td className="border border-green-600 px-4 py-2">Aisyah</td>
-          <td className="border border-green-600 px-4 py-2">85</td>
-        </tr>
-        <tr className="bg-white">
-          <td className="border border-green-600 px-4 py-2">Budi</td>
-          <td className="border border-green-600 px-4 py-2">70</td>
-        </tr>
-        <tr className="bg-green-50">
-          <td className="border border-green-600 px-4 py-2">Citra</td>
-          <td className="border border-green-600 px-4 py-2">95</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        <div className="flex flex-col items-center mt-4">
+          <p className="text-gray-600 text-sm text-center mb-2 italic">
+            Tabel 5. Contoh Data untuk Sorting
+          </p>
+          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+            <thead>
+              <tr className="bg-[#255F38] text-white">
+                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                <th className="border border-green-600 px-4 py-2">Nilai Tugas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="bg-green-50">
+                <td className="border border-green-600 px-4 py-2">Aisyah</td>
+                <td className="border border-green-600 px-4 py-2">85</td>
+              </tr>
+              <tr className="bg-white">
+                <td className="border border-green-600 px-4 py-2">Budi</td>
+                <td className="border border-green-600 px-4 py-2">70</td>
+              </tr>
+              <tr className="bg-green-50">
+                <td className="border border-green-600 px-4 py-2">Citra</td>
+                <td className="border border-green-600 px-4 py-2">95</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    1. Blok seluruh data termasuk header tabel (misalnya, kolom Nama Siswa dan Nilai Tugas).
-  </p>
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    2. Klik menu **Data** kemudian pilih **Urutkan (Sort)**.
-  </p>
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    3. Pilih kolom yang ingin diurutkan, misalnya "Nilai Tugas".
-  </p>
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    4. Pilih **Urutkan dari Z ke A** untuk mendapatkan urutan dari nilai tertinggi ke terendah.
-  </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          1. Blok seluruh data termasuk header tabel (misalnya, kolom Nama Siswa dan Nilai Tugas).
+        </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          2. Klik menu Data kemudian pilih Urutkan (Sort).
+        </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          3. Pilih kolom yang ingin diurutkan, misalnya "Nilai Tugas".
+        </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          4. Pilih Urutkan dari Z ke A untuk mendapatkan urutan dari nilai tertinggi ke terendah.
+        </p>
 
-  <p className="text-gray-700 text-sm md:text-base mt-4">
-    📌 **Filtering (Penyaringan)** – Menampilkan Data Siswa dengan Nilai di Atas 80:
-  </p>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          📌 Filtering (Penyaringan) – Menampilkan Data Siswa dengan Nilai di Atas 80:
+        </p>
 
-  <div className="flex flex-col items-center mt-4">
-    <p className="text-gray-600 text-sm text-center mb-2 italic">
-      Tabel 6. Contoh Data untuk Filtering
-    </p>
-    <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-      <thead>
-        <tr className="bg-[#255F38] text-white">
-          <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-          <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="bg-green-50">
-          <td className="border border-green-600 px-4 py-2">Dani</td>
-          <td className="border border-green-600 px-4 py-2">78</td>
-        </tr>
-        <tr className="bg-white">
-          <td className="border border-green-600 px-4 py-2">Eko</td>
-          <td className="border border-green-600 px-4 py-2">88</td>
-        </tr>
-        <tr className="bg-green-50">
-          <td className="border border-green-600 px-4 py-2">Farah</td>
-          <td className="border border-green-600 px-4 py-2">92</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        <div className="flex flex-col items-center mt-4">
+          <p className="text-gray-600 text-sm text-center mb-2 italic">
+            Tabel 6. Contoh Data untuk Filtering
+          </p>
+          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+            <thead>
+              <tr className="bg-[#255F38] text-white">
+                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="bg-green-50">
+                <td className="border border-green-600 px-4 py-2">Dani</td>
+                <td className="border border-green-600 px-4 py-2">78</td>
+              </tr>
+              <tr className="bg-white">
+                <td className="border border-green-600 px-4 py-2">Eko</td>
+                <td className="border border-green-600 px-4 py-2">88</td>
+              </tr>
+              <tr className="bg-green-50">
+                <td className="border border-green-600 px-4 py-2">Farah</td>
+                <td className="border border-green-600 px-4 py-2">92</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    1. Blok seluruh data termasuk header kolom.
-  </p>
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    2. Klik menu **Data** kemudian pilih **Filter**.
-  </p>
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    3. Akan muncul ikon panah di bagian kanan header kolom.
-  </p>
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    4. Klik ikon panah di kolom "Nilai Ujian", lalu pilih **Filter Angka > Lebih besar dari**.
-  </p>
-  <p className="text-gray-700 text-sm md:text-base pl-6">
-    5. Masukkan nilai 80, lalu klik OK untuk menampilkan hanya siswa yang nilainya lebih dari 80.
-  </p>
-</div>
-
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          1. Blok seluruh data termasuk header kolom.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          2. Klik menu Data kemudian pilih Filter.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          3. Akan muncul ikon panah di bagian kanan header kolom.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          4. Klik ikon panah di kolom "Nilai Ujian", lalu pilih Filter Angka > Lebih besar dari.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base pl-6">
+          5. Masukkan nilai 80, lalu klik OK untuk menampilkan hanya siswa yang nilainya lebih dari 80.
+        </p>
+      </div>
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8 px-4">

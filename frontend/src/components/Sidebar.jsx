@@ -292,9 +292,10 @@ export const Sidebar = () => {
       subItems: [
         { title: "Pencarian Fungsi Lookup", path: "/pencarian-lookup" },
         { title: "Penerapan Fungsi Lookup", path: "/contoh-lookup" },
+        { title: "Pencarian Fungsi Reference", path: "/pencarian-reference" },
+        { title: "Penerapan Fungsi Reference", path: "/contoh-reference" },
         { title: "Aktivitas Siswa", path: "/aktivitas-lookup" },
         { title: "Mari Berlatih", path: "/berlatih-lookup" },
-        { title: "Petunjuk Kuis 1", path: "/petunjuk-kuis1" },
         { title: "Kuis 1", path: "/quiz1" }
       ],
     },
