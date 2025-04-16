@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Layout from "../../components/Layout";
-import { CheckCircle, XCircle } from "lucide-react";
 
 export default function VlookupLesson() {
   const correctAnswers = {
@@ -42,12 +41,22 @@ export default function VlookupLesson() {
   const renderFeedback = (field) => {
     if (feedback[field] === null) return null;
     return (
-      <div className={`flex items-center gap-2 mt-2 text-lg font-semibold ${feedback[field] ? "text-green-700" : "text-red-700"}`}>
-        {feedback[field] ? <CheckCircle className="h-6 w-6 text-green-600" /> : <XCircle className="h-6 w-6 text-red-600" />}
-        <span>{feedback[field] ? "Benar" : "Salah"}</span>
+      <div className={`flex items-center gap-2 mt-2 text-base font-semibold ${feedback[field] ? "text-green-700" : "text-red-700"}`}>
+        {feedback[field] ? (
+          <>
+            <span>✅ Jawaban benar!</span>
+          </>
+        ) : (
+          <>
+            <span>❌ Jawaban salah. Coba lagi!</span>
+          </>
+        )}
       </div>
     );
   };
+  
+
+ 
 
   const allCorrect = Object.values(feedback).every((val) => val === true);
 
