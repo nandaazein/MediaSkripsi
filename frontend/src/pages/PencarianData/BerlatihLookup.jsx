@@ -34,6 +34,11 @@ export default function VlookupLesson() {
     setFeedback((prev) => ({ ...prev, [field]: isCorrect }));
   };
 
+  const clearAnswer = (field) => {
+    setAnswers((prev) => ({ ...prev, [field]: "" }));
+    setFeedback((prev) => ({ ...prev, [field]: null }));
+  };
+
   const renderFeedback = (field) => {
     if (feedback[field] === null) return null;
     return (
@@ -139,6 +144,12 @@ export default function VlookupLesson() {
             onClick={() => checkAnswer(key)}
           >
             Periksa
+          </button>
+          <button
+            className="mt-2 ml-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+            onClick={() => clearAnswer(key)}
+          >
+            Hapus
           </button>
           {renderFeedback(key)}
         </section>
