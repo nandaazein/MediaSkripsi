@@ -304,26 +304,10 @@ export const Sidebar = () => {
       title: "Visualisasi Data",
       subItems: [
         { title: "Visualisasi Data", path: "/visualisasi-data" },
-        {
-          title: "Penerapan Visualisasi Data",
-          path: "/contoh-penerapan-visualisasi-data",
-        },
-        {
-          title: "Aktivitas Siswa",
-          path: "/aktivitas-visualisasi",
-        },
-        {
-          title: "Mari Berlatih",
-          path: "/mari-berlatih-visualisasi",
-        },
-        {
-          title: "Pentunjuk Kuis ",
-          path: "/pentunjuk-kuis2",
-        },
-        {
-          title: "Kuis",
-          path: "/kuis2",
-        }
+        { title: "Penerapan Visualisasi Data", path: "/contoh-penerapan-visualisasi-data" },
+        { title: "Aktivitas Siswa", path: "/aktivitas-visualisasi"},
+        { title: "Mari Berlatih", path: "/mari-berlatih-visualisasi"},
+        { title: "Kuis", path: "/kuis2"}
       ],
     },
     {

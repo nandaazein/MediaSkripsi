@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 
-
-
 const langkahSUMIF = [
-    "Gunakan rumus SUMIF untuk menjumlahkan total penjualan berdasarkan kategori 'Makanan'",
-    "Pilih range kriteria, yaitu kolom Kategori (C2:C9)",
-    "Tentukan kriteria, yaitu hanya menjumlahkan transaksi dengan kategori 'Makanan'",
-    "Pilih sum_range, yaitu kolom Total Penjualan (F2:F9) yang akan dijumlahkan",
-  ];
+  "Gunakan rumus SUMIF untuk menjumlahkan total penjualan berdasarkan kategori 'Makanan'",
+  "Pilih range kriteria, yaitu kolom Kategori (C2:C9)",
+  "Tentukan kriteria, yaitu hanya menjumlahkan transaksi dengan kategori 'Makanan'",
+  "Pilih sum_range, yaitu kolom Total Penjualan (F2:F9) yang akan dijumlahkan",
+];
 
 const langkahCOUNTIFS = [
   "Gunakan rumus COUNTIFS untuk menghitung jumlah transaksi yang memenuhi kedua kriteria",
@@ -47,8 +45,18 @@ const AktivitasPeringkasan = () => {
     setFeedback1(jawaban1.trim().toLowerCase() === "susu kotak" ? "✅ Jawaban benar!" : "❌ Jawaban salah. Coba lagi!");
   };
 
+  const resetJawaban1 = () => {
+    setJawaban1("");
+    setFeedback1("");
+  };
+
   const cekJawaban2 = () => {
     setFeedback2(jawaban2.trim().toUpperCase() === "COUNTIF" ? "✅ Jawaban benar!" : "❌ Jawaban salah. Coba lagi!");
+  };
+
+  const resetJawaban2 = () => {
+    setJawaban2("");
+    setFeedback2("");
   };
 
   const cekJawaban3 = () => {
@@ -59,14 +67,33 @@ const AktivitasPeringkasan = () => {
     setFeedback3(benar ? "✅ Jawaban benar!" : "❌ Jawaban salah. Coba lagi!");
   };
 
+  const resetJawaban3 = () => {
+    setJawaban3a("");
+    setJawaban3b("");
+    setJawaban3c("");
+    setFeedback3("");
+  };
+
   const cekJawaban4 = () => {
     const benar = JSON.stringify(urutan4) === JSON.stringify(langkahCOUNTIFS);
     setFeedback4(benar ? "✅ Urutan benar! Anda berhasil!" : "❌ Urutan masih salah, coba lagi!");
   };
 
+  const resetJawaban4 = () => {
+    setUrutan4([]);
+    setFeedback4("");
+    setBank4(shuffleArray(langkahCOUNTIFS));
+  };
+
   const cekJawaban5 = () => {
     const benar = JSON.stringify(urutan5) === JSON.stringify(langkahSUMIF);
     setFeedback5(benar ? "✅ Urutan benar! Anda berhasil!" : "❌ Urutan masih salah, coba lagi!");
+  };
+
+  const resetJawaban5 = () => {
+    setUrutan5([]);
+    setFeedback5("");
+    setBank5(shuffleArray(langkahSUMIF));
   };
 
   const semuaBenar = [feedback1, feedback2, feedback3, feedback4, feedback5].every((f) => f.startsWith("✅"));
@@ -125,7 +152,10 @@ const AktivitasPeringkasan = () => {
       <div className="px-4 mb-6">
         <p className="text-gray-700 text-sm md:text-base mb-2">1. Produk apa yang memiliki total penjualan tertinggi?</p>
         <input type="text" className="border p-2 rounded w-full" value={jawaban1} onChange={(e) => setJawaban1(e.target.value)} />
-        <button onClick={cekJawaban1} className="mt-2 px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+        <div className="flex gap-2 mt-2">
+          <button onClick={cekJawaban1} className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+          <button onClick={resetJawaban1} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Hapus</button>
+        </div>
         {feedback1 && <p className="mt-2 font-semibold">{feedback1}</p>}
       </div>
 
@@ -133,7 +163,10 @@ const AktivitasPeringkasan = () => {
       <div className="px-4 mb-6">
         <p className="text-gray-700 text-sm md:text-base mb-2">2. Fungsi apa yang digunakan untuk menghitung jumlah data berdasarkan satu kriteria?</p>
         <input type="text" className="border p-2 rounded w-full" value={jawaban2} onChange={(e) => setJawaban2(e.target.value)} />
-        <button onClick={cekJawaban2} className="mt-2 px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+        <div className="flex gap-2 mt-2">
+          <button onClick={cekJawaban2} className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+          <button onClick={resetJawaban2} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Hapus</button>
+        </div>
         {feedback2 && <p className="mt-2 font-semibold">{feedback2}</p>}
       </div>
 
@@ -145,7 +178,10 @@ const AktivitasPeringkasan = () => {
           <input type="text" placeholder="Kriteria (misal: 'Makanan')" className="border p-2 rounded w-full" value={jawaban3b} onChange={(e) => setJawaban3b(e.target.value)} />
           <input type="text" placeholder="Hasil (misal: 4)" className="border p-2 rounded w-full" value={jawaban3c} onChange={(e) => setJawaban3c(e.target.value)} />
         </div>
-        <button onClick={cekJawaban3} className="mt-2 px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+        <div className="flex gap-2 mt-2">
+          <button onClick={cekJawaban3} className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+          <button onClick={resetJawaban3} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Hapus</button>
+        </div>
         {feedback3 && <p className="mt-2 font-semibold">{feedback3}</p>}
       </div>
 
@@ -154,9 +190,7 @@ const AktivitasPeringkasan = () => {
         <p className="text-gray-700 text-sm md:text-base mb-2">
           4. Seret langkah-langkah berikut ke dalam urutan yang benar untuk menghitung <b>jumlah transaksi kategori "Makanan" dengan jumlah terjual lebih dari 3</b>:
         </p>
-        <div className="mb-2">
-          {renderDraggableItems(bank4, urutan4)}
-        </div>
+        <div className="mb-2">{renderDraggableItems(bank4, urutan4)}</div>
         <div className="border border-gray-400 p-4 rounded mb-2 min-h-[100px] bg-gray-50" onDrop={(e) => handleDrop(e, setUrutan4)} onDragOver={allowDrop}>
           {urutan4.map((item, index) => (
             <div key={index} className="border border-gray-400 p-2 rounded bg-white shadow-sm mb-2">
@@ -164,9 +198,10 @@ const AktivitasPeringkasan = () => {
             </div>
           ))}
         </div>
-        <button onClick={cekJawaban4} className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">
-          Periksa
-        </button>
+        <div className="flex gap-2">
+          <button onClick={cekJawaban4} className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+          <button onClick={resetJawaban4} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Hapus</button>
+        </div>
         {feedback4 && <p className="mt-2 font-semibold">{feedback4}</p>}
       </div>
 
@@ -175,9 +210,7 @@ const AktivitasPeringkasan = () => {
         <p className="text-gray-700 text-sm md:text-base mb-2">
           5. Susun kembali langkah-langkah berikut agar urut untuk menghitung <b>total penjualan kategori "Makanan" menggunakan SUMIF</b>:
         </p>
-        <div className="mb-2">
-          {renderDraggableItems(bank5, urutan5)}
-        </div>
+        <div className="mb-2">{renderDraggableItems(bank5, urutan5)}</div>
         <div className="border border-gray-400 p-4 rounded mb-2 min-h-[100px] bg-gray-50" onDrop={(e) => handleDrop(e, setUrutan5)} onDragOver={allowDrop}>
           {urutan5.map((item, index) => (
             <div key={index} className="border border-gray-400 p-2 rounded bg-white shadow-sm mb-2">
@@ -185,16 +218,12 @@ const AktivitasPeringkasan = () => {
             </div>
           ))}
         </div>
-        <button onClick={cekJawaban5} className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">
-          Periksa
-        </button>
+        <div className="flex gap-2">
+          <button onClick={cekJawaban5} className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700">Periksa</button>
+          <button onClick={resetJawaban5} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Hapus</button>
+        </div>
         {feedback5 && <p className="mt-2 font-semibold">{feedback5}</p>}
       </div>
-
-      
-
-
-     
 
       <div className="flex justify-between mt-10 px-4">
         <a href="/aktivitas-lookup" className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600">
