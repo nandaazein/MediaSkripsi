@@ -43,8 +43,10 @@ import BerlatihPeringkasan from "./pages/PeringkasanData/BerlatihPeringkasan";
 
 // Sub 4
 import PengelolaanData from "./pages/PengelolaanData/PengelolaanData";
-
-
+import ContohPenerapanPengelolaan from "./pages/PengelolaanData/ContohPenerapan";
+import AktivitasSiswaPengelolaan from "./pages/PengelolaanData/AktivitasSiswa";
+import MariBerlatihPengelolaan from "./pages/PengelolaanData/MariBerlatih";
+import Kuis4 from "./pages/PengelolaanData/Kuis4";
 function App() {
   return (
     <BrowserRouter>
@@ -75,24 +77,50 @@ function App() {
         {/* VISUALISASI DATA */}
         <Route path="/visualisasi-data" element={<VisualisasiData />} />
         <Route
-          path="/contoh-penerapan-visualisasi-data" element={<ContohPenerapan />}/>
-        <Route path="/aktivitas-visualisasi" element={<AktivitasSiswaVisualisasi />}/>
-        <Route path="/mari-berlatih-visualisasi" element={<BerlatihVisualisasi />}/>
+          path="/contoh-penerapan-visualisasi-data"
+          element={<ContohPenerapan />}
+        />
+        <Route
+          path="/aktivitas-visualisasi"
+          element={<AktivitasSiswaVisualisasi />}
+        />
+        <Route
+          path="/mari-berlatih-visualisasi"
+          element={<BerlatihVisualisasi />}
+        />
         <Route path="/petunjuk-kuis2" element={<PetunjukKuis2 />} />
         <Route path="/kuis2" element={<Kuis2 />} />
         <Route path="/feedback2" element={<Feedback2 />} />
 
         {/* PERINGKASAN DATA SUB 3  */}
         <Route path="/peringkasan-data" element={<PeringkasanData />} />
-        <Route path="/penerapan-peringkasan" element={<ContohPenerapanPeringkasan />}/>
-        <Route path="/aktivitas-peringkasan" element={<AktivitasPeringkasan />} />
+        <Route
+          path="/penerapan-peringkasan"
+          element={<ContohPenerapanPeringkasan />}
+        />
+        <Route
+          path="/aktivitas-peringkasan"
+          element={<AktivitasPeringkasan />}
+        />
         <Route path="/berlatih-peringkasan" element={<BerlatihPeringkasan />} />
         <Route path="/spreadsheet" element={<Spreadsheet />} />
 
         {/* PENGELOLAAN DATA SUB 4 */}
         <Route path="/pengelolaan-data" element={<PengelolaanData />} />
+        <Route
+          path="/penerapan-pengelolaan-data"
+          element={<ContohPenerapanPengelolaan />}
+        />
+        <Route
+          path="/aktivitas-siswa"
+          element={<AktivitasSiswaPengelolaan />}
+        />
+        <Route
+          path="/berlatih-pengelolaan"
+          element={<MariBerlatihPengelolaan />}
+        />
+        <Route path="/quiz4" element={<Kuis4 />} />
       </Routes>
-   
     </BrowserRouter>
   );
 }

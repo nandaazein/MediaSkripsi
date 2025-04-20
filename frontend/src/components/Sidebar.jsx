@@ -296,7 +296,7 @@ export const Sidebar = () => {
         { title: "Penerapan Fungsi Reference", path: "/contoh-reference" },
         { title: "Aktivitas Siswa", path: "/aktivitas-lookup" },
         { title: "Mari Berlatih", path: "/berlatih-lookup" },
-        { title: "Kuis 1", path: "/quiz1" }
+        { title: "Kuis 1", path: "/quiz1" },
       ],
     },
     {
@@ -304,10 +304,13 @@ export const Sidebar = () => {
       title: "Visualisasi Data",
       subItems: [
         { title: "Visualisasi Data", path: "/visualisasi-data" },
-        { title: "Penerapan Visualisasi Data", path: "/contoh-penerapan-visualisasi-data" },
-        { title: "Aktivitas Siswa", path: "/aktivitas-visualisasi"},
-        { title: "Mari Berlatih", path: "/mari-berlatih-visualisasi"},
-        { title: "Kuis", path: "/kuis2"}
+        {
+          title: "Penerapan Visualisasi Data",
+          path: "/contoh-penerapan-visualisasi-data",
+        },
+        { title: "Aktivitas Siswa", path: "/aktivitas-visualisasi" },
+        { title: "Mari Berlatih", path: "/mari-berlatih-visualisasi" },
+        { title: "Kuis", path: "/kuis2" },
       ],
     },
     {
@@ -324,7 +327,16 @@ export const Sidebar = () => {
     {
       icon: faTable,
       title: "Pengelolaan Data",
-      subItems: [{ title: "Sorting & Filtering", path: "/pengelolaan-data" }],
+      subItems: [
+        { title: "Sorting & Filtering", path: "/pengelolaan-data" },
+        {
+          title: "Penerapan Pengelolaan Data",
+          path: "/penerapan-pengelolaan-data",
+        },
+        { title: "Aktivitas Siswa", path: "/aktivitas-siswa" },
+        { title: "Mari Berlatih", path: "/berlatih-pengelolaan" },
+        { title: "Kuis 4", path: "/quiz4" },
+      ],
     },
     {
       icon: faTasks,

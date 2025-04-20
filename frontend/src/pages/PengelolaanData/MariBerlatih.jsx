@@ -1,26 +1,26 @@
 import { useState } from "react";
 import Layout from "../../components/Layout";
 
-export default function SummaryLesson() {
+export default function MariBerlatih() {
   const correctAnswers = {
-    sumif: '=SUMIF(B2:B11;"Naya";E2:E11)',
-    sumifs: '=SUMIFS(E2:E11;C2:C11;"8A";D2:D11;"Kebersihan")',
-    countif: '=COUNTIF(D2:D11;"Olahraga")',
-    countifs: '=COUNTIFS(C2:C11;"8A";D2:D11;"Kebersihan")',
+    dekomposisi: "Kegiatan Ekstrakurikuler",
+    pengenalanPola: "Partisipasi dalam kegiatan",
+    abstraksi: "Nama siswa dan nilai",
+    algoritma: "Minimal 6 bulan",
   };
 
   const [answers, setAnswers] = useState({
-    sumif: "",
-    sumifs: "",
-    countif: "",
-    countifs: "",
+    dekomposisi: "",
+    pengenalanPola: "",
+    abstraksi: "",
+    algoritma: "",
   });
 
   const [feedback, setFeedback] = useState({
-    sumif: null,
-    sumifs: null,
-    countif: null,
-    countifs: null,
+    dekomposisi: null,
+    pengenalanPola: null,
+    abstraksi: null,
+    algoritma: null,
   });
 
   const handleChange = (field, value) => {
@@ -61,13 +61,12 @@ export default function SummaryLesson() {
   return (
     <Layout>
       <h1 className="text-xl md:text-2xl text-center font-bold mb-4 p-4 bg-[#255F38] text-white rounded">
-        Mari Berlatih Fungsi SUMIF, SUMIFS, COUNTIF, dan COUNTIFS
+        Mari Berlatih Pengelolaan Data
       </h1>
 
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-6">
-        <strong>Petunjuk:</strong> Baca studi kasus dan tabel data di bawah ini,
-        kemudian isilah rumus yang tepat untuk setiap pertanyaan berdasarkan
-        fungsi spreadsheet yang sesuai. Klik tombol <em>“Periksa”</em> untuk
+        <strong>Petunjuk:</strong> Baca setiap pertanyaan di bawah ini, kemudian
+        isilah jawaban yang tepat. Klik tombol <em>“Periksa”</em> untuk
         mengetahui apakah jawabanmu sudah tepat. Jangan khawatir, kamu bisa
         mencoba lagi jika belum benar!
       </p>
@@ -75,60 +74,48 @@ export default function SummaryLesson() {
       <section className="p-6 bg-white rounded shadow-lg">
         <h2 className="text-lg font-semibold text-green-700">Studi Kasus</h2>
         <p className="text-gray-700 text-sm md:text-base mt-2 text-justify leading-relaxed px-4">
-          Kamu adalah anggota OSIS yang sedang merekap kegiatan partisipasi
-          siswa dalam berbagai kegiatan sekolah. Data ini akan digunakan untuk
-          menentukan siapa saja yang paling aktif dan kegiatan apa yang paling
-          diminati. Kamu akan menggunakan rumus fungsi{" "}
-          <strong>SUMIF, SUMIFS, COUNTIF,</strong> dan <strong>COUNTIFS</strong>{" "}
-          untuk membantu analisis ini.
+          Sebagai anggota OSIS, kamu bertugas untuk merekap data partisipasi
+          siswa dalam kegiatan ekstrakurikuler. Data ini akan digunakan untuk
+          menentukan siswa yang paling aktif dan mendapatkan penghargaan. Kamu
+          perlu menganalisis data untuk melihat siapa saja yang berpartisipasi
+          dalam kegiatan tersebut.
         </p>
-        <div className="w-full flex justify-center px-4 mt-5">
-          <iframe
-            width="80%"
-            height="400"
-            style={{ border: "1px solid #e7e7e7" }}
-            frameBorder="0"
-            scrolling="no"
-            src="https://sheet.zohopublic.com/sheet/published/5ein2bd127829d1bd4a3c85ad2b0af6a05621?mode=embed"
-          ></iframe>
-        </div>
       </section>
 
       {/* Soal 1 */}
       <section className="p-6 bg-white rounded shadow-lg mt-6">
         <h3 className="text-md font-semibold text-green-700">1. Dekomposisi</h3>
         <p className="text-gray-700 mt-3 leading-relaxed">
-          <strong>Pertanyaan:</strong> Berapa total poin yang diperoleh Naya?
+          <strong>Pertanyaan:</strong> Apa yang perlu diidentifikasi dalam
+          filtering?
         </p>
         <p className="text-gray-600 text-sm mt-3 italic">
-          Silakan kerjakan terlebih dahulu pada spreadsheet di atas. Gunakan
-          fungsi SUMIF untuk mencari jumlah poin yang diperoleh oleh Naya.
-          Setelah menemukan jawabannya, salin rumus lengkapnya (misalnya:{" "}
-          <code>=SUMIF(...)</code>) ke dalam kolom di bawah.
+          Sebelum menentukan siswa yang memenuhi syarat untuk penghargaan, kita
+          perlu memecah masalah menjadi langkah-langkah kecil:
         </p>
         <ul className="list-disc ml-6 text-gray-700 mt-2 text-sm md:text-base">
-          <li>Mengidentifikasi data nama siswa.</li>
-          <li>Menentukan kolom poin yang dijumlahkan.</li>
-          <li>Menggunakan fungsi SUMIF berdasarkan nama.</li>
+          <li>Mengidentifikasi siswa yang berpartisipasi dalam kegiatan.</li>
+          <li>Menyaring siswa yang aktif dalam lebih dari satu kegiatan.</li>
+          <li>Menampilkan daftar siswa yang memenuhi kriteria tersebut.</li>
         </ul>
         <input
           className="border p-2 rounded w-full mt-3"
-          value={answers.sumif}
-          onChange={(e) => handleChange("sumif", e.target.value)}
+          value={answers.dekomposisi}
+          onChange={(e) => handleChange("dekompos isi", e.target.value)}
         />
         <button
           className="mt-2 bg-[#255F38] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
-          onClick={() => checkAnswer("sumif")}
+          onClick={() => checkAnswer("dekomposisi")}
         >
           Periksa
         </button>
         <button
           className="mt-2 ml-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
-          onClick={() => clearAnswer("sumif")}
+          onClick={() => clearAnswer("dekomposisi")}
         >
           Hapus
         </button>
-        {renderFeedback("sumif")}
+        {renderFeedback("dekomposisi")}
       </section>
 
       {/* Soal 2 */}
@@ -137,112 +124,122 @@ export default function SummaryLesson() {
           2. Pengenalan Pola
         </h3>
         <p className="text-gray-700 mt-3 leading-relaxed">
-          <strong>Pertanyaan:</strong> Berapa total poin kelas 8A pada kegiatan
-          Kebersihan?
+          <strong>Pertanyaan:</strong> Apa yang memengaruhi kelayakan siswa
+          untuk mendapatkan penghargaan?
         </p>
-        <p className="text-gray-600 text-sm mt-3 italic">
-          Silakan kerjakan terlebih dahulu pada spreadsheet di atas. Gunakan
-          fungsi SUMIFS dengan dua kriteria: kelas 8A dan kegiatan Kebersihan.
-          Setelah mendapatkan jawabannya, salin rumus lengkapnya ke kolom
-          berikut.
-        </p>
+
         <ul className="list-disc ml-6 text-gray-700 mt-2 text-sm md:text-base">
-          <li>Menemukan pola: dua kriteria digunakan.</li>
-          <li>Siswa dari kelas tertentu dan kegiatan tertentu.</li>
-          <li>Gunakan fungsi SUMIFS.</li>
+          <li>
+            Semakin banyak kegiatan yang diikuti, semakin besar peluangnya.
+          </li>
+          <li>
+            Hanya siswa yang aktif dalam kegiatan tertentu yang memenuhi syarat.
+          </li>
         </ul>
         <input
           className="border p-2 rounded w-full mt-3"
-          value={answers.sumifs}
-          onChange={(e) => handleChange("sumifs", e.target.value)}
+          value={answers.pengenalanPola}
+          onChange={(e) => handleChange("pengenalanPola", e.target.value)}
         />
         <button
           className="mt-2 bg-[#255F38] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
-          onClick={() => checkAnswer("sumifs")}
+          onClick={() => checkAnswer("pengenalanPola")}
         >
           Periksa
         </button>
         <button
           className="mt-2 ml-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
-          onClick={() => clearAnswer("sumifs")}
+          onClick={() => clearAnswer("pengenalanPola")}
         >
           Hapus
         </button>
-        {renderFeedback("sumifs")}
+        {renderFeedback("pengenalanPola")}
       </section>
 
       {/* Soal 3 */}
       <section className="p-6 bg-white rounded shadow-lg mt-6">
         <h3 className="text-md font-semibold text-green-700">3. Abstraksi</h3>
         <p className="text-gray-700 mt-3 leading-relaxed">
-          <strong>Pertanyaan:</strong> Berapa jumlah siswa yang ikut kegiatan
-          Olahraga?
-        </p>
-        <p className="text-gray-600 text-sm mt-3 italic">
-          Silakan kerjakan terlebih dahulu pada spreadsheet di atas. Fokuslah
-          hanya pada kolom kegiatan. Gunakan fungsi COUNTIF untuk menghitung
-          berapa banyak siswa yang ikut kegiatan Olahraga.
+          <strong>Pertanyaan:</strong> Data apa yang tidak digunakan dalam
+          filtering?
         </p>
         <ul className="list-disc ml-6 text-gray-700 mt-2 text-sm md:text-base">
-          <li>Fokus pada kolom kegiatan saja.</li>
-          <li>Mengabaikan kolom lain yang tidak diperlukan.</li>
-          <li>Gunakan COUNTIF.</li>
+          <li>
+            Fokus hanya pada{" "}
+            <strong>Nama Siswa dan Kegiatan yang Diikuti,</strong>
+            tanpa mempertimbangkan <strong>Nilai Akademik</strong> atau{" "}
+            <strong>Usia</strong>.
+          </li>
+          <li>Mengabaikan data yang tidak relevan.</li>
         </ul>
         <input
           className="border p-2 rounded w-full mt-3"
-          value={answers.countif}
-          onChange={(e) => handleChange("countif", e.target.value)}
+          value={answers.abstraksi}
+          onChange={(e) => handleChange("abstraksi", e.target.value)}
         />
         <button
           className="mt-2 bg-[#255F38] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
-          onClick={() => checkAnswer("countif")}
+          onClick={() => checkAnswer("abstraksi")}
         >
           Periksa
         </button>
         <button
           className="mt-2 ml-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
-          onClick={() => clearAnswer("countif")}
+          onClick={() => clearAnswer("abstraksi")}
         >
           Hapus
         </button>
-        {renderFeedback("countif")}
+        {renderFeedback("abstraksi")}
       </section>
 
       {/* Soal 4 */}
       <section className="p-6 bg-white rounded shadow-lg mt-6">
         <h3 className="text-md font-semibold text-green-700">4. Algoritma</h3>
         <p className="text-gray-700 mt-3 leading-relaxed">
-          <strong>Pertanyaan:</strong> Berapa jumlah siswa kelas 8A yang ikut
-          kegiatan Kebersihan?
+          <strong>Pertanyaan:</strong> Berapa minimal waktu partisipasi untuk
+          mendapatkan penghargaan?
         </p>
-        <p className="text-gray-600 text-sm mt-3 italic">
-          Silakan kerjakan terlebih dahulu pada spreadsheet. Gunakan fungsi
-          COUNTIFS dengan dua kriteria: siswa kelas 8A dan kegiatan Kebersihan.
-          Setelah berhasil, salin rumus lengkapnya ke kolom berikut.
-        </p>
-        <ul className="list-disc ml-6 text-gray-700 mt-2 text-sm md:text-base">
-          <li>Menggunakan dua syarat sekaligus.</li>
-          <li>Kelas 8A dan kegiatan Kebersihan.</li>
-          <li>Terapkan fungsi COUNTIFS untuk menghitung.</li>
-        </ul>
+        <div className="text-gray-700 mt-3 leading-relaxed">
+          <p>
+            <strong>a)</strong> Pilih kolom yang ingin diterapkan filter:
+          </p>
+          <p>Klik judul kolom yang ingin diterapkan filter.</p>
+          <p>
+            <strong>b)</strong> Buka menu Filter:
+          </p>
+          <ul className="list-disc ml-6">
+            <li>Klik kanan pada judul kolom yang dipilih.</li>
+            <li>
+              Pilih "Filter", lalu klik "Filter by Value of Selected Cell",
+              kemudian klik kolom yang ingin diberi filter dan "Clear Filter".
+            </li>
+            <li>Pilih kriteria filter yang diinginkan.</li>
+          </ul>
+          <p>
+            <strong>c)</strong> Lihat hasil pengurutan.
+          </p>
+          <p>
+            <strong>d)</strong> Periksa kembali data.
+          </p>
+        </div>
         <input
           className="border p-2 rounded w-full mt-3"
-          value={answers.countifs}
-          onChange={(e) => handleChange("countifs", e.target.value)}
+          value={answers.algoritma}
+          onChange={(e) => handleChange("algoritma", e.target.value)}
         />
         <button
           className="mt-2 bg-[#255F38] text-white px-4 py-1 rounded hover:bg-[#2E6B4B]"
-          onClick={() => checkAnswer("countifs")}
+          onClick={() => checkAnswer("algoritma")}
         >
           Periksa
         </button>
         <button
           className="mt-2 ml-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
-          onClick={() => clearAnswer("countifs")}
+          onClick={() => clearAnswer("algoritma")}
         >
           Hapus
         </button>
-        {renderFeedback("countifs")}
+        {renderFeedback("algoritma")}
       </section>
 
       <div className="flex justify-between mt-10 px-4">
