@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage";
 import Materi from "./pages/Materi";
 import Informasi from "./pages/Informasi";
 import Spreadsheet from "./pages/Spreadsheet";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 // Pendahuluan
 import PengantarBab from "./pages/Pendahuluan/PengantarBab";
@@ -55,6 +57,8 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/materi" element={<Materi />} />
         <Route path="/informasi" element={<Informasi />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* PENDAHULUAN */}
         <Route path="/pengantar-bab" element={<PengantarBab />} />
@@ -76,10 +80,7 @@ function App() {
 
         {/* VISUALISASI DATA */}
         <Route path="/visualisasi-data" element={<VisualisasiData />} />
-        <Route
-          path="/contoh-penerapan-visualisasi-data"
-          element={<ContohPenerapan />}
-        />
+        <Route path="/contoh-penerapan-visualisasi-data" element={<ContohPenerapan />}/>
         <Route
           path="/aktivitas-visualisasi"
           element={<AktivitasSiswaVisualisasi />}

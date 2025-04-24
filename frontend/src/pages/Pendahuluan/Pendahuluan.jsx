@@ -33,36 +33,41 @@ const Pendahuluan = () => {
         {/* Gambar */}
         <div className="flex justify-center mt-4">
           <img 
-            src={pustakawan} 
-            alt="Perpustakaan" 
+            src={pustakawan} // Bisa diganti dengan ilustrasi siswa mengelola data
+            alt="Siswa Mengelola Data" 
             className="w-full max-w-md rounded-lg shadow-md"
           />
         </div>
-        <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 1. Perpustakaan</p>
+        <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 1. Mengelola Data sebagai Siswa</p>
 
         {/* Paragraf Informasi */}
         <p className="mt-4 text-gray-700 leading-relaxed text-justify">
-          Menganalisis data mirip dengan cara pustakawan mengelola koleksi buku di perpustakaan. Bayangkan ada banyak 
-          data peminjaman buku, seperti <strong>judul</strong>, <strong>kategori</strong>, dan <strong>tanggal peminjaman</strong>. 
-          Untuk menemukan informasi dengan cepat, pustakawan menggunakan <strong>pencarian data</strong> (lookup dan reference), 
-          misalnya mencari siapa yang terakhir meminjam buku tertentu.
+          Sebagai siswa, kalian tentu pernah mengalami situasi seperti mencari nilai ulangan tertentu, 
+          menyusun jadwal piket kelas, atau memeriksa siapa saja yang belum mengumpulkan tugas. Semua kegiatan 
+          tersebut melibatkan data dan memerlukan keterampilan untuk mengelolanya dengan baik.
         </p>
+
         <p className="mt-2 text-gray-700 leading-relaxed text-justify">
-          Setelah data terkumpul, pustakawan dapat menganalisis pola peminjaman, seperti buku pelajaran yang lebih sering 
-          dipinjam saat ujian. Dengan <strong>visualisasi data</strong>, seperti grafik batang atau pie chart, tren peminjaman 
-          menjadi lebih mudah dipahami.
+          Dengan bantuan fitur <strong>pencarian data</strong>, kalian dapat menemukan informasi yang dibutuhkan 
+          dengan lebih cepat, seperti mengetahui siapa yang memperoleh nilai tertinggi dalam suatu mata pelajaran. 
+          Fitur <strong>filter</strong> juga memudahkan dalam menyaring data, misalnya hanya menampilkan siswa 
+          yang belum mengumpulkan tugas.
         </p>
+
         <p className="mt-2 text-gray-700 leading-relaxed text-justify">
-          Mereka juga bisa membuat <strong>peringkasan data</strong>, seperti menghitung total peminjaman dengan 
-          <strong> SUMIF</strong> atau <strong>COUNTIF</strong>, serta mengelola data dengan <strong>sorting dan filtering</strong>, 
-          misalnya mengurutkan daftar peminjaman atau mencari siswa yang paling sering meminjam buku.
+          Selain itu, kalian dapat membuat <strong>peringkasan data</strong> menggunakan fungsi seperti 
+          <strong> SUMIF</strong> atau <strong>COUNTIF</strong>, contohnya untuk menghitung jumlah tugas yang telah 
+          dikumpulkan setiap minggu. Dengan <strong>visualisasi data</strong> seperti grafik batang, kalian juga 
+          dapat melihat perkembangan nilai dari waktu ke waktu secara lebih jelas.
         </p>
+
         <p className="mt-2 text-gray-700 leading-relaxed text-justify">
-          Seperti pustakawan, kita juga bisa menerapkan <strong>analisis data dalam kehidupan sehari-hari</strong>, misalnya 
-          menyusun nilai ujian untuk melihat perkembangan belajar atau mengelompokkan pekerjaan agar lebih terkontrol. Dengan 
-          analisis data, kita bisa memahami informasi lebih baik dan mengambil keputusan lebih tepat.
+          Melalui kegiatan tersebut, kalian sebenarnya telah menerapkan prinsip <strong> analisis data </strong> 
+          dalam kehidupan sehari-hari. Kemampuan ini sangat berguna untuk memahami informasi, mengambil keputusan, 
+          serta menjadi lebih teratur dan sistematis dalam belajar maupun beraktivitas di sekolah.
         </p>
       </div>
+
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8 px-4">

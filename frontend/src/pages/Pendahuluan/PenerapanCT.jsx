@@ -1,7 +1,20 @@
 import Layout from "../../components/Layout";
 import { BookOpen, Lightbulb, BarChart, Filter, Code, CheckCircle } from "lucide-react";
+import { useState } from "react";
 
 const ComputationalThinking = () => {
+  const [siap, setSiap] = useState("");
+  const [berangkat, setBerangkat] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const cekJawaban = () => {
+    if (siap === "06.10" && berangkat === "06.30") {
+      setFeedback("✅ Jawaban kamu benar!");
+    } else {
+      setFeedback("❌ Jawaban belum tepat, coba lagi ya.");
+    }
+  };
+
   return (
     <Layout>
 
@@ -10,7 +23,6 @@ const ComputationalThinking = () => {
         Contoh Penerapan Computational Thinking
       </h1>
    
-
       {/* Studi Kasus */}
       <div className="bg-white p-5  border-gray-300  space-y-4 mt-5 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
@@ -60,7 +72,7 @@ const ComputationalThinking = () => {
           <Filter className="w-5 h-5 mr-2" /> ABSTRAKSI
         </div>
         <p className="text-gray-600 text-sm md:text-base mt-4 font-medium">Menyederhanakan dengan mengabaikan detail yang tidak pentin.</p>
-        <p className="text-gray-600 text-sm md:text-base pl-6">• 	Tidak perlu memikirkan hal lain seperti cuaca atau kondisi jalan.</p>
+        <p className="text-gray-600 text-sm md:text-base pl-6">•  Tidak perlu memikirkan hal lain seperti cuaca atau kondisi jalan.</p>
         <p className="text-gray-600 text-sm md:text-base pl-6">•  Fokus pada waktu yang dibutuhkan untuk bersiap-siap dan perjalanan ke sekolah.</p>
       </div>
 
@@ -70,11 +82,9 @@ const ComputationalThinking = () => {
           <Code className="w-5 h-5 mr-2" /> ALGORITMA
         </div>
         <p className="text-gray-600 text-sm md:text-base mt-4 font-medium">Langkah-langkah penyelesaian.</p>
-        <p className="text-gray-600 text-sm md:text-base pl-6">(1)	Tentukan jam masuk sekolah (07.00).</p>
-        <p className="text-gray-600 text-sm md:text-base pl-6">(2)	Kurangi waktu perjalanan (30 menit sebelumnya => Aldi harus pukul 06.30).</p>
-        <p className="text-gray-600 text-sm md:text-base pl-6">(3)	Kurangi lagi waktu untuk bersiap-siap (20 menit sebelumnya => Aldi harus mulai bersiap pukul 06.10).</p>
-        <p className="text-gray-600 text-sm md:text-base pl-6">(4)	Jadi, Aldi harus bersiap pukul 06.10 dan berangkat pada pukul 06.30 agar tiba tepat waktu di sekolah.</p>
-
+        <p className="text-gray-600 text-sm md:text-base pl-6">(1) Tentukan jam masuk sekolah (07.00).</p>
+        <p className="text-gray-600 text-sm md:text-base pl-6">(2) Kurangi waktu perjalanan (30 menit sebelumnya => Aldi harus pukul 06.30).</p>
+        <p className="text-gray-600 text-sm md:text-base pl-6">(3) Kurangi lagi waktu untuk bersiap-siap (20 menit sebelumnya => Aldi harus mulai bersiap pukul 06.10).</p>
       </div>
 
       {/* Kesimpulan dan Analisis */}
@@ -82,14 +92,38 @@ const ComputationalThinking = () => {
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <CheckCircle className="w-5 h-5 mr-2" /> KESIMPULAN & ANALISIS
         </div>
-        <p className="text-gray-600 text-sm md:text-base mt-6">
-          Aldi harus mulai bersiap pukul 06.10 dan berangkat pukul 06.30 agar tiba di sekolah tepat waktu.
-        </p>
+        <div className="mt-6">
+          <p className="text-gray-600 text-sm md:text-base font-semibold">Coba isikan waktu yang sesuai untuk Aldi:</p>
+          <p className="text-gray-600 text-sm md:text-base mt-2">Isikan jam yang harus Aldi mulai bersiap dan berangkat agar tidak terlambat ke sekolah.</p>
+          <input
+            type="text"
+            placeholder="Jam mulai bersiap (misal: 06.00)"
+            value={siap}
+            onChange={(e) => setSiap(e.target.value)}
+            className="w-full border px-3 py-1 text-sm rounded mt-2"
+          />
+          <input
+            type="text"
+            placeholder="Jam berangkat (misal: 06.00)"
+            value={berangkat}
+            onChange={(e) => setBerangkat(e.target.value)}
+            className="w-full border px-3 py-1 text-sm rounded mt-3"
+          />
+          <button
+            onClick={cekJawaban}
+            className="bg-green-800 text-white px-4 py-2 rounded hover:bg-green-700 mt-3"
+          >
+            Periksa Jawaban
+          </button>
+          {feedback && <p className="text-sm font-medium text-gray-700 mt-3">{feedback}</p>}
+        </div>
+
         <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-4 space-y-2">
           <li>Jika Aldi terlambat bersiap atau berangkat, ia bisa terlambat ke sekolah.</li>
           <li>Ia bisa berangkat lebih awal atau mengurangi waktu bersiap untuk menghindari keterlambatan.</li>
         </ul>
       </div>
+
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8">

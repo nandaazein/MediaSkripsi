@@ -15,8 +15,8 @@ const ContohReference = () => {
       {/* Pengantar Masalah */}
       <div>
         <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
-          Kamu adalah pengurus perpustakaan kelas. Setiap buku di rak memiliki kode unik, nama buku, dan harga. 
-          Suatu hari, temanmu bertanya: "Buku dengan kode <span className='font-semibold'>P002</span> itu harganya berapa, ya?" 
+          Kamu sedang membantu orang tuamu di toko buku. Setiap buku memiliki kode unik, nama buku, dan harga. 
+          Suatu hari, seorang pelanggan bertanya: "Buku dengan kode <span className='font-semibold'>TB002</span> itu harganya berapa, ya?" 
           Daripada mencari satu per satu secara manual, kamu bisa menggunakan fungsi <span className="font-semibold">INDEX</span> 
           untuk menemukan harga buku berdasarkan posisi datanya.
         </p>
@@ -24,23 +24,23 @@ const ContohReference = () => {
 
       {/* Tabel Data */}
       <div className="flex flex-col items-center mt-6">
-        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel. Data Buku Perpustakaan</p>
+        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel. Data Buku di Toko</p>
         <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center text-sm">
           <thead>
             <tr className="bg-[#255F38] text-white">
               <th className="border border-green-600 px-4 py-2">No</th>
               <th className="border border-green-600 px-4 py-2">Kode Buku</th>
-              <th className="border border-green-600 px-4 py-2">Nama Buku</th>
+              <th className="border border-green-600 px-4 py-2">Judul Buku</th>
               <th className="border border-green-600 px-4 py-2">Harga (Rp)</th>
             </tr>
           </thead>
           <tbody>
             {[
-              [1, "P001", "Fisika Dasar", 48000],
-              [2, "P002", "Matematika SMP", 52000],
-              [3, "P003", "Bahasa Inggris", 45000],
-              [4, "P004", "Sejarah Indonesia", 47000],
-              [5, "P005", "Biologi SMP", 50000],
+              [1, "TB001", "Cerita Anak Nusantara", 55000],
+              [2, "TB002", "Matematika Cerdas 1", 60000],
+              [3, "TB003", "Petualangan Sains", 58000],
+              [4, "TB004", "Atlas Dunia Anak", 65000],
+              [5, "TB005", "Panduan Bahasa Inggris", 53000],
             ].map((row, index) => (
               <tr key={index} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
                 {row.map((cell, i) => (
@@ -60,7 +60,7 @@ const ContohReference = () => {
             <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
           </div>
           <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Tabel berisi informasi kode buku, nama buku, dan harga.</li>
+            <li>Tabel berisi informasi kode buku, judul buku, dan harga.</li>
             <li>Tujuan: Menemukan harga dari buku dengan kode tertentu.</li>
           </ul>
         </div>
@@ -93,12 +93,12 @@ const ContohReference = () => {
             <Code className="w-5 h-5 mr-2" /> Algoritma
           </div>
           <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Temukan baris tempat kode P002 berada (misalnya baris ke-2).</li>
+            <li>Temukan baris tempat kode TB002 berada (misalnya baris ke-2).</li>
             <li>Gunakan rumus:
               <div className="bg-gray-100 p-2 rounded mt-1">
                 =INDEX(D2:D6;2)
               </div>
-              untuk menampilkan harga dari buku dengan kode P002.
+              untuk menampilkan harga dari buku dengan kode TB002.
             </li>
           </ul>
           <div className="flex justify-center">
@@ -110,7 +110,7 @@ const ContohReference = () => {
                 scrolling="no" 
                 src="https://sheet.zohopublic.com/sheet/published/cbhuve6b9eaad45264a6b9414a2877d494949?mode=embed">
             </iframe>
-            </div>
+          </div>
         </div>
       </div>
 
@@ -143,7 +143,7 @@ const ContohReference = () => {
         <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
           Kamu adalah <span className="font-semibold">panitia lomba</span> di sekolahmu. Setiap peserta lomba memiliki 
           <span className="font-semibold"> kode unik</span>, nama peserta, dan cabang lomba yang diikuti. Saat sedang menyusun daftar tampil, 
-          temanmu bertanya: "Peserta dengan kode <span className="font-semibold">L003</span> itu ada di urutan ke berapa, ya?" 
+          temanmu bertanya: "Peserta dengan kode <span className="font-semibold">6371</span> itu ada di urutan ke berapa, ya?" 
           Nah, kamu bisa menggunakan fungsi <span className="font-semibold">MATCH</span> untuk menemukan posisi peserta berdasarkan kode uniknya.
         </p>
       </div>
@@ -154,7 +154,6 @@ const ContohReference = () => {
         <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center text-sm">
           <thead>
             <tr className="bg-[#255F38] text-white">
-              <th className="border border-green-600 px-4 py-2">No</th>
               <th className="border border-green-600 px-4 py-2">Kode Peserta</th>
               <th className="border border-green-600 px-4 py-2">Nama Peserta</th>
               <th className="border border-green-600 px-4 py-2">Cabang Lomba</th>
@@ -162,11 +161,11 @@ const ContohReference = () => {
           </thead>
           <tbody>
             {[
-              [1, "L001", "Nina", "Menyanyi"],
-              [2, "L002", "Rafi", "Melukis"],
-              [3, "L003", "Sita", "Pantomim"],
-              [4, "L004", "Bayu", "Tari"],
-              [5, "L005", "Dina", "Puisi"],
+              ["3729", "Nina", "Menyanyi"],
+              ["8254", "Rafi", "Melukis"],
+              ["6271", "Sita", "Pantomim"],
+              ["1493", "Bayu", "Tari"],
+              ["6802", "Dina", "Puisi"],
             ].map((row, index) => (
               <tr key={index} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
                 {row.map((cell, i) => (
@@ -223,14 +222,14 @@ const ContohReference = () => {
             <li>
               Rumus:
               <div className="bg-gray-100 p-2 rounded mt-1">
-                =MATCH("L003"; A2:A6; 0)
+                =MATCH(6271; A2:A6; 0)
               </div>
               Artinya:
               <ul className="list-disc ml-6 mt-2 space-y-1 text-sm">
-                <li>"L003" adalah kode yang dicari.</li>
+                <li>6271 adalah kode yang dicari.</li>
                 <li>A2:A6 adalah kolom tempat pencarian dilakukan.</li>
                 <li>0 artinya mencari yang persis sama.</li>
-                <li>Hasilnya: <span className="font-semibold">3</span>, karena L003 berada di baris ke-3 dalam range.</li>
+                <li>Hasilnya: <span className="font-semibold">3</span>, karena 6271 berada di baris ke-3 dalam range.</li>
               </ul>
             </li>
           </ul>

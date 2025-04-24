@@ -1,223 +1,1742 @@
-// import React, { useEffect, useState } from "react";
+
+// import Layout from "../../components/Layout";
+// import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
-// export default function Quiz() {
-//   const [quizData, setQuizData] = useState([]);
-//   const [currentQuestion, setCurrentQuestion] = useState(0);
-//   const [selectedAnswer, setSelectedAnswer] = useState(null);
-//   const [correctAnswers, setCorrectAnswers] = useState(0);
-//   const [isQuizFinished, setIsQuizFinished] = useState(false);
+// const Quiz1 = () => {
 //   const navigate = useNavigate();
+//   const [answers, setAnswers] = useState({});
 
-//   useEffect(() => {
-//     fetch("/Quiz/Quiz1.json")
-//       .then((res) => res.json())
-//       .then((data) => setQuizData(data))
-//       .catch((error) => console.error("Error fetching quiz data:", error));
-//   }, []);
+//   const correctAnswers = {
+//     q1: "a",
+//     q2: "b",
+//     q3: "a",
+//     q4: "c",
+//     q5: "d",
+//     q6: "b",
+//     q7: "c",
+//     q8: "d",
+//     q9: "a",
+//     q10: "b",
+//   };
 
-//   function submitAnswer() {
-//     if (selectedAnswer === quizData[currentQuestion]?.answer) {
-//       setCorrectAnswers((prevCorrect) => prevCorrect + 1);
+//   const answerOptions = {
+//     q1: {
+//       a: '=VLOOKUP("S02"; A1:B4; 2; FALSE)',
+//       b: '=VLOOKUP(S02; A1:B4; 2; FALSE)',
+//       c: '=VLOOKUP("S02"; A1:B4; 1; FALSE)',
+//       d: '=VLOOKUP("S02"; B1:B4; 2; FALSE)',
+//     },
+//     q2: {
+//       a: '=VLOOKUP(B03; A1:B4; 2; FALSE)',
+//       b: '=VLOOKUP("B03"; A1:B4; 2; FALSE)',
+//       c: '=VLOOKUP("B03"; A1:B4; 1; FALSE)',
+//       d: '=VLOOKUP("B03"; B1:B4; 2; FALSE)',
+//     },
+//     q3: {
+//       a: '=VLOOKUP("I01"; A1:B4; 2; FALSE)',
+//       b: '=VLOOKUP(I01; A1:B4; 2; FALSE)',
+//       c: '=VLOOKUP("I01"; A1:B4; 1; FALSE)',
+//       d: '=VLOOKUP("I01"; B1:B4; 2; FALSE)',
+//     },
+//     q4: {
+//       a: '=HLOOKUP(Hari 2; B1:D2; 2; FALSE)',
+//       b: '=HLOOKUP("Hari 2"; B1:D2; 1; FALSE)',
+//       c: '=HLOOKUP("Hari 2"; B1:D2; 2; FALSE)',
+//       d: '=HLOOKUP("Hari 2"; B2:D2; 2; FALSE)',
+//     },
+//     q5: {
+//       a: '=HLOOKUP(Hari 3; B1:D2; 2; FALSE)',
+//       b: '=HLOOKUP("Hari 3"; B1:D2; 1; FALSE)',
+//       c: '=HLOOKUP("Hari 3"; B2:D2; 2; FALSE)',
+//       d: '=HLOOKUP("Hari 3"; B1:D2; 2; FALSE)',
+//     },
+//     q6: {
+//       a: '=INDEX(B1:B4; 3)',
+//       b: '=INDEX(B1:B4; 2)',
+//       c: '=INDEX(B1:B4; "2")',
+//       d: '=INDEX(B1:B4; 1)',
+//     },
+//     q7: {
+//       a: '=MATCH("Vina"; B1:B4; 0)',
+//       b: '=MATCH(Vina; A1:A4; 0)',
+//       c: '=MATCH("Vina"; A1:A4; 0)',
+//       d: '=MATCH("Vina"; A1:A4; 1)',
+//     },
+//     q8: {
+//       a: '=INDEX(B1:B4; 1)',
+//       b: '=INDEX(B1:B4; 3)',
+//       c: '=INDEX(B1:B4; "2")',
+//       d: '=INDEX(B1:B4; 2)',
+//     },
+//     q9: {
+//       a: '=MATCH("K01"; A1:A4; 0)',
+//       b: '=MATCH(K01; A1:A4; 0)',
+//       c: '=MATCH("K01"; A1:A4; 1)',
+//       d: '=MATCH("K01"; B1:B4; 0)',
+//     },
+//     q10: {
+//       a: '=CHOOSE("A2"; "Pramuka"; "Bola Voli"; "Seni Tari")',
+//       b: '=CHOOSE(A2; "Pramuka"; "Bola Voli"; "Seni Tari")',
+//       c: '=CHOOSE(A2; "Seni Tari"; "Bola Voli"; "Pramuka")',
+//       d: '=CHOOSE(B2; "Pramuka"; "Bola Voli"; "Seni Tari")',
+//     },
+//   };
+
+//   const handleAnswer = (question, answer) => {
+//     console.log("Selected:", question, answer);
+//     setAnswers({ ...answers, [question]: answer });
+//   };
+
+//   const handleSubmit = () => {
+//     try {
+//       if (Object.keys(answers).length < 10) {
+//         alert("Harap jawab semua soal sebelum menyelesaikan kuis!");
+//         return;
+//       }
+//       let correctCount = 0;
+//       Object.keys(correctAnswers).forEach((question) => {
+//         if (answers[question] === correctAnswers[question]) {
+//           correctCount++;
+//         }
+//       });
+//       const score = (correctCount / 10) * 100;
+//       console.log("Submitting:", { answers, correctCount, score, correctAnswers, answerOptions });
+//       navigate("/feedback1", { state: { answers, correctCount, score, correctAnswers, answerOptions } });
+//     } catch (error) {
+//       console.error("Error in handleSubmit:", error);
+//       alert("Terjadi kesalahan saat menyelesaikan kuis. Silakan coba lagi.");
 //     }
-//     if (currentQuestion + 1 < quizData.length) {
-//       setCurrentQuestion(currentQuestion + 1);
-//       setSelectedAnswer(null);
-//     } else {
-//       setIsQuizFinished(true);
-//     }
-//   }
-
-//   function handleSubmitQuiz() {
-//     const score = (correctAnswers / quizData.length) * 100;
-//     navigate("/feedback1", { state: { correctAnswers, total: quizData.length, score } });
-//   }
-
-//   if (quizData.length === 0)
-//     return (
-//       <div className="flex justify-center items-center min-h-screen">
-//         <p className="text-lg text-gray-600">Loading...</p>
-//       </div>
-//     );
-
-//   if (isQuizFinished) {
-//     return (
-//       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-xl p-6 text-center mt-40">
-//         <h2 className="text-xl font-bold text-green-700">🎉 Kuis Selesai!</h2>
-//         <p className="text-sm text-gray-700 mt-4">Klik tombol di bawah untuk melihat hasil kuis.</p>
-//         <button 
-//           className="mt-4 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl w-full text-md transition duration-300 shadow-md"
-//           onClick={handleSubmitQuiz}>
-//           ✅ Lihat Hasil
-//         </button>
-//       </div>
-//     );
-//   }
-
-//   const question = quizData[currentQuestion];
+//   };
 
 //   return (
-//     <div className="max-w-5xl mx-auto p-6 mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-//       {/* Sidebar Progres */}
-//       <div className="md:col-span-1 bg-green-100 p-4 rounded-xl shadow-md text-center border border-green-300">
-//         <h3 className="text-md font-bold text-green-700">Soal {currentQuestion + 1} / {quizData.length}</h3>
-//         <div className="w-full mx-auto bg-gray-300 rounded-full h-3 mt-2 overflow-hidden">
-//           <div 
-//             className="bg-green-500 h-3 rounded-full transition-all duration-500 ease-in-out"
-//             style={{ width: `${((currentQuestion + 1) / quizData.length) * 100}%` }}
-//           ></div>
-//         </div>
+//     <Layout>
+//       <div>
+//         <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
+//           Kuis Fungsi Lookup dan Reference
+//         </h1>
 //       </div>
 
-//       {/* Konten Soal */}
-//       <div className="md:col-span-2 bg-white p-6 rounded-xl shadow-lg border border-gray-300 text-center">
-//         <h4 className="text-xl font-bold text-gray-700 mb-3">Kuis 1 Pencarian dengan Fungsi Lookup</h4>
-//         <h2 className="text-md font-semibold text-gray-700 mb-3">{question?.question || "Pertanyaan tidak tersedia"}</h2>
-//         <div className="mt-3 space-y-2">
-//           {question?.options?.map((option, index) => (
-//             <button
-//               key={index}
-//               className={`block w-full text-md px-4 py-2 text-left rounded-xl border transition duration-300 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 ${
-//                 selectedAnswer === option
-//                   ? "bg-green-600 text-white border-green-700"
-//                   : "bg-gray-100 hover:bg-gray-200 border-gray-400"
-//               }`}
-//               onClick={() => setSelectedAnswer(option)}
-//             >
-//               {option}
-//             </button>
-//           ))}
-//         </div>
+//       <div>
+//         <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-8">
+//           Selamat datang di kuis tentang fungsi VLOOKUP, HLOOKUP, INDEX, MATCH, dan CHOOSE! Kuis ini berisi 10 soal pilihan ganda untuk melatih pemahamanmu dalam mencari data. Soal 1-5 menggunakan tabel utama dan tabel referensi, sedangkan soal 6-10 hanya menggunakan satu tabel utama. Pilih rumus yang benar untuk setiap soal. Skor minimal 70 diperlukan untuk lanjut ke materi berikutnya. Selamat mengerjakan!
+//         </p>
+//       </div>
 
+//       {/* Soal 1: VLOOKUP - Nilai Matematika */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 1
+//         </div>
+//         <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Utama: Daftar Nilai Siswa</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Kode Siswa", "Nama Siswa", "Nilai Matematika"],
+//                     ["2", "S01", "Ani", "[Kosong]"],
+//                     ["3", "S02", "Budi", "[Kosong]"],
+//                     ["4", "S03", "Cici", "[Kosong]"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Referensi: Data Nilai Matematika</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Kode Siswa", "Nilai Matematika"],
+//                     ["2", "S01", "85"],
+//                     ["3", "S02", "90"],
+//                     ["4", "S03", "78"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mengisi kolom <strong>Nilai Matematika</strong> untuk kode <code>S02</code> di Tabel Utama menggunakan <strong>VLOOKUP</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q1).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q1" onChange={() => handleAnswer("q1", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 2: VLOOKUP - Nama Barang */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 2
+//         </div>
+//         <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Utama: Daftar Belanja Sekolah</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Kode Barang", "Nama Barang", "Harga (Rp)"],
+//                     ["2", "B01", "[Kosong]", "2000"],
+//                     ["3", "B02", "[Kosong]", "5000"],
+//                     ["4", "B03", "[Kosong]", "3000"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Referensi: Data Barang</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Kode Barang", "Nama Barang"],
+//                     ["2", "B01", "Pensil"],
+//                     ["3", "B02", "Buku Tulis"],
+//                     ["4", "B03", "Penghapus"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mengisi kolom <strong>Nama Barang</strong> untuk kode <code>B03</code> di Tabel Utama menggunakan <strong>VLOOKUP</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q2).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q2" onChange={() => handleAnswer("q2", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 3: VLOOKUP - Harga Barang */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 3
+//         </div>
+//         <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Utama: Daftar Harga Jual</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Kode Barang", "Harga Barang (Rp)"],
+//                     ["2", "I01", "[Kosong]"],
+//                     ["3", "I02", "[Kosong]"],
+//                     ["4", "I03", "[Kosong]"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Referensi: Data Harga Barang</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Kode Barang", "Harga Barang (Rp)"],
+//                     ["2", "I01", "5000"],
+//                     ["3", "I02", "6000"],
+//                     ["4", "I03", "7000"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mengisi kolom <strong>Harga Barang</strong> untuk kode <code>I01</code> di Tabel Utama menggunakan <strong>VLOOKUP</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q3).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q3" onChange={() => handleAnswer("q3", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 4: HLOOKUP - Tugas Piket */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 4
+//         </div>
+//         <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Utama: Jadwal Piket Harian</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Hari", "Tugas Piket"],
+//                     ["2", "Hari 1", "[Kosong]"],
+//                     ["3", "Hari 2", "[Kosong]"],
+//                     ["4", "Hari 3", "[Kosong]"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Referensi: Data Piket</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">D</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "", "Hari 1", "Hari 2", "Hari 3"],
+//                     ["2", "Tugas", "Menyapu", "Membersihkan Papan", "Mengosongkan Sampah"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-gray-200" : "bg-[#255F38] text-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : index === 0 && i > 1 ? "bg-gray-200" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mengisi kolom <strong>Tugas Piket</strong> untuk Hari 2 di Tabel Utama menggunakan <strong>HLOOKUP</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q4).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q4" onChange={() => handleAnswer("q4", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 5: HLOOKUP - Kelompok Piket */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 5
+//         </div>
+//         <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Utama: Jadwal Kelompok Piket</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "Hari", "Kelompok Piket"],
+//                     ["2", "Hari 1", "[Kosong]"],
+//                     ["3", "Hari 2", "[Kosong]"],
+//                     ["4", "Hari 3", "[Kosong]"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//           <div>
+//             <p className="text-gray-700 text-sm md:text-base mb-2">
+//               <strong>Tabel Referensi: Data Kelompok Piket</strong>
+//             </p>
+//             <div className="overflow-x-auto">
+//               <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//                 <thead>
+//                   <tr className="bg-gray-200">
+//                     <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+//                     <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">D</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {[
+//                     ["1", "", "Hari 1", "Hari 2", "Hari 3"],
+//                     ["2", "Kelompok", "Kelompok A", "Kelompok B", "Kelompok C"],
+//                   ].map((row, index) => (
+//                     <tr key={index} className={index === 0 ? "bg-gray-200" : "bg-[#255F38] text-white"}>
+//                       {row.map((cell, i) => (
+//                         <td
+//                           key={i}
+//                           className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : index === 0 && i > 1 ? "bg-gray-200" : ""}`}
+//                         >
+//                           {cell}
+//                         </td>
+//                       ))}
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mengisi kolom <strong>Kelompok Piket</strong> untuk Hari 3 di Tabel Utama menggunakan <strong>HLOOKUP</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q5).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q5" onChange={() => handleAnswer("q5", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 6: INDEX - Nilai Ujian */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 6
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-6">
+//           <strong>Tabel: Daftar Nilai IPA</strong>
+//         </p>
+//         <div className="overflow-x-auto">
+//           <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//             <thead>
+//               <tr className="bg-gray-200">
+//                 <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {[
+//                 ["1", "No", "Nilai"],
+//                 ["2", "1", "88"],
+//                 ["3", "2", "92"],
+//                 ["4", "3", "85"],
+//               ].map((row, index) => (
+//                 <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                   {row.map((cell, i) => (
+//                     <td
+//                       key={i}
+//                       className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                     >
+//                       {cell}
+//                     </td>
+//                   ))}
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mengambil nilai pada posisi ke-2 (baris 2, kolom Nilai) menggunakan <strong>INDEX</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q6).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q6" onChange={() => handleAnswer("q6", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 7: MATCH - Posisi Nama Peserta */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 7
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-6">
+//           <strong>Tabel: Daftar Peserta Lomba</strong>
+//         </p>
+//         <div className="overflow-x-auto">
+//           <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//             <thead>
+//               <tr className="bg-gray-200">
+//                 <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {[
+//                 ["1", "Nama", "No Peserta"],
+//                 ["2", "Rina", "P01"],
+//                 ["3", "Tono", "P02"],
+//                 ["4", "Vina", "P03"],
+//               ].map((row, index) => (
+//                 <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                   {row.map((cell, i) => (
+//                     <td
+//                       key={i}
+//                       className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                     >
+//                       {cell}
+//                     </td>
+//                   ))}
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mencari posisi <code>Vina</code> di kolom Nama menggunakan <strong>MATCH</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q7).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q7" onChange={() => handleAnswer("q7", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 8: INDEX - Harga Barang */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 8
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-6">
+//           <strong>Tabel: Daftar Harga Alat Tulis</strong>
+//         </p>
+//         <div className="overflow-x-auto">
+//           <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//             <thead>
+//               <tr className="bg-gray-200">
+//                 <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {[
+//                 ["1", "No", "Harga (Rp)"],
+//                 ["2", "1", "3000"],
+//                 ["3", "2", "7000"],
+//                 ["4", "3", "5000"],
+//               ].map((row, index) => (
+//                 <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                   {row.map((cell, i) => (
+//                     <td
+//                       key={i}
+//                       className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                     >
+//                       {cell}
+//                     </td>
+//                   ))}
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mengambil harga pada posisi ke-2 (baris 2, kolom Harga) menggunakan <strong>INDEX</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q8).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q8" onChange={() => handleAnswer("q8", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 9: MATCH - Posisi Kode Siswa */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 9
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-6">
+//           <strong>Tabel: Daftar Kode Siswa</strong>
+//         </p>
+//         <div className="overflow-x-auto">
+//           <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//             <thead>
+//               <tr className="bg-gray-200">
+//                 <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {[
+//                 ["1", "Kode Siswa", "Nama Siswa"],
+//                 ["2", "K01", "Andi"],
+//                 ["3", "K02", "Budi"],
+//                 ["4", "K03", "Cici"],
+//               ].map((row, index) => (
+//                 <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                   {row.map((cell, i) => (
+//                     <td
+//                       key={i}
+//                       className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                     >
+//                       {cell}
+//                     </td>
+//                   ))}
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin mencari posisi <code>K01</code> di kolom Kode Siswa menggunakan <strong>MATCH</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q9).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q9" onChange={() => handleAnswer("q9", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       {/* Soal 10: CHOOSE - Tugas Ekstrakurikuler */}
+//       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+//         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+//           Soal 10
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-6">
+//           <strong>Tabel: Jadwal Ekstrakurikuler</strong>
+//         </p>
+//         <div className="overflow-x-auto">
+//           <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+//             <thead>
+//               <tr className="bg-gray-200">
+//                 <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+//                 <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {[
+//                 ["1", "Hari", "Kegiatan"],
+//                 ["2", "1", "Pramuka"],
+//                 ["3", "2", "Bola Voli"],
+//                 ["4", "3", "Seni Tari"],
+//               ].map((row, index) => (
+//                 <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+//                   {row.map((cell, i) => (
+//                     <td
+//                       key={i}
+//                       className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+//                     >
+//                       {cell}
+//                     </td>
+//                   ))}
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//         <p className="text-gray-700 text-sm md:text-base mt-4">
+//           Kamu ingin memilih kegiatan ekstrakurikuler berdasarkan hari ke-3 (sel A2) menggunakan <strong>CHOOSE</strong>. Rumus yang benar adalah:
+//         </p>
+//         <ul className="list-none space-y-2">
+//           {Object.entries(answerOptions.q10).map(([key, value]) => (
+//             <li key={key}>
+//               <label>
+//                 <input type="radio" name="q10" onChange={() => handleAnswer("q10", key)} className="mr-2" />
+//                 {key}. <code>{value}</code>
+//               </label>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       <div className="flex justify-center mt-8">
 //         <button
-//           className="mt-4 w-full bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-xl text-md transition duration-300 font-bold shadow-md"
-//           onClick={submitAnswer}
-//           disabled={!selectedAnswer}
+//           onClick={handleSubmit}
+//           className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
 //         >
-//           Jawab
+//           Selesai
 //         </button>
 //       </div>
-//     </div>
+//     </Layout>
 //   );
-// }
+// };
 
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// export default Quiz1;
+
 import Layout from "../../components/Layout";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Quiz() {
-  const [quizData, setQuizData] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [isQuizFinished, setIsQuizFinished] = useState(false);
+const Quiz1 = () => {
   const navigate = useNavigate();
+  const [answers, setAnswers] = useState({});
 
-  useEffect(() => {
-    fetch("/Quiz/Quiz1.json")
-      .then((res) => res.json())
-      .then((data) => setQuizData(data))
-      .catch((error) => console.error("Error fetching quiz data:", error));
-  }, []);
+  const correctAnswers = {
+    q1: "a",
+    q2: "b",
+    q3: "a",
+    q4: "c",
+    q5: "d",
+    q6: "b",
+    q7: "c",
+    q8: "d",
+    q9: "a",
+    q10: "b",
+  };
 
-  function submitAnswer() {
-    if (selectedAnswer === quizData[currentQuestion]?.answer) {
-      setCorrectAnswers((prevCorrect) => prevCorrect + 1);
+  const answerOptions = {
+    q1: {
+      a: '=VLOOKUP("S02"; A1:B4; 2; FALSE)',
+      b: '=VLOOKUP(S02; A1:B4; 2; FALSE)',
+      c: '=VLOOKUP("S02"; A1:B4; 1; FALSE)',
+      d: '=VLOOKUP("S02"; B1:B4; 2; FALSE)',
+    },
+    q2: {
+      a: '=VLOOKUP(B03; A1:B4; 2; FALSE)',
+      b: '=VLOOKUP("B03"; A1:B4; 2; FALSE)',
+      c: '=VLOOKUP("B03"; A1:B4; 1; FALSE)',
+      d: '=VLOOKUP("B03"; B1:B4; 2; FALSE)',
+    },
+    q3: {
+      a: '=VLOOKUP("I01"; A1:B4; 2; FALSE)',
+      b: '=VLOOKUP(I01; A1:B4; 2; FALSE)',
+      c: '=VLOOKUP("I01"; A1:B4; 1; FALSE)',
+      d: '=VLOOKUP("I01"; B1:B4; 2; FALSE)',
+    },
+    q4: {
+      a: '=HLOOKUP(Hari 2; B1:D2; 2; FALSE)',
+      b: '=HLOOKUP("Hari 2"; B1:D2; 1; FALSE)',
+      c: '=HLOOKUP("Hari 2"; B1:D2; 2; FALSE)',
+      d: '=HLOOKUP("Hari 2"; B2:D2; 2; FALSE)',
+    },
+    q5: {
+      a: '=HLOOKUP(Hari 3; B1:D2; 2; FALSE)',
+      b: '=HLOOKUP("Hari 3"; B1:D2; 1; FALSE)',
+      c: '=HLOOKUP("Hari 3"; B2:D2; 2; FALSE)',
+      d: '=HLOOKUP("Hari 3"; B1:D2; 2; FALSE)',
+    },
+    q6: {
+      a: '=INDEX(B1:B4; 3)',
+      b: '=INDEX(B1:B4; 2)',
+      c: '=INDEX(B1:B4; "2")',
+      d: '=INDEX(B1:B4; 1)',
+    },
+    q7: {
+      a: '=MATCH("Vina"; B1:B4; 0)',
+      b: '=MATCH(Vina; A1:A4; 0)',
+      c: '=MATCH("Vina"; A1:A4; 0)',
+      d: '=MATCH("Vina"; A1:A4; 1)',
+    },
+    q8: {
+      a: '=INDEX(B1:B4; 1)',
+      b: '=INDEX(B1:B4; 3)',
+      c: '=INDEX(B1:B4; "2")',
+      d: '=INDEX(B1:B4; 2)',
+    },
+    q9: {
+      a: '=MATCH("K01"; A1:A4; 0)',
+      b: '=MATCH(K01; A1:A4; 0)',
+      c: '=MATCH("K01"; A1:A4; 1)',
+      d: '=MATCH("K01"; B1:B4; 0)',
+    },
+    q10: {
+      a: '=CHOOSE("A2"; "Pramuka"; "Bola Voli"; "Seni Tari")',
+      b: '=CHOOSE(A2; "Pramuka"; "Bola Voli"; "Seni Tari")',
+      c: '=CHOOSE(A2; "Seni Tari"; "Bola Voli"; "Pramuka")',
+      d: '=CHOOSE(B2; "Pramuka"; "Bola Voli"; "Seni Tari")',
+    },
+  };
+
+  const handleAnswer = (question, answer) => {
+    console.log("Selected:", question, answer);
+    setAnswers({ ...answers, [question]: answer });
+  };
+
+  const handleSubmit = () => {
+    try {
+      if (Object.keys(answers).length < 10) {
+        alert("Harap jawab semua soal sebelum menyelesaikan kuis!");
+        return;
+      }
+      let correctCount = 0;
+      Object.keys(correctAnswers).forEach((question) => {
+        if (answers[question] === correctAnswers[question]) {
+          correctCount++;
+        }
+      });
+      const score = (correctCount / 10) * 100;
+      console.log("Submitting:", { answers, correctCount, score, correctAnswers, answerOptions });
+      navigate("/feedback1", { state: { answers, correctCount, score, correctAnswers, answerOptions } });
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+      alert("Terjadi kesalahan saat menyelesaikan kuis. Silakan coba lagi.");
     }
-    if (currentQuestion + 1 < quizData.length) {
-      setCurrentQuestion(currentQuestion + 1);
-      setSelectedAnswer(null);
-    } else {
-      setIsQuizFinished(true);
-    }
-  }
-
-  function handleSubmitQuiz() {
-    const score = (correctAnswers / quizData.length) * 100;
-    navigate("/feedback1", { state: { correctAnswers, total: quizData.length, score } });
-  }
-
-  if (quizData.length === 0)
-    return (
-      <Layout>
-        <div className="flex justify-center items-center min-h-screen">
-          <p className="text-lg text-gray-600">Loading...</p>
-        </div>
-      </Layout>
-    );
-
-  if (isQuizFinished) {
-    return (
-      <Layout>
-        <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-xl p-6 text-center mt-25">
-          <h2 className="text-xl font-bold text-green-700">🎉 Kuis Selesai!</h2>
-          <p className="text-sm text-gray-700 mt-4">Klik tombol di bawah untuk melihat hasil kuis.</p>
-          <button 
-            className="mt-4 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl w-full text-md transition duration-300 shadow-md"
-            onClick={handleSubmitQuiz}>
-            ✅ Lihat Hasil
-          </button>
-        </div>
-      </Layout>
-    );
-  }
-
-  const question = quizData[currentQuestion];
+  };
 
   return (
     <Layout>
-      <div className="max-w-5xl mx-auto p-6  grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Sidebar Progres */}
-        <div className="md:col-span-1 bg-green-100 p-4 rounded-xl shadow-md border border-green-300 text-center">
-          <h3 className="text-md font-bold text-green-700 mb-4">
-            Soal {currentQuestion + 1} dari {quizData.length}
-          </h3>
-          <div className="grid grid-cols-5 gap-2 justify-center">
-            {quizData.map((_, index) => (
-              <div
-                key={index}
-                className={`w-8 h-8 flex items-center justify-center text-sm font-bold rounded-full 
-                ${index === currentQuestion 
-                  ? 'bg-green-600 text-white shadow-md' 
-                  : 'bg-white border border-green-400 text-green-600'}`}
-              >
-                {index + 1}
-              </div>
-            ))}
+      <div>
+        <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
+          Kuis Fungsi Lookup dan Reference
+        </h1>
+      </div>
+
+      <div>
+        <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-8">
+          Selamat datang di kuis tentang fungsi VLOOKUP, HLOOKUP, INDEX, MATCH, dan CHOOSE! Kuis ini berisi 10 soal pilihan ganda untuk melatih pemahamanmu dalam mencari data. Soal 1-5 menggunakan tabel utama dan tabel referensi, sedangkan soal 6-10 hanya menggunakan satu tabel utama. Pilih rumus yang benar untuk setiap soal. Skor minimal 70 diperlukan untuk lanjut ke materi berikutnya. Selamat mengerjakan!
+        </p>
+      </div>
+
+      {/* Soal 1: VLOOKUP - Nilai Matematika */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 1
+        </div>
+        <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Utama: Daftar Nilai Siswa</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Kode Siswa", "Nama Siswa", "Nilai Matematika"],
+                    ["2", "S01", "Ani", "[Kosong]"],
+                    ["3", "S02", "Budi", "[Kosong]"],
+                    ["4", "S03", "Cici", "[Kosong]"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Referensi: Data Nilai Matematika</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Kode Siswa", "Nilai Matematika"],
+                    ["2", "S01", "85"],
+                    ["3", "S02", "90"],
+                    ["4", "S03", "78"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mengisi kolom <strong>Nilai Matematika</strong> untuk kode <code>S02</code> di Tabel Utama menggunakan <strong>VLOOKUP</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q1).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q1" onChange={() => handleAnswer("q1", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-
-        {/* Konten Soal */}
-        <div className="md:col-span-2 bg-white p-6 rounded-xl shadow-lg border border-gray-300 text-center">
-          <h4 className="text-xl font-bold text-gray-700 mb-3">Kuis 1 Pencarian dengan Fungsi Lookup</h4>
-          <h2 className="text-md font-semibold text-gray-700 mb-3">{question?.question || "Memuat soal..."}</h2>
-
-          <div className="flex flex-col gap-4">
-            {question?.options?.map((option, index) => (
-              <button
-                key={index}
-                className={`px-4 py-2 rounded-xl border text-left transition duration-300 ${
-                  selectedAnswer === option
-                    ? "bg-green-200 border-green-600 text-green-800 font-semibold"
-                    : "bg-gray-100 border-gray-300 hover:bg-gray-200"
-                }`}
-                onClick={() => setSelectedAnswer(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-
-          <button
-            className="mt-6 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl transition duration-300 shadow-md disabled:bg-gray-400"
-            onClick={submitAnswer}
-            disabled={selectedAnswer === null}
-          >
-            {currentQuestion + 1 === quizData.length ? "Selesai" : "Selanjutnya"}
-          </button>
+      {/* Soal 2: VLOOKUP - Nama Barang */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 2
         </div>
+        <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Utama: Daftar Belanja Sekolah</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Kode Barang", "Nama Barang", "Harga (Rp)"],
+                    ["2", "B01", "[Kosong]", "2000"],
+                    ["3", "B02", "[Kosong]", "5000"],
+                    ["4", "B03", "[Kosong]", "3000"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Referensi: Data Barang</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Kode Barang", "Nama Barang"],
+                    ["2", "B01", "Pensil"],
+                    ["3", "B02", "Buku Tulis"],
+                    ["4", "B03", "Penghapus"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mengisi kolom <strong>Nama Barang</strong> untuk kode <code>B03</code> di Tabel Utama menggunakan <strong>VLOOKUP</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q2).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q2" onChange={() => handleAnswer("q2", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 3: VLOOKUP - Harga Barang */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 3
+        </div>
+        <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Utama: Daftar Harga Jual</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Kode Barang", "Harga Barang (Rp)"],
+                    ["2", "I01", "[Kosong]"],
+                    ["3", "I02", "[Kosong]"],
+                    ["4", "I03", "[Kosong]"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Referensi: Data Harga Barang</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Kode Barang", "Harga Barang (Rp)"],
+                    ["2", "I01", "5000"],
+                    ["3", "I02", "6000"],
+                    ["4", "I03", "7000"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mengisi kolom <strong>Harga Barang</strong> untuk kode <code>I01</code> di Tabel Utama menggunakan <strong>VLOOKUP</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q3).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q3" onChange={() => handleAnswer("q3", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 4: HLOOKUP - Tugas Piket */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 4
+        </div>
+        <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Utama: Jadwal Piket Harian</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Hari", "Tugas Piket"],
+                    ["2", "Hari 1", "[Kosong]"],
+                    ["3", "Hari 2", "[Kosong]"],
+                    ["4", "Hari 3", "[Kosong]"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Referensi: Data Piket</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">D</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Hari", "Hari 1", "Hari 2", "Hari 3"],
+                    ["2", "Tugas", "Menyapu", "Membersihkan Papan", "Mengosongkan Sampah"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${
+                            i === 0
+                              ? "bg-gray-200 font-bold w-10 text-black"
+                              : i === 1 && index < 2
+                              ? "bg-[#255F38] text-white"
+                              : ""
+                          }`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mengisi kolom <strong>Tugas Piket</strong> untuk Hari 2 di Tabel Utama menggunakan <strong>HLOOKUP</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q4).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q4" onChange={() => handleAnswer("q4", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 5: HLOOKUP - Kelompok Piket */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 5
+        </div>
+        <div className="flex flex-row flex-wrap justify-center space-x-4 mt-6">
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Utama: Jadwal Kelompok Piket</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Hari", "Kelompok Piket"],
+                    ["2", "Hari 1", "[Kosong]"],
+                    ["3", "Hari 2", "[Kosong]"],
+                    ["4", "Hari 3", "[Kosong]"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <p className="text-gray-700 text-sm md:text-base mb-2">
+              <strong>Tabel Referensi: Data Kelompok Piket</strong>
+            </p>
+            <div className="overflow-x-auto">
+              <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">C</th>
+                    <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">D</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Hari", "Hari 1", "Hari 2", "Hari 3"],
+                    ["2", "Kelompok", "Kelompok A", "Kelompok B", "Kelompok C"],
+                  ].map((row, index) => (
+                    <tr key={index} className={index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                      {row.map((cell, i) => (
+                        <td
+                          key={i}
+                          className={`border border-gray-300 px-4 py-2 ${
+                            i === 0
+                              ? "bg-gray-200 font-bold w-10 text-black"
+                              : i === 1 && index < 2
+                              ? "bg-[#255F38] text-white"
+                              : ""
+                          }`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mengisi kolom <strong>Kelompok Piket</strong> untuk Hari 3 di Tabel Utama menggunakan <strong>HLOOKUP</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q5).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q5" onChange={() => handleAnswer("q5", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 6: INDEX - Nilai Ujian */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 6
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-6">
+          <strong>Tabel: Daftar Nilai IPA</strong>
+        </p>
+        <div className="overflow-x-auto">
+          <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["1", "No", "Nilai"],
+                ["2", "1", "88"],
+                ["3", "2", "92"],
+                ["4", "3", "85"],
+              ].map((row, index) => (
+                <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                  {row.map((cell, i) => (
+                    <td
+                      key={i}
+                      className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mengambil nilai pada posisi ke-2 (baris 2, kolom Nilai) menggunakan <strong>INDEX</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q6).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q6" onChange={() => handleAnswer("q6", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 7: MATCH - Posisi Nama Peserta */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 7
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-6">
+          <strong>Tabel: Daftar Peserta Lomba</strong>
+        </p>
+        <div className="overflow-x-auto">
+          <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["1", "Nama", "No Peserta"],
+                ["2", "Rina", "P01"],
+                ["3", "Tono", "P02"],
+                ["4", "Vina", "P03"],
+              ].map((row, index) => (
+                <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                  {row.map((cell, i) => (
+                    <td
+                      key={i}
+                      className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mencari posisi <code>Vina</code> di kolom Nama menggunakan <strong>MATCH</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q7).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q7" onChange={() => handleAnswer("q7", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 8: INDEX - Harga Barang */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 8
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-6">
+          <strong>Tabel: Daftar Harga Alat Tulis</strong>
+        </p>
+        <div className="overflow-x-auto">
+          <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["1", "No", "Harga (Rp)"],
+                ["2", "1", "3000"],
+                ["3", "2", "7000"],
+                ["4", "3", "5000"],
+              ].map((row, index) => (
+                <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                  {row.map((cell, i) => (
+                    <td
+                      key={i}
+                      className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mengambil harga pada posisi ke-2 (baris 2, kolom Harga) menggunakan <strong>INDEX</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q8).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q8" onChange={() => handleAnswer("q8", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 9: MATCH - Posisi Kode Siswa */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 9
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-6">
+          <strong>Tabel: Daftar Kode Siswa</strong>
+        </p>
+        <div className="overflow-x-auto">
+          <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["1", "Kode Siswa", "Nama Siswa"],
+                ["2", "K01", "Andi"],
+                ["3", "K02", "Budi"],
+                ["4", "K03", "Cici"],
+              ].map((row, index) => (
+                <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                  {row.map((cell, i) => (
+                    <td
+                      key={i}
+                      className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin mencari posisi <code>K01</code> di kolom Kode Siswa menggunakan <strong>MATCH</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q9).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q9" onChange={() => handleAnswer("q9", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Soal 10: CHOOSE - Tugas Ekstrakurikuler */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Soal 10
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-6">
+          <strong>Tabel: Jadwal Ekstrakurikuler</strong>
+        </p>
+        <div className="overflow-x-auto">
+          <table className="border-collapse border border-gray-300 text-center text-sm mx-auto">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 px-2 py-1 text-xs font-bold w-10 text-black"></th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">A</th>
+                <th className="border border-gray-300 px-4 py-1 text-xs font-bold w-28 text-black">B</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["1", "Hari", "Kegiatan"],
+                ["2", "1", "Pramuka"],
+                ["3", "2", "Bola Voli"],
+                ["4", "3", "Seni Tari"],
+              ].map((row, index) => (
+                <tr key={index} className={index === 0 ? "bg-[#255F38] text-white" : index % 2 === 1 ? "bg-green-50" : "bg-white"}>
+                  {row.map((cell, i) => (
+                    <td
+                      key={i}
+                      className={`border border-gray-300 px-4 py-2 ${i === 0 ? "bg-gray-200 font-bold w-10 text-black" : ""}`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Kamu ingin memilih kegiatan ekstrakurikuler berdasarkan hari ke-3 (sel A2) menggunakan <strong>CHOOSE</strong>. Rumus yang benar adalah:
+        </p>
+        <ul className="list-none space-y-2">
+          {Object.entries(answerOptions.q10).map(([key, value]) => (
+            <li key={key}>
+              <label>
+                <input type="radio" name="q10" onChange={() => handleAnswer("q10", key)} className="mr-2" />
+                {key}. <code>{value}</code>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={handleSubmit}
+          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
+        >
+          Selesai
+        </button>
       </div>
     </Layout>
   );
-}
+};
+
+export default Quiz1;

@@ -33,11 +33,6 @@ const Navbar = () => {
           </a>
         </li>
         <li>
-          <a href="/materi" className="block py-2 px-4 hover:text-gray-600">
-            Materi
-          </a>
-        </li>
-        <li>
           <a href="/informasi" className="block py-2 px-4 hover:text-gray-600">
             Informasi
           </a>
@@ -46,13 +41,13 @@ const Navbar = () => {
         {/* Tombol Daftar & Masuk (hanya muncul di mobile) */}
         <div className="flex flex-col mt-4 md:hidden">
           <a
-            href="/masuk"
+            href="/login"
             className="bg-[#1D6F35] text-white px-4 py-2 rounded-md text-center hover:bg-[#145029] transition"
           >
             Masuk
           </a>
           <a
-            href="/daftar"
+            href="/register"
             className="border border-[#1D6F35] text-[#1D6F35] px-4 py-2 rounded-md text-center mt-2 hover:bg-[#1D6F35] hover:text-white transition"
           >
             Daftar
@@ -63,13 +58,13 @@ const Navbar = () => {
       {/* Tombol Daftar & Masuk (hanya di desktop) */}
       <div className="hidden md:flex space-x-2">
         <a
-          href="/masuk"
+          href="/login"
           className="bg-[#1D6F35] text-white px-4 py-2 rounded-md hover:bg-[#145029] transition"
         >
           Masuk
         </a>
         <a
-          href="/daftar"
+          href="/register"
           className="border border-[#1D6F35] text-[#1D6F35] px-4 py-2 rounded-md hover:bg-[#1D6F35] hover:text-white transition"
         >
           Daftar
