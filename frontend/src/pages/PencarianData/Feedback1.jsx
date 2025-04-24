@@ -151,7 +151,7 @@ const Feedback = () => {
           </button>
         ) : (
           <button
-            onClick={() => navigate("quiz1")}
+            onClick={() => navigate("/quiz1")}
             className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md"
           >
             Ulang Kuis
