@@ -8,9 +8,13 @@ const ContohReference = () => {
       {/* Header Judul */}
       <div>
         <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-          Contoh Penerapan Fungsi INDEX
+          Contoh Penerapan Fungsi Reference
         </h1>
       </div>
+
+      <h2 className="text-lg md:text-xl font-bold mt-12 mb-4 px-4 text-gray-800">
+        Studi Kasus 1: INDEX 
+      </h2>
 
       {/* Pengantar Masalah */}
       <div>
@@ -132,11 +136,9 @@ const ContohReference = () => {
       </div>
 
       {/* Header Judul */}
-      <div>
-        <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-          Contoh Penerapan Fungsi MATCH
-        </h1>
-      </div>
+      <h2 className="text-lg md:text-xl font-bold mt-12 mb-4 px-4 text-gray-800">
+        Studi Kasus 2: MATCH 
+      </h2>
 
       {/* Pengantar Masalah */}
       <div>
@@ -264,11 +266,9 @@ const ContohReference = () => {
       </div>
 
        {/* Header Judul */}
-       <div>
-        <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-          Contoh Penerapan Fungsi CHOOSE
-        </h1>
-      </div>
+       <h2 className="text-lg md:text-xl font-bold mt-12 mb-4 px-4 text-gray-800">
+        Studi Kasus 3: CHOOSE
+      </h2>
 
       {/* Pengantar Masalah */}
       <div>

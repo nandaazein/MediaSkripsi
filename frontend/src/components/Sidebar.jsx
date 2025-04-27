@@ -93,7 +93,7 @@ export const Sidebar = () => {
       title: "Pengelolaan Data",
       subItems: [
         { title: "Sorting & Filtering", path: "/pengelolaan-data" },
-        { title: "Contoh Pengelolaan Data", path: "/penerapan-pengelolaan" },
+        { title: "Contoh Pengelolaan Data", path: "/contoh-pengelolaan" },
         { title: "Aktivitas Siswa", path: "/aktivitas-siswa" },
         { title: "Mari Berlatih", path: "/berlatih-pengelolaan" },
         { title: "Kuis 4", path: "/quiz4" },

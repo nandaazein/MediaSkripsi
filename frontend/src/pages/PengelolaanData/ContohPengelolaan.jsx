@@ -1,0 +1,537 @@
+import Layout from "../../components/Layout";
+import { useEffect } from "react";
+import { Lightbulb, BarChart, Filter, Code, CheckCircle } from "lucide-react";
+
+const ContohPengelolaan = () => {
+  useEffect(() => {
+    // Tambah stylesheet jika belum ada
+    if (!document.querySelector('link[href="https://cdn.syncfusion.com/ej2/19.1.56/material.css"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://cdn.syncfusion.com/ej2/19.1.56/material.css";
+      document.head.appendChild(link);
+    }
+
+    // Tambah script jika belum ada
+    if (!document.querySelector('script[src="https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js"]')) {
+      const script = document.createElement("script");
+      script.src = "https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js";
+      script.async = true;
+      script.onload = () => {
+        if (window.ej && window.ej.spreadsheet && !document.querySelector("#spreadsheet1 .e-spreadsheet")) {
+          // Spreadsheet untuk Sorting
+          new window.ej.spreadsheet.Spreadsheet({
+            sheets: [
+              {
+                name: "Sheet1",
+                columns: [
+                  { width: 120 },
+                  { width: 150 },
+                ],
+                rows: [
+                  {
+                    cells: [
+                      {
+                        value: "Nama Siswa",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                      {
+                        value: "Nilai Ulangan",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Rian", style: { textAlign: "center" } },
+                      { value: 85, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Siti", style: { textAlign: "center" } },
+                      { value: 78, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Toni", style: { textAlign: "center" } },
+                      { value: 92, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Lina", style: { textAlign: "center" } },
+                      { value: 65, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Fajar", style: { textAlign: "center" } },
+                      { value: 88, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                ],
+              },
+            ],
+          }).appendTo("#spreadsheet1");
+        }
+
+        if (window.ej && window.ej.spreadsheet && !document.querySelector("#spreadsheet2 .e-spreadsheet")) {
+          // Spreadsheet untuk Filtering
+          new window.ej.spreadsheet.Spreadsheet({
+            sheets: [
+              {
+                name: "Sheet1",
+                columns: [
+                  { width: 200 },
+                  { width: 120 },
+                  { width: 120 },
+                ],
+                rows: [
+                  {
+                    cells: [
+                      {
+                        value: "Judul Buku",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                      {
+                        value: "Kategori",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                      {
+                        value: "Jumlah Halaman",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Petualangan di Hutan", style: { textAlign: "center" } },
+                      { value: "Fiksi", style: { textAlign: "center" } },
+                      { value: 150, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Dunia Planet", style: { textAlign: "center" } },
+                      { value: "Sains", style: { textAlign: "center" } },
+                      { value: 200, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Misteri Kota Tua", style: { textAlign: "center" } },
+                      { value: "Fiksi", style: { textAlign: "center" } },
+                      { value: 180, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Teknologi Masa Depan", style: { textAlign: "center" } },
+                      { value: "Sains", style: { textAlign: "center" } },
+                      { value: 220, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Kisah Pahlawan", style: { textAlign: "center" } },
+                      { value: "Sejarah", style: { textAlign: "center" } },
+                      { value: 170, format: "#,##0", style: { textAlign: "center" } },
+                    ],
+                  },
+                ],
+              },
+            ],
+          }).appendTo("#spreadsheet2");
+        }
+      };
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  return (
+    <Layout>
+      {/* Header judul */}
+      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
+        Contoh Penerapan Sorting dan Filtering Data
+      </h1>
+
+      {/* Paragraf Penjelasan di Luar Section */}
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
+        Dalam kehidupan sehari-hari, siswa SMP sering dihadapkan pada tugas mengelola data, seperti mengurutkan nilai atau menyaring informasi tertentu. Berikut adalah dua contoh penerapan sorting dan filtering menggunakan spreadsheet untuk membantu siswa mengelola data secara efisien. Dengan pendekatan Computational Thinking, kita dapat memecah masalah, mengenali pola, fokus pada informasi penting, dan membuat langkah-langkah sistematis.
+      </p>
+
+      {/* Studi Kasus 1: Sorting - Mengurutkan Nilai Ulangan */}
+      <h2 className="text-lg md:text-xl font-bold mt-8 mb-4 px-4 text-gray-800">
+        Studi Kasus 1: Sorting - Mengurutkan Nilai Ulangan
+      </h2>
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
+        Budi, seorang siswa SMP, diminta oleh gurunya untuk mengelola data nilai ulangan matematika kelasnya. Data berisi nama siswa dan nilai ulangan. Budi ingin mengurutkan data dari nilai terbesar ke terkecil (descending, Z ke A) untuk menentukan tiga siswa dengan nilai tertinggi yang akan mendapatkan penghargaan. Dengan sorting, Budi dapat dengan cepat melihat peringkat siswa berdasarkan nilai mereka. <strong>Penjelasan</strong>: Urutan "A ke Z" (ascending) mengurutkan dari nilai terkecil ke terbesar, sedangkan "Z ke A" (descending) mengurutkan dari nilai terbesar ke terkecil.
+      </p>
+
+      {/* Tabel Data Nilai Ulangan */}
+      <div className="flex flex-col items-center mt-6">
+        <p className="text-gray-600 text-sm text-center mb-2 italic">
+          Tabel 1. Data Nilai Ulangan Siswa
+        </p>
+        <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+          <thead>
+            <tr className="bg-[#255F38] text-white">
+              <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+              <th className="border border-green-600 px-4 py-2">Nilai Ulangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ["Rian", 85],
+              ["Siti", 78],
+              ["Toni", 92],
+              ["Lina", 65],
+              ["Fajar", 88],
+            ].map((row, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? "bg-green-50" : "bg-white"}
+              >
+                {row.map((cell, i) => (
+                  <td key={i} className="border border-green-600 px-4 py-2">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Penyelesaian dengan Computational Thinking - Sorting */}
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mt-6">
+        Penyelesaian dengan{" "}
+        <span className="font-semibold italic">Computational Thinking:</span>
+      </p>
+
+      {/* DEKOMPOSISI - Sorting */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li className="list-none -ml-6">
+            Sebelum melakukan sorting, kita perlu membagi masalah menjadi langkah-langkah kecil:
+          </li>
+          <li>Mengumpulkan data nilai ulangan siswa dalam bentuk tabel.</li>
+          <li>
+            Menentukan kolom yang akan diurutkan, yaitu kolom Nilai Ulangan.
+          </li>
+          <li>
+            Menggunakan fitur sorting di spreadsheet untuk mengurutkan data dari terbesar ke terkecil (descending, Z ke A).
+          </li>
+        </ul>
+      </div>
+
+      {/* Pengenalan Pola - Sorting */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <BarChart className="w-5 h-5 mr-2" /> PENGENALAN POLA
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>
+            Setelah sorting, nilai ulangan tertinggi akan berada di posisi atas.
+          </li>
+          <li>
+            Data akan tersusun secara berurutan dari nilai terbesar ke terkecil, memudahkan identifikasi siswa dengan nilai tertinggi.
+          </li>
+          <li>
+            Pola ini membantu Budi melihat peringkat siswa dengan jelas untuk menentukan penerima penghargaan.
+          </li>
+        </ul>
+      </div>
+
+      {/* Abstraksi - Sorting */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Filter className="w-5 h-5 mr-2" /> ABSTRAKSI
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>
+            Fokus hanya pada kolom Nilai Ulangan untuk mengurutkan data.
+          </li>
+          <li>
+            Informasi seperti nama siswa hanya diperlukan setelah pengurutan untuk mengidentifikasi siswa.
+          </li>
+          <li>
+            Abaikan detail lain seperti kelas atau mata pelajaran lain yang tidak relevan untuk tujuan sorting.
+          </li>
+        </ul>
+      </div>
+
+      {/* Algoritma - Sorting */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Code className="w-5 h-5 mr-2" /> ALGORITMA
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li className="list-none -ml-6">
+            Untuk mengurutkan data di spreadsheet, ikuti langkah-langkah berikut:
+          </li>
+          <li>Siapkan data dalam tabel.</li>
+          <li>
+            Blok seluruh data termasuk header (misalnya, kolom Nama Siswa dan Nilai Ulangan).
+          </li>
+          <li>
+            Klik menu "Data" → "Urutkan" (Sort).
+          </li>
+          <li>
+            Pilih kolom "Nilai Ulangan" sebagai acuan pengurutan.
+          </li>
+          <li>
+            Pilih opsi "Z ke A" (descending) untuk mengurutkan dari nilai terbesar ke terkecil.
+          </li>
+          <li>Klik "OK".</li>
+        </ul>
+
+        <div className="w-full flex justify-center px-4">
+          <div
+            id="spreadsheet1"
+            className="w-full max-w-full md:max-w-screen-md"
+            style={{ height: "400px" }}
+          ></div>
+        </div>
+      </div>
+
+      {/* Kesimpulan dan Analisis - Sorting */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <CheckCircle className="w-5 h-5 mr-2" /> KESIMPULAN & ANALISIS
+        </div>
+        <p className="text-gray-600 text-sm md:text-base mt-6">
+          Dengan sorting, Budi dapat dengan cepat mengidentifikasi tiga siswa dengan nilai ulangan tertinggi untuk menerima penghargaan tanpa perlu memeriksa data secara manual.
+        </p>
+        <p className="text-gray-600 text-sm font-semibold md:text-base">
+          Analisis
+        </p>
+        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-4 space-y-2">
+          <li
+            className="text-justify"
+            style={{ textIndent: "-1.5em", paddingLeft: "1.5em" }}
+          >
+            Setelah sorting (Z ke A), Toni (92), Fajar (88), dan Rian (85) adalah tiga siswa dengan nilai ulangan tertinggi.
+          </li>
+          <li
+            className="text-justify"
+            style={{ textIndent: "-1.5em", paddingLeft: "1.5em" }}
+          >
+            Sorting dengan urutan descending (Z ke A) membuat data lebih terorganisir, memudahkan guru memilih penerima penghargaan berdasarkan peringkat.
+          </li>
+        </ul>
+      </div>
+
+      {/* Studi Kasus 2: Filtering - Menyaring Data Buku Perpustakaan */}
+      <h2 className="text-lg md:text-xl font-bold mt-12 mb-4 px-4 text-gray-800">
+        Studi Kasus 2: Filtering - Menyaring Data Buku Perpustakaan
+      </h2>
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
+        Sari, seorang siswa SMP dan anggota klub perpustakaan, diminta mengelola data buku perpustakaan yang berisi judul buku, kategori, dan jumlah halaman. Sari ingin menyaring buku dengan kategori "Sains" untuk membuat daftar rekomendasi buku sains untuk kegiatan Pekan Ilmiah sekolah. Dengan filtering, Sari dapat dengan cepat memilih buku yang relevan tanpa memeriksa setiap entri secara manual.
+      </p>
+
+      {/* Tabel Data Buku Perpustakaan */}
+      <div className="flex flex-col items-center mt-6">
+        <p className="text-gray-600 text-sm text-center mb-2 italic">
+          Tabel 2. Data Buku Perpustakaan
+        </p>
+        <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+          <thead>
+            <tr className="bg-[#255F38] text-white">
+              <th className="border border-green-600 px-4 py-2">Judul Buku</th>
+              <th className="border border-green-600 px-4 py-2">Kategori</th>
+              <th className="border border-green-600 px-4 py-2">Jumlah Halaman</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ["Petualangan di Hutan", "Fiksi", 150],
+              ["Dunia Planet", "Sains", 200],
+              ["Misteri Kota Tua", "Fiksi", 180],
+              ["Teknologi Masa Depan", "Sains", 220],
+              ["Kisah Pahlawan", "Sejarah", 170],
+            ].map((row, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? "bg-green-50" : "bg-white"}
+              >
+                {row.map((cell, i) => (
+                  <td key={i} className="border border-green-600 px-4 py-2">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Penyelesaian dengan Computational Thinking - Filtering */}
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mt-6">
+        Penyelesaian dengan{" "}
+        <span className="font-semibold italic">Computational Thinking:</span>
+      </p>
+
+      {/* DEKOMPOSISI - Filtering */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li className="list-none -ml-6">
+            Sebelum melakukan filtering, kita perlu membagi masalah menjadi langkah-langkah kecil:
+          </li>
+          <li>Mengumpulkan data buku perpustakaan dalam bentuk tabel.</li>
+          <li>
+            Menentukan kriteria penyaringan, yaitu kategori "Sains".
+          </li>
+          <li>
+            Menggunakan fitur filtering di spreadsheet untuk menampilkan hanya buku dengan kategori "Sains".
+          </li>
+        </ul>
+      </div>
+
+      {/* Pengenalan Pola - Filtering */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <BarChart className="w-5 h-5 mr-2" /> PENGENALAN POLA
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>
+            Setelah filtering, hanya buku dengan kategori "Sains" yang ditampilkan.
+          </li>
+          <li>
+            Buku-buku sains cenderung memiliki topik yang relevan untuk Pekan Ilmiah, seperti teknologi atau astronomi.
+          </li>
+          <li>
+            Pola ini membantu Sari fokus pada buku yang sesuai dengan kebutuhan kegiatan.
+          </li>
+        </ul>
+      </div>
+
+      {/* Abstraksi - Filtering */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Filter className="w-5 h-5 mr-2" /> ABSTRAKSI
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>
+            Fokus hanya pada kolom Kategori untuk menyaring buku sains.
+          </li>
+          <li>
+            Informasi seperti jumlah halaman diabaikan karena tidak relevan untuk tujuan filtering.
+          </li>
+          <li>
+            Judul buku hanya diperlukan setelah penyaringan untuk membuat daftar rekomendasi.
+          </li>
+        </ul>
+      </div>
+
+      {/* Algoritma - Filtering */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Code className="w-5 h-5 mr-2" /> ALGORITMA
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li className="list-none -ml-6">
+            Untuk menyaring data di spreadsheet, ikuti langkah-langkah berikut:
+          </li>
+          <li>Siapkan data dalam tabel.</li>
+          <li>
+            Blok seluruh data termasuk header (misalnya, kolom Judul Buku, Kategori, dan Jumlah Halaman).
+          </li>
+          <li>
+            Klik menu "Data" → "Filter".
+          </li>
+          <li>
+            Klik ikon panah di kolom "Kategori", centang opsi "Sains", dan hapus centang pada kategori lain.
+          </li>
+          <li>Klik "OK".</li>
+        </ul>
+
+        <div className="w-full flex justify-center px-4">
+          <div
+            id="spreadsheet2"
+            className="w-full max-w-full md:max-w-screen-md"
+            style={{ height: "400px" }}
+          ></div>
+        </div>
+      </div>
+
+      {/* Kesimpulan dan Analisis - Filtering */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <CheckCircle className="w-5 h-5 mr-2" /> KESIMPULAN & ANALISIS
+        </div>
+        <p className="text-gray-600 text-sm md:text-base mt-6">
+          Dengan filtering, Sari dapat dengan cepat mengidentifikasi buku-buku kategori "Sains" untuk rekomendasi Pekan Ilmiah tanpa perlu memeriksa setiap entri secara manual.
+        </p>
+        <p className="text-gray-600 text-sm font-semibold md:text-base">
+          Analisis
+        </p>
+        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-4 space-y-2">
+          <li
+            className="text-justify"
+            style={{ textIndent: "-1.5em", paddingLeft: "1.5em" }}
+          >
+            Setelah filtering, hanya buku "Dunia Planet" dan "Teknologi Masa Depan" yang ditampilkan, sesuai dengan kebutuhan Pekan Ilmiah.
+          </li>
+          <li
+            className="text-justify"
+            style={{ textIndent: "-1.5em", paddingLeft: "1.5em" }}
+          >
+            Filtering menghemat waktu Sari dalam memilih buku yang relevan dan memastikan daftar rekomendasi fokus pada kategori yang diinginkan.
+          </li>
+        </ul>
+      </div>
+
+      {/* Tombol Navigasi */}
+      <div className="flex justify-between mt-8">
+        <a
+          href="/pengelolaan-data"
+          className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition duration-300 text-base shadow-md"
+        >
+          ← Sebelumnya
+        </a>
+        <a
+          href="/aktivitas-pengelolaan-data"
+          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
+        >
+          Selanjutnya →
+        </a>
+      </div>
+    </Layout>
+  );
+};
+
+export default ContohPengelolaan;

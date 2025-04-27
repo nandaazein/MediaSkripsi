@@ -490,7 +490,7 @@ export default function PengelolaanData() {
           ← Sebelumnya
         </a>
         <a
-          href="/penerapan-peringkasan"
+          href="/contoh-pengelolaan"
           className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E]"
         >
           Selanjutnya →

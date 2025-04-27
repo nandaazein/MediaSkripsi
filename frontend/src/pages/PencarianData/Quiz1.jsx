@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Quiz1 = () => {
+const QuizPencarianData = () => {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
 
@@ -851,4 +851,4 @@ const Quiz1 = () => {
   );
 };
 
-export default Quiz1;
+export default QuizPencarianData;
