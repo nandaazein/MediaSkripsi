@@ -34,7 +34,7 @@ import ContohPenerapan from "./pages/VisualisasiData/ContohPenerapanVisualisasiD
 import AktivitasSiswaVisualisasi from "./pages/VisualisasiData/AktivitasSiswaVisualisasi";
 import BerlatihVisualisasi from "./pages/VisualisasiData/BerlatihVisualisasi";
 import PetunjukKuis2 from "./pages/VisualisasiData/PetunjukKuis2";
-import Kuis2 from "./pages/VisualisasiData/Kuis2";
+import Quiz2 from "./pages/VisualisasiData/Quiz2";
 import Feedback2 from "./pages/VisualisasiData/Feedback2";
 
 // Sub 3
@@ -81,16 +81,10 @@ function App() {
         {/* VISUALISASI DATA */}
         <Route path="/visualisasi-data" element={<VisualisasiData />} />
         <Route path="/contoh-penerapan-visualisasi-data" element={<ContohPenerapan />}/>
-        <Route
-          path="/aktivitas-visualisasi"
-          element={<AktivitasSiswaVisualisasi />}
-        />
-        <Route
-          path="/mari-berlatih-visualisasi"
-          element={<BerlatihVisualisasi />}
-        />
+        <Route path="/aktivitas-visualisasi" element={<AktivitasSiswaVisualisasi />} />
+        <Route path="/mari-berlatih-visualisasi" element={<BerlatihVisualisasi />}/>
         <Route path="/petunjuk-kuis2" element={<PetunjukKuis2 />} />
-        <Route path="/kuis2" element={<Kuis2 />} />
+        <Route path="/quiz2" element={<Quiz2 />} />
         <Route path="/feedback2" element={<Feedback2 />} />
 
         {/* PERINGKASAN DATA SUB 3  */}

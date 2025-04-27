@@ -1,79 +1,127 @@
 import { useState } from "react";
 import Layout from "../../components/Layout";
-import bar from "../../assets/Visualisasi/bar.png";
-import line from "../../assets/Visualisasi/line.png";
-import pie from "../../assets/Visualisasi/pie.png";
+
+// nomor 1
+import satuLine from "../../assets/Visualisasi/satu-line.png";
+import satuBar from "../../assets/Visualisasi/satu-bar.png";
+import satuPie from "../../assets/Visualisasi/satu-pie.png";
+
+// nomor 2
+import duaPie from "../../assets/Visualisasi/dua-pie.png";
+import duaBar from "../../assets/Visualisasi/dua-bar.png";
+import duaLine from "../../assets/Visualisasi/dua-line.png";
+
+// nomor 3
+import tigaPie from "../../assets/Visualisasi/tiga-pie.png";
+import tigaBar from "../../assets/Visualisasi/tiga-bar.png";
+import tigaLine from "../../assets/Visualisasi/tiga-line.png";
+
+// nomor 4
+import empatPie from "../../assets/Visualisasi/empat-pie.png";
+import empatKolom from "../../assets/Visualisasi/empat-kolom.png";
+import empatLine from "../../assets/Visualisasi/empat-line.png";
 
 const AktivitasVisualisasiGambar = () => {
   const [selected, setSelected] = useState("");
-  const [feedback, setFeedback] = useState("");
-  const [jawaban1, setJawaban1] = useState(""); // ✅ Tambahan penting!
+  const [feedback1, setFeedback1] = useState("");
+  const [feedback2, setFeedback2] = useState("");
+  const [feedback3, setFeedback3] = useState("");
+  const [feedback4, setFeedback4] = useState("");
   const [jawaban2, setJawaban2] = useState("");
   const [jawaban3, setJawaban3] = useState("");
   const [jawaban4, setJawaban4] = useState("");
-  const [jawaban5, setJawaban5] = useState("");
+  const [jawaban5, setJawaban5] = useState([]); // Array untuk beberapa jawaban di Soal 5
   const [isTouched1, setIsTouched1] = useState(false);
   const [isTouched2, setIsTouched2] = useState(false);
   const [isTouched3, setIsTouched3] = useState(false);
   const [isTouched4, setIsTouched4] = useState(false);
   const [isTouched5, setIsTouched5] = useState(false);
 
-  const isCorrect = (input, correct) => input.trim().toLowerCase() === correct;
+  const isCorrect = (input, correct) => input.trim().toLowerCase() === correct.toLowerCase();
 
-  const semuaBenar =
-    isCorrect(selected, "line") &&
-    isCorrect(jawaban2, "pie chart") &&
-    isCorrect(jawaban3, "line chart") &&
-    isCorrect(jawaban4, "bar chart");
+  const handlePeriksa1 = () => {
+    setIsTouched1(true);
+    if (isCorrect(selected, "Line Chart")) {
+      setFeedback1("✅ Benar! Grafik garis (Line Chart) cocok untuk melihat perubahan dari waktu ke waktu.");
+    } else {
+      setFeedback1("❌ Coba lagi. Grafik ini kurang tepat untuk melihat perubahan dari waktu ke waktu.");
+    }
+  };
+
+  const handlePeriksa2 = () => {
+    setIsTouched2(true);
+    if (isCorrect(jawaban2, "Pie Chart")) {
+      setFeedback2("✅ Benar! Grafik Pie Chart cocok untuk menunjukkan persentase dari keseluruhan.");
+    } else {
+      setFeedback2("❌ Salah. Grafik ini kurang tepat untuk menunjukkan persentase dari keseluruhan.");
+    }
+  };
+
+  const handlePeriksa3 = () => {
+    setIsTouched3(true);
+    if (isCorrect(jawaban3, "Line Chart")) {
+      setFeedback3("✅ Benar! Grafik garis cocok untuk melihat perubahan dari waktu ke waktu.");
+    } else {
+      setFeedback3("❌ Salah. Grafik ini kurang tepat untuk melihat perubahan dari waktu ke waktu.");
+    }
+  };
+
+  const handlePeriksa4 = () => {
+    setIsTouched4(true);
+    if (isCorrect(jawaban4, "Bar Chart")) {
+      setFeedback4("✅ Benar! Grafik batang cocok untuk perbandingan nilai antar kategori.");
+    } else {
+      setFeedback4("❌ Salah. Grafik ini kurang tepat untuk perbandingan nilai antar kategori.");
+    }
+  };
+
+  const handlePeriksa5 = () => {
+    setIsTouched5(true);
+  };
 
   return (
     <Layout>
       <div className="p-6 bg-white">
-        <h1 className="text-xl md:text-2xl text-center font-bold mb-6 p-4 bg-[#255F38] text-white">
+        <h1 className="text-xl md:text-2xl text-center font-bold mb-8 p-4 bg-[#255F38] text-white rounded-lg shadow-lg">
           Aktivitas Visualisasi Data
         </h1>
 
         {/* Soal 1 */}
-        <div className="p-4">
-          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base">
-            1. Kamu ingin tahu bagaimana{" "}
-            <span className="font-bold text-red-600">
-              jumlah penjualan produk berubah selama 4 bulan terakhir
-            </span>
-            . Grafik apa yang paling tepat untuk digunakan?
+        <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
+          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
+            <span className="text-lg font-bold text-green-700 mr-2">1️⃣</span>
+            Kamu ingin melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan terakhir. Grafik apa yang paling tepat untuk digunakan?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
-                jawaban1 === "Line Chart"
-                  ? "border-blue-500"
-                  : "border-gray-200"
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+                selected === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
-              onClick={() => setJawaban1("Line Chart")}
+              onClick={() => setSelected("Line Chart")}
             >
-              <img src={line} alt="Line Chart" className="rounded-lg" />
+              <img src={satuLine} alt="Line Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Line Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
-                jawaban1 === "Bar Chart" ? "border-blue-500" : "border-gray-200"
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+                selected === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
-              onClick={() => setJawaban1("Bar Chart")}
+              onClick={() => setSelected("Bar Chart")}
             >
-              <img src={bar} alt="Bar Chart" className="rounded-lg" />
+              <img src={satuBar} alt="Bar Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Bar Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
-                jawaban1 === "Pie Chart" ? "border-blue-500" : "border-gray-200"
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+                selected === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
-              onClick={() => setJawaban1("Pie Chart")}
+              onClick={() => setSelected("Pie Chart")}
             >
-              <img src={pie} alt="Pie Chart" className="rounded-lg" />
+              <img src={satuPie} alt="Pie Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Pie Chart
               </p>
@@ -81,75 +129,65 @@ const AktivitasVisualisasiGambar = () => {
           </div>
           <div className="mt-2 text-center">
             <button
-              onClick={() => setIsTouched1(true)}
-              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700"
+              onClick={handlePeriksa1}
+              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded-lg hover:bg-green-700 transition duration-200"
             >
               Periksa
             </button>
             <button
               onClick={() => {
-                setJawaban1("");
+                setSelected("");
                 setIsTouched1(false);
+                setFeedback1("");
               }}
-              className="px-4 py-2 ml-2 text-white bg-red-500 rounded hover:bg-red-700"
+              className="px-4 py-2 ml-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
-          {isTouched1 && jawaban1 && (
-            <div
-              className={`mt-2 text-sm font-medium ${
-                isCorrect(jawaban1, "line chart")
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {isCorrect(jawaban1, "line chart")
-                ? "✅ Benar! Grafik garis (line chart) cocok untuk menunjukkan data yang berubah dari waktu ke waktu."
-                : "❌ Coba lagi. Grafik ini kurang tepat untuk menunjukkan data yang berubah dari waktu ke waktu."}
+          {isTouched1 && selected && (
+            <div className={`mt-2 text-sm font-medium ${isCorrect(selected, "Line Chart") ? "text-green-600" : "text-red-600"}`}>
+              {feedback1}
             </div>
           )}
         </div>
 
         {/* Soal 2 */}
-        <div className="p-4">
-          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base">
-            2. Kelasmu melakukan survei tentang warna favorit. Grafik apa yang
-            paling pas untuk menunjukkan bagian warna favorit dari seluruh
-            kelas?
+        <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
+          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
+            <span className="text-lg font-bold text-green-700 mr-2">2️⃣</span>
+            Kelasmu melakukan survei tentang warna favorit. Grafik apa yang paling tepat untuk menunjukkan persentase warna favorit dari seluruh kelas?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
                 jawaban2 === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban2("Pie Chart")}
             >
-              <img src={pie} alt="Pie Chart" className="rounded-lg" />
+              <img src={duaPie} alt="Pie Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Pie Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
                 jawaban2 === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban2("Bar Chart")}
             >
-              <img src={bar} alt="Bar Chart" className="rounded-lg" />
+              <img src={duaBar} alt="Bar Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Bar Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
-                jawaban2 === "Line Chart"
-                  ? "border-blue-500"
-                  : "border-gray-200"
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+                jawaban2 === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban2("Line Chart")}
             >
-              <img src={line} alt="Line Chart" className="rounded-lg" />
+              <img src={duaLine} alt="Line Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Line Chart
               </p>
@@ -157,8 +195,8 @@ const AktivitasVisualisasiGambar = () => {
           </div>
           <div className="mt-2 text-center">
             <button
-              onClick={() => setIsTouched2(true)}
-              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700"
+              onClick={handlePeriksa2}
+              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded-lg hover:bg-green-700 transition duration-200"
             >
               Periksa
             </button>
@@ -166,65 +204,56 @@ const AktivitasVisualisasiGambar = () => {
               onClick={() => {
                 setJawaban2("");
                 setIsTouched2(false);
+                setFeedback2("");
               }}
-              className="px-4 py-2 ml-2 text-white bg-red-500 rounded hover:bg-red-700"
+              className="px-4 py-2 ml-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
           {isTouched2 && jawaban2 && (
-            <div
-              className={`mt-2 text-sm font-medium ${
-                isCorrect(jawaban2, "pie chart")
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {isCorrect(jawaban2, "pie chart")
-                ? "✅ Benar! Grafik pie chart cocok untuk menunjukkan bagian dari keseluruhan."
-                : "❌ Salah. Grafik tersebut kurang tepat untuk menunjukkan bagian dari keseluruhan."}
+            <div className={`mt-2 text-sm font-medium ${isCorrect(jawaban2, "Pie Chart") ? "text-green-600" : "text-red-600"}`}>
+              {feedback2}
             </div>
           )}
         </div>
 
         {/* Soal 3 */}
-        <div className="p-4">
-          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base">
-            3. Kamu ingin tahu bagaimana jumlah pengunjung perpustakaan sekolah
-            berubah setiap bulan. Grafik apa yang paling cocok?
+        <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
+          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
+            <span className="text-lg font-bold text-green-700 mr-2">3️⃣</span>
+            Kamu ingin melihat perubahan jumlah pengunjung perpustakaan sekolah dari waktu ke waktu setiap bulan. Grafik apa yang paling cocok?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
                 jawaban3 === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban3("Pie Chart")}
             >
-              <img src={pie} alt="Pie Chart" className="rounded-lg" />
+              <img src={tigaPie} alt="Pie Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Pie Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
                 jawaban3 === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban3("Bar Chart")}
             >
-              <img src={bar} alt="Bar Chart" className="rounded-lg" />
+              <img src={tigaBar} alt="Bar Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Bar Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
-                jawaban3 === "Line Chart"
-                  ? "border-blue-500"
-                  : "border-gray-200"
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+                jawaban3 === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban3("Line Chart")}
             >
-              <img src={line} alt="Line Chart" className="rounded-lg" />
+              <img src={tigaLine} alt="Line Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Line Chart
               </p>
@@ -232,8 +261,8 @@ const AktivitasVisualisasiGambar = () => {
           </div>
           <div className="mt-2 text-center">
             <button
-              onClick={() => setIsTouched3(true)}
-              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700"
+              onClick={handlePeriksa3}
+              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded-lg hover:bg-green-700 transition duration-200"
             >
               Periksa
             </button>
@@ -241,65 +270,56 @@ const AktivitasVisualisasiGambar = () => {
               onClick={() => {
                 setJawaban3("");
                 setIsTouched3(false);
+                setFeedback3("");
               }}
-              className="px-4 py-2 ml-2 text-white bg-red-500 rounded hover:bg-red-700"
+              className="px-4 py-2 ml-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
           {isTouched3 && jawaban3 && (
-            <div
-              className={`mt-2 text-sm font-medium ${
-                isCorrect(jawaban3, "line chart")
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {isCorrect(jawaban3, "line chart")
-                ? "✅ Benar! Grafik garis cocok untuk menunjukkan perubahan dari waktu ke waktu."
-                : "❌ Salah. Grafik tersebut kurang tepat untuk menunjukkan perubahan dari waktu ke waktu."}
+            <div className={`mt-2 text-sm font-medium ${isCorrect(jawaban3, "Line Chart") ? "text-green-600" : "text-red-600"}`}>
+              {feedback3}
             </div>
           )}
         </div>
 
         {/* Soal 4 */}
-        <div className="p-4">
-          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base">
-            4. Kamu ingin membandingkan nilai rata-rata siswa di pelajaran
-            Matematika, IPA, dan Bahasa Indonesia. Grafik apa yang paling tepat?
+        <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
+          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
+            <span className="text-lg font-bold text-green-700 mr-2">4️⃣</span>
+            Kamu ingin melihat perbandingan nilai rata-rata siswa di pelajaran Matematika, IPA, dan Bahasa Indonesia. Grafik apa yang paling tepat?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
                 jawaban4 === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban4("Pie Chart")}
             >
-              <img src={pie} alt="Pie Chart" className="rounded-lg" />
+              <img src={empatPie} alt="Pie Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Pie Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
                 jawaban4 === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban4("Bar Chart")}
             >
-              <img src={bar} alt="Bar Chart" className="rounded-lg" />
+              <img src={empatKolom} alt="Bar Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Bar Chart
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer ${
-                jawaban4 === "Line Chart"
-                  ? "border-blue-500"
-                  : "border-gray-200"
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+                jawaban4 === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban4("Line Chart")}
             >
-              <img src={line} alt="Line Chart" className="rounded-lg" />
+              <img src={empatLine} alt="Line Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
                 Line Chart
               </p>
@@ -307,8 +327,8 @@ const AktivitasVisualisasiGambar = () => {
           </div>
           <div className="mt-2 text-center">
             <button
-              onClick={() => setIsTouched4(true)}
-              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700"
+              onClick={handlePeriksa4}
+              className="ml-2 px-4 py-2 bg-[#255F38] text-white rounded-lg hover:bg-green-700 transition duration-200"
             >
               Periksa
             </button>
@@ -316,32 +336,25 @@ const AktivitasVisualisasiGambar = () => {
               onClick={() => {
                 setJawaban4("");
                 setIsTouched4(false);
+                setFeedback4("");
               }}
-              className="px-4 py-2 ml-2 text-white bg-red-500 rounded hover:bg-red-700"
+              className="px-4 py-2 ml-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
           {isTouched4 && jawaban4 && (
-            <div
-              className={`mt-2 text-sm font-medium ${
-                isCorrect(jawaban4, "bar chart")
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {isCorrect(jawaban4, "bar chart")
-                ? "✅ Benar! Grafik batang cocok untuk membandingkan beberapa kategori."
-                : "❌ Salah. Grafik tersebut kurang tepat untuk menunjukkan perbandingan antar kategori."}
+            <div className={`mt-2 text-sm font-medium ${isCorrect(jawaban4, "Bar Chart") ? "text-green-600" : "text-red-600"}`}>
+              {feedback4}
             </div>
           )}
         </div>
 
         {/* Soal 5 */}
-        <div className="p-4">
-          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base">
-            5. Lengkapi tabel berikut ini dengan jenis grafik yang paling sesuai
-            berdasarkan deskripsi kasus.
+        <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
+          <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
+            <span className="text-lg font-bold text-green-700 mr-2">5️⃣</span>
+            Lengkapi tabel berikut ini dengan jenis grafik yang paling sesuai berdasarkan deskripsi kasus.
           </p>
           <table className="w-full text-sm md:text-base">
             <thead>
@@ -351,51 +364,64 @@ const AktivitasVisualisasiGambar = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="p-2 border">
-                  Menunjukkan bagian warna favorit siswa dari seluruh kelas
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    value={jawaban5}
-                    onChange={(e) => setJawaban5(e.target.value)}
-                    className="w-full p-2 border-2 rounded-xl"
-                    placeholder="Ketik jawaban Anda..."
-                  />
-                </td>
-              </tr>
+              {[
+                {
+                  kasus: "Menunjukkan persentase warna favorit siswa dari seluruh kelas",
+                  jawabanBenar: "Pie Chart",
+                },
+                {
+                  kasus: "Melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan",
+                  jawabanBenar: "Line Chart",
+                },
+              ].map((item, index) => (
+                <tr key={index}>
+                  <td className="p-2 border">{item.kasus}</td>
+                  <td className="p-2 border">
+                    <input
+                      type="text"
+                      value={jawaban5[index] || ""}
+                      onChange={(e) => {
+                        const newJawaban = [...jawaban5];
+                        newJawaban[index] = e.target.value;
+                        setJawaban5(newJawaban);
+                      }}
+                      className="w-full p-2 border-2 rounded-xl"
+                      placeholder="Ketik jawaban Anda..."
+                    />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
           <div className="mt-2 text-center">
             <button
-              onClick={() => setIsTouched5(true)}
-              className="px-4 py-2 bg-[#255F38] text-white rounded hover:bg-green-700 mr-2"
+              onClick={handlePeriksa5}
+              className="px-4 py-2 bg-[#255F38] text-white rounded-lg hover:bg-green-700 transition duration-200 mr-2"
             >
               Periksa
             </button>
             <button
               onClick={() => {
-                setJawaban5("");
+                setJawaban5([]);
                 setIsTouched5(false);
               }}
-              className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700"
+              className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
-
-          {isTouched5 && jawaban5 && (
-            <div
-              className={`mt-2 text-sm font-medium ${
-                isCorrect(jawaban5, "pie chart")
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {isCorrect(jawaban5, "pie chart")
-                ? "✅ Benar!"
-                : "❌ Salah. Grafik tersebut kurang tepat untuk menunjukkan bagian dari keseluruhan."}
+          {isTouched5 && jawaban5.length > 0 && (
+            <div className="mt-2 text-sm font-medium">
+              {jawaban5.map((jawaban, index) => (
+                <div
+                  key={index}
+                  className={isCorrect(jawaban, ["Pie Chart", "Line Chart"][index]) ? "text-green-600" : "text-red-600"}
+                >
+                  {isCorrect(jawaban, ["Pie Chart", "Line Chart"][index])
+                    ? `✅ Benar! Untuk kasus "${["Menunjukkan persentase warna favorit siswa dari seluruh kelas", "Melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan"][index]}".`
+                    : `❌ Salah. Untuk kasus "${["Menunjukkan persentase warna favorit siswa dari seluruh kelas", "Melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan"][index]}", seharusnya ${["Pie Chart", "Line Chart"][index]}.`}
+                </div>
+              ))}
             </div>
           )}
         </div>

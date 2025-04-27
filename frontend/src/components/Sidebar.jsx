@@ -74,7 +74,7 @@ export const Sidebar = () => {
         },
         { title: "Aktivitas Siswa", path: "/aktivitas-visualisasi" },
         { title: "Mari Berlatih", path: "/mari-berlatih-visualisasi" },
-        { title: "Kuis", path: "/kuis2" },
+        { title: "Kuis 2", path: "/quiz2" },
       ],
     },
     {

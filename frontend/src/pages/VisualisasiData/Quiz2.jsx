@@ -16,7 +16,7 @@ const QuizVisualisasiData = () => {
     q7: "a",
     q8: "b",
     q9: "c",
-    q10: "c",
+    q10: "b", // Diperbaiki
   };
 
   const answerOptions = {
@@ -408,7 +408,7 @@ const QuizVisualisasiData = () => {
           Soal 10
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4">
-          Kamu ingin membandingkan nilai ulangan antar mata pelajaran seperti Matematika, IPA, dan Bahasa Indonesia. Grafik apa yang paling tepat?
+          Kamu ingin menunjukkan akumulasi jumlah siswa yang hadir di perpustakaan setiap minggu selama satu bulan. Grafik apa yang paling tepat?
         </p>
         <ul className="list-none space-y-2">
           {Object.entries(answerOptions.q10).map(([key, value]) => (
