@@ -524,7 +524,7 @@ const ContohPengelolaan = () => {
           ← Sebelumnya
         </a>
         <a
-          href="/aktivitas-pengelolaan-data"
+          href="/aktivitas-pengelolaan"
           className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
         >
           Selanjutnya →

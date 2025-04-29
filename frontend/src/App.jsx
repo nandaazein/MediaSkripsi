@@ -47,9 +47,9 @@ import QuizPeringkasanData from "./pages/PeringkasanData/Quiz3";
 // Sub 4
 import PengelolaanData from "./pages/PengelolaanData/PengelolaanData";
 import ContohPengelolaan from "./pages/PengelolaanData/ContohPengelolaan";
-import AktivitasSiswaPengelolaan from "./pages/PengelolaanData/AktivitasSiswa";
+import AktivitasSiswaPengelolaan from "./pages/PengelolaanData/AktivitasPengelolaan";
 import MariBerlatihPengelolaan from "./pages/PengelolaanData/MariBerlatih";
-import Kuis4 from "./pages/PengelolaanData/Kuis4";
+import Kuis4 from "./pages/PengelolaanData/Quiz4";
 function App() {
   return (
     <BrowserRouter>
@@ -99,7 +99,7 @@ function App() {
         {/* PENGELOLAAN DATA SUB 4 */}
         <Route path="/pengelolaan-data" element={<PengelolaanData />} />
         <Route path="/contoh-pengelolaan" element={<ContohPengelolaan />}/>
-        <Route path="/aktivitas-siswa" element={<AktivitasSiswaPengelolaan />}/>
+        <Route path="/aktivitas-pengelolaan" element={<AktivitasSiswaPengelolaan />}/>
         <Route path="/berlatih-pengelolaan" element={<MariBerlatihPengelolaan />}/>
         <Route path="/quiz4" element={<Kuis4 />} />
       </Routes>
