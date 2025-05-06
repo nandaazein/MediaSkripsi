@@ -24,8 +24,9 @@ import PencarianReference from "./pages/PencarianData/PencarianReference";
 import ContohReference from "./pages/PencarianData/ContohReference";
 import AktivitasLookup from "./pages/PencarianData/AktivitasLookup";
 import BerlatihLookup from "./pages/PencarianData/BerlatihLookup";
-import PetunjukQuiz1 from "./pages/PencarianData/PetunjukQuiz1";
-import QuizPencarianData from "./pages/PencarianData/Quiz1";
+import RangkumanPencarianData from "./pages/PencarianData/RangkumanPencarianData";
+import PetunjukQuizPencarian from "./pages/PencarianData/PetunjukQuizPencarian";
+import KuisPencarianData from "./pages/PencarianData/KuisPencarianData";
 import FeedbackPencarianData from "./pages/PencarianData/Feedback1";
 
 // Sub 2
@@ -33,8 +34,9 @@ import VisualisasiData from "./pages/VisualisasiData/VisualisasiData";
 import ContohPenerapan from "./pages/VisualisasiData/ContohPenerapanVisualisasiData";
 import AktivitasSiswaVisualisasi from "./pages/VisualisasiData/AktivitasSiswaVisualisasi";
 import BerlatihVisualisasi from "./pages/VisualisasiData/BerlatihVisualisasi";
-import PetunjukKuis2 from "./pages/VisualisasiData/PetunjukKuis2";
-import QuizVisualisasiData from "./pages/VisualisasiData/Quiz2";
+import RangkumanVisualisasiData from "./pages/VisualisasiData/RangkumanVisualisasiData";
+import PetunjukQuizVisualisasi from "./pages/VisualisasiData/PetunjukQuizVisualisasi";
+import KuisVisualisasiData from "./pages/VisualisasiData/KuisVisualisasiData";
 import FeedbackVisualisasiData from "./pages/VisualisasiData/Feedback2";
 
 // Sub 3
@@ -42,14 +44,28 @@ import PeringkasanData from "./pages/PeringkasanData/PeringkasanData";
 import ContohPenerapanPeringkasan from "./pages/PeringkasanData/ContohPenerapanPeringkasan";
 import AktivitasPeringkasan from "./pages/PeringkasanData/AktivitasPeringkasan";
 import BerlatihPeringkasan from "./pages/PeringkasanData/BerlatihPeringkasan";
-import QuizPeringkasanData from "./pages/PeringkasanData/Quiz3";
+import RangkumanPeringkasanData from "./pages/PeringkasanData/RangkumanPeringkasanData";
+import PetunjukQuizPeringkasan from "./pages/PeringkasanData/PetunjukQuizPeringkasan";
+import KuisPeringkasanData from "./pages/PeringkasanData/KuisPeringkasanData";
 
 // Sub 4
 import PengelolaanData from "./pages/PengelolaanData/PengelolaanData";
 import ContohPengelolaan from "./pages/PengelolaanData/ContohPengelolaan";
 import AktivitasSiswaPengelolaan from "./pages/PengelolaanData/AktivitasPengelolaan";
 import MariBerlatihPengelolaan from "./pages/PengelolaanData/MariBerlatih";
-import Kuis4 from "./pages/PengelolaanData/Quiz4";
+import RangkumanPengelolaanData from "./pages/PengelolaanData/RangkumanPengelolaan";
+import PetunjukQuizPengelolaan from "./pages/PengelolaanData/PetunjukQuizPengelolaan";
+import KuisPengelolaanData from "./pages/PengelolaanData/KuisPengelolaanData";
+
+
+// Admin
+import Dashboard from "./pages/admin/Dashboard";
+import Progres  from "./pages/admin/Progres";
+import DataSiswa from "./pages/admin/DataSiswa";
+import DataNilai from "./pages/admin/DataNilai";
+import DataEvaluasi from "./pages/admin/DataEvaluasi";
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -75,8 +91,9 @@ function App() {
         <Route path="/contoh-reference" element={<ContohReference />} />
         <Route path="/aktivitas-lookup" element={<AktivitasLookup />} />
         <Route path="/berlatih-lookup" element={<BerlatihLookup />} />
-        <Route path="/petunjuk-kuis1" element={<PetunjukQuiz1 />} />
-        <Route path="/quiz1" element={<QuizPencarianData />} />
+        <Route path="/rangkuman-pencarian" element={<RangkumanPencarianData />} />
+        <Route path="/petunjuk-quiz-pencarian" element={<PetunjukQuizPencarian />} />
+        <Route path="/kuis-pencarian" element={<KuisPencarianData />} />
         <Route path="/feedback1" element={<FeedbackPencarianData />} />
 
         {/* VISUALISASI DATA */}
@@ -84,8 +101,9 @@ function App() {
         <Route path="/contoh-penerapan-visualisasi-data" element={<ContohPenerapan />}/>
         <Route path="/aktivitas-visualisasi" element={<AktivitasSiswaVisualisasi />} />
         <Route path="/mari-berlatih-visualisasi" element={<BerlatihVisualisasi />}/>
-        <Route path="/petunjuk-kuis2" element={<PetunjukKuis2 />} />
-        <Route path="/quiz2" element={<QuizVisualisasiData />} />
+        <Route path="/rangkuman-visualisasi" element={<RangkumanVisualisasiData />} />
+        <Route path="/petunjuk-quiz-visualisasi" element={<PetunjukQuizVisualisasi />} />
+        <Route path="/kuis-visualisasi" element={<KuisVisualisasiData />} />
         <Route path="/feedback2" element={<FeedbackVisualisasiData />} />
 
         {/* PERINGKASAN DATA SUB 3  */}
@@ -93,15 +111,26 @@ function App() {
         <Route path="/penerapan-peringkasan" element={<ContohPenerapanPeringkasan />}/>
         <Route path="/aktivitas-peringkasan" element={<AktivitasPeringkasan />}/>
         <Route path="/berlatih-peringkasan" element={<BerlatihPeringkasan />} />
-        <Route path="/quiz3" element={<QuizPeringkasanData />} />
+        <Route path="/rangkuman-peringkasan" element={<RangkumanPeringkasanData />} />
+        <Route path="/petunjuk-quiz-peringkasan" element={<PetunjukQuizPeringkasan />} />
+        <Route path="/kuis-peringkasan" element={<KuisPeringkasanData />} />
         <Route path="/spreadsheet" element={<Spreadsheet />} />
 
         {/* PENGELOLAAN DATA SUB 4 */}
         <Route path="/pengelolaan-data" element={<PengelolaanData />} />
         <Route path="/contoh-pengelolaan" element={<ContohPengelolaan />}/>
         <Route path="/aktivitas-pengelolaan" element={<AktivitasSiswaPengelolaan />}/>
-        <Route path="/berlatih-pengelolaan" element={<MariBerlatihPengelolaan />}/>
-        <Route path="/quiz4" element={<Kuis4 />} />
+        <Route path="/berlatih-pengelolaan" element={<MariBerlatihPengelolaan />}/>    
+        <Route path="/rangkuman-pengelolaan" element={<RangkumanPengelolaanData />} />
+        <Route path="/petunjuk-quiz-pengelolaan" element={<PetunjukQuizPengelolaan />} />
+        <Route path="/kuis-pengelolaan" element={<KuisPengelolaanData />} />
+
+        {/* Admin */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/progres" element={<Progres />} />
+        <Route path="/data-siswa" element={<DataSiswa />} />
+        <Route path="/data-nilai" element={<DataNilai />} />
+        <Route path="/data-evaluasi" element={<DataEvaluasi />} />
       </Routes>
     </BrowserRouter>
   );

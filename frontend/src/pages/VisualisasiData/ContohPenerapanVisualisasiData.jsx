@@ -110,9 +110,9 @@ const ContohPenerapanVisualisasiData = () => {
   return (
     <Layout>
       {/* Header judul */}
-      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-        Contoh Penerapan Visualisasi Data
-      </h1>
+      <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
+        CONTOH PENERAPAN VISUALISASI DATA
+      </div>
 
       {/* Paragraf Penjelasan di Luar Section */}
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">

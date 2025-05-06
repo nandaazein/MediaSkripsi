@@ -9,12 +9,13 @@ import {
   faTasks,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useLocation } from "react-router-dom";
 
 export const Sidebar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,6 +26,15 @@ export const Sidebar = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
+    // Find the menu item that contains the current path
+    const currentPath = location.pathname;
+    const activeMenuIndex = menuItems.findIndex((item) =>
+      item.subItems.some((subItem) => subItem.path === currentPath)
+    );
+
+    // Open the dropdown for the active menu item
+    setOpenDropdown(activeMenuIndex !== -1 ? activeMenuIndex : null);
+
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
@@ -32,7 +42,7 @@ export const Sidebar = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [location.pathname]);
 
   const toggleDropdown = (index) => {
     setOpenDropdown(openDropdown === index ? null : index);
@@ -60,7 +70,8 @@ export const Sidebar = () => {
         { title: "Contoh Fungsi Reference", path: "/contoh-reference" },
         { title: "Aktivitas Siswa", path: "/aktivitas-lookup" },
         { title: "Mari Berlatih", path: "/berlatih-lookup" },
-        { title: "Kuis 1", path: "/quiz1" },
+        { title: "Rangkuman", path: "/rangkuman-pencarian" },
+        { title: "Kuis 1", path: "/kuis-pencarian" },
       ],
     },
     {
@@ -68,13 +79,11 @@ export const Sidebar = () => {
       title: "Visualisasi Data",
       subItems: [
         { title: "Visualisasi Data", path: "/visualisasi-data" },
-        {
-          title: "Contoh Visualisasi Data",
-          path: "/contoh-penerapan-visualisasi-data",
-        },
+        { title: "Contoh Visualisasi Data", path: "/contoh-penerapan-visualisasi-data",},
         { title: "Aktivitas Siswa", path: "/aktivitas-visualisasi" },
         { title: "Mari Berlatih", path: "/mari-berlatih-visualisasi" },
-        { title: "Kuis 2", path: "/quiz2" },
+        { title: "Rangkuman", path: "/rangkuman-visualisasi" },
+        { title: "Kuis 2", path: "/kuis-visualisasi" },
       ],
     },
     {
@@ -85,7 +94,8 @@ export const Sidebar = () => {
         { title: "Contoh Peringkasan Data", path: "/penerapan-peringkasan" },
         { title: "Aktivitas Siswa", path: "/aktivitas-peringkasan" },
         { title: "Mari Berlatih", path: "/berlatih-peringkasan" },
-        { title: "Kuis 3", path: "/quiz3" },
+        { title: "Rangkuman", path: "/rangkuman-peringkasan" },
+        { title: "Kuis 3", path: "/kuis-peringkasan" },
       ],
     },
     {
@@ -94,9 +104,10 @@ export const Sidebar = () => {
       subItems: [
         { title: "Sorting & Filtering", path: "/pengelolaan-data" },
         { title: "Contoh Pengelolaan Data", path: "/contoh-pengelolaan" },
-        { title: "Aktivitas Siswa", path: "/aktivitas-siswa" },
+        { title: "Aktivitas Siswa", path: "/aktivitas-pengelolaan" },
         { title: "Mari Berlatih", path: "/berlatih-pengelolaan" },
-        { title: "Kuis 4", path: "/quiz4" },
+        { title: "Rangkuman", path: "/rangkuman-pengelolaan" },
+        { title: "Kuis 4", path: "/kuis-pengelolaan" },
       ],
     },
     {
@@ -145,7 +156,14 @@ export const Sidebar = () => {
                     key={subIndex}
                     className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm hover:bg-gray-200 cursor-pointer"
                   >
-                    <Link to={sub.path} className="flex items-center gap-2">
+                    <Link
+                      to={sub.path}
+                      className={`flex items-center gap-2 w-full ${
+                        location.pathname === sub.path
+                          ? "bg-gray-300 font-bold"
+                          : ""
+                      }`}
+                    >
                       ○ {sub.title}
                     </Link>
                   </li>

@@ -81,11 +81,11 @@ const AktivitasVisualisasiGambar = () => {
 
   return (
     <Layout>
-      <div className="p-6 bg-white">
-        <h1 className="text-xl md:text-2xl text-center font-bold mb-8 p-4 bg-[#255F38] text-white rounded-lg shadow-lg">
-          Aktivitas Visualisasi Data
-        </h1>
+       <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
+        AKTIVITAS VISUALISASI DATA
+      </div>
 
+      <div className="p-6 bg-white">
         {/* Soal 1 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">

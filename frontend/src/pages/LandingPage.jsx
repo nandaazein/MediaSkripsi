@@ -31,7 +31,7 @@ const Homepage = () => {
               MULAI BELAJAR
             </a>
             <a
-              href="/dosen"
+              href="/dashboard"
               className="border border-[#1D6F35] text-[#1D6F35] px-6 py-3 rounded-md hover:bg-[#1D6F35] hover:text-white transition"
             >
               HALAMAN GURU

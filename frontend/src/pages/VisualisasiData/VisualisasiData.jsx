@@ -324,7 +324,7 @@ export default function VisualisasiData() {
               onClick={() => togglePolaStep(1)}
               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
             >
-              <ChevronRight className="w-4 h-4 mr-2" /> Pola 2: Fluktuasi Kehadiran
+              <ChevronRight className="w-4 h-4 mr-2" /> Pola 2: Perubahan Kehadiran
             </button>
             {polaSteps[1] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">

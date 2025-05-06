@@ -44,7 +44,7 @@ export default function PeringkasanData() {
 
   return (
     <Layout>
-      <div className="p-4 bg-[#255F38] text-white font-bold text-lg text-center">
+      <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
         C. PERINGKASAN DATA
       </div>
 

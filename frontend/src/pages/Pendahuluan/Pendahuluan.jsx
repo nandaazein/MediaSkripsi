@@ -6,7 +6,7 @@ const Pendahuluan = () => {
   return (
     <Layout>
       {/* Header judul */}
-      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-8 p-4 bg-[#255F38] text-white ">
+      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-8 p-4 bg-[#255F38] text-white rounded-lg shadow-lg">
         Pendahuluan
       </h1>
       

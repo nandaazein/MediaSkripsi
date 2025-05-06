@@ -6,9 +6,9 @@ const ContohLookup = () => {
   return (
     <Layout>
       {/* Header judul VLOOKUP */}
-      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-        Contoh Penerapan Pencarian Data
-      </h1>
+      <div className="p-4 bg-[#255F38] text-white font-bold text-lg text-center rounded-lg shadow-lg">
+        CONTOH PENERAPAN FUNGSI LOOKUP
+      </div>
 
       <h2 className="text-lg md:text-xl font-bold mt-12 mb-4 px-4 text-gray-800">
         Studi Kasus 1: VLOOKUP 
@@ -238,14 +238,14 @@ const ContohLookup = () => {
           <thead>
             <tr className="bg-[#255F38] text-white">
               <th className="border border-green-600 px-4 py-2">Hari</th>
-              <th className="border border-green-600 px-4 py-2">Senin</th>
-              <th className="border border-green-600 px-4 py-2">Selasa</th>
-              <th className="border border-green-600 px-4 py-2">Rabu</th>
+              <td className="border border-green-600 px-4 py-2 text-black bg-white">Senin</td>
+              <td className="border border-green-600 px-4 py-2 text-black bg-white">Selasa</td>
+              <td className="border border-green-600 px-4 py-2 text-black bg-white">Rabu</td>
             </tr>
           </thead>
           <tbody>
             <tr className="bg-green-50">
-              <td className="border border-green-600 px-4 py-2">Poin</td>
+              <th className="border border-green-600 px-4 py-2 bg-[#255F38] text-white">Poin</th>
               <td className="border border-green-600 px-4 py-2">50</td>
               <td className="border border-green-600 px-4 py-2">30</td>
               <td className="border border-green-600 px-4 py-2">20</td>

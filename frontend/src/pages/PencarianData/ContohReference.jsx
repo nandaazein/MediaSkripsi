@@ -6,10 +6,8 @@ const ContohReference = () => {
     <Layout>
 
       {/* Header Judul */}
-      <div>
-        <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-          Contoh Penerapan Fungsi Reference
-        </h1>
+      <div className="p-4 bg-[#255F38] text-white font-bold text-lg text-center rounded-lg shadow-lg">
+        CONTOH PENERAPAN FUNGSI REFERENCE
       </div>
 
       <h2 className="text-lg md:text-xl font-bold mt-12 mb-4 px-4 text-gray-800">

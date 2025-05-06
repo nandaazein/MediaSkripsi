@@ -19,7 +19,7 @@ const ComputationalThinking = () => {
     <Layout>
 
       {/* Header judul */}
-      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-12  p-4 bg-[#255F38] text-white ">
+      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-12  p-4 bg-[#255F38] text-white rounded-lg shadow-lg">
         Contoh Penerapan Computational Thinking
       </h1>
    
@@ -88,7 +88,7 @@ const ComputationalThinking = () => {
       </div>
 
       {/* Kesimpulan dan Analisis */}
-      <div className="bg-white p-5  border-gray-300 space-y-4 mt-10 relative">
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <CheckCircle className="w-5 h-5 mr-2" /> KESIMPULAN & ANALISIS
         </div>
@@ -118,12 +118,14 @@ const ComputationalThinking = () => {
           {feedback && <p className="text-sm font-medium text-gray-700 mt-3">{feedback}</p>}
         </div>
 
-        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-4 space-y-2">
-          <li>Jika Aldi terlambat bersiap atau berangkat, ia bisa terlambat ke sekolah.</li>
-          <li>Ia bisa berangkat lebih awal atau mengurangi waktu bersiap untuk menghindari keterlambatan.</li>
-        </ul>
+        {/* Menampilkan daftar hanya jika jawaban benar */}
+        {feedback === "✅ Jawaban kamu benar!" && (
+          <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-4 space-y-2">
+            <li>Jika Aldi terlambat bersiap atau berangkat, ia bisa terlambat ke sekolah.</li>
+            <li>Ia bisa berangkat lebih awal atau mengurangi waktu bersiap untuk menghindari keterlambatan.</li>
+          </ul>
+        )}
       </div>
-
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8">

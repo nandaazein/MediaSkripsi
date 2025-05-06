@@ -636,7 +636,7 @@ export default function PencarianReference() {
 
   return (
     <Layout>
-      <div className="p-4 bg-[#255F38] text-white font-bold text-lg text-center">
+      <div className="p-4 bg-[#255F38] text-white font-bold text-lg text-center rounded-lg shadow-lg">
         A. PENCARIAN DATA
       </div>
 

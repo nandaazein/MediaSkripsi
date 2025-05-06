@@ -377,11 +377,11 @@ const AktivitasPeringkasan = () => {
 
   return (
     <Layout>
-      <div className="p-6 bg-white">
-        <h1 className="text-xl md:text-2xl text-center font-bold mb-8 p-4 bg-[#255F38] text-white rounded-lg shadow-lg">
-          Aktivitas Peringkasan Data
-        </h1>
+      <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
+        AKTIVITAS PERINGKASAN DATA
+      </div>
 
+      <div className="p-6 bg-white">
         <div className="flex justify-center px-4 mb-6">
           <iframe
             width="100%"

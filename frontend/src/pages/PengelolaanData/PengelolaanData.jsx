@@ -17,6 +17,18 @@ export default function PengelolaanData() {
   const [abstraksiSteps, setAbstraksiSteps] = useState([false, false, false]);
   const [algoritmaSteps, setAlgoritmaSteps] = useState([false, false, false]);
 
+  // State untuk simulasi sorting dan filtering
+  const initialData = [
+    { id: 1, nama: "Aisyah", nilai: 85, kelas: "8A" },
+    { id: 2, nama: "Budi", nilai: 70, kelas: "8B" },
+    { id: 3, nama: "Citra", nilai: 95, kelas: "8A" },
+    { id: 4, nama: "Dani", nilai: 60, kelas: "8B" },
+  ];
+
+  const [data, setData] = useState(initialData);
+  const [sortOrder, setSortOrder] = useState("none");
+  const [filterKelas, setFilterKelas] = useState("Semua");
+
   // Fungsi untuk toggle langkah-langkah
   const toggleDekomposisiStep = (index) => {
     setDekomposisiSteps((prev) =>
@@ -42,9 +54,31 @@ export default function PengelolaanData() {
     );
   };
 
+  // Fungsi untuk sorting
+  const handleSort = (order) => {
+    setSortOrder(order);
+    let sortedData = [...initialData];
+    if (order === "ascending") {
+      sortedData.sort((a, b) => a.nilai - b.nilai);
+    } else if (order === "descending") {
+      sortedData.sort((a, b) => b.nilai - a.nilai);
+    }
+    setData(sortedData);
+  };
+
+  // Fungsi untuk filtering
+  const handleFilter = (kelas) => {
+    setFilterKelas(kelas);
+    if (kelas === "Semua") {
+      setData(initialData);
+    } else {
+      setData(initialData.filter((item) => item.kelas === kelas));
+    }
+  };
+
   return (
     <Layout>
-      <div className="p-4 bg-[#255F38] text-white font-bold text-lg text-center">
+      <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
         D. PENGELOLAAN DATA
       </div>
 
@@ -115,7 +149,7 @@ export default function PengelolaanData() {
                   Misalnya, jika kita ingin mengetahui siswa dengan nilai tertinggi, kita bisa mengurutkan data dari yang terbesar ke terkecil (<i>descending</i>).
                 </p>
                 <pre className="bg-gray-200 p-2 rounded mt-2 text-gray-800">
-                  Pilih kolom → Klik menu Sort → Pilih A-Z (ascending) atau Z-A (descending)
+                  Blok kolom → Klik kanan → Pilih Sort → Pilih A-Z (ascending) atau Z-A (descending)
                 </pre>
               </section>
 
@@ -123,11 +157,11 @@ export default function PengelolaanData() {
               <section className="bg-gray-100 rounded p-4 shadow-lg">
                 <h3 className="font-semibold text-[#255F38]">2. Filtering</h3>
                 <p className="text-gray-700 mt-2">
-                  <strong>Filtering</strong> digunakan untuk menampilkan hanya data yang memenuhi kriteria tertentu sementara data lainnya disembunyikan.
-                  Misalnya, hanya menampilkan siswa yang mendapatkan nilai 80.
+                  <strong>Filtering</strong> digunakan untuk menyaring atau menampilkan hanya data yang memenuhi kriteria tertentu sementara data lainnya disembunyikan.
+                  Misalnya, hanya menampilkan siswa dari kelas 8A.
                 </p>
                 <pre className="bg-gray-200 p-2 rounded mt-2 text-gray-800">
-                  Pilih kolom → Klik menu Filter → Centang data yang ingin ditampilkan
+                  Blok kolom → Klik kanan → Pilih Filter → Centang data yang ingin ditampilkan (misalnya, "8A")
                 </pre>
               </section>
             </div>
@@ -179,7 +213,7 @@ export default function PengelolaanData() {
             </button>
             {dekomposisiSteps[2] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Langkah:</strong> Pilih kolom "Harga" sebagai acuan dan urutkan secara <i>descending</i> (Z-A).
+                <strong>Langkah:</strong> Blok kolom "Harga", klik kanan, dan pilih Sort Z-A.
               </p>
             )}
           </div>
@@ -266,13 +300,13 @@ export default function PengelolaanData() {
 
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
-            <strong>Mengabaikan informasi</strong> yang tidak diperlukan → Jika hanya ingin mengetahui siswa yang <span className="italic">lulus</span>, kita cukup melihat kolom <span className="italic">Nilai</span> tanpa memperhatikan detail lain seperti nama atau kelas.
+            <strong>Mengabaikan informasi</strong> yang tidak diperlukan → Jika hanya ingin mengetahui siswa dari kelas 8A, kita cukup melihat kolom <span className="italic">Kelas</span> tanpa memperhatikan detail lain seperti nama atau nilai.
           </li>
           <li className="text-justify">
-            <strong>Menyaring data</strong> untuk fokus pada informasi relevan → Misalnya, hanya menampilkan siswa dengan nilai lebih dari <span className="italic">80</span> agar bisa fokus pada siswa yang unggul.
+            <strong>Menyaring data</strong> untuk fokus pada informasi relevan → Misalnya, hanya menampilkan siswa dari kelas 8A agar bisa fokus pada data kelas tersebut.
           </li>
           <li className="text-justify">
-            <strong>Mewakili data</strong> dalam bentuk yang lebih sederhana → Kita bisa menampilkan jumlah siswa yang memiliki nilai tertentu tanpa perlu melihat data setiap siswa satu per satu — misalnya menggunakan rumus <span className="italic">COUNTIF</span>.
+            <strong>Mewakili data</strong> dalam bentuk yang lebih sederhana → Kita bisa menampilkan jumlah siswa dari kelas tertentu tanpa perlu melihat data setiap siswa satu per satu — misalnya menggunakan rumus <span className="italic">COUNTIF</span>.
           </li>
         </ul>
 
@@ -282,7 +316,7 @@ export default function PengelolaanData() {
             <CheckCircle className="w-5 h-5 mr-2" /> Abstraksi: Menyederhanakan Data Siswa
           </h3>
           <p className="text-gray-700 mt-2">
-            Kamu memiliki data siswa: Nama, Kelas, Nilai Ujian, dan Alamat. Kamu hanya ingin mengetahui siswa yang nilainya di atas 80.
+            Kamu memiliki data siswa: Nama, Kelas, Nilai Ujian, dan Alamat. Kamu hanya ingin mengetahui siswa dari kelas 8A.
           </p>
           <p className="text-gray-700 mt-4">
             Klik tombol berikut untuk melihat langkah-langkah abstraksi:
@@ -296,7 +330,7 @@ export default function PengelolaanData() {
             </button>
             {abstraksiSteps[0] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Data penting:</strong> Kolom "Nilai Ujian".
+                <strong>Data penting:</strong> Kolom "Kelas".
               </p>
             )}
             <button
@@ -307,7 +341,7 @@ export default function PengelolaanData() {
             </button>
             {abstraksiSteps[1] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Data tidak relevan:</strong> Nama, Kelas, dan Alamat.
+                <strong>Data tidak relevan:</strong> Nama, Nilai Ujian, dan Alamat.
               </p>
             )}
             <button
@@ -318,7 +352,7 @@ export default function PengelolaanData() {
             </button>
             {abstraksiSteps[2] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Teknik:</strong> Gunakan <i>Filtering</i> untuk menampilkan hanya siswa dengan nilai di atas 80.
+                <strong>Teknik:</strong> Gunakan <i>Filtering</i> untuk menampilkan hanya siswa dari kelas 8A.
               </p>
             )}
           </div>
@@ -369,21 +403,31 @@ export default function PengelolaanData() {
 
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
-            <strong>Blok seluruh data</strong> termasuk header tabel → Misalnya, kolom Nama Siswa dan Nilai Tugas.
+            <strong>Blok seluruh data</strong>, termasuk judul kolom (header), misalnya kolom Nama Siswa dan Nilai Tugas.
           </li>
           <li className="text-justify">
-            <strong>Klik menu Data</strong> kemudian pilih Urutkan → Untuk memulai proses pengurutan.
+            <strong>Klik kanan</strong> pada data yang sudah diblok.
           </li>
           <li className="text-justify">
-            <strong>Pilih kolom</strong> yang ingin diurutkan → Misalnya, "Nilai Tugas".
+            <strong>Pilih menu <em>Sort</em></strong> dari daftar yang muncul.
           </li>
           <li className="text-justify">
-            <strong>Pilih Urutkan</strong> dari Z ke A → Untuk mendapatkan urutan dari nilai tertinggi ke terendah.
+            <strong>Jika hanya ingin mengurutkan satu kolom</strong>, pilih <strong>Sort A to Z</strong> (dari kecil ke besar) atau <strong>Sort Z to A</strong> (dari besar ke kecil). 
+            <ul className="list-none ml-4 mt-1">
+              <li>- <strong>Ascending (Sort A to Z)</strong>: Mengurutkan data dari yang terkecil atau terawal (misalnya A-Z untuk huruf atau angka kecil ke besar).</li>
+              <li>- <strong>Descending (Sort Z to A)</strong>: Mengurutkan data dari yang terbesar atau terakhir (misalnya Z-A untuk huruf atau angka besar ke kecil).</li>
+            </ul>
+          </li>
+          <li className="text-justify">
+            <strong>Jika ingin mengurutkan berdasarkan lebih dari satu kolom</strong>, pilih <strong>Custom Sort</strong>.
+          </li>
+          <li className="text-justify">
+            <strong>Misalnya</strong>, urutkan data berdasarkan kolom Nilai Tugas agar siswa dengan nilai tertinggi muncul di atas.
           </li>
         </ul>
 
         <p className="text-gray-700 text-sm md:text-base mt-4">
-          📌 Filtering (Penyaringan) – Menampilkan Data Siswa dengan Nilai di Atas 80:
+          📌 Filtering (Penyaringan) – Menampilkan Data Siswa dari Kelas 8A:
         </p>
 
         <div className="flex flex-col items-center mt-4">
@@ -394,21 +438,21 @@ export default function PengelolaanData() {
             <thead>
               <tr className="bg-[#255F38] text-white">
                 <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-                <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
+                <th className="border border-green-600 px-4 py-2">Kelas</th>
               </tr>
             </thead>
             <tbody>
               <tr className="bg-green-50">
                 <td className="border border-green-600 px-4 py-2">Dani</td>
-                <td className="border border-green-600 px-4 py-2">78</td>
+                <td className="border border-green-600 px-4 py-2">8A</td>
               </tr>
               <tr className="bg-white">
                 <td className="border border-green-600 px-4 py-2">Eko</td>
-                <td className="border border-green-600 px-4 py-2">88</td>
+                <td className="border border-green-600 px-4 py-2">8B</td>
               </tr>
               <tr className="bg-green-50">
                 <td className="border border-green-600 px-4 py-2">Farah</td>
-                <td className="border border-green-600 px-4 py-2">92</td>
+                <td className="border border-green-600 px-4 py-2">8A</td>
               </tr>
             </tbody>
           </table>
@@ -416,29 +460,26 @@ export default function PengelolaanData() {
 
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
-            <strong>Blok seluruh data</strong> termasuk header kolom → Untuk memastikan semua data tersaring.
+            <strong>Blok seluruh data</strong>, termasuk judul kolom (header), agar semua data bisa difilter dengan benar.
           </li>
           <li className="text-justify">
-            <strong>Klik menu Data</strong> kemudian pilih Filter → Untuk mengaktifkan fitur penyaringan.
+            <strong>Klik kanan</strong> pada kolom "Kelas", lalu pilih opsi <em>Filter</em>.
           </li>
           <li className="text-justify">
-            <strong>Ikon panah</strong> akan muncul di header kolom → Sebagai indikator filter aktif.
+            <strong>Pilih kriteria filter</strong> → Misalnya, jika ingin menampilkan hanya siswa dari kelas 8A, centang <strong>"8A"</strong> saja.
           </li>
           <li className="text-justify">
-            <strong>Klik ikon panah</strong> di kolom "Nilai Ujian" → Pilih Filter Angka → Lebih besar dari.
-          </li>
-          <li className="text-justify">
-            <strong>Masukkan nilai</strong> 80 → Klik OK untuk menampilkan hanya siswa dengan nilai di atas 80.
+            Jika ingin menampilkan semua kelas, centang <strong>"Select All"</strong>.
           </li>
         </ul>
 
         {/* Interactive Case Study for Algoritma */}
         <div className="bg-green-50 p-4 rounded shadow-md mt-6">
           <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Algoritma: Menyaring Data Penjualan
+            <CheckCircle className="w-5 h-5 mr-2" /> Algoritma: Menyaring Data Kegiatan
           </h3>
           <p className="text-gray-700 mt-2">
-            Kamu memiliki data penjualan: Nama Produk, Kategori, Harga, dan Tanggal. Kamu ingin menampilkan hanya produk dengan harga di atas Rp500.000.
+            Kamu memiliki data kegiatan: Nama Siswa, Kategori, Tanggal, dan Kelas. Kamu ingin menampilkan hanya kegiatan dengan kategori "Pramuka".
           </p>
           <p className="text-gray-700 mt-4">
             Klik tombol berikut untuk melihat langkah-langkah algoritma:
@@ -452,7 +493,7 @@ export default function PengelolaanData() {
             </button>
             {algoritmaSteps[0] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Data:</strong> Seluruh tabel penjualan, fokus pada kolom "Harga".
+                <strong>Data:</strong> Seluruh tabel kegiatan, fokus pada kolom "Kategori".
               </p>
             )}
             <button
@@ -463,7 +504,7 @@ export default function PengelolaanData() {
             </button>
             {algoritmaSteps[1] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Kriteria:</strong> Harga di atas Rp500.000.
+                <strong>Kriteria:</strong> Kategori "Pramuka".
               </p>
             )}
             <button
@@ -474,12 +515,85 @@ export default function PengelolaanData() {
             </button>
             {algoritmaSteps[2] && (
               <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Langkah Filtering:</strong> Klik menu Filter, pilih kolom "Harga", lalu filter dengan "Lebih besar dari 500000".
+                <strong>Langkah Filtering:</strong> Blok kolom "Kategori", klik kanan, pilih Filter, lalu centang "Pramuka".
               </p>
             )}
           </div>
         </div>
       </div>
+
+      {/* Mari Mengamati Section */}
+
+
+        <h3 className="font-semibold text-[#255F38] mt-6">
+          Visualisasi Interaktif: Cara Kerja Sorting dan Filtering
+        </h3>
+        <p className="text-gray-700 text-sm md:text-base text-justify">
+          Cobalah simulasi berikut untuk melihat cara kerja sorting dan filtering secara langsung. Kamu bisa mengurutkan data berdasarkan nilai atau menyaring data berdasarkan kelas.
+        </p>
+
+        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
+          <div className="flex justify-between mb-4 items-center">
+            <div className="flex items-center space-x-4">
+              <div>
+                <label className="text-gray-700 mr-2">Urutkan berdasarkan nilai:</label>
+                <select
+                  value={sortOrder}
+                  onChange={(e) => handleSort(e.target.value)}
+                  className="p-2 border rounded"
+                >
+                  <option value="none">Tanpa Urutan</option>
+                  <option value="ascending">Ascending (A-Z)</option>
+                  <option value="descending">Descending (Z-A)</option>
+                </select>
+              </div>
+              <div>
+                <label className="text-gray-700 mr-2">Filter berdasarkan kelas:</label>
+                <select
+                  value={filterKelas}
+                  onChange={(e) => handleFilter(e.target.value)}
+                  className="p-2 border rounded"
+                >
+                  <option value="Semua">Semua Kelas</option>
+                  <option value="8A">8A</option>
+                  <option value="8B">8B</option>
+                </select>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setData(initialData);
+                setSortOrder("none");
+                setFilterKelas("Semua");
+              }}
+              className="bg-[#255F38] text-white px-4 py-2 rounded hover:bg-[#1E4D2E]"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="border-collapse border border-green-800 w-full text-center">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                  <th className="border border-green-600 px-4 py-2">Nilai</th>
+                  <th className="border border-green-600 px-4 py-2">Kelas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, index) => (
+                  <tr key={item.id} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
+                    <td className="border border-green-600 px-4 py-2">{item.nama}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.nilai}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.kelas}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8 px-4">

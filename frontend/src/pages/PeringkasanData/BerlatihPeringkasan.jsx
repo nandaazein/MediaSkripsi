@@ -56,13 +56,11 @@ export default function SummaryLesson() {
     );
   };
 
-  const allCorrect = Object.values(feedback).every((val) => val === true);
-
   return (
     <Layout>
-      <h1 className="text-xl md:text-2xl text-center font-bold mb-4 p-4 bg-[#255F38] text-white rounded">
-        Mari Berlatih Fungsi SUMIF, SUMIFS, COUNTIF, dan COUNTIFS
-      </h1>
+      <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
+        MARI BERLATIH PERINGKASAN DATA
+      </div>
 
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-6">
         <strong>Petunjuk:</strong> Baca studi kasus dan tabel data di bawah ini,
@@ -253,17 +251,10 @@ export default function SummaryLesson() {
           ← Sebelumnya
         </a>
         <a
-          href={allCorrect ? "/petunjuk-kuis1" : "#"}
-          className={`px-5 py-2 rounded-lg text-white ${
-            allCorrect
-              ? "bg-[#255F38] hover:bg-[#1E4D2E]"
-              : "bg-gray-400 cursor-not-allowed"
-          }`}
-          onClick={(e) => {
-            if (!allCorrect) e.preventDefault();
-          }}
+          href="/rangkuman-peringkasan"
+          className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E]"
         >
-          Mulai Kuis →
+          Selanjutnya →
         </a>
       </div>
     </Layout>
