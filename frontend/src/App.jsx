@@ -7,8 +7,10 @@ import HomePage from "./pages/HomePage";
 import Materi from "./pages/Materi";
 import Informasi from "./pages/Informasi";
 import Spreadsheet from "./pages/Spreadsheet";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import LoginSiswa from "./pages/LoginSiswa";
+import LoginGuru from "./pages/LoginGuru";
+import RegisterSiswa from "./pages/RegisterSiswa";
+import RegisterGuru from "./pages/RegisterGuru";
 
 // Pendahuluan
 import PengantarBab from "./pages/Pendahuluan/PengantarBab";
@@ -47,6 +49,7 @@ import BerlatihPeringkasan from "./pages/PeringkasanData/BerlatihPeringkasan";
 import RangkumanPeringkasanData from "./pages/PeringkasanData/RangkumanPeringkasanData";
 import PetunjukQuizPeringkasan from "./pages/PeringkasanData/PetunjukQuizPeringkasan";
 import KuisPeringkasanData from "./pages/PeringkasanData/KuisPeringkasanData";
+import FeedbackPeringkasanData from "./pages/PeringkasanData/Feedback3";
 
 // Sub 4
 import PengelolaanData from "./pages/PengelolaanData/PengelolaanData";
@@ -56,6 +59,7 @@ import MariBerlatihPengelolaan from "./pages/PengelolaanData/MariBerlatih";
 import RangkumanPengelolaanData from "./pages/PengelolaanData/RangkumanPengelolaan";
 import PetunjukQuizPengelolaan from "./pages/PengelolaanData/PetunjukQuizPengelolaan";
 import KuisPengelolaanData from "./pages/PengelolaanData/KuisPengelolaanData";
+import FeedbackPengelolaanData from "./pages/PengelolaanData/Feedback4";
 
 
 // Admin
@@ -66,6 +70,8 @@ import DataNilai from "./pages/admin/DataNilai";
 import DataEvaluasi from "./pages/admin/DataEvaluasi";
 
 
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -74,8 +80,10 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/materi" element={<Materi />} />
         <Route path="/informasi" element={<Informasi />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login-siswa" element={<LoginSiswa />} />
+        <Route path="/login-guru" element={<LoginGuru />} />
+        <Route path="/register-siswa" element={<RegisterSiswa />} />
+        <Route path="/register-guru" element={<RegisterGuru />} />
 
         {/* PENDAHULUAN */}
         <Route path="/pengantar-bab" element={<PengantarBab />} />
@@ -114,6 +122,7 @@ function App() {
         <Route path="/rangkuman-peringkasan" element={<RangkumanPeringkasanData />} />
         <Route path="/petunjuk-quiz-peringkasan" element={<PetunjukQuizPeringkasan />} />
         <Route path="/kuis-peringkasan" element={<KuisPeringkasanData />} />
+        <Route path="/feedback3" element={<FeedbackPeringkasanData />} />
         <Route path="/spreadsheet" element={<Spreadsheet />} />
 
         {/* PENGELOLAAN DATA SUB 4 */}
@@ -124,6 +133,7 @@ function App() {
         <Route path="/rangkuman-pengelolaan" element={<RangkumanPengelolaanData />} />
         <Route path="/petunjuk-quiz-pengelolaan" element={<PetunjukQuizPengelolaan />} />
         <Route path="/kuis-pengelolaan" element={<KuisPengelolaanData />} />
+        <Route path="/feedback4" element={<FeedbackPengelolaanData />} />
 
         {/* Admin */}
         <Route path="/dashboard" element={<Dashboard />} />
