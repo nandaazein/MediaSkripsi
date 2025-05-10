@@ -124,7 +124,7 @@ export const Sidebar = () => {
     { icon: faChartBar, title: "Progres Belajar", path: "/progres" },
     { icon: faUsers, title: "Data Siswa", path: "/data-siswa" },
     { icon: faBook, title: "Data Nilai", path: "/data-nilai" },
-    { icon: faFileText, title: "Data Evaluasi", path: "/data-evaluasi" },
+    { icon: faFileText, title: "Data Evaluasi", path: "/kelola-soal" },
     { icon: faTasks, title: "Pengaturan", path: "/admin/pengaturan" },
     { icon: faSignOutAlt, title: "Logout", path: "/logout", isLogout: true },
   ];

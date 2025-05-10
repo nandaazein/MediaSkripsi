@@ -11,7 +11,7 @@ POST {{host}}/api/students/register
 Content-Type: application/json
 
 {
-  "nis": "1010",
+  "nis": "COBA",
   "fullName": "Faldi",
   "password": "123",
   "confirmPassword": "123",
@@ -25,7 +25,7 @@ POST {{host}}/api/students/login
 Content-Type: application/json
 
 {
-  "nis": "123",
+  "nis": "COBA",
   "password": "123"
 }
 
@@ -34,11 +34,11 @@ POST {{host}}/api/teachers/register
 Content-Type: application/json
 
 {
-  "nip": "987654",
+  "nip": "COBA",
   "fullName": "Jane Smith",
   "school": "SMA Negeri 1",
-  "password": "teacher123",
-  "confirmPassword": "teacher123"
+  "password": "123",
+  "confirmPassword": "123"
 }
 
 ### Login Guru
@@ -47,8 +47,8 @@ POST {{host}}/api/teachers/login
 Content-Type: application/json
 
 {
-  "nip": "987654",
-  "password": "teacher123"
+  "nip": "COBA",
+  "password": "123"
 }
 
 ### Ambil Semua Siswa (Butuh Token Guru)
@@ -60,7 +60,7 @@ GET {{host}}/api/students/classes
 Authorization: Bearer {{token}}
 
 ### Perbarui Progres Siswa oleh Guru (Butuh Token Guru)
-PUT {{host}}/api/students/123/progress
+PUT {{host}}/api/students/COBA/progress
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -78,5 +78,72 @@ Content-Type: application/json
 }
 
 ### Hapus Siswa (Butuh Token Guru)
-DELETE {{host}}/api/students/123
+DELETE {{host}}/api/students/COBA
+Authorization: Bearer {{token}}
+
+### Tambah atau Perbarui Skor Siswa (Butuh Token Guru)
+POST {{host}}/api/scores/COBA
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "latihan1": 80.5,
+  "latihan2": 85.0,
+  "latihan3": 90.0,
+  "latihan4": 95.0,
+  "kuis1": 70.0,
+  "kuis2": 75.0,
+  "kuis3": 80.0,
+  "kuis4": 85.0,
+  "evaluasi_akhir": 90.0
+}
+
+### Ambil Skor Siswa (Butuh Token Guru atau Siswa)
+GET {{host}}/api/scores/COBA
+Authorization: Bearer {{token}}
+
+### Ambil Semua Skor (Butuh Token Guru)
+GET {{host}}/api/scores
+Authorization: Bearer {{token}}
+
+### Tambah Soal (Butuh Token Guru)
+POST {{host}}/api/questions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "quizNumber": 1,
+  "question": "Apa ibu kota Indonesia?",
+  "options": ["Jakarta", "Bandung", "Surabaya", "Medan"],
+  "correctAnswer": "Jakarta",
+  "imageUrl": null
+}
+
+### Ambil Semua Soal (Butuh Token Guru atau Siswa)
+GET {{host}}/api/questions
+Authorization: Bearer {{token}}
+
+### Ambil Soal Berdasarkan Quiz Number (Butuh Token Guru atau Siswa)
+GET {{host}}/api/questions?quizNumber=1
+Authorization: Bearer {{token}}
+
+### Ambil Soal Berdasarkan ID (Butuh Token Guru atau Siswa)
+GET {{host}}/api/questions/1
+Authorization: Bearer {{token}}
+
+### Perbarui Soal (Butuh Token Guru)
+PUT {{host}}/api/questions/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "quizNumber": 1,
+  "question": "Apa ibu kota Indonesia yang diperbarui?",
+  "options": ["Jakarta", "Bandung", "Surabaya", "Yogyakarta"],
+  "correctAnswer": "Jakarta",
+  "imageUrl": null
+}
+
+### Hapus Soal (Butuh Token Guru)
+DELETE {{host}}/api/questions/1
 Authorization: Bearer {{token}}

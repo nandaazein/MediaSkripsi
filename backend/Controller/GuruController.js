@@ -1,6 +1,5 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import teacherModel from '../Models/GuruModel.js';
+import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 
 config();
@@ -9,6 +8,10 @@ const teacherController = {
   async register(req, res) {
     try {
       const { nip, fullName, school, password, confirmPassword } = req.body;
+
+      if (!nip || !fullName || !school || !password || !confirmPassword) {
+        return res.status(400).json({ message: 'Semua field wajib diisi' });
+      }
 
       if (password !== confirmPassword) {
         return res.status(400).json({ message: 'Kata sandi tidak cocok' });
@@ -19,17 +22,11 @@ const teacherController = {
         return res.status(400).json({ message: 'NIP sudah terdaftar' });
       }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      await teacherModel.create({
-        nip,
-        fullName,
-        school,
-        password: hashedPassword
-      });
+      await teacherModel.create({ nip, fullName, school, password });
 
       res.status(201).json({ message: 'Guru berhasil terdaftar' });
     } catch (error) {
+      console.error("Register teacher error:", error);
       res.status(500).json({ message: 'Kesalahan server', error: error.message });
     }
   },
@@ -38,19 +35,18 @@ const teacherController = {
     try {
       const { nip, password } = req.body;
 
-      const teacher = await teacherModel.findByNIP(nip);
+      if (!nip || !password) {
+        return res.status(400).json({ message: 'NIP dan kata sandi wajib diisi' });
+      }
+
+      const teacher = await teacherModel.login(nip, password);
       if (!teacher) {
         return res.status(400).json({ message: 'Kredensial tidak valid' });
       }
 
-      const isMatch = await bcrypt.compare(password, teacher.password);
-      if (!isMatch) {
-        return res.status(400).json({ message: 'Kredensial tidak valid' });
-      }
-
       const token = jwt.sign(
-        { id: teacher.id, role: teacher.role },
-        process.env.JWT_SECRET,
+        { id: teacher.id, role: teacher.role, nip: teacher.nip },
+        process.env.JWT_SECRET || 'your_jwt_secret',
         { expiresIn: '1h' }
       );
 
@@ -65,6 +61,7 @@ const teacherController = {
         }
       });
     } catch (error) {
+      console.error("Teacher login error:", error);
       res.status(500).json({ message: 'Kesalahan server', error: error.message });
     }
   }

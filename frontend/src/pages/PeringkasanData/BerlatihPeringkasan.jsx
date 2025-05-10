@@ -3,7 +3,8 @@ import Layout from "../../components/Layout";
 
 export default function SummaryLesson() {
   const correctAnswers = {
-    sumif: '=SUMIF(B2:B11;"Naya";E2:E11)',
+    // sumif: '=SUMIF(B2:B11;"Naya";E2:E11)',
+    sumif: '36',
     sumifs: '=SUMIFS(E2:E11;C2:C11;"8A";D2:D11;"Kebersihan")',
     countif: '=COUNTIF(D2:D11;"Olahraga")',
     countifs: '=COUNTIFS(C2:C11;"8A";D2:D11;"Kebersihan")',

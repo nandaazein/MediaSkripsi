@@ -10,7 +10,7 @@ const RegisterSiswa = () => {
   const [studentClass, setStudentClass] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [token, setToken] = useState('123');
+  const [token, setToken] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 

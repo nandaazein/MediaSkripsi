@@ -68,6 +68,8 @@ import Progres  from "./pages/admin/Progres";
 import DataSiswa from "./pages/admin/DataSiswa";
 import DataNilai from "./pages/admin/DataNilai";
 import DataEvaluasi from "./pages/admin/DataEvaluasi";
+import KelolaSoal from "./pages/admin/KelolaSoal";
+
 
 
 
@@ -141,6 +143,8 @@ function App() {
         <Route path="/data-siswa" element={<DataSiswa />} />
         <Route path="/data-nilai" element={<DataNilai />} />
         <Route path="/data-evaluasi" element={<DataEvaluasi />} />
+        <Route path="/kelola-soal" element={<KelolaSoal />} />
+
       </Routes>
     </BrowserRouter>
   );
