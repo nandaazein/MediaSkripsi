@@ -15,6 +15,12 @@ const ComputationalThinking = () => {
     }
   };
 
+  const handleHapus = () => {
+    setSiap("");
+    setBerangkat("");
+    setFeedback("");
+  };
+
   return (
     <Layout>
 
@@ -83,7 +89,7 @@ const ComputationalThinking = () => {
         </div>
         <p className="text-gray-600 text-sm md:text-base mt-4 font-medium">Langkah-langkah penyelesaian.</p>
         <p className="text-gray-600 text-sm md:text-base pl-6">(1) Tentukan jam masuk sekolah (07.00).</p>
-        <p className="text-gray-600 text-sm md:text-base pl-6">(2) Kurangi waktu perjalanan (30 menit sebelumnya => Aldi harus pukul 06.30).</p>
+        <p className="text-gray-600 text-sm md:text-base pl-6">(2) Kurangi waktu perjalanan (30 menit sebelumnya => Aldi harus berangkat pukul 06.30).</p>
         <p className="text-gray-600 text-sm md:text-base pl-6">(3) Kurangi lagi waktu untuk bersiap-siap (20 menit sebelumnya => Aldi harus mulai bersiap pukul 06.10).</p>
       </div>
 
@@ -94,7 +100,7 @@ const ComputationalThinking = () => {
         </div>
         <div className="mt-6">
           <p className="text-gray-600 text-sm md:text-base font-semibold">Coba isikan waktu yang sesuai untuk Aldi:</p>
-          <p className="text-gray-600 text-sm md:text-base mt-2">Isikan jam yang harus Aldi mulai bersiap dan berangkat agar tidak terlambat ke sekolah.</p>
+          <p className="text-gray-600 text-sm md:text-base mt-2">Isikan jam Aldi mulai bersiap dan berangkat agar tidak terlambat ke sekolah.</p>
           <input
             type="text"
             placeholder="Jam mulai bersiap (misal: 06.00)"
@@ -114,6 +120,12 @@ const ComputationalThinking = () => {
             className="bg-green-800 text-white px-4 py-2 rounded hover:bg-green-700 mt-3"
           >
             Periksa Jawaban
+          </button>
+          <button
+            onClick={handleHapus}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mt-3 ml-2"
+          >
+            Hapus
           </button>
           {feedback && <p className="text-sm font-medium text-gray-700 mt-3">{feedback}</p>}
         </div>

@@ -3,22 +3,25 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import studentRoutes from './Route/SiswaRoute.js';
 import teacherRoutes from './Route/GuruRoute.js';
+import quizRoutes from './Route/QuizRoute.js';
 
 config();
 
 const app = express();
 
 // Middleware
-app.use(cors({ 
+app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(express.json());
+app.use(express.json({ limit: '10mb' })); // Tambahkan batas 10MB
+app.use(express.urlencoded({ limit: '10mb', extended: true })); // Untuk form data jika diperlukan
 
 // Routes
 app.use('/api/students', studentRoutes);
 app.use('/api/teachers', teacherRoutes);
+app.use('/api/quizzes', quizRoutes);
 
 // Error handling
 app.use((err, req, res, next) => {
