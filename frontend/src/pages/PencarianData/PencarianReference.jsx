@@ -342,7 +342,7 @@ export default function PencarianReference() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleDekomposisiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Tentukan Tujuan
             </button>
@@ -353,7 +353,7 @@ export default function PencarianReference() {
             )}
             <button
               onClick={() => toggleDekomposisiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Siapkan Data
             </button>
@@ -364,7 +364,7 @@ export default function PencarianReference() {
             )}
             <button
               onClick={() => toggleDekomposisiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Pilih Fungsi
             </button>
@@ -427,7 +427,7 @@ export default function PencarianReference() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => togglePolaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Lihat Struktur
             </button>
@@ -438,7 +438,7 @@ export default function PencarianReference() {
             )}
             <button
               onClick={() => togglePolaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Temukan Pola
             </button>
@@ -449,7 +449,7 @@ export default function PencarianReference() {
             )}
             <button
               onClick={() => togglePolaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Pilih Fungsi
             </button>
@@ -529,7 +529,7 @@ export default function PencarianReference() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleAbstraksiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Abaikan yang Tidak Penting
             </button>
@@ -540,7 +540,7 @@ export default function PencarianReference() {
             )}
             <button
               onClick={() => toggleAbstraksiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Ambil yang Penting
             </button>
@@ -551,7 +551,7 @@ export default function PencarianReference() {
             )}
             <button
               onClick={() => toggleAbstraksiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Cari Data
             </button>
@@ -604,7 +604,7 @@ export default function PencarianReference() {
             <div className="space-y-3 mt-4">
               <button
                 onClick={() => toggleAlgoritmaIndexStep(0)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Pilih Tabel
               </button>
@@ -615,7 +615,7 @@ export default function PencarianReference() {
               )}
               <button
                 onClick={() => toggleAlgoritmaIndexStep(1)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Tentukan Posisi
               </button>
@@ -626,7 +626,7 @@ export default function PencarianReference() {
               )}
               <button
                 onClick={() => toggleAlgoritmaIndexStep(2)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Tulis Rumus
               </button>
@@ -673,7 +673,7 @@ export default function PencarianReference() {
             <div className="space-y-3 mt-4">
               <button
                 onClick={() => toggleAlgoritmaMatchStep(0)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Tentukan Kode
               </button>
@@ -684,7 +684,7 @@ export default function PencarianReference() {
               )}
               <button
                 onClick={() => toggleAlgoritmaMatchStep(1)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Pilih Daftar
               </button>
@@ -695,7 +695,7 @@ export default function PencarianReference() {
               )}
               <button
                 onClick={() => toggleAlgoritmaMatchStep(2)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Tulis Rumus
               </button>
@@ -742,7 +742,7 @@ export default function PencarianReference() {
             <div className="space-y-3 mt-4">
               <button
                 onClick={() => toggleAlgoritmaChooseStep(0)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Pilih Peringkat
               </button>
@@ -753,7 +753,7 @@ export default function PencarianReference() {
               )}
               <button
                 onClick={() => toggleAlgoritmaChooseStep(1)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Buat Daftar
               </button>
@@ -764,7 +764,7 @@ export default function PencarianReference() {
               )}
               <button
                 onClick={() => toggleAlgoritmaChooseStep(2)}
-                className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+                className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
               >
                 <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Tulis Rumus
               </button>

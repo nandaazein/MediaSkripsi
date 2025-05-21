@@ -74,7 +74,7 @@ const LoginGuru = () => {
           </form>
           <p className="mt-4 text-sm text-center text-gray-600">
             Belum punya akun?{' '}
-            <a href="/teacher-register" className="text-green-700 font-medium hover:underline">
+            <a href="register-guru" className="text-green-700 font-medium hover:underline">
               Daftar sekarang
             </a>
           </p>

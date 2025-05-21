@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import registerImage from '../assets/register.png'; // Impor gambar dari folder src/assets
+import registerImage from '../assets/register.png'; 
 
 const RegisterGuru = () => {
   const [nip, setNip] = useState('');
@@ -33,10 +33,9 @@ const RegisterGuru = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-2xl bg-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row items-center">
-        {/* Gambar di sisi kiri - Diimpor dari src/assets */}
         <div className="w-full md:w-1/2 mb-4 md:mb-0 md:pr-4">
           <img
-            src={registerImage} // Menggunakan gambar yang diimpor
+            src={registerImage} 
             alt="Ilustrasi Register Guru"
             className="w-full h-auto object-cover rounded-lg"
           />

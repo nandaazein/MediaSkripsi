@@ -239,7 +239,7 @@
 //           <div className="space-y-3 mt-4">
 //             <button
 //               onClick={() => toggleDekomposisiStep(0)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Identifikasi Tujuan
 //             </button>
@@ -250,7 +250,7 @@
 //             )}
 //             <button
 //               onClick={() => toggleDekomposisiStep(1)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Tentukan Kriteria
 //             </button>
@@ -261,7 +261,7 @@
 //             )}
 //             <button
 //               onClick={() => toggleDekomposisiStep(2)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Pilih Fungsi
 //             </button>
@@ -315,7 +315,7 @@
 //           <div className="space-y-3 mt-4">
 //             <button
 //               onClick={() => togglePolaStep(0)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Amati Data
 //             </button>
@@ -326,7 +326,7 @@
 //             )}
 //             <button
 //               onClick={() => togglePolaStep(1)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Identifikasi Pola
 //             </button>
@@ -337,7 +337,7 @@
 //             )}
 //             <button
 //               onClick={() => togglePolaStep(2)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Gunakan Fungsi
 //             </button>
@@ -382,7 +382,7 @@
 //           <div className="space-y-3 mt-4">
 //             <button
 //               onClick={() => toggleAbstraksiStep(0)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Identifikasi Data Penting
 //             </button>
@@ -393,7 +393,7 @@
 //             )}
 //             <button
 //               onClick={() => toggleAbstraksiStep(1)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Abaikan Data Tidak Relevan
 //             </button>
@@ -404,7 +404,7 @@
 //             )}
 //             <button
 //               onClick={() => toggleAbstraksiStep(2)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Gunakan Fungsi
 //             </button>
@@ -696,7 +696,7 @@
 //           <div className="space-y-3 mt-4">
 //             <button
 //               onClick={() => toggleAlgoritmaStep(0)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Pilih Data
 //             </button>
@@ -707,7 +707,7 @@
 //             )}
 //             <button
 //               onClick={() => toggleAlgoritmaStep(1)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Tentukan Kriteria
 //             </button>
@@ -718,7 +718,7 @@
 //             )}
 //             <button
 //               onClick={() => toggleAlgoritmaStep(2)}
-//               className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+//               className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
 //             >
 //               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Terapkan Rumus
 //             </button>
@@ -1047,7 +1047,7 @@ export default function PeringkasanData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleDekomposisiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Identifikasi Tujuan
             </button>
@@ -1058,7 +1058,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => toggleDekomposisiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Tentukan Kriteria
             </button>
@@ -1069,7 +1069,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => toggleDekomposisiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Pilih Fungsi
             </button>
@@ -1123,7 +1123,7 @@ export default function PeringkasanData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => togglePolaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Amati Data
             </button>
@@ -1134,7 +1134,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => togglePolaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Identifikasi Pola
             </button>
@@ -1145,7 +1145,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => togglePolaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Gunakan Fungsi
             </button>
@@ -1190,7 +1190,7 @@ export default function PeringkasanData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleAbstraksiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Identifikasi Data Penting
             </button>
@@ -1201,7 +1201,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => toggleAbstraksiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Abaikan Data Tidak Relevan
             </button>
@@ -1212,7 +1212,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => toggleAbstraksiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Gunakan Fungsi
             </button>
@@ -1504,7 +1504,7 @@ export default function PeringkasanData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleAlgoritmaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Pilih Data
             </button>
@@ -1515,7 +1515,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => toggleAlgoritmaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Tentukan Kriteria
             </button>
@@ -1526,7 +1526,7 @@ export default function PeringkasanData() {
             )}
             <button
               onClick={() => toggleAlgoritmaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Terapkan Rumus
             </button>

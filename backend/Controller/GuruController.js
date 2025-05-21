@@ -47,7 +47,7 @@ const teacherController = {
       const token = jwt.sign(
         { id: teacher.id, role: teacher.role, nip: teacher.nip },
         process.env.JWT_SECRET || 'your_jwt_secret',
-        { expiresIn: '1h' }
+        { expiresIn: '24h' }
       );
 
       res.json({
@@ -62,6 +62,15 @@ const teacherController = {
       });
     } catch (error) {
       console.error("Teacher login error:", error);
+      res.status(500).json({ message: 'Kesalahan server', error: error.message });
+    }
+  },
+
+  async logout(req, res) {
+    try {
+      res.status(200).json({ message: 'Logout berhasil' });
+    } catch (error) {
+      console.error("Teacher logout error:", error);
       res.status(500).json({ message: 'Kesalahan server', error: error.message });
     }
   }

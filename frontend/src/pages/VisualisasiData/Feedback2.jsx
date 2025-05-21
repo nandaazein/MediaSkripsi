@@ -4,29 +4,67 @@ import { useLocation, useNavigate } from "react-router-dom";
 const FeedbackVisualisasiData = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { answers, correctCount, score, correctAnswers, answerOptions } = state || {
-    answers: {},
-    correctCount: 0,
+
+  // Default state jika data tidak tersedia
+  const { score, answers, questions, totalQuestions } = state || {
     score: 0,
-    correctAnswers: {},
-    answerOptions: {},
+    answers: {},
+    questions: [],
+    totalQuestions: 0,
   };
+
+  // Hitung correctCount berdasarkan answers dan questions
+  const correctCount = questions.reduce((count, question, index) => {
+    const answerKey = String.fromCharCode(97 + (answers[index] || '').charCodeAt(0) - 97);
+    return answers[index] && answerKey === question.correct_answer ? count + 1 : count;
+  }, 0);
+
+  // Siapkan correctAnswers dan answerOptions
+  const correctAnswers = questions.reduce((acc, question, index) => {
+    acc[`q${index + 1}`] = question.correct_answer;
+    return acc;
+  }, {});
+  const answerOptions = questions.reduce((acc, question, index) => {
+    acc[`q${index + 1}`] = question.options.reduce((opts, opt, idx) => {
+      opts[String.fromCharCode(97 + idx)] = opt;
+      return opts;
+    }, {});
+    return acc;
+  }, {});
+
   const KKM = 70;
-  const incorrectCount = 10 - correctCount;
+  const incorrectCount = totalQuestions - correctCount;
 
   const feedbackMessage =
     score >= KKM
       ? "Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!"
       : "Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!";
 
-  console.log("Feedback state:", state); // Debugging
+  console.log("FeedbackVisualisasiData state:", state); // Debugging
+
+  // Jika data tidak lengkap, tampilkan pesan error
+  if (!state || !questions.length) {
+    return (
+      <Layout>
+        <div className="p-6 text-center">
+          <p className="text-red-500 text-lg">Data feedback tidak ditemukan. Silakan coba lagi.</p>
+          <button
+            onClick={() => navigate("/kuis-visualisasi")}
+            className="mt-4 bg-green-800 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+            Kembali ke Kuis
+          </button>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       {/* Header Judul */}
       <div>
         <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-          Hasil Kuis Visualisasi Data
+          Hasil Kuis 2
         </h1>
       </div>
 
@@ -63,21 +101,25 @@ const FeedbackVisualisasiData = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(correctAnswers).map((question, index) => (
-              <tr key={question} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
-                <td className="border border-green-600 px-4 py-2">{question.replace("q", "")}</td>
-                <td className="border border-green-600 px-4 py-2">
-                  {answers[question] ? answerOptions[question][answers[question]] : "Tidak dijawab"}
-                </td>
-                <td className="border border-green-600 px-4 py-2">
-                  {answers[question] === correctAnswers[question] ? (
-                    <span className="text-green-600">Benar</span>
-                  ) : (
-                    <span className="text-red-600">Salah</span>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {questions.map((question, index) => {
+              const answerKey = answers[index] || '';
+              const isCorrect = answerKey === question.correct_answer;
+              return (
+                <tr key={index} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
+                  <td className="border border-green-600 px-4 py-2">{index + 1}</td>
+                  <td className="border border-green-600 px-4 py-2">
+                    {answerOptions[`q${index + 1}`][answerKey] || "Tidak dijawab"}
+                  </td>
+                  <td className="border border-green-600 px-4 py-2">
+                    {isCorrect ? (
+                      <span className="text-green-600">Benar</span>
+                    ) : (
+                      <span className="text-red-600">Salah</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -86,7 +128,7 @@ const FeedbackVisualisasiData = () => {
       <div className="flex justify-center mt-8 space-x-4">
         {score >= KKM ? (
           <button
-            onClick={() => navigate("/visualisasi-data")}
+            onClick={() => navigate("/materi-berikutnya")} // Ganti dengan path materi berikutnya
             className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
           >
             Lanjut Materi

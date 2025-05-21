@@ -9,7 +9,8 @@ import {
   CheckCircle,
   ChevronRight,
 } from "lucide-react";
-import pustakawan from "../../assets/Pendahuluan/pustakawan.jpg";
+
+import SimpleChart from "../../components/SimpleChart";
 
 export default function VisualisasiData() {
   // State for Dekomposisi steps
@@ -186,7 +187,7 @@ export default function VisualisasiData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleDekomposisiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Tentukan Tujuan
             </button>
@@ -197,7 +198,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => toggleDekomposisiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Kumpulkan Data
             </button>
@@ -208,7 +209,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => toggleDekomposisiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Pilih Jenis Grafik
             </button>
@@ -219,7 +220,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => toggleDekomposisiStep(3)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 4: Buat Grafik
             </button>
@@ -244,62 +245,41 @@ export default function VisualisasiData() {
           memilih jenis grafik yang paling sesuai agar informasi lebih mudah
           dipahami.
         </p>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-  <li className="text-justify">
-    <strong>Data yang menunjukkan perubahan</strong> dari waktu ke waktu → Gunakan Diagram Garis (Line Chart) atau Diagram Area (Area Chart):
-    <ol className="list-decimal pl-10 text-gray-700 space-y-2">
-      <li>
-        Diagram Garis lebih fokus pada perubahan individu dari satu titik ke titik lainnya, misalnya tren nilai ulangan selama satu semester.
-        <div className="flex justify-center mt-4">
-          <img
-            src={pustakawan}
-            alt="Diagram Garis"
-            className="w-3/4 md:w-1/2 max-w-xs rounded-lg shadow-md"
-          />
-        </div>
-      </li>
-      <li>
-        Diagram Area menekankan total nilai yang berubah, cocok untuk menunjukkan akumulasi data, seperti jumlah siswa yang mengumpulkan tugas setiap minggu.
-        <div className="flex justify-center mt-4">
-          <img
-            src={pustakawan}
-            alt="Diagram Area"
-            className="w-3/4 md:w-1/2 max-w-xs rounded-lg shadow-md"
-          />
-        </div>
-      </li>
-    </ol>
-  </li>
-  <li className="text-justify">
-    <strong>Data untuk membandingkan jumlah</strong> antar kategori → Gunakan Diagram Batang (Bar Chart) atau Diagram Kolom (Column Chart):
-    <ol className="list-decimal pl-10 text-gray-700 space-y-2">
-      <li>
-        Diagram Batang sering digunakan untuk membandingkan data kategori dalam posisi horizontal, misalnya jumlah siswa yang memilih berbagai ekstrakurikuler.
-        <div className="flex justify-center mt-4">
-          <img
-            src={pustakawan}
-            alt="Diagram Batang"
-            className="w-3/4 md:w-1/2 max-w-xs rounded-lg shadow-md"
-          />
-        </div>
-      </li>
-      <li>
-        Diagram Kolom berbentuk vertikal dan sering dipakai untuk membandingkan nilai ulangan antar mata pelajaran.
-        <div className="flex justify-center mt-4">
-          <img
-            src={pustakawan}
-            alt="Diagram Kolom"
-            className="w-3/4 md:w-1/2 max-w-xs rounded-lg shadow-md"
-          />
-        </div>
-      </li>
-    </ol>
-  </li>
-  <li className="text-justify">
-    <strong>Data yang menunjukkan proporsi</strong> atau persentase → Gunakan Diagram Lingkaran (Pie Chart), misalnya untuk menunjukkan persentase pengeluaran bulanan untuk makanan, transportasi, dan hiburan.
-  </li>
-</ul>
-
+        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-4">
+          <li className="text-justify">
+            <strong>Data Perubahan dari Waktu ke Waktu</strong>
+            <ol className="list-decimal pl-8 mt-2 text-gray-700 space-y-2">
+              <li>
+                <span className="font-medium">Diagram Garis:</span> Fokus pada perubahan individu antar titik waktu.{' '}
+                <span className="italic">Contoh: Tren nilai ulangan selama satu semester.</span>
+              </li>
+              <li>
+                <span className="font-medium">Diagram Area:</span> Menekankan akumulasi atau total nilai yang berubah.{' '}
+                <span className="italic">Contoh: Jumlah siswa yang mengumpulkan tugas setiap minggu.</span>
+              </li>
+            </ol>
+          </li>
+          <li className="text-justify">
+            <strong>Data Perbandingan Jumlah Antar Kategori</strong>
+            <ol className="list-decimal pl-8 mt-2 text-gray-700 space-y-2">
+              <li>
+                <span className="font-medium">Diagram Batang:</span> Membandingkan data kategori secara horizontal.{' '}
+                <span className="italic">Contoh: Jumlah siswa yang memilih berbagai ekstrakurikuler.</span>
+              </li>
+              <li>
+                <span className="font-medium">Diagram Kolom:</span> Membandingkan data kategori secara vertikal.{' '}
+                <span className="italic">Contoh: Nilai ulangan antar mata pelajaran.</span>
+              </li>
+            </ol>
+          </li>
+          <li className="text-justify">
+            <strong>Data Proporsi atau Persentase</strong>
+            <p className="pl-8 mt-2">
+              <span className="font-medium">Diagram Lingkaran (Pie Chart):</span> Menampilkan persentase dari total.{' '}
+              <span className="italic">Contoh: Persentase pengeluaran bulanan untuk makanan, transportasi, dan hiburan.</span>
+            </p>
+          </li>
+        </ul>
         {/* Interactive Case Study for Pengenalan Pola */}
         <div className="bg-green-50 p-4 rounded shadow-md mt-6">
           <h3 className="font-semibold text-[#255F38] flex items-center">
@@ -311,7 +291,7 @@ export default function VisualisasiData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => togglePolaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Pola 1: Perubahan Waktu
             </button>
@@ -322,7 +302,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => togglePolaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Pola 2: Perubahan Kehadiran
             </button>
@@ -333,7 +313,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => togglePolaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Pola 3: Jenis Grafik yang Cocok
             </button>
@@ -378,7 +358,7 @@ export default function VisualisasiData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleAbstraksiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Identifikasi Data Relevan
             </button>
@@ -389,7 +369,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => toggleAbstraksiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Abaikan Data Tidak Relevan
             </button>
@@ -436,7 +416,7 @@ export default function VisualisasiData() {
           <div className="space-y-3 mt-4">
             <button
               onClick={() => toggleAlgoritmaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Siapkan Data
             </button>
@@ -447,7 +427,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => toggleAlgoritmaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Pilih Data
             </button>
@@ -458,7 +438,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => toggleAlgoritmaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Insert Chart
             </button>
@@ -469,7 +449,7 @@ export default function VisualisasiData() {
             )}
             <button
               onClick={() => toggleAlgoritmaStep(3)}
-              className="flex items-center bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full md:w-1/2 shadow-md"
+              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
             >
               <ChevronRight className="w-4 h-4 mr-2" /> Langkah 4: Periksa Grafik
             </button>
@@ -481,6 +461,9 @@ export default function VisualisasiData() {
           </div>
         </div>
       </div>
+
+      {/* Visualisasi Interaktif */}
+      <SimpleChart />
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8 px-4">

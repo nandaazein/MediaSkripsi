@@ -1147,7 +1147,7 @@ export default function PencarianLookup() {
             Kamu membantu teman mencari harga makanan di kantin sekolah berdasarkan kode pesanan "A2" menggunakan VLOOKUP. Berdasarkan tabel, kode "A2" sesuai dengan "Bakso" seharga 8.000, dengan pola bahwa harga selalu ada di kolom ketiga.
           </p>
           <div className="mt-4 overflow-x-auto text-center">
-            <p className="text-gray-600 text-sm text-center mb-1 italic">Tabel: Daftar Makanan di Kantin Sekolah</p>
+            <p className="text-gray-600 text-sm text-center mb-1 italic">Tabel 1: Menemukan Pola Pencarian Data</p>
             <table className="border-collapse border border-green-800 mx-auto max-w-xs sm:max-w-sm md:max-w-md">
               <thead>
                 <tr className="bg-[#255F38] text-white">
@@ -1234,7 +1234,7 @@ export default function PencarianLookup() {
             Kamu mengikuti lomba permainan dan ingin mencari poin untuk "Puzzle" menggunakan VLOOKUP. Berdasarkan tabel, "Puzzle" memiliki poin 30 dengan waktu 20 menit.
           </p>
           <div className="mt-4 overflow-x-auto text-center">
-            <p className="text-gray-600 text-sm text-center mb-1 italic">Tabel: Daftar Poin Permainan</p>
+            <p className="text-gray-600 text-sm text-center mb-1 italic">Tabel 2: Menyederhanakan Masalah Pencarian Data</p>
             <table className="border-collapse border border-green-800 mx-auto max-w-xs sm:max-w-sm md:max-w-md">
               <thead>
                 <tr className="bg-[#255F38] text-white">
@@ -1330,7 +1330,7 @@ export default function PencarianLookup() {
             Kamu membantu petugas perpustakaan mencari kategori buku dengan kode "K1" menggunakan VLOOKUP. Berdasarkan tabel, kode "K1" sesuai dengan buku "Matematika" yang termasuk dalam kategori "Pelajaran" di kolom ketiga.
           </p>
           <div className="mt-4 overflow-x-auto text-center">
-            <p className="text-gray-600 text-sm text-center mb-1 italic">Tabel: Daftar Buku di Perpustakaan</p>
+            <p className="text-gray-600 text-sm text-center mb-1 italic">Tabel 3: Menentukan Langkah Pencarian Data</p>
             <table className="border-collapse border border-green-800 mx-auto max-w-xs sm:max-w-sm md:max-w-md">
               <thead>
                 <tr className="bg-[#255F38] text-white">

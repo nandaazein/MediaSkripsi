@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-100 p-4 text-[#1D6F35] flex justify-between items-center w-full relative">
       {/* Logo */}
-      <h1 className="text-2xl font-bold">AnalyticsLearn</h1>
+      <h1 className="text-3xl font-bold ml-6 underline">AnalyticsLearn</h1>
 
       {/* Hamburger Button */}
       <button
@@ -27,28 +27,17 @@ const Navbar = () => {
           isOpen ? "block" : "hidden"
         }`}
       >
-        <li>
-          <a href="/" className="block py-2 px-4 hover:text-gray-600">
-            Beranda
-          </a>
-        </li>
-        <li>
-          <a href="/informasi" className="block py-2 px-4 hover:text-gray-600">
-            Informasi
-          </a>
-        </li>
-
         {/* Tombol Daftar & Masuk (hanya muncul di mobile) */}
-        <div className="flex flex-col mt-4 md:hidden">
+        <div className="flex flex-col mt-4 md:hidden space-y-2">
           <a
             href="/login-siswa"
-            className="bg-[#1D6F35] text-white px-4 py-2 rounded-md text-center hover:bg-[#145029] transition"
+            className="bg-[#1D6F35] text-white px-4 py-2 rounded-md text-center hover:bg-[#145029] transition w-full text-base font-medium"
           >
             Masuk
           </a>
           <a
             href="/register-siswa"
-            className="border border-[#1D6F35] text-[#1D6F35] px-4 py-2 rounded-md text-center mt-2 hover:bg-[#1D6F35] hover:text-white transition"
+            className="border border-[#1D6F35] text-[#1D6F35] px-4 py-2 rounded-md text-center hover:bg-[#1D6F35] hover:text-white transition w-full text-base font-medium"
           >
             Daftar
           </a>
@@ -56,16 +45,16 @@ const Navbar = () => {
       </ul>
 
       {/* Tombol Daftar & Masuk (hanya di desktop) */}
-      <div className="hidden md:flex space-x-2">
+      <div className="hidden md:flex space-x-2 items-center">
         <a
           href="/login-siswa"
-          className="bg-[#1D6F35] text-white px-4 py-2 rounded-md hover:bg-[#145029] transition"
+          className="bg-[#1D6F35] text-white px-4 py-2 rounded-md hover:bg-[#145029] transition text-base font-medium"
         >
           Masuk
         </a>
         <a
           href="/register-siswa"
-          className="border border-[#1D6F35] text-[#1D6F35] px-4 py-2 rounded-md hover:bg-[#1D6F35] hover:text-white transition"
+          className="border border-[#1D6F35] text-[#1D6F35] px-4 py-2 rounded-md hover:bg-[#1D6F35] hover:text-white transition text-base font-medium"
         >
           Daftar 
         </a>

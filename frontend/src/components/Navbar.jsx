@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { UserCircle } from "lucide-react";
+import { UserCircle, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
@@ -49,10 +49,18 @@ export const Navbar = () => {
         <span style={{ color: "#255F38" }}>Halo, {studentName}</span>
         <div className="relative">
           <div
-            className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer"
+            className="flex items-center space-x-1 cursor-pointer"
             onClick={toggleDropdown}
           >
-            <UserCircle size={32} className="text-[#255F38]" />
+            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+              <UserCircle size={32} className="text-[#255F38]" />
+            </div>
+            <ChevronDown
+              size={20}
+              className={`text-[#255F38] transition-transform duration-200 ${
+                isDropdownOpen ? "rotate-180" : ""
+              }`}
+            />
           </div>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
