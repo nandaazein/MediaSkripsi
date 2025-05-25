@@ -19,14 +19,14 @@ export default function PencarianReference() {
   };
 
   const checkDekomposisiAnswers = () => {
-    const correctAnswers = { step1: false, step2: true, step3: true }; // Langkah 2 dan 3 benar
+    const correctAnswers = { step1: true, step2: true, step3: false };
     const isCorrect =
       dekomposisiAnswers.step1 === correctAnswers.step1 &&
       dekomposisiAnswers.step2 === correctAnswers.step2 &&
       dekomposisiAnswers.step3 === correctAnswers.step3;
     setDekomposisiFeedback(
       isCorrect
-        ? "Benar! Langkah yang tepat adalah menyiapkan tabel dan memilih fungsi yang sesuai."
+        ? "Benar! Langkah yang tepat adalah menentukan tujuan dan menyiapkan data dalam tabel."
         : "Jawaban salah, ayo coba lagi."
     );
     setDekomposisiAnswered(true);
@@ -77,14 +77,14 @@ export default function PencarianReference() {
   };
 
   const checkAbstraksiAnswers = () => {
-    const correctAnswers = { info1: false, info2: true, info3: false }; // Hanya langkah 2 benar
+    const correctAnswers = { info1: true, info2: false, info3: false };
     const isCorrect =
       abstraksiAnswers.info1 === correctAnswers.info1 &&
       abstraksiAnswers.info2 === correctAnswers.info2 &&
       abstraksiAnswers.info3 === correctAnswers.info3;
     setAbstraksiFeedback(
       isCorrect
-        ? "Benar! Hanya nomor absen dan nama siswa yang relevan untuk pencarian."
+        ? "Benar! Hanya nomor absen dan nama siswa yang diperlukan untuk pencarian."
         : "Jawaban salah, ayo coba lagi."
     );
     setAbstraksiAnswered(true);
@@ -110,14 +110,14 @@ export default function PencarianReference() {
   };
 
   const checkAlgoritmaIndexAnswers = () => {
-    const correctAnswers = { step1: false, step2: true, step3: true }; // Langkah 2 dan 3 benar
+    const correctAnswers = { step1: true, step2: true, step3: false };
     const isCorrect =
       algoritmaIndexAnswers.step1 === correctAnswers.step1 &&
       algoritmaIndexAnswers.step2 === correctAnswers.step2 &&
       algoritmaIndexAnswers.step3 === correctAnswers.step3;
     setAlgoritmaIndexFeedback(
       isCorrect
-        ? "Benar! Langkah yang tepat adalah menentukan posisi baris/kolom dan menulis rumus INDEX."
+        ? "Benar! Langkah yang tepat adalah memilih tabel dan menentukan posisi baris/kolom."
         : "Jawaban salah, ayo coba lagi."
     );
     setAlgoritmaIndexAnswered(true);
@@ -143,14 +143,14 @@ export default function PencarianReference() {
   };
 
   const checkAlgoritmaMatchAnswers = () => {
-    const correctAnswers = { step1: true, step2: false, step3: true }; // Langkah 1 dan 3 benar
+    const correctAnswers = { step1: true, step2: true, step3: false };
     const isCorrect =
       algoritmaMatchAnswers.step1 === correctAnswers.step1 &&
       algoritmaMatchAnswers.step2 === correctAnswers.step2 &&
       algoritmaMatchAnswers.step3 === correctAnswers.step3;
     setAlgoritmaMatchFeedback(
       isCorrect
-        ? "Benar! Langkah yang tepat adalah menentukan kode dan menulis rumus MATCH."
+        ? "Benar! Langkah yang tepat adalah memilih kode dan daftar pencarian."
         : "Jawaban salah, ayo coba lagi."
     );
     setAlgoritmaMatchAnswered(true);
@@ -176,14 +176,14 @@ export default function PencarianReference() {
   };
 
   const checkAlgoritmaChooseAnswers = () => {
-    const correctAnswers = { step1: true, step2: true, step3: false }; // Langkah 1 dan 2 benar
+    const correctAnswers = { step1: true, step2: true, step3: false };
     const isCorrect =
       algoritmaChooseAnswers.step1 === correctAnswers.step1 &&
       algoritmaChooseAnswers.step2 === correctAnswers.step2 &&
       algoritmaChooseAnswers.step3 === correctAnswers.step3;
     setAlgoritmaChooseFeedback(
       isCorrect
-        ? "Benar! Langkah yang tepat adalah menentukan peringkat dan menulis daftar hadiah."
+        ? "Benar! Langkah yang tepat adalah memilih peringkat dan daftar hadiah."
         : "Jawaban salah, ayo coba lagi."
     );
     setAlgoritmaChooseAnswered(true);
@@ -542,9 +542,9 @@ export default function PencarianReference() {
           className="w-full max-w-sm sm:max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-md h-auto"
         />
       </div>
-      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 4. Pencarian dengan VLOOKUP</p>
+      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 3. Pencarian dengan VLOOKUP</p>
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-2 sm:px-6 mt-4">
-        Pada gambar 4, fungsi <strong>INDEX</strong> digunakan untuk mengambil sebuah nilai dari tabel berdasarkan posisi baris dan kolom. Misalnya, ditentukan bahwa data yang diambil berada di <strong>baris ke-4 dan kolom ke-2</strong>. Maka, fungsi akan mencari titik temu antara baris dan kolom tersebut, lalu mengambil nilai yang ada pada posisi tersebut. Pada gambar terlihat panah menunjukkan alur pencarian menuju nilai <code>@</code>, yang merupakan hasil dari fungsi INDEX. Nilai ini diperoleh karena berada pada posisi baris dan kolom yang telah ditentukan sebelumnya.
+        Pada gambar 3, fungsi <strong>INDEX</strong> digunakan untuk mengambil sebuah nilai dari tabel berdasarkan posisi baris dan kolom. Misalnya, ditentukan bahwa data yang diambil berada di <strong>baris ke-4 dan kolom ke-2</strong>. Maka, fungsi akan mencari titik temu antara baris dan kolom tersebut, lalu mengambil nilai yang ada pada posisi tersebut. Pada gambar terlihat panah menunjukkan alur pencarian menuju nilai <code>@</code>, yang merupakan hasil dari fungsi INDEX. Nilai ini diperoleh karena berada pada posisi baris dan kolom yang telah ditentukan sebelumnya.
       </p>
 
       {/* MATCH */}
@@ -555,9 +555,9 @@ export default function PencarianReference() {
           className="w-full max-w-sm sm:max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-md h-auto"
         />
       </div>
-      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 5. Pencarian dengan VLOOKUP</p>
+      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 4. Pencarian dengan VLOOKUP</p>
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-2 sm:px-6 mt-4">
-        Pada gambar 5, fungsi <strong>MATCH</strong> digunakan untuk mencari <strong>posisi dari suatu data</strong> dalam sebuah daftar. Misalnya, ingin dicari di urutan keberapa simbol <code>@</code> berada. Fungsi ini akan memeriksa satu per satu data dari atas, sampai menemukan simbol yang dicari. Jika simbol <code>@</code> ditemukan di baris ke-5, maka fungsi MATCH akan menghasilkan angka <strong>5</strong> sebagai posisi data tersebut dalam daftar. Jadi, hasil dari fungsi MATCH bukanlah nilainya, melainkan <strong>nomor urutan</strong> tempat data itu ditemukan.
+        Pada gambar 4, fungsi <strong>MATCH</strong> digunakan untuk mencari <strong>posisi dari suatu data</strong> dalam sebuah daftar. Misalnya, ingin dicari di urutan keberapa simbol <code>@</code> berada. Fungsi ini akan memeriksa satu per satu data dari atas, sampai menemukan simbol yang dicari. Jika simbol <code>@</code> ditemukan di baris ke-5, maka fungsi MATCH akan menghasilkan angka <strong>5</strong> sebagai posisi data tersebut dalam daftar. Jadi, hasil dari fungsi MATCH bukanlah nilainya, melainkan <strong>nomor urutan</strong> tempat data itu ditemukan.
       </p>
 
       {/* CHOOSE */}
@@ -568,10 +568,11 @@ export default function PencarianReference() {
           className="w-full max-w-sm sm:max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-md h-auto"
         />
       </div>
-      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 6. Pencarian dengan VLOOKUP</p>
-      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-2 sm:px-6 mt-4">
-        Pada gambar 6, fungsi <strong>CHOOSE</strong> digunakan untuk mengambil <strong>satu nilai dari beberapa pilihan</strong> berdasarkan nomor indeks. Misalnya, jika dipilih indeks ke-3, maka fungsi akan melihat daftar data yang tersedia, lalu mengambil data yang berada di <strong>urutan ke-3</strong>. Pada gambar, indeks ke-3 mengarah pada nilai <code>@</code>, sehingga nilai inilah yang menjadi <strong>hasil dari fungsi CHOOSE</strong>. Fungsi ini cocok digunakan saat kita memiliki beberapa opsi dan ingin memilih salah satu berdasarkan posisi angkanya.
-      </p>
+      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 5. Pencarian dengan VLOOKUP</p>
+     <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-2 sm:px-6 mt-4">
+      Pada gambar 5, fungsi <strong>CHOOSE</strong> digunakan untuk mengambil <strong>satu nilai dari beberapa pilihan</strong> berdasarkan nomor indeks. Misalnya, jika dipilih indeks ke-3, maka fungsi akan melihat daftar data yang tersedia, lalu mengambil data yang berada di <strong>urutan ke-3</strong>. Pada gambar, indeks ke-3 mengarah pada nilai <code>@</code>, sehingga nilai inilah yang menjadi <strong>hasil dari fungsi CHOOSE</strong>. Fungsi ini cocok digunakan saat kita memiliki beberapa opsi dan ingin memilih salah satu berdasarkan posisi angkanya.
+    </p>
+
 
       {/* DEKOMPOSISI */}
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12 relative">
@@ -645,6 +646,7 @@ export default function PencarianReference() {
                 </ul>
               </section>
             </div>
+
           </div>
         </div>
         <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
@@ -663,7 +665,7 @@ export default function PencarianReference() {
                   onChange={() => handleDekomposisiChange("step1")}
                   className="mr-2"
                 />
-                1. Membuat grafik dari data siswa.
+                1. Tentukan tujuan: cari nama siswa dari nomor absen.
               </label>
             </div>
             <div className="text-sm md:text-base">
@@ -674,7 +676,7 @@ export default function PencarianReference() {
                   onChange={() => handleDekomposisiChange("step2")}
                   className="mr-2"
                 />
-                2. Menyiapkan tabel berisi nomor absen dan nama siswa.
+                2. Siapkan tabel berisi nomor absen dan nama siswa.
               </label>
             </div>
             <div className="text-sm md:text-base">
@@ -685,7 +687,7 @@ export default function PencarianReference() {
                   onChange={() => handleDekomposisiChange("step3")}
                   className="mr-2"
                 />
-                3. Memilih fungsi seperti INDEX atau MATCH untuk mencari data.
+                3. Hitung jumlah siswa yang hadir.
               </label>
             </div>
           </div>
@@ -868,7 +870,7 @@ export default function PencarianReference() {
                   onChange={() => handleAbstraksiChange("info1")}
                   className="mr-2"
                 />
-                1. Nilai matematika siswa.
+                1. Nomor absen dan nama siswa.
               </label>
             </div>
             <div className="text-sm md:text-base">
@@ -879,7 +881,7 @@ export default function PencarianReference() {
                   onChange={() => handleAbstraksiChange("info2")}
                   className="mr-2"
                 />
-                2. Nomor absen dan nama siswa.
+                2. Nilai matematika.
               </label>
             </div>
             <div className="text-sm md:text-base">
@@ -890,7 +892,7 @@ export default function PencarianReference() {
                   onChange={() => handleAbstraksiChange("info3")}
                   className="mr-2"
                 />
-                3. Jadwal pelajaran siswa.
+                3. Jadwal ujian.
               </label>
             </div>
           </div>
@@ -952,7 +954,7 @@ export default function PencarianReference() {
                     onChange={() => handleAlgoritmaIndexChange("step1")}
                     className="mr-2"
                   />
-                  1. Mengurutkan data barang berdasarkan harga.
+                  1. Pilih tabel yang berisi data barang.
                 </label>
               </div>
               <div className="text-sm md:text-base">
@@ -974,7 +976,7 @@ export default function PencarianReference() {
                     onChange={() => handleAlgoritmaIndexChange("step3")}
                     className="mr-2"
                   />
-                  3. Tulis rumus INDEX untuk mengambil data.
+                  3. Hitung jumlah barang.
                 </label>
               </div>
             </div>
@@ -1027,7 +1029,7 @@ export default function PencarianReference() {
                     onChange={() => handleAlgoritmaMatchChange("step1")}
                     className="mr-2"
                   />
-                  1. Tentukan kode yang dicari: "T02".
+                  1. Tentukan kode: cari posisi "T02".
                 </label>
               </div>
               <div className="text-sm md:text-base">
@@ -1038,7 +1040,7 @@ export default function PencarianReference() {
                     onChange={() => handleAlgoritmaMatchChange("step2")}
                     className="mr-2"
                   />
-                  2. Menghitung jumlah kode tim yang ada.
+                  2. Pilih daftar kode tim: "T01", "T02", "T03".
                 </label>
               </div>
               <div className="text-sm md:text-base">
@@ -1049,7 +1051,7 @@ export default function PencarianReference() {
                     onChange={() => handleAlgoritmaMatchChange("step3")}
                     className="mr-2"
                   />
-                  3. Tulis rumus MATCH untuk mencari posisi kode.
+                  3. Urutkan daftar kode tim.
                 </label>
               </div>
             </div>
@@ -1124,7 +1126,7 @@ export default function PencarianReference() {
                     onChange={() => handleAlgoritmaChooseChange("step3")}
                     className="mr-2"
                   />
-                  3. Membuat laporan tentang hadiah.
+                  3. Hitung jumlah hadiah.
                 </label>
               </div>
             </div>
@@ -1152,6 +1154,330 @@ export default function PencarianReference() {
               </p>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* VISUALISASI INTERAKTIF */}
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12">
+        <h3 className="font-semibold text-[#255F38] text-lg mb-2">Visualisasi Interaktif: Cara Kerja Fungsi Reference</h3>
+        <p className="text-gray-700 text-sm md:text-base text-justify">
+          Coba simulasi berikut untuk memahami cara kerja fungsi INDEX, MATCH, dan CHOOSE.
+        </p>
+
+        {/* Visualisasi INDEX */}
+        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
+          <h4 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">INDEX: Ambil Data Berdasarkan Baris dan Kolom</h4>
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+            <input
+              type="number"
+              value={indexRow}
+              onChange={(e) => setIndexRow(e.target.value)}
+              placeholder="Nomor baris (1-3)"
+              className="p-2 border rounded w-full sm:w-40"
+            />
+            <input
+              type="number"
+              value={indexCol}
+              onChange={(e) => setIndexCol(e.target.value)}
+              placeholder="Nomor kolom (1-3)"
+              className="p-2 border rounded w-full sm:w-40"
+            />
+            <button
+              onClick={startIndexSearch}
+              className="bg-[#1B5E20] text-white p-2 rounded hover:bg-[#145A20] transition duration-300 w-full sm:w-auto"
+            >
+              Mulai
+            </button>
+            <button
+              onClick={resetIndexSearch}
+              className="bg-[#B0BEC5] text-white p-2 rounded hover:bg-[#90A4AE] transition duration-300 w-full sm:w-auto"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-4 mt-4 space-y-2 sm:space-y-0 text-center">
+            <span className="text-sm md:text-base font-bold">1. Masukkan Baris & Kolom</span>
+            <span className="text-2xl hidden sm:inline">→</span>
+            <span className="text-sm md:text-base font-bold">2. Cari di Tabel</span>
+            <span className="text-2xl hidden sm:inline">→</span>
+            <span className="text-sm md:text-base font-bold">3. Tampilkan Hasil</span>
+          </div>
+
+          <div className="mt-4 p-3 bg-gray-100 rounded">
+            <p className="text-gray-700 text-sm md:text-base">
+              <strong>Langkah Pencarian:</strong>{" "}
+              {indexStepExplanation || "Masukkan nomor baris dan kolom, lalu klik Mulai."}
+            </p>
+          </div>
+
+          <h4 className="font-semibold text-[#2E7D32] mt-4 text-sm md:text-base">Tabel Data</h4>
+          <div className="overflow-x-auto w-full">
+            <table className="border-collapse border border-green-800 w-full mt-2">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-2 py-1">Kode</th>
+                  <th className="border border-green-600 px-2 py-1">Nama</th>
+                  <th className="border border-green-600 px-2 py-1">Harga</th>
+                </tr>
+              </thead>
+              <tbody>
+                {indexReferenceData.map((row, rowIndex) => (
+                  <tr
+                    key={rowIndex}
+                    className={`${rowIndex % 2 === 0 ? "bg-green-50" : "bg-white"}`}
+                  >
+                    {Object.values(row).map((cell, colIndex) => (
+                      <td
+                        key={colIndex}
+                        className={`border border-green-600 px-2 py-1 ${
+                          indexSearching &&
+                          parseInt(indexRow) === rowIndex + 1 &&
+                          parseInt(indexCol) === colIndex + 1
+                            ? "bg-yellow-200 animate-pulse"
+                            : ""
+                        } ${
+                          !indexSearching &&
+                          indexResult &&
+                          parseInt(indexRow) === rowIndex + 1 &&
+                          parseInt(indexCol) === colIndex + 1
+                            ? "bg-green-200"
+                            : ""
+                        }`}
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-gray-700 mt-4 text-sm md:text-base">
+            <strong>Hasil:</strong>{" "}
+            {indexResult || (indexSearching ? "Mencari..." : "Masukkan baris dan kolom, lalu klik Mulai")}
+          </p>
+        </div>
+
+        {/* Visualisasi MATCH */}
+        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
+          <h4 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">MATCH: Cari Posisi Nilai</h4>
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+            <input
+              type="text"
+              value={matchLookupValue}
+              onChange={(e) => setMatchLookupValue(e.target.value)}
+              placeholder="Masukkan kode tim (contoh: T02)"
+              className="p-2 border rounded w-full sm:w-64"
+            />
+            <button
+              onClick={startMatchSearch}
+              className="bg-[#1B5E20] text-white p-2 rounded hover:bg-[#145A20] transition duration-300 w-full sm:w-auto"
+            >
+              Mulai
+            </button>
+            <button
+              onClick={resetMatchSearch}
+              className="bg-[#B0BEC5] text-white p-2 rounded hover:bg-[#90A4AE] transition duration-300 w-full sm:w-auto"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-4 mt-4 space-y-2 sm:space-y-0 text-center">
+            <span className="text-sm md:text-base font-bold">1. Masukkan Kode Tim</span>
+            <span className="text-2xl hidden sm:inline">→</span>
+            <span className="text-sm md:text-base font-bold">2. Cari di Daftar</span>
+            <span className="text-2xl hidden sm:inline">→</span>
+            <span className="text-sm md:text-base font-bold">3. Tampilkan Hasil</span>
+          </div>
+
+          <div className="mt-4 p-3 bg-gray-100 rounded">
+            <p className="text-gray-700 text-sm md:text-base">
+              <strong>Langkah Pencarian:</strong>{" "}
+              {matchStepExplanation || "Masukkan kode tim dan klik Mulai."}
+            </p>
+          </div>
+
+          <h4 className="font-semibold text-[#2E7D32] mt-4 text-sm md:text-base">Daftar Kode Tim</h4>
+          <div className="overflow-x-auto w-full">
+            <table className="border-collapse border border-green-800 w-full mt-2">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-2 py-1">Kode</th>
+                </tr>
+              </thead>
+              <tbody>
+                {matchReferenceData.map((value, rowIndex) => (
+                  <tr
+                    key={rowIndex}
+                    className={`${rowIndex % 2 === 0 ? "bg-green-50" : "bg-white"}`}
+                  >
+                    <td
+                      className={`border border-green-600 px-2 py-1 ${
+                        matchSearching && matchCurrentIndex === rowIndex
+                          ? "bg-yellow-200 animate-pulse"
+                          : ""
+                      } ${
+                        !matchSearching &&
+                        value === matchLookupValue &&
+                        matchResult
+                          ? "bg-green-200"
+                          : ""
+                      }`}
+                    >
+                      {value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h4 className="font-semibold text-[#2E7D32] mt-4 text-sm md:text-base">Hasil Pencarian</h4>
+          <div className="overflow-x-auto w-full">
+            <table className="border-collapse border border-green-800 w-full mt-2">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-2 py-1">Kode</th>
+                  <th className="border border-green-600 px-2 py-1">Posisi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {matchResultTable.map((row, index) => (
+                  <tr
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-green-50" : "bg-white"
+                    } ${
+                      row.value === matchLookupValue && row.position !== "-"
+                        ? "bg-green-200"
+                        : ""
+                    }`}
+                  >
+                    <td className="border border-green-600 px-2 py-1">{row.value}</td>
+                    <td className="border border-green-600 px-2 py-1">{row.position}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-gray-700 mt-4 text-sm md:text-base">
+            <strong>Hasil:</strong>{" "}
+            {matchResult || (matchSearching ? "Mencari..." : "Masukkan kode tim dan klik Mulai")}
+          </p>
+        </div>
+
+        {/* Visualisasi CHOOSE */}
+        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
+          <h4 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">CHOOSE: Pilih Hadiah Berdasarkan Peringkat</h4>
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+            <input
+              type="number"
+              value={chooseIndex}
+              onChange={(e) => setChooseIndex(e.target.value)}
+              placeholder="Masukkan peringkat (1-3)"
+              className="p-2 border rounded w-full sm:w-64"
+            />
+            <button
+              onClick={startChooseSearch}
+              className="bg-[#1B5E20] text-white p-2 rounded hover:bg-[#145A20] transition duration-300 w-full sm:w-auto"
+            >
+              Mulai
+            </button>
+            <button
+              onClick={resetChooseSearch}
+              className="bg-[#B0BEC5] text-white p-2 rounded hover:bg-[#90A4AE] transition duration-300 w-full sm:w-auto"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-4 mt-4 space-y-2 sm:space-y-0 text-center">
+            <span className="text-sm md:text-base font-bold">1. Masukkan Peringkat</span>
+            <span className="text-2xl hidden sm:inline">→</span>
+            <span className="text-sm md:text-base font-bold">2. Pilih Hadiah</span>
+            <span className="text-2xl hidden sm:inline">→</span>
+            <span className="text-sm md:text-base font-bold">3. Tampilkan Hasil</span>
+          </div>
+
+          <div className="mt-4 p-3 bg-gray-100 rounded">
+            <p className="text-gray-700 text-sm md:text-base">
+              <strong>Langkah Pencarian:</strong>{" "}
+              {chooseStepExplanation || "Masukkan nomor peringkat dan klik Mulai."}
+            </p>
+          </div>
+
+          <h4 className="font-semibold text-[#2E7D32] mt-4 text-sm md:text-base">Daftar Hadiah</h4>
+          <div className="overflow-x-auto w-full">
+            <table className="border-collapse border border-green-800 w-full mt-2">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-2 py-1">Hadiah</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chooseReferenceData.map((value, rowIndex) => (
+                  <tr
+                    key={rowIndex}
+                    className={`${rowIndex % 2 === 0 ? "bg-green-50" : "bg-white"}`}
+                  >
+                    <td
+                      className={`border border-green-600 px-2 py-1 ${
+                        chooseSearching && parseInt(chooseIndex) === rowIndex + 1
+                          ? "bg-yellow-200 animate-pulse"
+                          : ""
+                      } ${
+                        !chooseSearching &&
+                        chooseResult &&
+                        chooseReferenceData.indexOf(value) === parseInt(chooseIndex) - 1
+                          ? "bg-green-200"
+                          : ""
+                      }`}
+                    >
+                      {value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h4 className="font-semibold text-[#2E7D32] mt-4 text-sm md:text-base">Hasil Pilihan</h4>
+          <div className="overflow-x-auto w-full">
+            <table className="border-collapse border border-green-800 w-full mt-2">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-2 py-1">Hadiah</th>
+                  <th className="border border-green-600 px-2 py-1">Dipilih</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chooseResultTable.map((row, index) => (
+                  <tr
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-green-50" : "bg-white"
+                    } ${
+                      row.value === chooseResult && row.selected !== "-"
+                        ? "bg-green-200"
+                        : ""
+                    }`}
+                  >
+                    <td className="border border-green-600 px-2 py-1">{row.value}</td>
+                    <td className="border border-green-600 px-2 py-1">{row.selected}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-gray-700 mt-4 text-sm md:text-base">
+            <strong>Hasil:</strong>{" "}
+            {chooseResult || (chooseSearching ? "Memilih..." : "Masukkan peringkat dan klik Mulai")}
+          </p>
         </div>
       </div>
 

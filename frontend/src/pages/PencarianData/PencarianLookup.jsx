@@ -1,6 +1,8 @@
 import Layout from "../../components/Layout";
 import { Lightbulb, BarChart, Filter, Code } from "lucide-react";
 import { useState } from "react";
+import ilustrasi1 from "../../assets/PencarianData/ilustrasi1.png";
+import ilustrasi2 from "../../assets/PencarianData/ilustrasi2.png";
 
 export default function PencarianLookup() {
   // State untuk Aktivitas Dekomposisi
@@ -313,24 +315,78 @@ export default function PencarianLookup() {
         </div>
       </div>
 
+      <div className="flex justify-center mt-4">
+        <img 
+          src={ilustrasi1} 
+          alt="Siswa Mengelola Data" 
+          className="w-full max-w-sm sm:max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-md h-auto"
+        />
+      </div>
+      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 2. Pencarian dengan VLOOKUP</p>
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-2 sm:px-6 mt-4"> Pada gambar 2, fungsi <strong>VLOOKUP</strong> digunakan untuk mencari sebuah nilai tertentu, misalnya simbol <code>*</code> yang ada di sel G5, dalam sebuah tabel di rentang <strong>B5 sampai E9</strong>. Fungsi ini akan mencari simbol tersebut di <strong>kolom pertama tabel</strong> (kolom B). Jika simbol <code>*</code> ditemukan, maka fungsi akan mengambil <strong>nilai dari kolom ke-3</strong> (yaitu kolom D) yang sejajar atau sebaris dengan simbol tersebut. Angka 3 ini disebut <em>col index num</em>, yaitu posisi kolom yang diambil datanya. Karena menggunakan <code>FALSE</code>, artinya hanya akan cocok jika simbol yang dicari benar-benar sama persis. Jadi, jika simbol <code>*</code> ada di kolom B, maka nilai yang diambil dari kolom D adalah <code>@</code>. </p>
+
+      <div className="flex justify-center mt-4">
+        <img 
+          src={ilustrasi2} 
+          alt="Siswa Mengelola Data" 
+          className="w-full max-w-sm sm:max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-md h-auto"
+        />
+      </div>
+      <p className="text-center text-sm italic text-gray-500 mt-2">Gambar 3. Pencarian dengan HLOOKUP</p>
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-2 sm:px-6 mt-4"> Pada Gambar 3, fungsi <strong>HLOOKUP</strong> digunakan untuk mencari sebuah nilai tertentu, misalnya simbol <code>*</code> yang ada di sel G5, dalam tabel pada rentang <strong>B5 sampai E9</strong>. Fungsi ini akan mencari simbol tersebut di <strong>baris pertama tabel</strong> (yaitu baris 5). Jika simbol <code>*</code> ditemukan, maka fungsi akan mengambil <strong>nilai dari baris ke-4</strong> dalam tabel (yaitu baris 8), di kolom yang sama. Angka 4 ini disebut <em>row index num</em>, yaitu posisi baris yang datanya ingin diambil. Karena kita memakai <code>FALSE</code>, maka pencarian hanya akan berhasil jika simbol yang dicari benar-benar sama. Jadi, kalau simbol <code>*</code> ditemukan di baris 5, maka nilai dari baris 8 di kolom yang sama akan diambil, misalnya <code>@</code>. </p>
+
+
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12 relative">
         <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Lightbulb className="mr-1 sm:mr-2 w-4 h-4 md:w-5 md:h-5" /> Dekomposisi
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6 text-justify">
-          Sebelum melakukan pencarian dengan fungsi Lookup, kita perlu memahami <span className="font-semibold">komponen utama</span> dalam pencarian data dan membaginya menjadi <span className="font-semibold">bagian-bagian kecil</span>. Pencarian data dalam tabel lembar kerja dapat diuraikan menjadi langkah-langkah berikut:
+          Sebelum melakukan pencarian dengan fungsi Lookup, kita perlu memahami <span className="font-semibold">komponen utama</span> dalam pencarian data dan memecahnya menjadi <span className="font-semibold">bagian-bagian kecil</span>. 
+          Pencarian data dalam tabel lembar kerja dapat dipecah menjadi beberapa langkah berikut: 
         </p>
-        <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
-          <div className="text-sm md:text-base text-justify">
-            <strong>1. Identifikasi data</strong> yang akan dicari → Data harus memiliki nilai unik sebagai referensi, seperti kode barang atau kode siswa.
-          </div>
-          <div className="text-sm md:text-base text-justify">
-            <strong>2. Menentukan tabel</strong> referensi → Data harus tersedia dalam tabel dengan format yang sesuai.
-          </div>
-          <div className="text-sm md:text-base text-justify">
-            <strong>3. Menentukan jenis</strong> fungsi lookup → Pilih fungsi yang tepat sesuai kebutuhan.
-          </div>
-        </div>
+        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+          <li className="text-sm md:text-base text-justify">
+            <strong>Identifikasi data</strong> yang akan dicari → Data harus memiliki nilai unik sebagai referensi (misalnya, kode barang atau kode siswa).
+          </li>
+          <li className="text-sm md:text-base text-justify">
+            <strong>Menentukan tabel</strong> referensi → Data harus tersedia dalam tabel dengan format yang benar.
+          </li>
+          <li className="text-sm md:text-base text-justify">
+            <strong>Menentukan jenis</strong> fungsi lookup → Pilih fungsi yang sesuai dengan kebutuhan:
+            <div className="ml-2 sm:ml-4 mt-1 sm:mt-2 space-y-2">
+              <section className="bg-gray-100 rounded p-2 sm:p-4 shadow-lg">
+                <h3 className="font-semibold text-[#255F38] text-sm md:text-base">1. VLOOKUP</h3>
+                <p className="text-gray-700 text-sm md:text-base">Fungsi VLOOKUP (Vertical Lookup) dalam spreadsheet digunakan untuk mencari nilai tertentu dalam kolom pertama dari sebuah tabel atau rentang data secara vertical (dari atas ke bawah).</p>
+                <pre className="bg-gray-200 p-1 sm:p-2 rounded text-gray-800 overflow-x-auto whitespace-normal break-words text-xs sm:text-sm">
+                  =VLOOKUP(<span className="italic">lookup_value;table_array;col_index_num;[range_lookup]</span>)
+                </pre>
+                <p className="text-gray-700 text-sm md:text-base">Keterangan:</p>
+                <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700">
+                  <li className="text-sm md:text-base"><strong>lookup_value:</strong> Nilai yang akan dicari dalam kolom pertama tabel.</li>
+                  <li className="text-sm md:text-base"><strong>table_array:</strong> Rentang tabel tempat pencarian dilakukan.</li>
+                  <li className="text-sm md:text-base"><strong>col_index_num:</strong> Nomor kolom dari mana nilai yang ingin diambil.</li>
+                  <li className="text-sm md:text-base"><strong>range_lookup:</strong> <span className="italic font-bold">TRUE</span> untuk pencarian nilai mendekati, <span className="italic font-bold">FALSE</span> untuk pencarian nilai persis.</li>
+                </ul>
+              </section>
+
+              <section className="bg-gray-100 rounded p-2 sm:p-4 shadow-lg">
+                <h3 className="font-semibold text-[#255F38] text-sm md:text-base">2. HLOOKUP</h3>
+                <p className="text-gray-700 text-sm md:text-base">Fungsi HLOOKUP (Horizontal Lookup) dalam spreadsheet digunakan untuk mencari nilai tertentu dalam baris pertama dari sebuah tabel atau rentang data secara horizontal (dari kiri ke kanan).</p>
+                <pre className="bg-gray-200 p-1 sm:p-2 rounded text-gray-800 overflow-x-auto whitespace-normal break-words text-xs sm:text-sm">
+                  =HLOOKUP(<span className="italic">lookup_value;table_array;row_index_num;[range_lookup]</span>)
+                </pre>
+                <p className="text-gray-700 text-sm md:text-base">Keterangan:</p>
+                <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700">
+                  <li className="text-sm md:text-base"><strong>lookup_value:</strong> Nilai yang akan dicari dalam baris pertama tabel.</li>
+                  <li className="text-sm md:text-base"><strong>table_array:</strong> Rentang tabel tempat pencarian dilakukan.</li>
+                  <li className="text-sm md:text-base"><strong>row_index_num:</strong> Nomor baris dari mana nilai yang ingin diambil.</li>
+                  <li className="text-sm md:text-base"><strong>range_lookup:</strong> <span className="italic font-bold">TRUE</span> untuk pencarian nilai mendekati, <span className="italic font-bold">FALSE</span> untuk pencarian nilai persis.</li>
+                </ul>
+              </section>
+            </div>
+          </li>
+        </ul>
+
         <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
           <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
             Latihan Pemahaman: Memecah Masalah Pencarian Kode Barang

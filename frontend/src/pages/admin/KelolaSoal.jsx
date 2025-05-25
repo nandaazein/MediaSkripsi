@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Layout from '../../components/admin/Layout';
 import Compressor from 'compressorjs';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const KelolaSoal = () => {
   const [questions, setQuestions] = useState([]);
@@ -382,11 +384,22 @@ const KelolaSoal = () => {
                   className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] transition text-sm"
                 />
                 {previewImage && (
-                  <img
-                    src={previewImage}
-                    alt="Preview"
-                    className="w-24 h-24 object-cover mt-2 rounded-lg mx-auto"
-                  />
+                  <div className="mt-2 flex flex-col items-center">
+                    <img
+                      src={previewImage}
+                      alt="Preview"
+                      className="w-24 h-24 object-cover rounded-lg"
+                    />
+                    <button
+                      onClick={() => {
+                        setFormData({ ...formData, imageBase64: '' });
+                        setPreviewImage(null);
+                      }}
+                      className="mt-2 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 text-sm"
+                    >
+                      Hapus Gambar
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
@@ -410,6 +423,8 @@ const KelolaSoal = () => {
           </div>
         </div>
       )}
+      
+      
     </Layout>
   );
 };

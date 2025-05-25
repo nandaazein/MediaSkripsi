@@ -23,59 +23,41 @@ export default function BerlatihPencarian() {
     setAnswers((prev) => ({ ...prev, [field]: value }));
   };
 
-
   const submitLatihan = async () => {
-  try {
-    let correctCount = 0;
-    Object.keys(correctAnswers).forEach((field) => {
-      const isCorrect = answers[field].trim().toLowerCase() === correctAnswers[field].trim().toLowerCase();
-      if (isCorrect) correctCount++;
-    });
-    const score = (correctCount / 5) * 100;
-    const token = localStorage.getItem('token');
-    const nis = JSON.parse(localStorage.getItem('user')).nis;
+    try {
+      let correctCount = 0;
+      Object.keys(correctAnswers).forEach((field) => {
+        const isCorrect = answers[field].trim().toLowerCase() === correctAnswers[field].trim().toLowerCase();
+        if (isCorrect) correctCount++;
+      });
+      const score = (correctCount / 5) * 100;
+      const token = localStorage.getItem('token');
+      const nis = JSON.parse(localStorage.getItem('user')).nis;
 
-    // Kirim hanya skor numerik ke database
-    await axios.post(
-      `http://localhost:5000/api/students/scores/${nis}`,
-      {
-        latihan1: score, // Kirim skor sebagai angka, bukan objek
-        latihan2: null,
-        latihan3: null,
-        latihan4: null,
-        kuis1: null,
-        kuis2: null,
-        kuis3: null,
-        kuis4: null,
-        evaluasi_akhir: null
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-
-    alert(`Latihan selesai! Skor Anda: ${score}`);
-  } catch (error) {
-    console.error("Error saat mengirim latihan:", error);
-    alert("Terjadi kesalahan saat mengirim skor latihan.");
-  }
-};
-
-  const renderFeedback = (field) => {
-    // Feedback hanya ditampilkan setelah submit
-    const isCorrect = answers[field].trim().toLowerCase() === correctAnswers[field].trim().toLowerCase();
-    if (!isCorrect && answers[field]) {
-      return (
-        <div className="flex items-center gap-2 mt-2 text-base font-semibold text-red-700">
-          <span>❌ Jawaban salah. Coba lagi!</span>
-        </div>
+      // Kirim hanya skor numerik ke database
+      await axios.post(
+        `http://localhost:5000/api/students/scores/${nis}`,
+        {
+          latihan1: score,
+          latihan2: null,
+          latihan3: null,
+          latihan4: null,
+          kuis1: null,
+          kuis2: null,
+          kuis3: null,
+          kuis4: null,
+          evaluasi_akhir: null
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-    } else if (isCorrect && answers[field]) {
-      return (
-        <div className="flex items-center gap-2 mt-2 text-base font-semibold text-green-700">
-          <span>✅ Jawaban benar!</span>
-        </div>
-      );
+
+      // Tampilkan alert dan arahkan ke halaman rangkuman setelah klik OK
+      alert("Sudah selesai mengerjakan Mari Berlatih");
+      window.location.href = "/rangkuman-pencarian";
+    } catch (error) {
+      console.error("Error saat mengirim latihan:", error);
+      alert("Terjadi kesalahan saat mengirim skor latihan.");
     }
-    return null;
   };
 
   return (
@@ -155,7 +137,6 @@ export default function BerlatihPencarian() {
             value={answers[key]}
             onChange={(e) => handleChange(key, e.target.value)}
           />
-          {renderFeedback(key)}
         </section>
       ))}
 

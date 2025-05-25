@@ -116,7 +116,7 @@ const KuisPencarianData = () => {
               <button
                 key={index}
                 onClick={() => { setCurrentQuestionIndex(index); setSelectedAnswer(answers[index] || ''); }}
-                className={`block w-full text-left p-2 mb-2 ${currentQuestionIndex === index ? 'bg-green-200' : 'bg-gray-200'} rounded`}
+                className={`block w-full text-left p-2 mb-2 rounded ${currentQuestionIndex === index ? 'bg-green-200' : answers[index] ? 'bg-blue-200' : 'bg-gray-200'}`}
               >
                 Soal {index + 1}
               </button>
