@@ -1,25 +1,53 @@
-import { useState } from "react";
+
 import Layout from "../../components/Layout";
-import "remixicon/fonts/remixicon.css";
-import algoritma from "../../assets/Pendahuluan/algoritma.jpg";
+import { BookOpen, Lightbulb, BarChart, Filter, Code, CheckCircle } from "lucide-react";
+import { useState } from "react";
 
 const PengenalanCT = () => {
-  // State untuk interaktivitas Pengenalan Pola
+  // State for case study interactivity (Aldi's schedule)
+  const [siap, setSiap] = useState("");
+  const [berangkat, setBerangkat] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  // State for pattern recognition interactivity
   const [selectedColor, setSelectedColor] = useState("");
   const [polaFeedback, setPolaFeedback] = useState("");
-  const correctColor = "kuning"; // Jawaban yang benar untuk melengkapi pola
+  const correctColor = "06.30";
 
+  // State for abstraction interactivity
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
+  const correctAnswersCheckbox = ["1", "2"];
+
+  // Handlers for case study interactivity
+  const cekJawaban = () => {
+    if (siap === "06.10" && berangkat === "06.30") {
+      setFeedback(
+        "✅ Jawaban kamu benar! Aldi harus mulai bersiap pukul 06.10, dihitung dengan mengurangi 30 menit perjalanan dari 07.00 (menjadi 06.30) dan 20 menit bersiap-siap dari 06.30 (menjadi 06.10). "
+      );
+    } else {
+      setFeedback("Jawaban salah, ayo coba lagi.");
+    }
+  };
+
+  const handleHapus = () => {
+    setSiap("");
+    setBerangkat("");
+    setFeedback("");
+  };
+
+  // Handlers for pattern recognition interactivity
   const handleColorChange = (e) => {
     setSelectedColor(e.target.value);
-    setPolaFeedback(""); // Reset feedback saat pilihan berubah
+    setPolaFeedback("");
   };
 
   const checkPolaAnswers = () => {
     const isCorrect = selectedColor === correctColor;
     setPolaFeedback(
       isCorrect
-        ? "Jawaban Anda benar!"
-        : "Jawaban Anda salah. Coba lagi!"
+        ? "Jawaban Anda benar! 06.30 sesuai dengan pola waktu berangkat Aldi."
+        : "Jawaban salah, ayo coba lagi."
     );
   };
 
@@ -28,17 +56,13 @@ const PengenalanCT = () => {
     setPolaFeedback("");
   };
 
-  // State untuk interaktivitas Abstraksi
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
-  const correctAnswersCheckbox = ["1", "2"];
-
+  // Handlers for abstraction interactivity
   const handleCheckboxChange = (event) => {
     const { value } = event.target;
     setSelectedOptions((prev) =>
       prev.includes(value) ? prev.filter((opt) => opt !== value) : [...prev, value]
     );
-    setAbstraksiFeedback(""); // Reset feedback saat checkbox berubah
+    setAbstraksiFeedback("");
   };
 
   const checkAbstraksiAnswers = () => {
@@ -47,8 +71,8 @@ const PengenalanCT = () => {
       selectedOptions.every((val) => correctAnswersCheckbox.includes(val));
     setAbstraksiFeedback(
       isCorrect
-        ? "Jawaban Anda benar!"
-        : "Jawaban Anda salah. Coba lagi!"
+        ? "Jawaban Anda benar! 'Waktu bersiap-siap' dan 'Waktu perjalanan' adalah informasi relevan."
+        : "Jawaban salah, ayo coba lagi."
     );
   };
 
@@ -59,186 +83,124 @@ const PengenalanCT = () => {
 
   return (
     <Layout>
-      {/* Header judul */}
-      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-4 p-4 bg-[#255F38] text-white rounded-lg shadow-lg">
-        Pendekatan Computational Thinking
+      {/* Header */}
+      <h1 className="text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white rounded-lg shadow-lg">
+        Pengenalan Computational Thinking
       </h1>
 
-      {/* Tujuan Pembelajaran */}
+      {/* Learning Objectives */}
       <section className="bg-green-100 rounded shadow-md p-4 mt-4">
-        <h2 className="font-bold text-[#255F38]">Tujuan Pembelajaran:</h2>
-        <p className="text-gray-700">
-          Memperkenalkan konsep dasar dari pendekatan <i>Computational Thinking</i> (CT). 
+        <h2 className="font-bold text-[#255F38] flex items-center">
+          <BookOpen className="w-5 h-5 mr-2" /> Tujuan Pembelajaran
+        </h2>
+        <p className="text-gray-700 text-sm md:text-base">
+          Memahami konsep dasar <i>Computational Thinking</i> (CT) dan menerapkannya dalam menyelesaikan masalah melalui studi kasus.
         </p>
       </section>
 
-      {/* Pengertian Computational Thinking */}
+      {/* Introduction to Computational Thinking */}
       <div className="bg-white p-5 border-gray-300 mt-4 space-y-4">
-        <h2 className="text-2xl font-bold text-green-800 mb-2">Pengertian Computational Thinking</h2>
+        <h2 className="text-2xl font-bold text-green-800 mb-2">Apa Itu Computational Thinking?</h2>
         <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          <span className="font-bold">Berpikir Komputasional <i>(Computational Thinking)</i></span> adalah cara berpikir yang
-          terstruktur untuk memecahkan masalah dengan langkah-langkah yang efektif dan efisien. Pendekatan ini membantu kita 
-          menemukan solusi terbaik dengan menggunakan konsep dari ilmu komputer, tetapi tidak hanya terbatas pada pemrograman.
+          <span className="font-bold">Computational Thinking (CT)</span> adalah pendekatan berpikir terstruktur untuk memecahkan masalah secara efektif dan efisien. Menggunakan konsep ilmu komputer, CT membantu kita berpikir logis dan menyusun solusi sistematis, tidak hanya untuk pemrograman tetapi juga untuk kehidupan sehari-hari.
         </p>
         <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Dalam dunia pendidikan, CT sangat berguna karena melatih siswa untuk berpikir logis, menganalisis masalah, dan menyusun strategi 
-          penyelesaian yang dapat diterapkan baik oleh manusia maupun komputer. Dengan CT, siswa dapat belajar bagaimana menyelesaikan masalah dengan cara yang lebih sistematis dan terorganisir.
+          CT terdiri dari empat fondasi: <b>Dekomposisi</b>, <b>Pengenalan Pola</b>, <b>Abstraksi</b>, dan <b>Algoritma</b>. Kita akan menerapkannya pada studi kasus berikut.
         </p>
       </div>
 
-      {/* Fondasi Computational Thinking */}
-      <div className="bg-white p-5 border-gray-300 mt-4 space-y-4">
-        <h2 className="text-2xl font-bold text-green-800">Fondasi Computational Thinking</h2>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          CT memiliki empat konsep utama: <b>Dekomposisi</b>, <b>Pengenalan Pola</b>, <b>Abstraksi</b>, dan <b>Algoritma</b>.
+      {/* Case Study */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-5">
+        <h2 className="text-xl font-bold text-green-800 flex items-center">
+          <BookOpen className="w-5 h-5 mr-2" /> Studi Kasus
+        </h2>
+        <p className="text-gray-600 text-sm md:text-base text-justify">
+          Aldi ingin tiba di sekolah tepat pukul 07.00. Ia naik sepeda, yang memakan waktu 30 menit dari rumah ke sekolah. Sebelum berangkat, Aldi perlu 20 menit untuk bersiap-siap (mandi, sarapan, memakai seragam). Pertanyaan: pukul berapa Aldi harus mulai bersiap dan berangkat?
         </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          <h2 className="text-lg font-bold text-green-800">(1) Dekomposisi</h2>
-          Dekomposisi adalah proses membagi suatu masalah menjadi bagian-bagian yang lebih kecil agar lebih mudah dipahami dan diselesaikan. 
-          Dengan memecah masalah menjadi langkah-langkah yang terstruktur, setiap bagian dapat ditangani dengan lebih efektif. 
-          Saat menganalisis suatu masalah, penting untuk mengidentifikasi bagian-bagian kecil yang membentuknya serta memahami bagaimana 
-          setiap bagian saling berhubungan dalam menemukan solusi secara keseluruhan. Agar lebih memahami bagaimana dekomposisi diterapkan, 
-          mari kita perhatikan contoh berikut.
-        </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Situasi: Bu Ani ingin mengetahui penyebab nilai ujian kelas mengalami penurunan dan mencari cara untuk meningkatkannya.
-        </p> 
-         {/* Langkah-langkah dekomposisi */}
-         <div className="bg-green-100 border-l-4 border-green-800 p-4 rounded-lg shadow-md space-y-3">
-          <h3 className="text-green-800 font-bold">Langkah Dekomposisi dalam <i>Computational Thinking</i></h3>
-
-          <div>
-            <h4 className="font-semibold">(1) Memecah Masalah Menjadi Bagian Kecil</h4>
-            <div className="pl-6">
-              <ul className="list-disc list-inside text-gray-700 text-sm md:text-base space-y-2">
-                <li>Data nilai dapat dibagi berdasarkan mata pelajaran (Matematika, IPA, Bahasa Indonesia, dan Bahasa Inggris).</li>
-                <li>Setiap mata pelajaran bisa dikelompokkan lagi berdasarkan jenis ujian (ulangan harian, ujian tengah semester, ujian akhir semester).</li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-semibold">(2) Menentukan Bagian Penting</h4>
-            <div className="pl-6">
-              <ul className="list-disc list-inside text-gray-700 text-sm md:text-base space-y-2">
-                <li>Cari data yang paling berpengaruh terhadap penurunan nilai, misalnya membandingkan nilai ulangan harian dengan nilai ujian akhir.</li>
-                <li>Periksa apakah ada hubungan antara jumlah tugas yang dikumpulkan dengan nilai ujian.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-semibold">(3) Mencari Informasi yang Diperlukan</h4>
-            <div className="pl-6">
-              <ul className="list-disc list-inside text-gray-700 text-sm md:text-base space-y-2">
-                <li>Setelah menemukan data yang penting, cari pola nilai siswa, misalnya apakah sebagian besar siswa mengalami penurunan nilai di mata pelajaran tertentu.</li>
-                <li>Cari siswa yang nilai ujiannya di bawah KKM untuk diberikan bimbingan tambahan.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-semibold">(4) Menganalisis Data</h4>
-            <div className="pl-6">
-              <ul className="list-disc list-inside text-gray-700 text-sm md:text-base space-y-2">
-                <li>Urutkan (<i>sorting</i>) nilai siswa dari yang tertinggi hingga terendah untuk melihat siapa saja yang mengalami peningkatan atau penurunan nilai.</li>
-                <li>Gunakan <i>filter</i> untuk melihat hanya data siswa yang mengalami penurunan nilai.</li>
-                <li>Buat grafik atau tabel untuk melihat tren nilai ujian selama semester.</li>
-              </ul>
+        {/* Timeline Graphic */}
+        <div className="flex justify-center mt-4">
+          <div className="relative w-full max-w-md">
+            <div className="absolute w-full h-1 bg-green-300 top-6"></div>
+            <div className="flex justify-between items-center">
+              <div className="text-center">
+                <div className="w-4 h-4 bg-green-600 rounded-full mx-auto"></div>
+                <p className="text-sm text-gray-600 mt-2">Bersiap (20 menit)</p>
+              </div>
+              <div className="text-center">
+                <div className="w-4 h-4 bg-green-600 rounded-full mx-auto"></div>
+                <p className="text-sm text-gray-600 mt-2">Berangkat (30 menit)</p>
+              </div>
+              <div className="text-center">
+                <div className="w-4 h-4 bg-green-600 rounded-full mx-auto"></div>
+                <p className="text-sm text-gray-600 mt-2">Tiba 07.00</p>
+              </div>
             </div>
           </div>
         </div>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Dengan membagi masalah besar menjadi bagian kecil (<i>dekomposisi</i>), kita bisa lebih mudah memahami penyebab turunnya nilai kelas. 
-          Setelah menemukan pola dan menganalisis data, kita dapat menentukan solusi terbaik, seperti memberikan bimbingan tambahan atau memperbaiki metode belajar.
-        </p> 
       </div>
 
-      {/* Pengenalan Pola */}
-      <div className="bg-white p-5 border-gray-300 mt-4 space-y-4">
-        <h2 className="text-lg font-bold text-green-800">(2) Pengenalan Pola</h2>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Pengenalan pola adalah cara mengenali kesamaan atau pola yang muncul dalam berbagai masalah. Dengan mengenali pola, 
-          kita bisa memahami hubungan antar data dan menemukan solusi lebih cepat.
+      {/* Decomposition */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
+        <h2 className="text-xl font-bold text-green-800 flex items-center">
+          <Lightbulb className="w-5 h-5 mr-2" /> Dekomposisi
+        </h2>
+        <p className="text-gray-600 text-sm md:text-base font-semibold">
+          Memecah masalah menjadi bagian kecil:
         </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Saat mengamati data, kita mencari bagian yang mirip atau berbeda, lalu menghubungkannya dengan informasi yang sudah kita ketahui 
-          sebelumnya. Dengan cara ini, kita dapat mengelompokkan data ke dalam kategori tertentu dan menentukan apakah sesuatu termasuk 
-          dalam kelompuk tersebut atau tidak.
-        </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Dalam menyelesaikan masalah, mengenali pola sangat berguna karena membantu kita menggunakan solusi dari masalah sebelumnya untuk 
-          menyelesaikan masalah baru yang serupa. Dengan begitu, kita tidak perlu mencari solusi dari awal setiap kali menghadapi masalah baru.
-        </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Pengenalan pola dalam <i>Computational Thinking</i> (CT) dapat digunakan dalam banyak hal, seperti menganalisis data, mengelompokkan informasi, dan menyelesaikan masalah dengan lebih efisien.
-        </p>
+        <p className="text-gray-600 text-sm md:text-base font-medium">Apa yang perlu dilakukan Aldi?</p>
+        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
+          <li>Bersiap-siap sebelum berangkat (20 menit).</li>
+          <li>Bersepeda ke sekolah (30 menit).</li>
+        </ul>
+        <p className="text-gray-600 text-sm md:text-base font-medium">Apa yang ingin diketahui?</p>
+        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
+          <li>Pukul berapa harus mulai bersiap?</li>
+          <li>Pukul berapa harus berangkat?</li>
+        </ul>
+      </div>
 
-        {/* Interaktivitas */}
-        <div className="bg-green-100 border-l-4 border-green-800 p-4 rounded-lg shadow-md space-y-3">
-          <h3 className="text-green-800 font-bold">
-            Perhatikan pola pada gambar berikut dan pilih jawaban yang tepat untuk melengkapi pola!
-          </h3>
-
-          <p className="text-gray-700 text-sm md:text-base">
-            Berikut adalah urutan lingkaran berwarna:
-          </p>
-          <div className="flex space-x-2 mb-4">
-            <div className="w-8 h-8 bg-red-500 rounded-full"></div>
-            <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
-            <div className="w-8 h-8 bg-yellow-500 rounded-full"></div>
-            <div className="w-8 h-8 bg-red-500 rounded-full"></div>
-            <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
-            <div className="w-8 h-8 border-2 border-gray-500 rounded-full"></div>
-          </div>
-          <p className="text-gray-700 text-sm md:text-base">
-            Lingkaran berikutnya harus mengikuti pola warna: merah, biru, kuning, merah, biru, ... Pilih warna yang tepat untuk lingkaran kosong!
+      {/* Pattern Recognition */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
+        <h2 className="text-xl font-bold text-green-800 flex items-center">
+          <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
+        </h2>
+        <p className="text-gray-600 text-sm md:text-base font-medium">
+          Menemukan pola yang berlaku dalam masalah Aldi.
+        </p>
+        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
+          <li>Waktu bersiap-siap selalu 20 menit setiap hari.</li>
+          <li>Waktu perjalanan ke sekolah selalu 30 menit.</li>
+        </ul>
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3">
+          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Interaktivitas: Mengenali Pola Waktu</h3>
+          <p className="text-gray-700 text-sm md:text-base text-justify">
+            Aldi mencatat waktu berangkatnya: Senin (06.30), Selasa (06.30), Rabu (06.30), Kamis (06.30), Jumat (06.30). Pilih waktu yang sesuai untuk hari Sabtu!
           </p>
           <div className="space-y-2">
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="color"
-                value="merah"
-                checked={selectedColor === "merah"}
-                onChange={handleColorChange}
-                className="form-radio"
-              />
-              <span>Merah</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="color"
-                value="biru"
-                checked={selectedColor === "biru"}
-                onChange={handleColorChange}
-                className="form-radio"
-              />
-              <span>Biru</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="color"
-                value="kuning"
-                checked={selectedColor === "kuning"}
-                onChange={handleColorChange}
-                className="form-radio"
-              />
-              <span>Kuning</span>
-            </label>
+            {["06.00", "06.30", "07.00"].map((time) => (
+              <label key={time} className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  name="color"
+                  value={time}
+                  checked={selectedColor === time}
+                  onChange={handleColorChange}
+                  className="form-radio"
+                />
+                <span>{time}</span>
+              </label>
+            ))}
           </div>
           <div className="flex space-x-2 mt-4">
             <button
               onClick={checkPolaAnswers}
-              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E]"
+              className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
             >
               Periksa Jawaban
             </button>
             <button
               onClick={resetPolaAnswers}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
             >
               Hapus
             </button>
@@ -255,84 +217,52 @@ const PengenalanCT = () => {
         </div>
       </div>
 
-      {/* Abstraksi */}
-      <div className="bg-white p-5 border-gray-300 mt-4 space-y-4">
-        <h2 className="text-lg font-bold text-green-800">(3) Abstraksi</h2>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Abstraksi membantu kita memahami banyak data dengan cara yang lebih sederhana. Dalam analisis data, abstraksi berarti kita tidak perlu 
-          melihat semua detail satu per satu, tetapi cukup fokus pada bagian yang paling penting. 
+      {/* Abstraction */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
+        <h2 className="text-xl font-bold text-green-800 flex items-center">
+          <Filter className="w-5 h-5 mr-2" /> Abstraksi
+        </h2>
+        <p className="text-gray-600 text-sm md:text-base font-medium">
+          Menyederhanakan masalah dengan mengabaikan detail yang tidak penting.
         </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Misalnya, jika kita ingin mengetahui bagaimana hasil ujian siswa di suatu sekolah, kita tidak perlu membaca setiap nilai satu per satu. 
-          Sebagai gantinya, kita bisa melihat rata-rata nilai setiap kelas atau membandingkan nilai tertinggi dan terendah. Dengan cara ini, kita bisa 
-          lebih mudah memahami gambaran umum tanpa harus melihat semua angka.
-        </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Abstraksi juga sering digunakan dalam kehidupan sehari-hari. Misalnya, ketika kita membaca ringkasan sebuah buku, kita tidak perlu 
-          membaca seluruh isi buku untuk mengetahui cerita intinya. Dalam analisis data, abstraksi membantu kita melihat pola atau kesimpulan
-          penting tanpa harus membaca semua data secara langsung. Dengan begitu, kita bisa mengambil keputusan lebih cepat dan mudah.
-        </p>
-
-        {/* Interaktivitas Abstraksi */}
-        <div className="bg-green-100 border-l-4 border-green-800 p-4 rounded-lg shadow-md space-y-3">
-          <h3 className="text-green-800 font-bold">
-            Isilah kotak pilihan di bawah dengan jawaban yang paling tepat.
-            Pilih hanya informasi yang penting untuk menyelesaikan tugas berikut!
-          </h3>
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-            ❓ Kamu ingin mencari nomor telepon teman di sekolah. Pilih informasi yang penting!
-          </p>
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-            📌 Petunjuk: Fokus hanya pada informasi yang diperlukan untuk menemukan nomor
+        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
+          <li>Tidak mempertimbangkan faktor seperti cuaca atau kondisi jalan.</li>
+          <li>Fokus pada waktu bersiap-siap (20 menit) dan perjalanan (30 menit).</li>
+        </ul>
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3">
+          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Interaktivitas: Memilih Informasi Penting</h3>
+          <p className="text-gray-700 text-sm md:text-base text-justify">
+            Pilih informasi yang relevan untuk membantu Aldi merencanakan jadwalnya!
           </p>
           <div className="space-y-2">
-            <label className="flex items-center space-x-2">
-              <input 
-                type="checkbox" 
-                value="1" 
-                checked={selectedOptions.includes("1")} 
-                onChange={handleCheckboxChange} 
-              />
-              <span>Nama Teman</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input 
-                type="checkbox" 
-                value="2" 
-                checked={selectedOptions.includes("2")} 
-                onChange={handleCheckboxChange} 
-              />
-              <span>Nomor Telepon</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input 
-                type="checkbox" 
-                value="3" 
-                checked={selectedOptions.includes("3")} 
-                onChange={handleCheckboxChange} 
-              />
-              <span>Warna HP</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input 
-                type="checkbox" 
-                value="4" 
-                checked={selectedOptions.includes("4")} 
-                onChange={handleCheckboxChange} 
-              />
-              <span>Jenis SIM Card</span>
-            </label>
+            {[
+              { value: "1", label: "Waktu bersiap-siap" },
+              { value: "2", label: "Waktu perjalanan" },
+              { value: "3", label: "Jenis sepeda" },
+              { value: "4", label: "Menu sarapan" },
+            ].map((option) => (
+              <label key={option.value} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  value={option.value}
+                  checked={selectedOptions.includes(option.value)}
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox"
+                />
+                <span>{option.label}</span>
+              </label>
+            ))}
           </div>
           <div className="flex space-x-2 mt-4">
             <button
               onClick={checkAbstraksiAnswers}
-              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E]"
+              className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
             >
               Periksa Jawaban
             </button>
             <button
               onClick={resetAbstraksiAnswers}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
             >
               Hapus
             </button>
@@ -349,48 +279,98 @@ const PengenalanCT = () => {
         </div>
       </div>
 
-      {/* Algoritma */}
-      <div className="bg-white p-5 border-gray-300 mt-4 space-y-4">
-        <h2 className="text-lg font-bold text-green-800 mb-2">(4) Algoritma </h2>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Pernahkah kamu membaca grafik atau tabel untuk memahami suatu informasi? Saat menganalisis data, kita perlu mengikuti langkah-langkah 
-          tertentu agar dapat menarik kesimpulan yang tepat. Proses ini mirip seperti mengikuti resep kue, setiap langkah harus dilakukan secara 
-          berurutan agar hasilnya sesuai harapan.
-        </p>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          <i>📌 Misalnya, dalam membuat kue, kita harus mengumpulkan bahan, mencampur adonan, memanggang dengan suhu tertentu, dan menunggu 
-            hingga matang. Jika ada langkah yang terlewat atau dilakukan tidak berurutan, hasilnya bisa berbeda dari yang diharapkan.</i>
-        </p>
-        <div className="flex justify-center mt-10">
-          <img 
-            src={algoritma} 
-            alt="Algoritma" 
-            className="w-[70%] md:w-[50%] lg:w-[40%] rounded-lg"
-          />
-        </div> 
-        <p className="text-center text-gray-600 text-sm italic">Gambar 2. Langkah Membuat Kue</p>
-        
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          Dalam analisis data, algoritma berperan sebagai serangkaian langkah sistematis yang membantu kita mengolah informasi. Jika seorang siswa ingin mengetahui perkembangan nilai ujiannya selama satu semester, ia bisa mengikuti algoritma berikut:
-        </p>
-        <ul className="list-decimal list-inside text-gray-700 text-sm md:text-base leading-relaxed mt-2">
-          <li>Kumpulkan nilai ujian dari setiap mata pelajaran.</li>
-          <li>Susun nilai dalam tabel berdasarkan tanggal ujian.</li>
-          <li>Buat grafik untuk melihat tren kenaikan atau penurunan.</li>
-          <li>Analisis pola, apakah ada peningkatan setelah belajar lebih giat.</li>
-          <li>Simpulkan apakah strategi belajarnya sudah efektif atau perlu diperbaiki.</li>
-        </ul>
-        <p className="text-gray-700 text-sm md:text-base leading-relaxed mt-2">
-          Dengan mengikuti algoritma ini, kita dapat memahami data dengan lebih sistematis dan membuat keputusan yang lebih baik. Proses ini tidak hanya berguna dalam pelajaran, tetapi juga dalam kehidupan sehari-hari, seperti menganalisis harga barang atau memantau pertumbuhan tanaman.
-        </p>
+      {/* Algorithm */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
+        <h2 className="text-xl font-bold text-green-800 flex items-center">
+          <Code className="w-5 h-5 mr-2" /> Algoritma
+        </h2>
+        <p className="text-gray-600 text-sm md:text-base font-medium">Langkah-langkah penyelesaian:</p>
+        <ol className="list-decimal list-inside text-gray-600 text-sm md:text-base pl-6">
+          <li>Tentukan jam masuk sekolah (07.00).</li>
+          <li>Kurangi waktu perjalanan (30 menit) untuk menentukan waktu berangkat (06.30).</li>
+          <li>Kurangi waktu bersiap-siap (20 menit) untuk menentukan waktu mulai bersiap (06.10).</li>
+        </ol>
       </div>
-      
-      {/* Tombol Navigasi */}
+
+      {/* Conclusion and Analysis */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
+        <h2 className="text-xl font-bold text-green-800 flex items-center">
+          <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan & Saran
+        </h2>
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3">
+          <p className="text-gray-600 text-sm md:text-base font-semibold">
+            Coba isikan waktu yang sesuai untuk Aldi:
+          </p>
+          <p className="text-gray-600 text-sm md:text-base text-justify">
+            Isikan jam Aldi mulai bersiap dan berangkat agar tidak terlambat ke sekolah.
+          </p>
+          <input
+            type="text"
+            placeholder="Jam mulai bersiap (misal: 06.00)"
+            value={siap}
+            onChange={(e) => setSiap(e.target.value)}
+            className="w-full border px-3 py-1 text-sm rounded mt-2"
+          />
+          <input
+            type="text"
+            placeholder="Jam berangkat (misal: 06.00)"
+            value={berangkat}
+            onChange={(e) => setBerangkat(e.target.value)}
+            className="w-full border px-3 py-1 text-sm rounded mt-3"
+          />
+          <div className="flex space-x-2 mt-3">
+            <button
+              onClick={cekJawaban}
+              className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa Jawaban
+            </button>
+            <button
+              onClick={handleHapus}
+              className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {feedback && (
+            <p
+              className={`text-sm font-medium mt-3 ${
+                feedback.includes("benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {feedback}
+            </p>
+          )}
+        </div>
+        {feedback ===
+          "✅ Jawaban kamu benar! Aldi harus mulai bersiap pukul 06.10, dihitung dengan mengurangi 30 menit perjalanan dari 07.00 (menjadi 06.30) dan 20 menit bersiap-siap dari 06.30 (menjadi 06.10). Ini sesuai dengan langkah algoritma dalam Computational Thinking." && (
+          <div>
+            <p className="text-gray-600 text-sm md:text-base mt-4 font-semibold">Kesimpulan:</p>
+            <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-2 space-y-2">
+              <li>Dengan CT, Aldi dapat merencanakan jadwalnya secara sistematis untuk tiba tepat waktu.</li>
+              <li>Memecah masalah, mengenali pola, menyederhanakan informasi, dan menyusun algoritma membantu menyelesaikan masalah secara efisien.</li>
+            </ul>
+            <p className="text-gray-600 text-sm md:text-base mt-4 font-semibold">Saran:</p>
+            <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-2 space-y-2">
+              <li>Aldi bisa berangkat lebih awal untuk mengantisipasi gangguan seperti cuaca.</li>
+              <li>CT dapat diterapkan pada masalah lain, seperti mengatur tugas sekolah atau menganalisis pengeluaran harian.</li>
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {/* Navigation Buttons */}
       <div className="flex justify-between mt-8 px-4">
-        <a href="/mengenal-analisis" className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600">
+        <a
+          href="/mengenal-analisis"
+          className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition duration-300 text-base shadow-md"
+        >
           ← Sebelumnya
         </a>
-        <a href="/penerapan-ct" className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E]">
+        <a
+          href="/pencarian-lookup"
+          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
+        >
           Selanjutnya →
         </a>
       </div>

@@ -136,7 +136,9 @@ const ProgressBelajar = () => {
               }}
             >
               {classes.map((cls, index) => (
-                <option key={index} value={cls} className="bg-white text-sm">{cls}</option>
+                <option key={index} value={cls} className="bg-white text-sm">
+                  {cls === 'Semua kelas' ? cls : cls.toUpperCase()}
+                </option>
               ))}
             </select>
           </div>
@@ -171,7 +173,7 @@ const ProgressBelajar = () => {
                 >
                   <td className="p-2 border-b border-gray-200 text-sm">{student.nis}</td>
                   <td className="p-2 border-b border-gray-200 text-sm">{student.full_name}</td>
-                  <td className="p-2 border-b border-gray-200 text-sm">{student.class}</td>
+                  <td className="p-2 border-b border-gray-200 text-sm">{student.class?.toUpperCase() ?? '-'}</td>
                   <td className="p-2 border-b border-gray-200 text-sm">
                     <div className="w-full bg-gray-200 rounded-full h-2.5">
                       <div

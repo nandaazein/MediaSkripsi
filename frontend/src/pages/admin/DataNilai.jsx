@@ -5,9 +5,7 @@ import Layout from '../../components/admin/Layout';
 const DataNilai = () => {
   const [scores, setScores] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [search, setSearch] = useState('');
   const [classFilter, setClassFilter] = useState('Semua kelas');
-  const [limit, setLimit] = useState(20);
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedScore, setSelectedScore] = useState(null);
@@ -22,29 +20,31 @@ const DataNilai = () => {
     kuis4: '',
     evaluasi_akhir: ''
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const scoresPerPage = 10;
 
-const fetchScores = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Token tidak ditemukan. Silakan login kembali.');
+  const fetchScores = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token tidak ditemukan. Silakan login kembali.');
+      }
+      console.log('Fetching scores with token:', token);
+      const response = await axios.get('http://localhost:5000/api/students/scores', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      console.log('Scores response:', response.data);
+      setScores(response.data || []);
+      setError('');
+    } catch (err) {
+      console.error('Fetch scores error:', err);
+      setError(
+        err.response?.data?.message ||
+        'Gagal mengambil data nilai. Pastikan server backend berjalan di http://localhost:5000 dan Anda login sebagai guru.'
+      );
+      setScores([]);
     }
-    console.log('Fetching scores with token:', token);
-    const response = await axios.get('http://localhost:5000/api/students/scores', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    console.log('Scores response:', response.data);
-    setScores(response.data || []); // Pastikan array kosong jika data null
-    setError('');
-  } catch (err) {
-    console.error('Fetch scores error:', err);
-    setError(
-      err.response?.data?.message ||
-      'Gagal mengambil data nilai. Pastikan server backend berjalan di http://localhost:5000 dan Anda login sebagai guru.'
-    );
-    setScores([]); // Reset scores jika gagal
-  }
-};
+  };
 
   const fetchClasses = async () => {
     try {
@@ -65,7 +65,7 @@ const fetchScores = async () => {
         err.response?.data?.message ||
         'Gagal mengambil daftar kelas. Pastikan server backend berjalan di http://localhost:5000, Anda login sebagai guru, dan tabel students berisi data.'
       );
-      setClasses(['Semua kelas']); // Fallback jika gagal
+      setClasses(['Semua kelas']);
     }
   };
 
@@ -81,83 +81,73 @@ const fetchScores = async () => {
     }
   }, []);
 
-const handleUpdateScore = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('Token tidak ditemukan. Silakan login kembali.');
+  const handleUpdateScore = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token tidak ditemukan. Silakan login kembali.');
+      }
+      const updatedData = {
+        latihan1: formData.latihan1 ? parseFloat(formData.latihan1) : null,
+        latihan2: formData.latihan2 ? parseFloat(formData.latihan2) : null,
+        latihan3: formData.latihan3 ? parseFloat(formData.latihan3) : null,
+        latihan4: formData.latihan4 ? parseFloat(formData.latihan4) : null,
+        kuis1: formData.kuis1 ? parseFloat(formData.kuis1) : null,
+        kuis2: formData.kuis2 ? parseFloat(formData.kuis2) : null,
+        kuis3: formData.kuis3 ? parseFloat(formData.kuis3) : null,
+        kuis4: formData.kuis4 ? parseFloat(formData.kuis4) : null,
+        evaluasi_akhir: formData.evaluasi_akhir ? parseFloat(formData.evaluasi_akhir) : null
+      };
+      console.log('Updating score for NIS:', selectedScore.nis, updatedData);
+
+      const response = await axios.post(
+        `http://localhost:5000/api/students/scores/${selectedScore.nis}`,
+        updatedData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log('Update score response:', response.data);
+      fetchScores();
+      setIsModalOpen(false);
+      alert('Nilai siswa berhasil diperbarui');
+    } catch (err) {
+      console.error('Update score error:', err);
+      alert(err.response?.data?.message || 'Gagal memperbarui nilai');
     }
-    const updatedData = {
-      latihan1: formData.latihan1 ? parseFloat(formData.latihan1) : null,
-      latihan2: formData.latihan2 ? parseFloat(formData.latihan2) : null,
-      latihan3: formData.latihan3 ? parseFloat(formData.latihan3) : null,
-      latihan4: formData.latihan4 ? parseFloat(formData.latihan4) : null,
-      kuis1: formData.kuis1 ? parseFloat(formData.kuis1) : null,
-      kuis2: formData.kuis2 ? parseFloat(formData.kuis2) : null,
-      kuis3: formData.kuis3 ? parseFloat(formData.kuis3) : null,
-      kuis4: formData.kuis4 ? parseFloat(formData.kuis4) : null,
-      evaluasi_akhir: formData.evaluasi_akhir ? parseFloat(formData.evaluasi_akhir) : null
-    };
-    console.log('Updating score for NIS:', selectedScore.nis, updatedData);
+  };
 
-    const response = await axios.post(
-      `http://localhost:5000/api/students/scores/${selectedScore.nis}`,
-      updatedData,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log('Update score response:', response.data);
-    fetchScores();
-    setIsModalOpen(false);
-    alert('Nilai siswa berhasil diperbarui');
-  } catch (err) {
-    console.error('Update score error:', err);
-    alert(err.response?.data?.message || 'Gagal memperbarui nilai');
-  }
-};
+  // Filter dan pagination
+  const filteredScores = scores.filter(
+    (score) => classFilter === 'Semua kelas' || score.class === classFilter
+  );
+  const totalPages = Math.ceil(filteredScores.length / scoresPerPage);
+  const indexOfLastScore = currentPage * scoresPerPage;
+  const indexOfFirstScore = indexOfLastScore - scoresPerPage;
+  const currentScores = filteredScores.slice(indexOfFirstScore, indexOfLastScore);
 
-  const filteredScores = scores
-    .filter((score) =>
-      score.full_name?.toLowerCase().includes(search.toLowerCase())
-    )
-    .filter((score) => classFilter === 'Semua kelas' || score.class === classFilter)
-    .slice(0, limit);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <Layout>
-   
       <section className="bg-gray-100 p-4 sm:p-6 rounded shadow-md mt-6 mb-6 text-center">
         <h2 className="text-xl font-semibold text-[#255F38] mb-6">Data Nilai</h2>
         {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
-        <div className="flex justify-between mb-6 items-center space-x-4 flex-wrap gap-4">
-          <div className="flex items-center space-x-4 flex-wrap gap-4">
-            <select
-              className="p-2 border border-gray-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-[#255F38] transition text-sm"
-              value={limit}
-              onChange={(e) => setLimit(parseInt(e.target.value))}
-            >
-              <option value="20">Menampilkan 20 data</option>
-              <option value="50">Menampilkan 50 data</option>
-              <option value="100">Menampilkan 100 data</option>
-            </select>
-            <select
-              className="p-2 border border-gray-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-[#255F38] transition text-sm"
-              value={classFilter}
-              onChange={(e) => setClassFilter(e.target.value)}
-            >
-              {classes.map((cls, index) => (
-                <option key={index} value={cls} className="bg-white text-sm">{cls}</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex items-center space-x-4">
-            <input
-              type="text"
-              placeholder="Cari nama..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="p-2 border border-gray-300 rounded-lg w-64 shadow-md focus:outline-none focus:ring-2 focus:ring-[#255F38] transition text-sm"
-            />
-          </div>
+        <div className="flex justify-start mb-6 items-center">
+          <select
+            className="p-2 border border-gray-300 rounded-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-[#255F38] transition text-sm"
+            value={classFilter}
+            onChange={(e) => {
+              setClassFilter(e.target.value);
+              setCurrentPage(1); // Reset ke halaman 1 saat filter berubah
+            }}
+          >
+            {classes.map((cls, index) => (
+              <option key={index} value={cls} className="bg-white text-sm">
+                {cls === 'Semua kelas' ? cls : cls.toUpperCase()}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-gray-700">
@@ -170,23 +160,23 @@ const handleUpdateScore = async () => {
                 <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Latihan 2</th>
                 <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Latihan 3</th>
                 <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Latihan 4</th>
-                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 1</th>
-                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 2</th>
-                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 3</th>
-                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 4</th>
+                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 1 (KKM: {scores[0]?.kkm?.kuis1 ?? 75})</th>
+                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 2 (KKM: {scores[0]?.kkm?.kuis2 ?? 75})</th>
+                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 3 (KKM: {scores[0]?.kkm?.kuis3 ?? 75})</th>
+                <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Kuis 4 (KKM: {scores[0]?.kkm?.kuis4 ?? 75})</th>
                 <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Evaluasi Akhir</th>
                 <th className="p-2 border-b-2 border-gray-300 text-center text-sm">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {filteredScores.map((score) => (
+              {currentScores.map((score) => (
                 <tr
                   key={score.nis}
                   className="hover:bg-gray-100 transition-colors duration-200 even:bg-gray-50"
                 >
                   <td className="p-2 border-b border-gray-200 text-sm">{score.nis}</td>
                   <td className="p-2 border-b border-gray-200 text-sm">{score.full_name}</td>
-                  <td className="p-2 border-b border-gray-200 text-sm">{score.class}</td>
+                  <td className="p-2 border-b border-gray-200 text-sm">{score.class?.toUpperCase() ?? '-'}</td>
                   <td className="p-2 border-b border-gray-200 text-sm">{score.latihan1 ?? '-'}</td>
                   <td className="p-2 border-b border-gray-200 text-sm">{score.latihan2 ?? '-'}</td>
                   <td className="p-2 border-b border-gray-200 text-sm">{score.latihan3 ?? '-'}</td>
@@ -224,8 +214,41 @@ const handleUpdateScore = async () => {
             </tbody>
           </table>
         </div>
-        {filteredScores.length === 0 && !error && (
-          <p className="text-gray-500 mt-4 text-sm">Tidak ada data nilai yang ditemukan. Coba tambahkan skor untuk siswa.</p>
+        {currentScores.length === 0 && !error && (
+          <p className="text-gray-500 mt-4 text-sm">Tidak ada data nilai yang ditemukan untuk filter ini. Silakan tambahkan skor untuk siswa.</p>
+        )}
+
+        {/* Pagination Controls */}
+        {filteredScores.length > 0 && (
+          <div className="flex justify-center mt-4 space-x-2">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200 text-sm disabled:opacity-50"
+            >
+              Sebelumnya
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-3 py-1 rounded-lg text-sm ${
+                  currentPage === page
+                    ? 'bg-[#255F38] text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                } transition-colors duration-200`}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200 text-sm disabled:opacity-50"
+            >
+              Selanjutnya
+            </button>
+          </div>
         )}
       </section>
 

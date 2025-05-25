@@ -178,6 +178,7 @@ const studentController = {
       res.status(500).json({ message: error.message || 'Kesalahan server' });
     }
   },
+  
 
   async getAllScores(req, res) {
     try {
@@ -189,5 +190,7 @@ const studentController = {
     }
   },
 };
+
+
 
 export default studentController;

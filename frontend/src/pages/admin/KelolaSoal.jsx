@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Layout from '../../components/admin/Layout';
-import Compressor from 'compressorjs'; // Tambahkan ini
+import Compressor from 'compressorjs';
 
 const KelolaSoal = () => {
   const [questions, setQuestions] = useState([]);
@@ -17,6 +17,9 @@ const KelolaSoal = () => {
     imageBase64: ''
   });
   const [previewImage, setPreviewImage] = useState(null);
+  const [filterQuizNumber, setFilterQuizNumber] = useState('all'); // State untuk filter
+  const [currentPage, setCurrentPage] = useState(1); // State untuk halaman saat ini
+  const questionsPerPage = 10; // Jumlah soal per halaman
 
   const fetchQuestions = async () => {
     try {
@@ -46,17 +49,15 @@ const KelolaSoal = () => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Validasi ukuran file (maksimum 2MB)
       if (file.size > 2 * 1024 * 1024) {
         alert('Ukuran gambar terlalu besar. Maksimum 2MB.');
         return;
       }
 
-      // Kompres gambar
       new Compressor(file, {
-        quality: 0.6, // Kualitas gambar (0 hingga 1)
-        maxWidth: 1200, // Lebar maksimum
-        maxHeight: 1200, // Tinggi maksimum
+        quality: 0.6,
+        maxWidth: 1200,
+        maxHeight: 1200,
         success(compressedFile) {
           const reader = new FileReader();
           reader.onloadend = () => {
@@ -88,7 +89,7 @@ const KelolaSoal = () => {
         imageUrl: formData.imageBase64 || null
       };
 
-      console.log('Sending data:', updatedData); // Debug data yang dikirim
+      console.log('Sending data:', updatedData);
 
       let response;
       if (isEditMode) {
@@ -165,22 +166,59 @@ const KelolaSoal = () => {
     setIsModalOpen(true);
   };
 
+  // Filter soal berdasarkan quizNumber
+  const filteredQuestions = filterQuizNumber === 'all'
+    ? questions
+    : questions.filter(q => q.quiz_number === parseInt(filterQuizNumber));
+
+  // Hitung total halaman dan soal untuk halaman saat ini
+  const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+  const indexOfLastQuestion = currentPage * questionsPerPage;
+  const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+  const currentQuestions = filteredQuestions.slice(indexOfFirstQuestion, indexOfLastQuestion);
+
+  // Fungsi untuk mengganti halaman
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <Layout>
       <section className="bg-white p-6 rounded-lg shadow-2xl mt-4 mb-6 text-center max-w-full mx-auto">
         <h2 className="text-xl font-semibold text-[#255F38] mb-6">Daftar Soal Kuis</h2>
         {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
-        <div className="flex justify-end mb-4">
+        
+        {/* Filter Dropdown */}
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <label className="mr-2 text-sm font-medium text-gray-700">Filter Kuis:</label>
+            <select
+              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] transition text-sm"
+              value={filterQuizNumber}
+              onChange={(e) => {
+                setFilterQuizNumber(e.target.value);
+                setCurrentPage(1); // Reset ke halaman 1 saat filter berubah
+              }}
+            >
+              <option value="all">Semua Kuis</option>
+              <option value="1">Kuis 1</option>
+              <option value="2">Kuis 2</option>
+              <option value="3">Kuis 3</option>
+              <option value="4">Kuis 4</option>
+              <option value="5">Evaluasi Akhir</option>
+            </select>
+          </div>
           <button
             onClick={() => {
               resetForm();
               setIsModalOpen(true);
             }}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-200 text-sm"
+            className="px-4 py-2 bg-[#255F38] text-white rounded-lg cursor-pointer hover:bg-green-800 transition-colors duration-200 text-sm"
           >
             Tambah Soal
           </button>
         </div>
+
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-gray-700">
             <thead className="bg-[#255F38] text-white">
@@ -195,12 +233,12 @@ const KelolaSoal = () => {
               </tr>
             </thead>
             <tbody>
-              {questions.map((question, index) => (
+              {currentQuestions.map((question, index) => (
                 <tr
                   key={question.id}
                   className="hover:bg-gray-100 transition-colors duration-200 even:bg-gray-50"
                 >
-                  <td className="p-2 border-b border-gray-200 text-sm">{index + 1}</td>
+                  <td className="p-2 border-b border-gray-200 text-sm">{indexOfFirstQuestion + index + 1}</td>
                   <td className="p-2 border-b border-gray-200 text-sm">
                     {question.quiz_number === 5 ? 'Evaluasi Akhir' : `Kuis ${question.quiz_number}`}
                   </td>
@@ -248,8 +286,41 @@ const KelolaSoal = () => {
             </tbody>
           </table>
         </div>
-        {questions.length === 0 && !error && (
-          <p className="text-gray-500 mt-4 text-sm">Tidak ada soal yang ditemukan. Silakan tambahkan soal baru.</p>
+        {filteredQuestions.length === 0 && !error && (
+          <p className="text-gray-500 mt-4 text-sm">Tidak ada soal yang ditemukan untuk filter ini. Silakan tambahkan soal baru.</p>
+        )}
+
+        {/* Pagination Controls */}
+        {filteredQuestions.length > 0 && (
+          <div className="flex justify-center mt-4 space-x-2">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200 text-sm disabled:opacity-50"
+            >
+              Sebelumnya
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-3 py-1 rounded-lg text-sm ${
+                  currentPage === page
+                    ? 'bg-[#255F38] text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                } transition-colors duration-200`}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200 text-sm disabled:opacity-50"
+            >
+              Selanjutnya
+            </button>
+          </div>
         )}
       </section>
 

@@ -1,481 +1,830 @@
+
 import Layout from "../../components/Layout";
 import { useState } from "react";
-import {
-  BookOpen,
-  Lightbulb,
-  BarChart,
-  Filter,
-  Code,
-  CheckCircle,
-  ChevronRight,
-} from "lucide-react";
-
 import SimpleChart from "../../components/SimpleChart";
 
 export default function VisualisasiData() {
-  // State for Dekomposisi steps
-  const [dekomposisiSteps, setDekomposisiSteps] = useState([false, false, false, false]);
+  // State untuk Aktivitas Dekomposisi
+  const [dekomposisiAnswers, setDekomposisiAnswers] = useState({
+    step1: false,
+    step2: false,
+    step3: false,
+    step4: false,
+  });
+  const [dekomposisiFeedback, setDekomposisiFeedback] = useState("");
+  const [dekomposisiAnswered, setDekomposisiAnswered] = useState(false);
 
-  // State for Pengenalan Pola steps
-  const [polaSteps, setPolaSteps] = useState([false, false, false]);
-
-  // State for Abstraksi steps
-  const [abstraksiSteps, setAbstraksiSteps] = useState([false, false]);
-
-  // State for Algoritma steps
-  const [algoritmaSteps, setAlgoritmaSteps] = useState([false, false, false, false]);
-
-  // Toggle Dekomposisi steps
-  const toggleDekomposisiStep = (index) => {
-    const newSteps = [...dekomposisiSteps];
-    newSteps[index] = !newSteps[index];
-    setDekomposisiSteps(newSteps);
+  const handleDekomposisiChange = (step) => {
+    setDekomposisiAnswers((prev) => ({ ...prev, [step]: !prev[step] }));
   };
 
-  // Toggle Pengenalan Pola steps
-  const togglePolaStep = (index) => {
-    const newSteps = [...polaSteps];
-    newSteps[index] = !newSteps[index];
-    setPolaSteps(newSteps);
+  const checkDekomposisiAnswers = () => {
+    const correctAnswers = { step1: true, step2: true, step3: true, step4: false };
+    const isCorrect =
+      dekomposisiAnswers.step1 === correctAnswers.step1 &&
+      dekomposisiAnswers.step2 === correctAnswers.step2 &&
+      dekomposisiAnswers.step3 === correctAnswers.step3 &&
+      dekomposisiAnswers.step4 === correctAnswers.step4;
+    setDekomposisiFeedback(
+      isCorrect
+        ? "Benar! Langkah-langkah yang tepat adalah menentukan tujuan, mengumpulkan data, dan memilih jenis chart."
+        : "Jawaban salah, ayo coba lagi."
+    );
+    setDekomposisiAnswered(true);
   };
 
-  // Toggle Abstraksi steps
-  const toggleAbstraksiStep = (index) => {
-    const newSteps = [...abstraksiSteps];
-    newSteps[index] = !newSteps[index];
-    setAbstraksiSteps(newSteps);
+  const resetDekomposisiAnswers = () => {
+    setDekomposisiAnswers({ step1: false, step2: false, step3: false, step4: false });
+    setDekomposisiFeedback("");
+    setDekomposisiAnswered(false);
   };
 
-  // Toggle Algoritma steps
-  const toggleAlgoritmaStep = (index) => {
-    const newSteps = [...algoritmaSteps];
-    newSteps[index] = !newSteps[index];
-    setAlgoritmaSteps(newSteps);
+  // State untuk Aktivitas Pengenalan Pola
+  const [polaAnswer, setPolaAnswer] = useState("");
+  const [polaFeedback, setPolaFeedback] = useState("");
+  const [polaAnswered, setPolaAnswered] = useState(false);
+
+  const handlePolaChange = (value) => {
+    setPolaAnswer(value);
+  };
+
+  const checkPolaAnswer = () => {
+    const correctAnswer = "Line Chart";
+    setPolaFeedback(
+      polaAnswer === correctAnswer
+        ? "Benar! Line Chart cocok untuk menunjukkan perubahan kehadiran siswa seiring waktu."
+        : "Jawaban salah, ayo coba lagi."
+    );
+    setPolaAnswered(true);
+  };
+
+  const resetPolaAnswer = () => {
+    setPolaAnswer("");
+    setPolaFeedback("");
+    setPolaAnswered(false);
+  };
+
+  // State untuk Aktivitas Abstraksi
+  const [abstraksiAnswers, setAbstraksiAnswers] = useState({
+    info1: false,
+    info2: false,
+    info3: false,
+  });
+  const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
+  const [abstraksiAnswered, setAbstraksiAnswered] = useState(false);
+
+  const handleAbstraksiChange = (info) => {
+    setAbstraksiAnswers((prev) => ({ ...prev, [info]: !prev[info] }));
+  };
+
+  const checkAbstraksiAnswers = () => {
+    const correctAnswers = { info1: false, info2: true, info3: false };
+    const isCorrect =
+      abstraksiAnswers.info1 === correctAnswers.info1 &&
+      abstraksiAnswers.info2 === correctAnswers.info2 &&
+      abstraksiAnswers.info3 === correctAnswers.info3;
+    setAbstraksiFeedback(
+      isCorrect
+        ? "Benar! Hanya jumlah siswa di setiap ekstrakurikuler yang relevan untuk Pie Chart."
+        : "Jawaban salah, ayo coba lagi."
+    );
+    setAbstraksiAnswered(true);
+  };
+
+  const resetAbstraksiAnswers = () => {
+    setAbstraksiAnswers({ info1: false, info2: false, info3: false });
+    setAbstraksiFeedback("");
+    setAbstraksiAnswered(false);
+  };
+
+  // State untuk Aktivitas Algoritma
+  const [algoritmaAnswers, setAlgoritmaAnswers] = useState({
+    step1: false,
+    step2: false,
+    step3: false,
+    step4: false,
+  });
+  const [algoritmaFeedback, setAlgoritmaFeedback] = useState("");
+  const [algoritmaAnswered, setAlgoritmaAnswered] = useState(false);
+
+  const handleAlgoritmaChange = (step) => {
+    setAlgoritmaAnswers((prev) => ({ ...prev, [step]: !prev[step] }));
+  };
+
+  const checkAlgoritmaAnswers = () => {
+    const correctAnswers = { step1: true, step2: true, step3: true, step4: false };
+    const isCorrect =
+      algoritmaAnswers.step1 === correctAnswers.step1 &&
+      algoritmaAnswers.step2 === correctAnswers.step2 &&
+      algoritmaAnswers.step3 === correctAnswers.step3 &&
+      algoritmaAnswers.step4 === correctAnswers.step4;
+    setAlgoritmaFeedback(
+      isCorrect
+        ? "Benar! Langkah-langkah ini adalah urutan yang tepat untuk membuat chart di spreadsheet."
+        : "Jawaban salah, ayo coba lagi."
+    );
+    setAlgoritmaAnswered(true);
+  };
+
+  const resetAlgoritmaAnswers = () => {
+    setAlgoritmaAnswers({ step1: false, step2: false, step3: false, step4: false });
+    setAlgoritmaFeedback("");
+    setAlgoritmaAnswered(false);
+  };
+
+  // State untuk Kuis Pemahaman
+  const [currentQuestion, setCurrentQuestion] = useState(1);
+  const [answers, setAnswers] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+  });
+  const [feedback, setFeedback] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+  });
+  const [isAnswered, setIsAnswered] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  });
+
+  const questions = [
+    {
+      question: "Apa manfaat utama visualisasi data?",
+      options: [
+        "A. Membantu melihat pola dengan cepat",
+        "B. Membuat data lebih rumit",
+        "C. Mengurangi jumlah data",
+        "D. Menghapus data yang salah",
+      ],
+      correctAnswer: "A. Membantu melihat pola dengan cepat",
+      explanation: "Visualisasi data membantu kita melihat pola dan tren dengan cepat melalui chart atau tabel.",
+    },
+    {
+      question: "Langkah memecah masalah menjadi bagian kecil disebut?",
+      options: [
+        "A. Dekomposisi",
+        "B. Abstraksi",
+        "C. Pengenalan Pola",
+        "D. Algoritma",
+      ],
+      correctAnswer: "A. Dekomposisi",
+      explanation: "Dekomposisi adalah proses memecah masalah besar menjadi langkah-langkah kecil untuk memudahkan pemahaman dan penyelesaian.",
+    },
+    {
+      question: "Chart apa yang cocok untuk menunjukkan persentase pengeluaran?",
+      options: [
+        "A. Pie Chart",
+        "B. Line Chart",
+        "C. Bar Chart",
+        "D. Area Chart",
+      ],
+      correctAnswer: "A. Pie Chart",
+      explanation: "Pie Chart cocok untuk menunjukkan persentase, seperti pembagian pengeluaran dalam kategori tertentu.",
+    },
+    {
+      question: "Memilih data penting untuk chart disebut?",
+      options: [
+        "A. Abstraksi",
+        "B. Dekomposisi",
+        "C. Pengenalan Pola",
+        "D. Algoritma",
+      ],
+      correctAnswer: "A. Abstraksi",
+      explanation: "Abstraksi adalah proses memilih data yang relevan dan mengabaikan informasi yang tidak perlu untuk membuat chart yang jelas.",
+    },
+    {
+      question: "Apa langkah pertama membuat chart di spreadsheet?",
+      options: [
+        "A. Siapkan data dalam tabel",
+        "B. Pilih jenis chart",
+        "C. Hitung rata-rata data",
+        "D. Simpan chart",
+      ],
+      correctAnswer: "A. Siapkan data dalam tabel",
+      explanation: "Langkah pertama dalam membuat chart adalah menyiapkan data dalam tabel yang rapi untuk memastikan chart akurat.",
+    },
+  ];
+
+  const handleAnswerChange = (option) => {
+    setAnswers((prev) => ({ ...prev, [currentQuestion]: option }));
+    const currentCorrect = questions[currentQuestion - 1].correctAnswer;
+    if (option === currentCorrect) {
+      setFeedback((prev) => ({
+        ...prev,
+        [currentQuestion]: `Benar! ${currentCorrect}. ${questions[currentQuestion - 1].explanation}`,
+      }));
+    } else {
+      setFeedback((prev) => ({
+        ...prev,
+        [currentQuestion]: "Jawaban salah, ayo coba lagi.",
+      }));
+    }
+    setIsAnswered((prev) => ({ ...prev, [currentQuestion]: true }));
+  };
+
+  const resetQuizAnswer = () => {
+    setAnswers((prev) => ({ ...prev, [currentQuestion]: "" }));
+    setFeedback((prev) => ({ ...prev, [currentQuestion]: "" }));
+    setIsAnswered((prev) => ({ ...prev, [currentQuestion]: false }));
+  };
+
+  const goToPrevious = () => {
+    if (currentQuestion > 1) {
+      setCurrentQuestion(currentQuestion - 1);
+      setFeedback((prev) => ({ ...prev, [currentQuestion - 1]: "" }));
+      if (isAnswered[currentQuestion - 1]) {
+        alert("Soal ini telah dijawab. Silakan lanjut ke soal berikutnya atau hapus jawaban untuk memilih ulang.");
+      }
+    }
+  };
+
+  const goToNext = () => {
+    if (!isAnswered[currentQuestion]) {
+      alert("Silakan jawab soal ini terlebih dahulu.");
+      return;
+    }
+    if (currentQuestion < 5) {
+      setCurrentQuestion(currentQuestion + 1);
+      setFeedback((prev) => ({ ...prev, [currentQuestion + 1]: "" }));
+    } else if (
+      currentQuestion === 5 &&
+      isAnswered[1] &&
+      isAnswered[2] &&
+      isAnswered[3] &&
+      isAnswered[4] &&
+      isAnswered[5] &&
+      feedback[currentQuestion].includes("Benar")
+    ) {
+      alert("Kamu sudah selesai mengerjakan semua soal, kerja bagus!");
+    }
   };
 
   return (
     <Layout>
-      <div className="p-4 bg-[#255F38] text-white font-bold text-lg text-center">
+      <div className="p-2 sm:p-4 bg-[#255F38] text-white font-bold text-lg text-center rounded-lg shadow-lg">
         B. VISUALISASI DATA
       </div>
 
-      <section className="bg-green-100 p-4 rounded shadow-md mt-6 mb-6">
-        <h2 className="font-bold text-[#255F38]">Tujuan Pembelajaran:</h2>
-        <ol className="list-decimal list-inside space-y-2 mt-4 text-gray-700">
-          <li>
-            Memahami konsep visualisasi data dan bagaimana cara menyajikan
-            informasi dalam bentuk grafik, tabel, atau diagram.
+      <section className="bg-green-100 p-2 sm:p-4 rounded shadow-md mt-2 sm:mt-6 mb-2 sm:mb-6">
+        <h2 className="font-bold text-[#255F38] text-lg">Tujuan Pembelajaran:</h2>
+        <ol className="list-decimal list-inside space-y-1 sm:space-y-2 mt-2 sm:mt-4 text-gray-700">
+          <li className="text-sm md:text-base">
+            Memahami konsep visualisasi data dan bagaimana cara menyajikan informasi dalam bentuk chart, tabel, atau grafik.
           </li>
-          <li>
-            Menggunakan pendekatan Computational Thinking untuk
-            memvisualisasikan data secara efektif.
+          <li className="text-sm md:text-base">
+            Menggunakan pendekatan Computational Thinking untuk memvisualisasikan data secara efektif.
           </li>
-          <li>
-            Menerapkan berbagai jenis visualisasi dalam studi kasus visualisasi
-            data di lembar kerja.
+          <li className="text-sm md:text-base">
+            Menerapkan berbagai jenis visualisasi dalam studi kasus visualisasi data di lembar kerja.
           </li>
         </ol>
       </section>
 
-      {/* Paragraf Penjelasan */}
-      <p className="text-gray-700 text-base text-justify leading-relaxed px-4">
-        <strong>Visualisasi data</strong> adalah teknik menyajikan informasi
-        dalam bentuk <strong>grafik, tabel, atau diagram</strong> agar lebih
-        mudah dipahami. Dibandingkan dengan membaca angka atau teks panjang,
-        visualisasi data memungkinkan kita melihat <strong>pola</strong> dan{" "}
-        <strong>tren</strong> dengan lebih cepat. Dalam era digital saat ini,
-        kita sering menggunakan <strong>spreadsheet</strong> untuk membuat
-        grafik yang membantu dalam pengambilan keputusan. Untuk membuat
-        visualisasi data yang efektif, kita bisa menerapkan{" "}
-        <strong>pendekatan Computational Thinking (CT)</strong> agar prosesnya
-        lebih sistematis dan efisien.
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-2 sm:px-4">
+        <strong>Visualisasi data</strong> adalah cara menyajikan informasi dalam bentuk <strong>chart, tabel, atau grafik</strong> agar mudah dipahami. Dibandingkan membaca angka atau teks panjang, chart membantu kita melihat <strong>pola</strong> dan <strong>tren</strong> dengan cepat. Kita sering menggunakan <strong>spreadsheet</strong> untuk membuat chart yang membantu membuat keputusan. Dengan <strong>Computational Thinking (CT)</strong>, proses membuat chart jadi lebih mudah dan teratur.
       </p>
 
-      {/* Peran Visualisasi Data */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12 relative">
+        <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Peran Visualisasi Data
         </div>
-        <p className="text-gray-700 text-base text-justify leading-relaxed mt-6">
-          Visualisasi data memiliki banyak manfaat yang membantu kita dalam
-          memahami informasi dengan lebih mudah. Dengan menyajikan data dalam
-          bentuk grafik, tabel, atau diagram, kita bisa melihat pola dan tren
-          yang mungkin sulit ditemukan jika hanya melihat angka atau teks biasa.
+        <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6 text-justify">
+          Visualisasi data membantu kita memahami informasi dengan lebih mudah melalui chart, tabel, atau grafik.
         </p>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Mengidentifikasi pola dan tren</strong> → Dengan melihat grafik, kita bisa lebih mudah memahami bagaimana suatu data berubah dari waktu ke waktu, seperti tren nilai ujian siswa selama satu semester.
+        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+          <li className="text-sm md:text-base text-justify">
+            <strong>Mengidentifikasi pola dan tren</strong> → Chart membantu kita melihat perubahan data, seperti nilai ujian siswa selama satu semester.
           </li>
-          <li className="text-justify">
-            <strong>Membantu membuat keputusan</strong> → Data dalam bentuk grafik atau diagram lebih mudah dipahami, sehingga kita bisa mengambil keputusan lebih cepat, misalnya menentukan strategi belajar.
+          <li className="text-sm md:text-base text-justify">
+            <strong>Membantu membuat keputusan</strong> → Chart membuat data lebih jelas, sehingga kita bisa memilih strategi belajar.
           </li>
-          <li className="text-justify">
-            <strong>Menyajikan data</strong> lebih ringkas dan jelas → Informasi dapat disajikan dalam bentuk grafik yang sederhana dan mudah dibaca.
+          <li className="text-sm md:text-base text-justify">
+            <strong>Menyajikan data</strong> lebih ringkas → Informasi jadi sederhana dan mudah dibaca.
           </li>
-          <li className="text-justify">
-            <strong>Meningkatkan komunikasi data</strong> → Grafik dan diagram membuat penjelasan lebih menarik dan mudah dimengerti, misalnya saat presentasi di kelas.
+          <li className="text-sm md:text-base text-justify">
+            <strong>Meningkatkan komunikasi data</strong> → Chart membuat presentasi lebih menarik dan mudah dipahami.
           </li>
-          <li className="text-justify">
-            <strong>Mendeteksi kesalahan</strong> → Grafik membantu menemukan data yang tidak sesuai, seperti nilai ujian yang tiba-tiba terlalu tinggi atau rendah.
+          <li className="text-sm md:text-base text-justify">
+            <strong>Mendeteksi kesalahan</strong> → Chart membantu menemukan data yang salah, seperti nilai ujian yang tidak wajar.
           </li>
         </ul>
       </div>
 
-      {/* Contoh dalam Kehidupan Sehari-hari */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative text-justify">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-12 relative text-justify">
+        <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Contoh dalam Kehidupan Sehari-hari
         </div>
-        <p className="text-gray-700 text-base text-justify leading-relaxed mt-6">
-          Visualisasi data banyak digunakan dalam kehidupan sehari-hari untuk
-          menyajikan informasi secara lebih jelas dan menarik.
+        <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6">
+          Visualisasi data sering digunakan untuk membuat informasi lebih jelas dan menarik.
         </p>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Diagram garis</strong> untuk tren nilai siswa → Dapat digunakan untuk melihat perubahan nilai siswa selama satu semester, apakah meningkat atau menurun.
+        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+          <li className="text-sm md:text-base">
+            <strong>Line Chart</strong> → Menunjukkan perubahan nilai siswa selama satu semester.
           </li>
-          <li className="text-justify">
-            <strong>Diagram batang</strong> untuk perbandingan jumlah pelanggan → Membantu membandingkan jumlah pelanggan di beberapa cabang toko dengan mudah.
+          <li className="text-sm md:text-base">
+            <strong>Bar Chart</strong> → Membandingkan jumlah pelanggan di beberapa toko.
           </li>
-          <li className="text-justify">
-            <strong>Diagram lingkaran</strong> untuk distribusi pengeluaran → Menunjukkan persentase pengeluaran dalam berbagai kategori seperti makanan, transportasi, dan hiburan.
+          <li className="text-sm md:text-base">
+            <strong>Pie Chart</strong> → Menunjukkan persentase pengeluaran untuk makanan, transportasi, dan hiburan.
           </li>
         </ul>
-        <p className="text-gray-700 text-base text-justify leading-relaxed mt-4">
-          Dengan memahami peran visualisasi data, kita dapat memilih metode yang
-          paling efektif untuk menyajikan informasi dengan lebih jelas dan
-          menarik.
+        <p className="text-gray-700 text-sm md:text-base mt-2 sm:mt-4">
+          Dengan memahami visualisasi data, kita bisa memilih cara terbaik untuk menyajikan informasi.
         </p>
       </div>
 
-      {/* DEKOMPOSISI */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative text-justify">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-12 relative text-justify">
+        <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Dekomposisi
         </div>
-        <p className="text-gray-700 text-sm md:text-base mt-6 text-justify">
-          Membuat grafik tidaklah sulit jika kita{" "}
-          <span className="font-semibold">
-            membagi prosesnya menjadi langkah-langkah kecil.
-          </span>{" "}
-          Dengan menggunakan teknik dekomposisi, kita dapat memahami setiap
-          tahap dengan lebih mudah.
+        <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6">
+          Membuat chart lebih mudah jika kita <span className="font-semibold">memecah prosesnya menjadi langkah kecil.</span> Dekomposisi membantu kita memahami setiap langkah.
         </p>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Menentukan tujuan</strong> visualisasi → Sebelum membuat grafik, tentukan tujuan Anda, misalnya melihat pola perubahan nilai ulangan atau membandingkan jumlah siswa yang membeli jajanan.
+        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+          <li className="text-sm md:text-base">
+            <strong>Menentukan tujuan</strong> → Tentukan apa yang ingin ditunjukkan, seperti membandingkan penjualan jajanan.
           </li>
-          <li className="text-justify">
-            <strong>Mengumpulkan data</strong> yang relevan → Kumpulkan data yang sesuai, seperti nilai ulangan Matematika selama lima bulan atau jumlah siswa yang memilih es teh atau jus jeruk di kantin.
+          <li className="text-sm md:text-base">
+            <strong>Mengumpulkan data</strong> → Kumpulkan data yang dibutuhkan, seperti jumlah jajanan yang terjual.
           </li>
-          <li className="text-justify">
-            <strong>Memilih jenis grafik</strong> yang tepat → Pilih jenis grafik yang sesuai dengan data dan tujuan, seperti diagram garis untuk tren atau diagram batang untuk perbandingan.
-          </li>
-          <li className="text-justify">
-            <strong>Menggunakan fitur</strong> spreadsheet → Manfaatkan tools seperti Insert Chart untuk membuat grafik otomatis.
+          <li className="text-sm md:text-base">
+            <strong>Memilih jenis chart</strong> → Pilih chart yang tepat, seperti Bar Chart untuk membandingkan.
           </li>
         </ul>
 
-        {/* Interactive Case Study for Dekomposisi */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Latihan Dekomposisi: Membuat Diagram Batang Penjualan Jajanan
+        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 sm:mt-6 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
+            Latihan Pemahaman: Pecah Langkah Membuat Chart
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu diminta membuat diagram batang untuk membandingkan penjualan jajanan di kantin sekolah: bakpao (50 porsi), siomay (30 porsi), dan cilok (20 porsi). Mari kita pecah proses ini menjadi langkah-langkah kecil. Klik tombol berikut untuk melihat langkah-langkahnya:
+          <p className="text-gray-700 text-sm md:text-base mb-2">
+            Kamu ingin membuat chart untuk membandingkan penjualan jajanan: bakpao (50 porsi), siomay (30 porsi), cilok (20 porsi). Pilih langkah yang benar:
           </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => toggleDekomposisiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Tentukan Tujuan
-            </button>
-            {dekomposisiSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Tujuannya adalah <strong>membandingkan penjualan</strong> bakpao, siomay, dan cilok dalam bentuk diagram batang.
-              </p>
-            )}
-            <button
-              onClick={() => toggleDekomposisiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Kumpulkan Data
-            </button>
-            {dekomposisiSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Data penjualan: bakpao (50 porsi), siomay (30 porsi), cilok (20 porsi).
-              </p>
-            )}
-            <button
-              onClick={() => toggleDekomposisiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Pilih Jenis Grafik
-            </button>
-            {dekomposisiSteps[2] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Untuk membandingkan jumlah antar kategori, kita pilih <strong>Diagram Batang</strong>.
-              </p>
-            )}
-            <button
-              onClick={() => toggleDekomposisiStep(3)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 4: Buat Grafik
-            </button>
-            {dekomposisiSteps[3] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Gunakan spreadsheet untuk memasukkan data dan buat diagram batang menggunakan fitur <strong>Insert Chart</strong>.
-              </p>
-            )}
+          <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={dekomposisiAnswers.step1}
+                  onChange={() => handleDekomposisiChange("step1")}
+                  className="mr-2"
+                />
+                Tentukan tujuan: bandingkan penjualan jajanan.
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={dekomposisiAnswers.step2}
+                  onChange={() => handleDekomposisiChange("step2")}
+                  className="mr-2"
+                />
+                Kumpulkan data: bakpao (50), siomay (30), cilok (20).
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={dekomposisiAnswers.step3}
+                  onChange={() => handleDekomposisiChange("step3")}
+                  className="mr-2"
+                />
+                Pilih Bar Chart untuk membandingkan.
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={dekomposisiAnswers.step4}
+                  onChange={() => handleDekomposisiChange("step4")}
+                  className="mr-2"
+                />
+                Hitung total penjualan semua jajanan.
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkDekomposisiAnswers}
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetDekomposisiAnswers}
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {dekomposisiFeedback && (
+            <p
+              className={`text-sm mt-2 font-bold ${
+                dekomposisiFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {dekomposisiFeedback}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* PENGENALAN POLA */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative text-justify">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-10 relative text-justify">
+        <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Pengenalan Pola
         </div>
-        <p className="text-gray-700 text-sm md:text-base mt-6 text-justify">
-          Setelah data terkumpul, langkah berikutnya adalah mengenali pola dalam
-          data tersebut. Dengan{" "}
-          <span className="font-semibold">memahami pola</span>, kita dapat
-          memilih jenis grafik yang paling sesuai agar informasi lebih mudah
-          dipahami.
+        <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6">
+          Setelah mengumpulkan data, kita perlu <span className="font-semibold">mengenali pola</span> untuk memilih chart yang tepat.
         </p>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-4">
-          <li className="text-justify">
-            <strong>Data Perubahan dari Waktu ke Waktu</strong>
-            <ol className="list-decimal pl-8 mt-2 text-gray-700 space-y-2">
+        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-2 sm:space-y-4">
+          <li className="text-sm md:text-base">
+            <strong>Data yang berubah seiring waktu</strong>
+            <ol className="list-decimal pl-6 sm:pl-8 mt-1 sm:mt-2 text-gray-700 space-y-1 sm:space-y-2">
               <li>
-                <span className="font-medium">Diagram Garis:</span> Fokus pada perubahan individu antar titik waktu.{' '}
-                <span className="italic">Contoh: Tren nilai ulangan selama satu semester.</span>
+                <span className="font-medium">Line Chart:</span> Menunjukkan perubahan data, seperti nilai ujian per bulan.
               </li>
               <li>
-                <span className="font-medium">Diagram Area:</span> Menekankan akumulasi atau total nilai yang berubah.{' '}
-                <span className="italic">Contoh: Jumlah siswa yang mengumpulkan tugas setiap minggu.</span>
+                <span className="font-medium">Area Chart:</span> Menunjukkan jumlah total, seperti jumlah tugas yang dikumpulkan.
               </li>
             </ol>
           </li>
-          <li className="text-justify">
-            <strong>Data Perbandingan Jumlah Antar Kategori</strong>
-            <ol className="list-decimal pl-8 mt-2 text-gray-700 space-y-2">
+          <li className="text-sm md:text-base">
+            <strong>Data untuk membandingkan jumlah</strong>
+            <ol className="list-decimal pl-6 sm:pl-8 mt-1 sm:mt-2 text-gray-700 space-y-1 sm:space-y-2">
               <li>
-                <span className="font-medium">Diagram Batang:</span> Membandingkan data kategori secara horizontal.{' '}
-                <span className="italic">Contoh: Jumlah siswa yang memilih berbagai ekstrakurikuler.</span>
+                <span className="font-medium">Bar Chart:</span> Membandingkan data, seperti jumlah siswa di tiap klub.
               </li>
               <li>
-                <span className="font-medium">Diagram Kolom:</span> Membandingkan data kategori secara vertikal.{' '}
-                <span className="italic">Contoh: Nilai ulangan antar mata pelajaran.</span>
+                <span className="font-medium">Column Chart:</span> Membandingkan data, seperti nilai ujian antar pelajaran.
               </li>
             </ol>
           </li>
-          <li className="text-justify">
-            <strong>Data Proporsi atau Persentase</strong>
-            <p className="pl-8 mt-2">
-              <span className="font-medium">Diagram Lingkaran (Pie Chart):</span> Menampilkan persentase dari total.{' '}
-              <span className="italic">Contoh: Persentase pengeluaran bulanan untuk makanan, transportasi, dan hiburan.</span>
+          <li className="text-sm md:text-base">
+            <strong>Data persentase</strong>
+            <p className="pl-6 sm:pl-8 mt-1 sm:mt-2">
+              <span className="font-medium">Pie Chart:</span> Menunjukkan persentase, seperti pengeluaran untuk makanan dan transportasi.
             </p>
           </li>
         </ul>
-        {/* Interactive Case Study for Pengenalan Pola */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Latihan Pengenalan Pola: Memilih Grafik untuk Data Kehadiran Siswa
+
+        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 sm:mt-6 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
+            Latihan Pemahaman: Pilih Chart yang Tepat
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu memiliki data kehadiran siswa selama satu minggu: Senin (90 siswa hadir), Selasa (85 siswa), Rabu (88 siswa), Kamis (92 siswa), Jumat (80 siswa). Mari kita identifikasi pola untuk memilih jenis grafik yang tepat. Klik tombol berikut untuk melihat pola yang ditemukan:
+          <p className="text-gray-700 text-sm md:text-base mb-2">
+            Kamu punya data kehadiran siswa: Senin (90 siswa), Selasa (85 siswa), Rabu (88 siswa), Kamis (92 siswa), Jumat (80 siswa). Pilih chart yang cocok untuk menunjukkan perubahan kehadiran:
           </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => togglePolaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Pola 1: Perubahan Waktu
-            </button>
-            {polaSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Data kehadiran menunjukkan <strong>perubahan harian</strong> dari Senin hingga Jumat.
-              </p>
-            )}
-            <button
-              onClick={() => togglePolaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Pola 2: Perubahan Kehadiran
-            </button>
-            {polaSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Kehadiran menurun dari Senin (90) ke Selasa (85), naik lagi pada Kamis (92), lalu turun tajam pada Jumat (80).
-              </p>
-            )}
-            <button
-              onClick={() => togglePolaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Pola 3: Jenis Grafik yang Cocok
-            </button>
-            {polaSteps[2] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Untuk melihat fluktuasi kehadiran harian, <strong>Diagram Garis</strong> adalah pilihan yang tepat.
-              </p>
-            )}
+          <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="pattern"
+                  value="Bar Chart"
+                  checked={polaAnswer === "Bar Chart"}
+                  onChange={() => handlePolaChange("Bar Chart")}
+                  className="mr-2"
+                />
+                Bar Chart
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="pattern"
+                  value="Line Chart"
+                  checked={polaAnswer === "Line Chart"}
+                  onChange={() => handlePolaChange("Line Chart")}
+                  className="mr-2"
+                />
+                Line Chart
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="pattern"
+                  value="Pie Chart"
+                  checked={polaAnswer === "Pie Chart"}
+                  onChange={() => handlePolaChange("Pie Chart")}
+                  className="mr-2"
+                />
+                Pie Chart
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkPolaAnswer}
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetPolaAnswer}
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {polaFeedback && (
+            <p
+              className={`text-sm mt-2 font-bold ${
+                polaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {polaFeedback}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* ABSTRAKSI */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <Filter className="w-5 h-5 mr-2" /> Abstraksi
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-10 relative">
+        <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Abstraksi
         </div>
-        <p className="text-gray-700 text-sm md:text-base mt-4 text-justify">
-          Agar grafik mudah dipahami, kita harus menyaring informasi penting dan
-          menghilangkan hal-hal yang tidak relevan.
+        <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-4">
+          Untuk membuat chart yang jelas, kita harus pilih data yang penting dan abaikan data yang tidak perlu.
         </p>
-        <p className="text-gray-700 text-sm md:text-base mt-2 text-justify">
-          📌 Beberapa hal yang perlu diperhatikan:
+        <p className="text-gray-700 text-sm md:text-base mt-1 sm:mt-2">
+          📌 Yang perlu diperhatikan:
         </p>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Fokus hanya pada data utama</strong> → Misalnya, hanya menampilkan rata-rata nilai ujian, bukan semua nilai detail.
+        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+          <li className="text-sm md:text-base">
+            <strong>Pilih data utama</strong> → Misalnya, hanya gunakan rata-rata nilai ujian, bukan semua nilai.
           </li>
-          <li className="text-justify">
-            <strong>Hindari terlalu banyak kategori</strong> dalam satu grafik → Jika terlalu banyak, data akan sulit dianalisis.
+          <li className="text-sm md:text-base">
+            <strong>Jangan gunakan terlalu banyak kategori</strong> → Terlalu banyak kategori membuat chart sulit dipahami.
           </li>
         </ul>
 
-        {/* Interactive Case Study for Abstraksi */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Latihan Abstraksi: Membuat Diagram Lingkaran Preferensi Ekstrakurikuler
+        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 sm:mt-6 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
+            Latihan Pemahaman: Pilih Data yang Penting
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu ingin membuat diagram lingkaran untuk menunjukkan preferensi siswa terhadap ekstrakurikuler: Pramuka (40 siswa), Seni Tari (30 siswa), Bola Voli (20 siswa). Kamu juga memiliki data tambahan seperti nama siswa, kelas, dan jadwal kegiatan. Mari kita saring data yang relevan. Klik tombol berikut untuk melihat proses abstraksi:
+          <p className="text-gray-700 text-sm md:text-base mb-2">
+            Kamu ingin membuat Pie Chart untuk menunjukkan pilihan ekstrakurikuler: Pramuka (40 siswa), Seni Tari (30 siswa), Bola Voli (20 siswa). Pilih data yang dibutuhkan:
           </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => toggleAbstraksiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Identifikasi Data Relevan
-            </button>
-            {abstraksiSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Data yang relevan adalah <strong>jumlah siswa per ekstrakurikuler</strong>: Pramuka (40), Seni Tari (30), Bola Voli (20).
-              </p>
-            )}
-            <button
-              onClick={() => toggleAbstraksiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Abaikan Data Tidak Relevan
-            </button>
-            {abstraksiSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Data seperti nama siswa, kelas, dan jadwal kegiatan <strong>tidak relevan</strong> untuk diagram lingkaran ini, karena tidak memengaruhi distribusi preferensi.
-              </p>
-            )}
+          <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={abstraksiAnswers.info1}
+                  onChange={() => handleAbstraksiChange("info1")}
+                  className="mr-2"
+                />
+                Nama siswa.
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={abstraksiAnswers.info3}
+                  onChange={() => handleAbstraksiChange("info3")}
+                  className="mr-2"
+                />
+                Jadwal ekstrakurikuler.
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={abstraksiAnswers.info2}
+                  onChange={() => handleAbstraksiChange("info2")}
+                  className="mr-2"
+                />
+                Jumlah siswa di setiap ekstrakurikuler.
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkAbstraksiAnswers}
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetAbstraksiAnswers}
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {abstraksiFeedback && (
+            <p
+              className={`text-sm mt-2 font-bold ${
+                abstraksiFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {abstraksiFeedback}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* ALGORITMA */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <Code className="w-5 h-5 mr-2" /> Algoritma
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-10 relative">
+        <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
+          Algoritma
         </div>
-        <p className="text-gray-600 text-sm md:text-base mt-4 text-justify">
-          Untuk membuat grafik di spreadsheet, langkah-langkahnya adalah:
+        <p className="text-gray-600 text-sm md:text-base mt-4 sm:mt-4">
+          Untuk membuat chart di spreadsheet, ikuti langkah-langkah ini:
         </p>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Siapkan data</strong> dalam bentuk tabel → Masukkan data ke dalam kolom dan baris yang rapi.
+        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+          <li className="text-sm md:text-base">
+            <strong>Siapkan data</strong> → Masukkan data ke dalam tabel yang rapi.
           </li>
-          <li className="text-justify">
-            <strong>Pilih data</strong> yang akan divisualisasikan → Blok data yang ingin dibuat grafik.
+          <li className="text-sm md:text-base">
+            <strong>Pilih data</strong> → Blok data yang akan dibuat chart.
           </li>
-          <li className="text-justify">
-            <strong>Klik menu Insert Chart</strong> dan pilih jenis grafik yang sesuai → Pilih jenis grafik seperti garis, batang, atau lingkaran.
-          </li>
-          <li className="text-justify">
-            <strong>Periksa kembali grafik</strong> dan lakukan modifikasi jika diperlukan → Pastikan grafik jelas dan sesuai dengan tujuan.
+          <li className="text-sm md:text-base">
+            <strong>Klik Insert Chart</strong> → Pilih jenis chart, seperti Line Chart atau Bar Chart.
           </li>
         </ul>
 
-        {/* Interactive Case Study for Algoritma */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Latihan Algoritma: Membuat Grafik Nilai Ujian Bulanan
+        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 sm:mt-6 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
+            Latihan Pemahaman: Urutkan Langkah Membuat Chart
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu ingin membuat grafik garis untuk menunjukkan nilai ujian bulanan seorang siswa: Januari (80), Februari (85), Maret (90), April (88), Mei (92), Juni (87). Mari kita buat langkah-langkah sistematis untuk membuat grafik ini di spreadsheet. Klik tombol berikut untuk melihat langkah-langkahnya:
+          <p className="text-gray-700 text-sm md:text-base mb-2">
+            Kamu ingin membuat Line Chart untuk nilai ujian: Januari (80), Februari (85), Maret (90). Pilih langkah yang benar:
           </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => toggleAlgoritmaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Siapkan Data
-            </button>
-            {algoritmaSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Buat tabel di spreadsheet: kolom pertama untuk bulan (Januari-Juni), kolom kedua untuk nilai (80, 85, 90, dst.).
-              </p>
-            )}
-            <button
-              onClick={() => toggleAlgoritmaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Pilih Data
-            </button>
-            {algoritmaSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Blok data di tabel, termasuk bulan dan nilai ujian.
-              </p>
-            )}
-            <button
-              onClick={() => toggleAlgoritmaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Insert Chart
-            </button>
-            {algoritmaSteps[2] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Klik menu <strong>"Insert Chart"</strong> di spreadsheet, lalu pilih <strong>Diagram Garis</strong>.
-              </p>
-            )}
-            <button
-              onClick={() => toggleAlgoritmaStep(3)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 4: Periksa Grafik
-            </button>
-            {algoritmaSteps[3] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                Periksa grafik, pastikan label bulan dan nilai terlihat jelas, lalu simpan.
-              </p>
-            )}
+          <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={algoritmaAnswers.step1}
+                  onChange={() => handleAlgoritmaChange("step1")}
+                  className="mr-2"
+                />
+                Siapkan data dalam tabel.
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={algoritmaAnswers.step4}
+                  onChange={() => handleAlgoritmaChange("step4")}
+                  className="mr-2"
+                />
+                Hitung rata-rata nilai ujian.
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={algoritmaAnswers.step2}
+                  onChange={() => handleAlgoritmaChange("step2")}
+                  className="mr-2"
+                />
+                Blok data untuk chart.
+              </label>
+            </div>
+            <div className="text-sm md:text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={algoritmaAnswers.step3}
+                  onChange={() => handleAlgoritmaChange("step3")}
+                  className="mr-2"
+                />
+                Klik Insert Chart, pilih Line Chart.
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkAlgoritmaAnswers}
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetAlgoritmaAnswers}
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {algoritmaFeedback && (
+            <p
+              className={`text-sm mt-2 font-bold ${
+                algoritmaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {algoritmaFeedback}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Visualisasi Interaktif */}
       <SimpleChart />
 
-      {/* Tombol Navigasi */}
-      <div className="flex justify-between mt-8 px-4">
+      <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12">
+        <h3 className="font-semibold text-[#255F38] text-lg mb-2">Kuis Pemahaman: Visualisasi Data</h3>
+        <p className="text-gray-700 text-sm md:text-base text-justify">
+          Jawab pertanyaan berikut untuk menguji pemahaman Anda tentang konsep visualisasi data:
+        </p>
+        <div className="bg-yellow-50 p-3 sm:p-4 border border-yellow-300 rounded mt-4 shadow-md">
+          <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-yellow-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
+            Soal {currentQuestion} dari 5
+          </div>
+          <div className="mt-8">
+            <h4 className="font-semibold text-yellow-800 text-sm md:text-base mb-2">
+              {questions[currentQuestion - 1].question}
+            </h4>
+            <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+              {questions[currentQuestion - 1].options.map((option, index) => (
+                <div key={index} className="text-sm md:text-base">
+                  <label className="flex items-center border border-gray-300 p-2 mb-2 rounded">
+                    <input
+                      type="radio"
+                      name={`quiz${currentQuestion}`}
+                      value={option}
+                      checked={answers[currentQuestion] === option}
+                      onChange={() => handleAnswerChange(option)}
+                      className="mr-2"
+                    />
+                    {option}
+                  </label>
+                </div>
+              ))}
+            </div>
+            {feedback[currentQuestion] && (
+              <p
+                className={`text-sm mt-2 font-bold ${
+                  feedback[currentQuestion].includes("Benar") ? "text-green-700" : "text-red-700"
+                }`}
+              >
+                {feedback[currentQuestion]}
+              </p>
+            )}
+            <div className="mt-4 flex justify-between">
+              <div className="flex space-x-2">
+                <button
+                  onClick={goToPrevious}
+                  className="bg-[#B0BEC5] text-white px-4 py-2 rounded-lg hover:bg-[#90A4AE] transition duration-300 disabled:opacity-50"
+                  disabled={currentQuestion === 1}
+                >
+                  Sebelumnya
+                </button>
+                {feedback[currentQuestion] && (
+                  <button
+                    onClick={resetQuizAnswer}
+                    className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+                  >
+                    Hapus
+                  </button>
+                )}
+              </div>
+              {isAnswered[currentQuestion] && (
+                <button
+                  onClick={goToNext}
+                  className="bg-yellow-800 text-white px-4 py-2 rounded-lg hover:bg-yellow-900 transition duration-300"
+                  disabled={currentQuestion === 5 && !isAnswered[currentQuestion]}
+                >
+                  {currentQuestion === 5 ? "Selesai" : "Soal Selanjutnya"}
+                </button>
+              )}
+            </div>
+            {currentQuestion === 5 && isAnswered[currentQuestion] && (
+              <p className="mt-4 text-center text-yellow-800 font-bold text-base">
+                Anda telah menyelesaikan semua soal! Klik "Sebelumnya" untuk meninjau.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center px-2 sm:px-4 py-2 mt-4 sm:mt-8">
         <a
           href="/contoh-lookup"
-          className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600"
+          className="bg-gray-500 text-white px-4 sm:px-5 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px]"
         >
           ← Sebelumnya
         </a>
         <a
           href="/contoh-penerapan-visualisasi-data"
-          className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E]"
+          className="bg-[#255F38] text-white px-4 sm:px-5 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px]"
         >
           Selanjutnya →
         </a>
@@ -483,4 +832,3 @@ export default function VisualisasiData() {
     </Layout>
   );
 }
-

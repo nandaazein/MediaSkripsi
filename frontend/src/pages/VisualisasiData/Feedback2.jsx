@@ -1,11 +1,14 @@
+import React, { useState, useEffect } from 'react';
 import Layout from "../../components/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const FeedbackVisualisasiData = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [kkm, setKKM] = useState(70);
+  const [error, setError] = useState('');
 
-  // Default state jika data tidak tersedia
   const { score, answers, questions, totalQuestions } = state || {
     score: 0,
     answers: {},
@@ -13,13 +16,27 @@ const FeedbackVisualisasiData = () => {
     totalQuestions: 0,
   };
 
-  // Hitung correctCount berdasarkan answers dan questions
+  useEffect(() => {
+    const fetchKKM = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:5000/api/kkm/2', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setKKM(response.data.kkm);
+      } catch (err) {
+        console.error('Fetch KKM error:', err);
+        setError('Gagal mengambil KKM, menggunakan default (70)');
+      }
+    };
+    fetchKKM();
+  }, []);
+
   const correctCount = questions.reduce((count, question, index) => {
     const answerKey = String.fromCharCode(97 + (answers[index] || '').charCodeAt(0) - 97);
     return answers[index] && answerKey === question.correct_answer ? count + 1 : count;
   }, 0);
 
-  // Siapkan correctAnswers dan answerOptions
   const correctAnswers = questions.reduce((acc, question, index) => {
     acc[`q${index + 1}`] = question.correct_answer;
     return acc;
@@ -32,17 +49,15 @@ const FeedbackVisualisasiData = () => {
     return acc;
   }, {});
 
-  const KKM = 70;
   const incorrectCount = totalQuestions - correctCount;
 
   const feedbackMessage =
-    score >= KKM
+    score >= kkm
       ? "Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!"
       : "Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!";
 
-  console.log("FeedbackVisualisasiData state:", state); // Debugging
+  console.log("FeedbackVisualisasiData state:", state);
 
-  // Jika data tidak lengkap, tampilkan pesan error
   if (!state || !questions.length) {
     return (
       <Layout>
@@ -61,14 +76,12 @@ const FeedbackVisualisasiData = () => {
 
   return (
     <Layout>
-      {/* Header Judul */}
       <div>
         <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
           Hasil Kuis 2
         </h1>
       </div>
-
-      {/* Ringkasan Hasil */}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Ringkasan
@@ -83,11 +96,12 @@ const FeedbackVisualisasiData = () => {
           <strong>Jawaban Salah:</strong> {incorrectCount} soal
         </p>
         <p className="text-gray-700 text-sm md:text-base">
+          <strong>KKM:</strong> {kkm}
+        </p>
+        <p className="text-gray-700 text-sm md:text-base">
           <strong>Feedback:</strong> {feedbackMessage}
         </p>
       </div>
-
-      {/* Detail Jawaban */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Detail Jawaban
@@ -123,12 +137,10 @@ const FeedbackVisualisasiData = () => {
           </tbody>
         </table>
       </div>
-
-      {/* Tombol Navigasi */}
       <div className="flex justify-center mt-8 space-x-4">
-        {score >= KKM ? (
+        {score >= kkm ? (
           <button
-            onClick={() => navigate("/materi-berikutnya")} // Ganti dengan path materi berikutnya
+            onClick={() => navigate("/peringkasan-data")} // Ganti dengan path materi berikutnya
             className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
           >
             Lanjut Materi

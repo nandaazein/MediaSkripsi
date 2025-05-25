@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import LayoutSiswa from '../../components/Layout'; // Sesuaikan path sesuai struktur proyek Anda
+
 
 const KuisPeringkasanData = () => {
   const [questions, setQuestions] = useState([]);
@@ -117,7 +116,7 @@ const KuisPeringkasanData = () => {
         console.log('Saving progress...');
         const progressResponse = await axios.post(
           'http://localhost:5000/api/students/progress',
-          { nis: user.nis, progress: 100 },
+          { nis: user.nis, progress: 20 },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         console.log('Progress saved:', progressResponse.data);
@@ -162,86 +161,88 @@ const KuisPeringkasanData = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <LayoutSiswa>
       <div className="p-6">
-        <h2 className="text-xl font-bold text-green-800 mb-4">AnalyticsLearn - Kuis 3</h2>
-        <div className="bg-gray-200 p-4 rounded mb-4">
-          <h3 className="text-lg font-semibold text-green-800 mb-2">PETUNJUK Mengerjakan</h3>
-          <ol className="list-decimal list-inside text-gray-700 space-y-2">
-            <li>Pilih jawaban yang benar dari opsi yang tersedia.</li>
-            <li>Tekan tombol <strong>Selesai</strong> untuk mengakhiri kuis dan melihat hasil.</li>
-            <li>Hasil akan ditampilkan di halaman feedback dengan skor dan detail jawaban.</li>
-          </ol>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-green-800">Kuis 3 - Peringkasan Data</h2>
+          <div className="bg-red-100 p-2 rounded text-red-700">
+            Waktu Tersisa: {formatTime(timeLeft)}
+          </div>
         </div>
-
-        {error ? (
-          <p className="text-red-500">{error}</p>
-        ) : currentQuestion ? (
-          <div className="bg-white p-4 rounded shadow-lg mb-4">
-            <div className="bg-red-100 p-2 rounded mb-2 text-red-700">
-              Waktu Tersisa: {formatTime(timeLeft)}
-            </div>
-            <h3 className="text-lg font-semibold text-green-800 mb-2">
-              Soal {currentQuestionIndex + 1}
-            </h3>
-            <p className="text-gray-700 mb-2">
-              {currentQuestion.question_text || 'Pilih jawaban yang benar,'}
-            </p>
-            {currentQuestion.image_url && (
-              <img
-                src={currentQuestion.image_url}
-                alt="Question Image"
-                className="w-[512px] h-[512px] max-w-full object-contain mx-auto mb-2 rounded-lg"
-                onError={(e) => { e.target.style.display = 'none'; }}
-              />
-            )}
-            <div className="mb-4">
-              {Array.isArray(currentQuestion.options) && currentQuestion.options.map((option, idx) => (
-                <div key={idx} className="flex items-center mb-2">
-                  <input
-                    type="radio"
-                    name="answer"
-                    value={String.fromCharCode(97 + idx)}
-                    checked={selectedAnswer === String.fromCharCode(97 + idx)}
-                    onChange={(e) => handleAnswerChange(e.target.value)}
-                    className="mr-2"
-                  />
-                  <label className="text-gray-700">
-                    {String.fromCharCode(97 + idx)}. {option || '-'}
-                  </label>
-                </div>
+        {/* Navigasi Soal dan Konten Soal */}
+        <div className="flex h-full">
+          <div className="w-1/4 pr-4">
+            <div className="bg-gray-100 p-4 rounded shadow-lg h-full">
+              {questions.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => { setCurrentQuestionIndex(index); setSelectedAnswer(answers[index] || ''); }}
+                  className={`block w-full text-left p-2 mb-2 ${currentQuestionIndex === index ? 'bg-green-200' : 'bg-gray-200'} rounded`}
+                >
+                  Soal {index + 1}
+                </button>
               ))}
             </div>
-            <div className="flex justify-between items-center mt-4">
-              <button
-                onClick={handlePrevQuestion}
-                disabled={currentQuestionIndex === 0}
-                className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 disabled:opacity-50"
-              >
-                Sebelumnya
-              </button>
-              {currentQuestionIndex === questions.length - 1 ? (
-                <button
-                  onClick={handleNextOrFinish}
-                  className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800"
-                >
-                  Selesai
-                </button>
-              ) : (
-                <button
-                  onClick={handleNextOrFinish}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
-                >
-                  Selanjutnya
-                </button>
-              )}
-            </div>
           </div>
-        ) : (
-          <p className="text-gray-500">Tidak ada soal yang tersedia untuk Kuis 3.</p>
-        )}
+          <div className="w-3/4">
+            {error ? (
+              <p className="text-red-500">{error}</p>
+            ) : currentQuestion ? (
+              <div className="bg-white p-3 rounded shadow-lg" style={{ maxHeight: '100%', overflowY: 'auto' }}>
+                <h3 className="text-lg font-semibold text-green-800 mb-2">
+                  Soal {currentQuestionIndex + 1}
+                </h3>
+                <p className="text-gray-700 mb-2">{currentQuestion.question_text || 'Pilih jawaban yang benar,'}</p>
+                {currentQuestion.image_url && (
+                  <img src={currentQuestion.image_url} alt="Question Image" className="w-[512px] h-auto max-w-full object-contain mx-auto mb-2 rounded-lg" onError={(e) => { e.target.style.display = 'none'; }} />
+                )}
+                <div className="mb-3">
+                  {Array.isArray(currentQuestion.options) && currentQuestion.options.map((option, idx) => (
+                    <div key={idx} className="border border-gray-300 p-2 mb-2 rounded">
+                      <input
+                        type="radio"
+                        name="answer"
+                        value={String.fromCharCode(97 + idx)}
+                        checked={selectedAnswer === String.fromCharCode(97 + idx)}
+                        onChange={(e) => handleAnswerChange(e.target.value)}
+                        className="mr-2"
+                      />
+                      <label className="text-gray-700">
+                        {String.fromCharCode(97 + idx)}. {option || '-'}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-between items-center mt-3">
+                  <button
+                    onClick={handlePrevQuestion}
+                    disabled={currentQuestionIndex === 0}
+                    className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 disabled:opacity-50"
+                  >
+                    Sebelumnya
+                  </button>
+                  {currentQuestionIndex === questions.length - 1 ? (
+                    <button
+                      onClick={handleNextOrFinish}
+                      className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800"
+                    >
+                      Selesai
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleNextOrFinish}
+                      className="bg-[#255F38] hover:bg-[#1E4D2E] text-white px-4 py-2 rounded"
+                    >
+                      Selanjutnya
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <p className="text-gray-500">Tidak ada soal yang tersedia untuk Kuis 3.</p>
+            )}
+          </div>
+        </div>
       </div>
-    </LayoutSiswa>
   );
 };
 

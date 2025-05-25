@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Admin/Layout";
+import { Users, CheckCircle, BarChart3, TrendingUp, TrendingDown } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // Dummy data to simulate database fetch
   const dummyData = {
     totalStudents: 3,
     completedStudents: 2,
@@ -30,93 +30,85 @@ const Dashboard = () => {
       kuis4: { student: "SISWA 1", score: 10 },
       evaluasi: { student: "SISWA 1", score: 5 },
     },
-    token: "0B71TP4P",
   };
 
-  // Cek role pengguna saat komponen dimuat
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user || user.role !== 'teacher') {
-      navigate('/masuk'); // Arahkan ke halaman login jika bukan teacher
+      navigate('/masuk');
     }
   }, [navigate]);
 
   return (
     <Layout>
-
-
-      <section className="bg-gray-100 p-4 sm:p-6 rounded shadow-md mt-6 mb-6 text-center">
-        <h2 className="text-xl sm:text-2xl font-bold text-[#255F38] mb-4">
-          Selamat Datang di Halaman Admin
+      <section className="bg-white py-8 px-6 rounded-lg shadow mt-8 mb-8">
+        <h2 className="text-3xl font-bold text-[#255F38] mb-6 text-center">
+          📊 Dashboard Admin
         </h2>
-        <div className="flex flex-col sm:flex-row justify-between mb-4 items-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <div className="w-full sm:w-auto flex justify-center sm:justify-start">
-            <select className="p-2 border rounded w-full sm:w-auto max-w-xs">
-              <option value="Semua kelas">Semua kelas</option>
-              <option value="Kelas A">Kelas A</option>
-              <option value="Kelas B">Kelas B</option>
-              <option value="Kelas C">Kelas C</option>
-            </select>
-          </div>
-          <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <div className="relative w-full sm:w-auto">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                  <path fillRule="evenodd" d="M10 0a10 10 0 100 20 10 10 0 000-20zM2 10a8 8 0 1116 0 8 8 0 01-16 0z" clipRule="evenodd" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                placeholder="TOKEN"
-                className="pl-10 p-2 border rounded w-full sm:w-64"
-                value={dummyData.token}
-              />
-            </div>
-            <button className="bg-[#255F38] text-white p-2 rounded hover:bg-green-700 cursor-pointer w-full sm:w-auto">
-              Refresh
-            </button>
-          </div>
+
+        {/* Filter Kelas */}
+        <div className="flex justify-center mb-8">
+          <select className="p-3 border rounded-lg bg-white shadow-sm w-64">
+            <option value="Semua kelas">Semua kelas</option>
+            <option value="Kelas A">Kelas A</option>
+            <option value="Kelas B">Kelas B</option>
+            <option value="Kelas C">Kelas C</option>
+          </select>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 mb-4">
-          <div className="border p-4 rounded">
-            <h3 className="text-sm font-bold text-gray-700">JUMLAH SISWA</h3>
-            <p className="text-base text-gray-700">{dummyData.totalStudents} SISWA</p>
-          </div>
-          <div className="border p-4 rounded">
-            <h3 className="text-sm font-bold text-gray-700">PROGRES BELAJAR</h3>
-            <p className="text-base text-gray-700">{dummyData.completedStudents} SISWA SELESAI</p>
-          </div>
+
+        {/* Statistik Utama */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <StatCard icon={<Users className="text-green-600" />} title="Jumlah Siswa" value={`${dummyData.totalStudents} Siswa`} />
+          <StatCard icon={<CheckCircle className="text-green-600" />} title="Progres Belajar" value={`${dummyData.completedStudents} Siswa Selesai`} />
+          <StatCard icon={<BarChart3 className="text-green-600" />} title="Rata-rata Nilai" value={
+            <ScoreList scores={dummyData.averageScores} />
+          } />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="border p-4 rounded">
-            <h3 className="text-sm font-bold text-gray-700">NILAI RATA-RATA</h3>
-            <p className="text-sm text-gray-700">Kuis 1: {dummyData.averageScores.kuis1}</p>
-            <p className="text-sm text-gray-700">Kuis 2: {dummyData.averageScores.kuis2}</p>
-            <p className="text-sm text-gray-700">Kuis 3: {dummyData.averageScores.kuis3}</p>
-            <p className="text-sm text-gray-700">Kuis 4: {dummyData.averageScores.kuis4}</p>
-            <p className="text-sm text-gray-700">Evaluasi: {dummyData.averageScores.evaluasi}</p>
-          </div>
-          <div className="border p-4 rounded">
-            <h3 className="text-sm font-bold text-gray-700">NILAI TERTINGGI</h3>
-            <p className="text-sm text-gray-700">Kuis 1: {dummyData.highestScores.kuis1.student} ({dummyData.highestScores.kuis1.score})</p>
-            <p className="text-sm text-gray-700">Kuis 2: {dummyData.highestScores.kuis2.student} ({dummyData.highestScores.kuis2.score})</p>
-            <p className="text-sm text-gray-700">Kuis 3: {dummyData.highestScores.kuis3.student} ({dummyData.highestScores.kuis3.score})</p>
-            <p className="text-sm text-gray-700">Kuis 4: {dummyData.highestScores.kuis4.student} ({dummyData.highestScores.kuis4.score})</p>
-            <p className="text-sm text-gray-700">Evaluasi: {dummyData.highestScores.evaluasi.student} ({dummyData.highestScores.evaluasi.score})</p>
-          </div>
-          <div className="border p-4 rounded">
-            <h3 className="text-sm font-bold text-gray-700">NILAI TERENDAH</h3>
-            <p className="text-sm text-gray-700">Kuis 1: {dummyData.lowestScores.kuis1.student} ({dummyData.lowestScores.kuis1.score})</p>
-            <p className="text-sm text-gray-700">Kuis 2: {dummyData.lowestScores.kuis2.student} ({dummyData.lowestScores.kuis2.score})</p>
-            <p className="text-sm text-gray-700">Kuis 3: {dummyData.lowestScores.kuis3.student} ({dummyData.lowestScores.kuis3.score})</p>
-            <p className="text-sm text-gray-700">Kuis 4: {dummyData.lowestScores.kuis4.student} ({dummyData.lowestScores.kuis4.score})</p>
-            <p className="text-sm text-gray-700">Evaluasi: {dummyData.lowestScores.evaluasi.student} ({dummyData.lowestScores.evaluasi.score})</p>
-          </div>
+
+        {/* Nilai Tertinggi & Terendah */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <StatCard icon={<TrendingUp className="text-green-600" />} title="Nilai Tertinggi" value={
+            <ScoreDetailList data={dummyData.highestScores} />
+          } />
+          <StatCard icon={<TrendingDown className="text-red-600" />} title="Nilai Terendah" value={
+            <ScoreDetailList data={dummyData.lowestScores} />
+          } />
         </div>
       </section>
     </Layout>
   );
 };
+
+const StatCard = ({ icon, title, value }) => (
+  <div className="bg-gray-50 border border-gray-200 p-6 rounded-xl shadow-sm">
+    <div className="flex items-center mb-3 space-x-3">
+      <div className="p-2 rounded-full bg-green-100">
+        {icon}
+      </div>
+      <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+    </div>
+    <div className="text-gray-700 text-sm">
+      {typeof value === 'string' ? <p className="text-xl font-medium">{value}</p> : value}
+    </div>
+  </div>
+);
+
+const ScoreList = ({ scores }) => (
+  <ul className="text-sm space-y-1">
+    {Object.entries(scores).map(([key, val]) => (
+      <li key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}: <span className="font-semibold">{val}</span></li>
+    ))}
+  </ul>
+);
+
+const ScoreDetailList = ({ data }) => (
+  <ul className="text-sm space-y-1">
+    {Object.entries(data).map(([key, val]) => (
+      <li key={key}>
+        {key.charAt(0).toUpperCase() + key.slice(1)}: {val.student} ({val.score})
+      </li>
+    ))}
+  </ul>
+);
 
 export default Dashboard;

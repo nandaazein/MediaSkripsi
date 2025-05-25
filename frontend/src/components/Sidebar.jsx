@@ -57,7 +57,6 @@ export const Sidebar = () => {
         { title: "Pendahuluan", path: "/pendahuluan" },
         { title: "Mengenal Analisis Data", path: "/mengenal-analisis" },
         { title: "Computational Thinking", path: "/pengenalan-ct" },
-        { title: "Penerapan CT", path: "/penerapan-ct" },
       ],
     },
     {
@@ -71,7 +70,7 @@ export const Sidebar = () => {
         { title: "Aktivitas Siswa", path: "/aktivitas-lookup" },
         { title: "Mari Berlatih", path: "/berlatih-lookup" },
         { title: "Rangkuman", path: "/rangkuman-pencarian" },
-        { title: "Kuis 1", path: "/kuis-pencarian" },
+        { title: "Kuis 1", path: "/petunjuk-pengerjaan-pencarian" },
       ],
     },
     {
@@ -83,7 +82,7 @@ export const Sidebar = () => {
         { title: "Aktivitas Siswa", path: "/aktivitas-visualisasi" },
         { title: "Mari Berlatih", path: "/mari-berlatih-visualisasi" },
         { title: "Rangkuman", path: "/rangkuman-visualisasi" },
-        { title: "Kuis 2", path: "/kuis-visualisasi" },
+        { title: "Kuis 2", path: "/petunjuk-pengerjaan-visualisasi" },
       ],
     },
     {
@@ -95,7 +94,7 @@ export const Sidebar = () => {
         { title: "Aktivitas Siswa", path: "/aktivitas-peringkasan" },
         { title: "Mari Berlatih", path: "/berlatih-peringkasan" },
         { title: "Rangkuman", path: "/rangkuman-peringkasan" },
-        { title: "Kuis 3", path: "/kuis-peringkasan" },
+        { title: "Kuis 3", path: "/petunjuk-pengerjaan-peringkasan" },
       ],
     },
     {
@@ -109,6 +108,11 @@ export const Sidebar = () => {
         { title: "Rangkuman", path: "/rangkuman-pengelolaan" },
         { title: "Kuis 4", path: "/kuis-pengelolaan" },
       ],
+    },
+    {
+      icon: faTasks,
+      title: "Penerapan Analisis Data",
+      subItems: [],
     },
     {
       icon: faTasks,

@@ -52,7 +52,9 @@ const quizModel = {
     console.error('Error in deleteQuestion:', error);
     throw error; // Lempar error agar ditangkap oleh controller
   }
-}
+},
+
+
 };
 
 export default quizModel;

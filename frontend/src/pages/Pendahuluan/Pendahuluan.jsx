@@ -1,8 +1,40 @@
 import Layout from "../../components/Layout";
 import "remixicon/fonts/remixicon.css";
 import pustakawan from "../../assets/Pendahuluan/pustakawan.jpg";
+import { useState } from "react";
 
 const Pendahuluan = () => {
+  const [answers, setAnswers] = useState({
+    step1: false,
+    step2: false,
+    step3: false,
+  });
+  const [feedback, setFeedback] = useState("");
+
+  // Fungsi untuk menangani perubahan checkbox
+  const handleChange = (step) => {
+    setAnswers((prev) => ({ ...prev, [step]: !prev[step] }));
+  };
+
+  // Fungsi untuk memeriksa jawaban
+  const checkAnswers = () => {
+    const correctAnswers = ["Membandingkan nilai ulangan dengan teman", "Menghitung jumlah tugas yang sudah selesai"];
+    const selectedAnswers = [
+      answers.step1 ? "Membandingkan nilai ulangan dengan teman" : "",
+      answers.step2 ? "Menghitung jumlah tugas yang sudah selesai" : "",
+      answers.step3 ? "Mencatat jadwal harian" : "",
+    ].filter(Boolean);
+
+    const isCorrect = selectedAnswers.length === correctAnswers.length && selectedAnswers.every((ans) => correctAnswers.includes(ans));
+    setFeedback(isCorrect ? "Benar! Kamu sudah melakukan analisis data dalam kegiatan sehari-hari." : "Salah. Pilih aktivitas yang berhubungan dengan analisis data. Coba lagi!");
+  };
+
+  // Fungsi untuk mereset jawaban
+  const resetAnswers = () => {
+    setAnswers({ step1: false, step2: false, step3: false });
+    setFeedback("");
+  };
+
   return (
     <Layout>
       {/* Header judul */}
@@ -24,7 +56,7 @@ const Pendahuluan = () => {
         </p>
       </div>
 
-      {/* Bagian "Tahukah Kamu?" */}
+      {/* Bagian "Tahukah Kamu?" dengan Interaktivitas */}
       <div className="bg-white p-4 shadow-md rounded mt-4">
         <h2 className="font-bold text-lg flex items-center text-[#255F38]">
           <i className="ri-lightbulb-line text-[#255F38] text-xl mr-2"></i> Tahukah Kamu?
@@ -33,7 +65,7 @@ const Pendahuluan = () => {
         {/* Gambar */}
         <div className="flex justify-center mt-4">
           <img 
-            src={pustakawan} // Bisa diganti dengan ilustrasi siswa mengelola data
+            src={pustakawan} 
             alt="Siswa Mengelola Data" 
             className="w-full max-w-md rounded-lg shadow-md"
           />
@@ -66,8 +98,80 @@ const Pendahuluan = () => {
           dalam kehidupan sehari-hari. Kemampuan ini sangat berguna untuk memahami informasi, mengambil keputusan, 
           serta menjadi lebih teratur dan sistematis dalam belajar maupun beraktivitas di sekolah.
         </p>
-      </div>
 
+        {/* Interaktivitas: Apersepsi Analisis Data */}
+        <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-1 sm:mt-2 relative">
+          <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
+            <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
+             Apa yang Pernah Kamu Lakukan?
+            </h3>
+            <p className="text-gray-700 text-sm md:text-base mt-1 sm:mt-2 text-justify">
+            Sebelum belajar lebih dalam tentang analisis data, mari kita ingat pengalamanmu. Sebagai siswa, kamu pasti pernah melakukan kegiatan yang melibatkan analisis data, seperti membandingkan nilai atau menghitung sesuatu untuk membuat keputusan. Coba pikirkan kegiatan berikut yang pernah kamu lakukan:
+            </p>
+            <p className="text-gray-700 text-sm md:text-base text-justify mb-2">
+              Pilih kegiatan yang pernah kamu lakukan yang berhubungan dengan analisis data:
+            </p>
+            <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
+              <div className="text-sm md:text-base">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={answers.step1}
+                    onChange={() => handleChange("step1")}
+                    className="mr-2"
+                  />
+                  1. Membandingkan nilai ulangan dengan teman
+                </label>
+              </div>
+              <div className="text-sm md:text-base">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={answers.step2}
+                    onChange={() => handleChange("step2")}
+                    className="mr-2"
+                  />
+                  2. Menghitung jumlah tugas yang sudah selesai
+                </label>
+              </div>
+              <div className="text-sm md:text-base">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={answers.step3}
+                    onChange={() => handleChange("step3")}
+                    className="mr-2"
+                  />
+                  3. Mencatat jadwal harian
+                </label>
+              </div>
+            </div>
+            <div className="mt-4 flex space-x-2">
+              <button
+                onClick={checkAnswers}
+                className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+              >
+                Periksa Jawaban
+              </button>
+              <button
+                onClick={resetAnswers}
+                className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+              >
+                Hapus
+              </button>
+            </div>
+            {feedback && (
+              <p
+                className={`text-sm mt-2 font-bold ${
+                  feedback.includes("Benar") ? "text-green-700" : "text-red-700"
+                }`}
+              >
+                {feedback}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8 px-4">

@@ -7,16 +7,9 @@ import {
   Filter,
   Code,
   CheckCircle,
-  ChevronRight,
 } from "lucide-react";
 
 export default function PengelolaanData() {
-  // State untuk toggle langkah-langkah di masing-masing bagian
-  const [dekomposisiSteps, setDekomposisiSteps] = useState([false, false, false]);
-  const [polaSteps, setPolaSteps] = useState([false, false, false]);
-  const [abstraksiSteps, setAbstraksiSteps] = useState([false, false, false]);
-  const [algoritmaSteps, setAlgoritmaSteps] = useState([false, false, false]);
-
   // State untuk simulasi sorting dan filtering
   const initialData = [
     { id: 1, nama: "Aisyah", nilai: 85, kelas: "8A" },
@@ -29,31 +22,6 @@ export default function PengelolaanData() {
   const [sortOrder, setSortOrder] = useState("none");
   const [filterKelas, setFilterKelas] = useState("Semua");
 
-  // Fungsi untuk toggle langkah-langkah
-  const toggleDekomposisiStep = (index) => {
-    setDekomposisiSteps((prev) =>
-      prev.map((step, i) => (i === index ? !step : step))
-    );
-  };
-
-  const togglePolaStep = (index) => {
-    setPolaSteps((prev) =>
-      prev.map((step, i) => (i === index ? !step : step))
-    );
-  };
-
-  const toggleAbstraksiStep = (index) => {
-    setAbstraksiSteps((prev) =>
-      prev.map((step, i) => (i === index ? !step : step))
-    );
-  };
-
-  const toggleAlgoritmaStep = (index) => {
-    setAlgoritmaSteps((prev) =>
-      prev.map((step, i) => (i === index ? !step : step))
-    );
-  };
-
   // Fungsi untuk sorting
   const handleSort = (order) => {
     setSortOrder(order);
@@ -61,7 +29,7 @@ export default function PengelolaanData() {
     if (order === "ascending") {
       sortedData.sort((a, b) => a.nilai - b.nilai);
     } else if (order === "descending") {
-      sortedData.sort((a, b) => b.nilai - a.nilai);
+      sortedData.sort((a, b) => b.nilai - b.nilai);
     }
     setData(sortedData);
   };
@@ -73,6 +41,258 @@ export default function PengelolaanData() {
       setData(initialData);
     } else {
       setData(initialData.filter((item) => item.kelas === kelas));
+    }
+  };
+
+  // State untuk Latihan Pemahaman: Dekomposisi
+  const [dekomposisiAnswers, setDekomposisiAnswers] = useState({
+    step1: false,
+    step2: false,
+    step3: false,
+  });
+  const [dekomposisiFeedback, setDekomposisiFeedback] = useState("");
+  const [dekomposisiAnswered, setDekomposisiAnswered] = useState(false);
+
+  const handleDekomposisiChange = (step) => {
+    setDekomposisiAnswers((prev) => ({ ...prev, [step]: !prev[step] }));
+  };
+
+  const checkDekomposisiAnswers = () => {
+    const correctAnswers = { step1: true, step2: true, step3: false };
+    const isCorrect =
+      dekomposisiAnswers.step1 === correctAnswers.step1 &&
+      dekomposisiAnswers.step2 === correctAnswers.step2 &&
+      dekomposisiAnswers.step3 === correctAnswers.step3;
+    setDekomposisiFeedback(
+      isCorrect
+        ? "Benar! Langkah yang tepat adalah menentukan tujuan dan memilih teknik sorting."
+        : "Jawaban salah, ayo coba lagi."
+    );
+    setDekomposisiAnswered(true);
+  };
+
+  const resetDekomposisiAnswers = () => {
+    setDekomposisiAnswers({ step1: false, step2: false, step3: false });
+    setDekomposisiFeedback("");
+    setDekomposisiAnswered(false);
+  };
+
+  // State untuk Latihan Pemahaman: Pengenalan Pola
+  const [polaAnswer, setPolaAnswer] = useState("");
+  const [polaFeedback, setPolaFeedback] = useState("");
+  const [polaAnswered, setPolaAnswered] = useState(false);
+
+  const handlePolaChange = (value) => {
+    setPolaAnswer(value);
+  };
+
+  const checkPolaAnswer = () => {
+    const correctAnswer = "Nilai tertinggi di atas";
+    setPolaFeedback(
+      polaAnswer === correctAnswer
+        ? "Benar! Setelah sorting descending, nilai tertinggi berada di posisi atas."
+        : "Jawaban salah, ayo coba lagi."
+    );
+    setPolaAnswered(true);
+  };
+
+  const resetPolaAnswer = () => {
+    setPolaAnswer("");
+    setPolaFeedback("");
+    setPolaAnswered(false);
+  };
+
+  // State untuk Latihan Pemahaman: Abstraksi
+  const [abstraksiAnswers, setAbstraksiAnswers] = useState({
+    info1: false,
+    info2: false,
+    info3: false,
+  });
+  const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
+  const [abstraksiAnswered, setAbstraksiAnswered] = useState(false);
+
+  const handleAbstraksiChange = (info) => {
+    setAbstraksiAnswers((prev) => ({ ...prev, [info]: !prev[info] }));
+  };
+
+  const checkAbstraksiAnswers = () => {
+    const correctAnswers = { info1: true, info2: false, info3: false };
+    const isCorrect =
+      abstraksiAnswers.info1 === correctAnswers.info1 &&
+      abstraksiAnswers.info2 === correctAnswers.info2 &&
+      abstraksiAnswers.info3 === correctAnswers.info3;
+    setAbstraksiFeedback(
+      isCorrect
+        ? "Benar! Hanya kolom Kelas yang diperlukan untuk menyaring siswa kelas 8A."
+        : "Jawaban salah, ayo coba lagi."
+    );
+    setAbstraksiAnswered(true);
+  };
+
+  const resetAbstraksiAnswers = () => {
+    setAbstraksiAnswers({ info1: false, info2: false, info3: false });
+    setAbstraksiFeedback("");
+    setAbstraksiAnswered(false);
+  };
+
+  // State untuk Latihan Pemahaman: Algoritma
+  const [algoritmaAnswer, setAlgoritmaAnswer] = useState("");
+  const [algoritmaFeedback, setAlgoritmaFeedback] = useState("");
+  const [algoritmaAnswered, setAlgoritmaAnswered] = useState(false);
+
+  const handleAlgoritmaChange = (value) => {
+    setAlgoritmaAnswer(value);
+  };
+
+  const checkAlgoritmaAnswer = () => {
+    const correctAnswer = "Langkah-langkah Filtering";
+    setAlgoritmaFeedback(
+      algoritmaAnswer === correctAnswer
+        ? "Benar! Langkah-langkah filtering melibatkan memilih kolom Kategori, menetapkan kriteria 'Pramuka', dan menerapkan filter."
+        : "Jawaban salah, ayo coba lagi. Pastikan Anda memilih langkah yang mencakup semua aspek algoritma untuk filtering."
+    );
+    setAlgoritmaAnswered(true);
+  };
+
+  const resetAlgoritmaAnswer = () => {
+    setAlgoritmaAnswer("");
+    setAlgoritmaFeedback("");
+    setAlgoritmaAnswered(false);
+  };
+
+  // State untuk Kuis Pemahaman
+  const [currentQuestion, setCurrentQuestion] = useState(1);
+  const [answers, setAnswers] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+  });
+  const [feedback, setFeedback] = useState({
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+  });
+  const [isAnswered, setIsAnswered] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  });
+
+  const questions = [
+    {
+      question: "Apa fungsi utama dari sorting dalam pengelolaan data?",
+      options: [
+        "A. Menyaring data berdasarkan kriteria",
+        "B. Mengurutkan data agar lebih mudah dianalisis",
+        "C. Menjumlahkan data",
+        "D. Menghapus data duplikat",
+      ],
+      correctAnswer: "B. Mengurutkan data agar lebih mudah dianalisis",
+      explanation: "Sorting mengurutkan data untuk memudahkan analisis, seperti mengurutkan nilai dari tertinggi ke terendah.",
+    },
+    {
+      question: "Apa yang dilakukan oleh filtering dalam spreadsheet?",
+      options: [
+        "A. Mengurutkan data dari kecil ke besar",
+        "B. Menampilkan hanya data yang memenuhi kriteria tertentu",
+        "C. Menghitung jumlah data",
+        "D. Menggabungkan data dari beberapa kolom",
+      ],
+      correctAnswer: "B. Menampilkan hanya data yang memenuhi kriteria tertentu",
+      explanation: "Filtering menyaring data berdasarkan kriteria, seperti menampilkan hanya siswa dari kelas 8A.",
+    },
+    {
+      question: "Langkah apa yang termasuk dalam dekomposisi pengelolaan data?",
+      options: [
+        "A. Membuat grafik dari data",
+        "B. Menentukan tujuan pengelolaan data",
+        "C. Menghitung rata-rata data",
+        "D. Membuat presentasi",
+      ],
+      correctAnswer: "B. Menentukan tujuan pengelolaan data",
+      explanation: "Dekomposisi melibatkan menentukan tujuan, seperti apakah akan mengurutkan atau menyaring data.",
+    },
+    {
+      question: "Dalam abstraksi, apa yang harus dilakukan?",
+      options: [
+        "A. Mengumpulkan semua data",
+        "B. Mengabaikan data yang tidak relevan",
+        "C. Mengurutkan data",
+        "D. Membuat tabel baru",
+      ],
+      correctAnswer: "B. Mengabaikan data yang tidak relevan",
+      explanation: "Abstraksi berfokus pada memilih data penting dan mengabaikan yang tidak diperlukan.",
+    },
+    {
+      question: "Apa langkah pertama dalam menerapkan filtering?",
+      options: [
+        "A. Memilih kolom untuk diurutkan",
+        "B. Memblok seluruh data termasuk header",
+        "C. Menghitung jumlah data",
+        "D. Mengklik tombol Sort",
+      ],
+      correctAnswer: "B. Memblok seluruh data termasuk header",
+      explanation: "Filtering dimulai dengan memblok data untuk memastikan semua kolom dapat difilter dengan benar.",
+    },
+  ];
+
+  const handleAnswerChange = (option) => {
+    setAnswers((prev) => ({ ...prev, [currentQuestion]: option }));
+    const currentCorrect = questions[currentQuestion - 1].correctAnswer;
+    if (option === currentCorrect) {
+      setFeedback((prev) => ({
+        ...prev,
+        [currentQuestion]: `Benar! ${currentCorrect}. ${questions[currentQuestion - 1].explanation}`,
+      }));
+    } else {
+      setFeedback((prev) => ({
+        ...prev,
+        [currentQuestion]: "Jawaban salah, ayo coba lagi.",
+      }));
+    }
+    setIsAnswered((prev) => ({ ...prev, [currentQuestion]: true }));
+  };
+
+  const resetQuizAnswer = () => {
+    setAnswers((prev) => ({ ...prev, [currentQuestion]: "" }));
+    setFeedback((prev) => ({ ...prev, [currentQuestion]: "" }));
+    setIsAnswered((prev) => ({ ...prev, [currentQuestion]: false }));
+  };
+
+  const goToPrevious = () => {
+    if (currentQuestion > 1) {
+      setCurrentQuestion(currentQuestion - 1);
+      setFeedback((prev) => ({ ...prev, [currentQuestion - 1]: "" }));
+      if (isAnswered[currentQuestion - 1]) {
+        alert("Soal ini telah dijawab. Silakan lanjut ke soal berikutnya atau hapus jawaban untuk memilih ulang.");
+      }
+    }
+  };
+
+  const goToNext = () => {
+    if (!isAnswered[currentQuestion]) {
+      alert("Silakan jawab soal ini terlebih dahulu.");
+      return;
+    }
+    if (currentQuestion < 5) {
+      setCurrentQuestion(currentQuestion + 1);
+      setFeedback((prev) => ({ ...prev, [currentQuestion + 1]: "" }));
+    } else if (
+      currentQuestion === 5 &&
+      isAnswered[1] &&
+      isAnswered[2] &&
+      isAnswered[3] &&
+      isAnswered[4] &&
+      isAnswered[5] &&
+      feedback[currentQuestion].includes("Benar")
+    ) {
+      alert("Kamu sudah selesai mengerjakan semua soal, kerja bagus!");
     }
   };
 
@@ -101,7 +321,6 @@ export default function PengelolaanData() {
         Dalam kehidupan sehari-hari, kita sering berhadapan dengan banyak data yang perlu dikelola agar lebih mudah dianalisis dan digunakan dalam pengambilan keputusan. Pengelolaan data adalah proses menyusun, mengurutkan, dan menyaring data agar lebih terstruktur serta dapat diakses dengan cepat. Jika dilakukan secara manual, pengelolaan data dapat memakan waktu yang lama dan rentan terhadap kesalahan. Oleh karena itu, kita dapat menggunakan fitur sorting (pengurutan) dan filtering (penyaringan) dalam spreadsheet untuk membantu proses ini secara lebih efisien.
       </p>
 
-      {/* Pentingnya Pengelolaan Data */}
       <div className="p-4 bg-[#255F38] text-white font-bold text-lg mt-6">
         Mengapa Pengelolaan Data Penting?
       </div>
@@ -129,11 +348,9 @@ export default function PengelolaanData() {
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
         </div>
-
         <p className="text-gray-700 text-sm md:text-base mt-6 text-justify">
           Sebelum mengelola data, kita harus memahami langkah-langkah kecil yang perlu dilakukan:
         </p>
-
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
             <strong>Tentukan tujuan</strong> pengelolaan data → Apakah ingin mengurutkan data agar lebih mudah dibaca atau menyaring data berdasarkan kriteria tertentu?
@@ -141,24 +358,19 @@ export default function PengelolaanData() {
           <li className="text-justify">
             <strong>Pilih teknik</strong> yang sesuai:
             <div className="ml-4 mt-2 space-y-4">
-              {/* Teknik: Sorting */}
               <section className="bg-gray-100 rounded p-4 shadow-lg">
                 <h3 className="font-semibold text-[#255F38]">1. Sorting</h3>
                 <p className="text-gray-700 mt-2">
-                  <strong>Sorting</strong> digunakan untuk mengurutkan data agar lebih mudah dianalisis.
-                  Misalnya, jika kita ingin mengetahui siswa dengan nilai tertinggi, kita bisa mengurutkan data dari yang terbesar ke terkecil (<i>descending</i>).
+                  <strong>Sorting</strong> digunakan untuk mengurutkan data agar lebih mudah dianalisis. Misalnya, jika kita ingin mengetahui siswa dengan nilai tertinggi, kita bisa mengurutkan data dari yang terbesar ke terkecil (<i>descending</i>).
                 </p>
                 <pre className="bg-gray-200 p-2 rounded mt-2 text-gray-800">
                   Blok kolom → Klik kanan → Pilih Sort → Pilih A-Z (ascending) atau Z-A (descending)
                 </pre>
               </section>
-
-              {/* Teknik: Filtering */}
               <section className="bg-gray-100 rounded p-4 shadow-lg">
                 <h3 className="font-semibold text-[#255F38]">2. Filtering</h3>
                 <p className="text-gray-700 mt-2">
-                  <strong>Filtering</strong> digunakan untuk menyaring atau menampilkan hanya data yang memenuhi kriteria tertentu sementara data lainnya disembunyikan.
-                  Misalnya, hanya menampilkan siswa dari kelas 8A.
+                  <strong>Filtering</strong> digunakan untuk menyaring atau menampilkan hanya data yang memenuhi kriteria tertentu sementara data lainnya disembunyikan. Misalnya, hanya menampilkan siswa dari kelas 8A.
                 </p>
                 <pre className="bg-gray-200 p-2 rounded mt-2 text-gray-800">
                   Blok kolom → Klik kanan → Pilih Filter → Centang data yang ingin ditampilkan (misalnya, "8A")
@@ -170,53 +382,72 @@ export default function PengelolaanData() {
             <strong>Tentukan langkah-langkah</strong> dalam menerapkan sorting dan filtering → Misalnya, memilih kolom yang digunakan sebagai acuan dan menentukan metode pengurutan atau penyaringan.
           </li>
         </ul>
-
-        {/* Interactive Case Study for Dekomposisi */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Memecah Masalah: Mengelola Data Penjualan
+        {/* Latihan Pemahaman: Dekomposisi */}
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
+            Latihan Pemahaman: Memecah Masalah Pengelolaan Data
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu memiliki data penjualan toko: Nama Produk, Kategori, Harga, dan Tanggal. Kamu ingin mengurutkan data berdasarkan harga dari tertinggi ke terendah.
+          <p className="text-gray-700 text-base text-justify mb-2">
+            Kamu ingin mengurutkan data penjualan berdasarkan harga dari tertinggi ke terendah. Pilih langkah-langkah yang tepat:
           </p>
-          <p className="text-gray-700 mt-4">
-            Klik tombol berikut untuk melihat langkah-langkah memecah masalah:
-          </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => toggleDekomposisiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Tentukan Tujuan
-            </button>
-            {dekomposisiSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Tujuan:</strong> Mengurutkan data penjualan berdasarkan harga dari tertinggi ke terendah.
-              </p>
-            )}
-            <button
-              onClick={() => toggleDekomposisiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Pilih Teknik
-            </button>
-            {dekomposisiSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Teknik:</strong> Gunakan <i>Sorting</i> untuk mengurutkan data.
-              </p>
-            )}
-            <button
-              onClick={() => toggleDekomposisiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Tentukan Langkah
-            </button>
-            {dekomposisiSteps[2] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Langkah:</strong> Blok kolom "Harga", klik kanan, dan pilih Sort Z-A.
-              </p>
-            )}
+          <div className="ml-6 text-gray-700 space-y-2">
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={dekomposisiAnswers.step1}
+                  onChange={() => handleDekomposisiChange("step1")}
+                  className="mr-2"
+                />
+                1. Tentukan tujuan: mengurutkan data berdasarkan harga.
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={dekomposisiAnswers.step2}
+                  onChange={() => handleDekomposisiChange("step2")}
+                  className="mr-2"
+                />
+                2. Pilih teknik sorting untuk mengurutkan data.
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={dekomposisiAnswers.step3}
+                  onChange={() => handleDekomposisiChange("step3")}
+                  className="mr-2"
+                />
+                3. Hitung total penjualan.
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkDekomposisiAnswers}
+              className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetDekomposisiAnswers}
+              className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {dekomposisiFeedback && (
+            <p
+              className={`text-base mt-2 font-bold ${
+                dekomposisiFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {dekomposisiFeedback}
+            </p>
+          )}
         </div>
       </div>
 
@@ -225,11 +456,9 @@ export default function PengelolaanData() {
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <BarChart className="mr-2 w-5 h-5" /> Pengenalan Pola
         </div>
-
         <p className="text-gray-700 text-sm md:text-base mt-6 text-justify">
           Setelah menentukan cara mengelola data, kita harus mengenali pola dalam data agar lebih efektif.
         </p>
-
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
             <strong>Mengamati hasil</strong> <i>sorting</i> → Apakah setelah sorting data lebih mudah dibaca? Misalnya, apakah siswa dengan nilai tertinggi berada di posisi atas?
@@ -238,53 +467,78 @@ export default function PengelolaanData() {
             <strong>Menganalisis hasil</strong> <i>filtering</i> → Setelah menyaring data, apakah informasi yang dihasilkan lebih relevan dan sesuai dengan kebutuhan?
           </li>
         </ul>
-
-        {/* Interactive Case Study for Pengenalan Pola */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Mengenali Pola: Hasil Sorting Nilai Siswa
+        {/* Latihan Pemahaman: Pengenalan Pola */}
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
+            Latihan Pemahaman: Mengenali Pola Sorting
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu telah mengurutkan data nilai siswa: Aisyah (85), Budi (70), Citra (95). Setelah sorting dari tertinggi ke terendah, data menjadi: Citra (95), Aisyah (85), Budi (70). Apa pola yang terlihat?
+          <p className="text-gray-700 text-base text-justify mb-2">
+            Data nilai siswa diurutkan dari tertinggi ke terendah: Citra (95), Aisyah (85), Budi (70). Apa pola yang terlihat?
           </p>
-          <p className="text-gray-700 mt-4">
-            Klik tombol berikut untuk melihat langkah-langkah mengenali pola:
-          </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => togglePolaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Amati Data Setelah Sorting
-            </button>
-            {polaSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Data:</strong> Citra (95), Aisyah (85), Budi (70).
-              </p>
-            )}
-            <button
-              onClick={() => togglePolaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Identifikasi Pola
-            </button>
-            {polaSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Pola:</strong> Nilai tertinggi (Citra, 95) berada di posisi atas, diikuti Aisyah (85), dan Budi (70) di posisi terbawah.
-              </p>
-            )}
-            <button
-              onClick={() => togglePolaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Evaluasi Manfaat
-            </button>
-            {polaSteps[2] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Manfaat:</strong> Data lebih mudah dibaca, siswa dengan nilai tertinggi langsung terlihat di posisi atas.
-              </p>
-            )}
+          <div className="ml-6 text-gray-700 space-y-2">
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="pattern"
+                  value="Nilai terendah di atas"
+                  checked={polaAnswer === "Nilai terendah di atas"}
+                  onChange={() => handlePolaChange("Nilai terendah di atas")}
+                  className="mr-2"
+                />
+                1. Nilai terendah berada di posisi atas.
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="pattern"
+                  value="Nilai tertinggi di atas"
+                  checked={polaAnswer === "Nilai tertinggi di atas"}
+                  onChange={() => handlePolaChange("Nilai tertinggi di atas")}
+                  className="mr-2"
+                />
+                2. Nilai tertinggi berada di posisi atas.
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="pattern"
+                  value="Urutan acak"
+                  checked={polaAnswer === "Urutan acak"}
+                  onChange={() => handlePolaChange("Urutan acak")}
+                  className="mr-2"
+                />
+                3. Data diurutkan secara acak.
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkPolaAnswer}
+              className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetPolaAnswer}
+              className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {polaFeedback && (
+            <p
+              className={`text-base mt-2 font-bold ${
+                polaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {polaFeedback}
+            </p>
+          )}
         </div>
       </div>
 
@@ -293,11 +547,9 @@ export default function PengelolaanData() {
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Filter className="mr-2 w-5 h-5" /> Abstraksi
         </div>
-
-        <p className="text-gray-700 text-sm md:text-base mt-6 text-justify">
+        <p className="text-gray-700 text-sm md:text-base mt-4 text-justify">
           Agar data lebih mudah dipahami dan digunakan, kita hanya fokus pada bagian penting.
         </p>
-
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
             <strong>Mengabaikan informasi</strong> yang tidak diperlukan → Jika hanya ingin mengetahui siswa dari kelas 8A, kita cukup melihat kolom <span className="italic">Kelas</span> tanpa memperhatikan detail lain seperti nama atau nilai.
@@ -309,53 +561,72 @@ export default function PengelolaanData() {
             <strong>Mewakili data</strong> dalam bentuk yang lebih sederhana → Kita bisa menampilkan jumlah siswa dari kelas tertentu tanpa perlu melihat data setiap siswa satu per satu — misalnya menggunakan rumus <span className="italic">COUNTIF</span>.
           </li>
         </ul>
-
-        {/* Interactive Case Study for Abstraksi */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Abstraksi: Menyederhanakan Data Siswa
+        {/* Latihan Pemahaman: Abstraksi */}
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
+            Latihan Pemahaman: Memilih Data Penting
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu memiliki data siswa: Nama, Kelas, Nilai Ujian, dan Alamat. Kamu hanya ingin mengetahui siswa dari kelas 8A.
+          <p className="text-gray-700 text-base text-justify mb-2">
+            Kamu ingin menyaring siswa dari kelas 8A dari tabel yang berisi nama, kelas, nilai, dan alamat. Pilih data yang diperlukan:
           </p>
-          <p className="text-gray-700 mt-4">
-            Klik tombol berikut untuk melihat langkah-langkah abstraksi:
-          </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => toggleAbstraksiStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Identifikasi Data Penting
-            </button>
-            {abstraksiSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Data penting:</strong> Kolom "Kelas".
-              </p>
-            )}
-            <button
-              onClick={() => toggleAbstraksiStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Abaikan Data Tidak Relevan
-            </button>
-            {abstraksiSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Data tidak relevan:</strong> Nama, Nilai Ujian, dan Alamat.
-              </p>
-            )}
-            <button
-              onClick={() => toggleAbstraksiStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Terapkan Teknik
-            </button>
-            {abstraksiSteps[2] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Teknik:</strong> Gunakan <i>Filtering</i> untuk menampilkan hanya siswa dari kelas 8A.
-              </p>
-            )}
+          <div className="ml-6 text-gray-700 space-y-2">
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={abstraksiAnswers.info1}
+                  onChange={() => handleAbstraksiChange("info1")}
+                  className="mr-2"
+                />
+                1. Kolom Kelas.
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={abstraksiAnswers.info2}
+                  onChange={() => handleAbstraksiChange("info2")}
+                  className="mr-2"
+                />
+                2. Kolom Nama.
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={abstraksiAnswers.info3}
+                  onChange={() => handleAbstraksiChange("info3")}
+                  className="mr-2"
+                />
+                3. Kolom Alamat.
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkAbstraksiAnswers}
+              className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetAbstraksiAnswers}
+              className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {abstraksiFeedback && (
+            <p
+              className={`text-base mt-2 font-bold ${
+                abstraksiFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {abstraksiFeedback}
+            </p>
+          )}
         </div>
       </div>
 
@@ -364,15 +635,12 @@ export default function PengelolaanData() {
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Code className="w-5 h-5 mr-2" /> Algoritma
         </div>
-
         <p className="text-gray-600 text-sm md:text-base mt-4 text-justify">
           Setelah kita memahami data yang tersedia dan menentukan informasi yang ingin kita cari, kita bisa membuat langkah-langkah sistematis untuk menerapkan sorting dan filtering di spreadsheet.
         </p>
-
         <p className="text-gray-700 text-sm md:text-base mt-4">
           📌 Sorting (Pengurutan) – Mengurutkan Data dari Nilai Tertinggi ke Terendah:
         </p>
-
         <div className="flex flex-col items-center mt-4">
           <p className="text-gray-600 text-sm text-center mb-2 italic">
             Tabel 5. Contoh Data untuk Sorting
@@ -400,7 +668,6 @@ export default function PengelolaanData() {
             </tbody>
           </table>
         </div>
-
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
             <strong>Blok seluruh data</strong>, termasuk judul kolom (header), misalnya kolom Nama Siswa dan Nilai Tugas.
@@ -412,7 +679,7 @@ export default function PengelolaanData() {
             <strong>Pilih menu <em>Sort</em></strong> dari daftar yang muncul.
           </li>
           <li className="text-justify">
-            <strong>Jika hanya ingin mengurutkan satu kolom</strong>, pilih <strong>Sort A to Z</strong> (dari kecil ke besar) atau <strong>Sort Z to A</strong> (dari besar ke kecil). 
+            <strong>Jika hanya ingin mengurutkan satu kolom</strong>, pilih <strong>Sort A to Z</strong> (dari kecil ke besar) atau <strong>Sort Z to A</strong> (dari besar ke kecil).
             <ul className="list-none ml-4 mt-1">
               <li>- <strong>Ascending (Sort A to Z)</strong>: Mengurutkan data dari yang terkecil atau terawal (misalnya A-Z untuk huruf atau angka kecil ke besar).</li>
               <li>- <strong>Descending (Sort Z to A)</strong>: Mengurutkan data dari yang terbesar atau terakhir (misalnya Z-A untuk huruf atau angka besar ke kecil).</li>
@@ -425,11 +692,9 @@ export default function PengelolaanData() {
             <strong>Misalnya</strong>, urutkan data berdasarkan kolom Nilai Tugas agar siswa dengan nilai tertinggi muncul di atas.
           </li>
         </ul>
-
         <p className="text-gray-700 text-sm md:text-base mt-4">
           📌 Filtering (Penyaringan) – Menampilkan Data Siswa dari Kelas 8A:
         </p>
-
         <div className="flex flex-col items-center mt-4">
           <p className="text-gray-600 text-sm text-center mb-2 italic">
             Tabel 6. Contoh Data untuk Filtering
@@ -457,7 +722,6 @@ export default function PengelolaanData() {
             </tbody>
           </table>
         </div>
-
         <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
           <li className="text-justify">
             <strong>Blok seluruh data</strong>, termasuk judul kolom (header), agar semua data bisa difilter dengan benar.
@@ -472,75 +736,96 @@ export default function PengelolaanData() {
             Jika ingin menampilkan semua kelas, centang <strong>"Select All"</strong>.
           </li>
         </ul>
-
-        {/* Interactive Case Study for Algoritma */}
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center">
-            <CheckCircle className="w-5 h-5 mr-2" /> Algoritma: Menyaring Data Kegiatan
+        {/* Latihan Pemahaman: Algoritma */}
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
+          <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
+            Latihan Pemahaman: Langkah Algoritmik untuk Filtering
           </h3>
-          <p className="text-gray-700 mt-2">
-            Kamu memiliki data kegiatan: Nama Siswa, Kategori, Tanggal, dan Kelas. Kamu ingin menampilkan hanya kegiatan dengan kategori "Pramuka".
+          <p className="text-gray-700 text-base text-justify mb-2">
+            Kamu ingin menampilkan hanya kegiatan dengan kategori "Pramuka" dari tabel kegiatan. Manakah langkah algoritmik yang benar?
           </p>
-          <p className="text-gray-700 mt-4">
-            Klik tombol berikut untuk melihat langkah-langkah algoritma:
-          </p>
-          <div className="space-y-3 mt-4">
-            <button
-              onClick={() => toggleAlgoritmaStep(0)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 1: Pilih Data
-            </button>
-            {algoritmaSteps[0] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Data:</strong> Seluruh tabel kegiatan, fokus pada kolom "Kategori".
-              </p>
-            )}
-            <button
-              onClick={() => toggleAlgoritmaStep(1)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 2: Tentukan Kriteria
-            </button>
-            {algoritmaSteps[1] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Kriteria:</strong> Kategori "Pramuka".
-              </p>
-            )}
-            <button
-              onClick={() => toggleAlgoritmaStep(2)}
-              className="flex items-center bg-[#255F38] text-white px-3 sm:px-5 py-1 sm:py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 w-full shadow-md"
-            >
-              <ChevronRight className="w-4 h-4 mr-2" /> Langkah 3: Terapkan Filtering
-            </button>
-            {algoritmaSteps[2] && (
-              <p className="text-gray-700 pl-4 bg-gray-100 p-3 rounded">
-                <strong>Langkah Filtering:</strong> Blok kolom "Kategori", klik kanan, pilih Filter, lalu centang "Pramuka".
-              </p>
-            )}
+          <div className="ml-6 text-gray-700 space-y-2">
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="algorithm"
+                  value="Langkah-langkah Sorting"
+                  checked={algoritmaAnswer === "Langkah-langkah Sorting"}
+                  onChange={() => handleAlgoritmaChange("Langkah-langkah Sorting")}
+                  className="mr-2"
+                />
+                1. Blok kolom Kategori, pilih Sort Z-A untuk mengurutkan data.
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="algorithm"
+                  value="Langkah-langkah Filtering"
+                  checked={algoritmaAnswer === "Langkah-langkah Filtering"}
+                  onChange={() => handleAlgoritmaChange("Langkah-langkah Filtering")}
+                  className="mr-2"
+                />
+                2. Blok kolom Kategori, pilih Filter, lalu centang "Pramuka".
+              </label>
+            </div>
+            <div className="text-base">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="algorithm"
+                  value="Langkah-langkah Manual"
+                  checked={algoritmaAnswer === "Langkah-langkah Manual"}
+                  onChange={() => handleAlgoritmaChange("Langkah-langkah Manual")}
+                  className="mr-2"
+                />
+                3. Salin data dengan kategori Pramuka secara manual ke tabel baru.
+              </label>
+            </div>
           </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={checkAlgoritmaAnswer}
+              className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
+            >
+              Periksa
+            </button>
+            <button
+              onClick={resetAlgoritmaAnswer}
+              className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+            >
+              Hapus
+            </button>
+          </div>
+          {algoritmaFeedback && (
+            <p
+              className={`text-base mt-2 font-bold ${
+                algoritmaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              }`}
+            >
+              {algoritmaFeedback}
+            </p>
+          )}
         </div>
-      </div>
 
-      {/* Mari Mengamati Section */}
-
-
-        <h3 className="font-semibold text-[#255F38] mt-6">
-          Visualisasi Interaktif: Cara Kerja Sorting dan Filtering
-        </h3>
-        <p className="text-gray-700 text-sm md:text-base text-justify">
-          Cobalah simulasi berikut untuk melihat cara kerja sorting dan filtering secara langsung. Kamu bisa mengurutkan data berdasarkan nilai atau menyaring data berdasarkan kelas.
-        </p>
-
-        <div className="bg-green-50 p-4 rounded shadow-md mt-6">
+        {/* Visualisasi Interaktif */}
+        <div className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
+          <h3 className="font-semibold text-[#255F38] flex items-center text-lg mb-4">
+            <CheckCircle className="w-5 h-5 mr-2" /> Visualisasi Interaktif: Cara Kerja Sorting dan Filtering
+          </h3>
+          <p className="text-gray-700 mb-4 text-justify">
+            Cobalah simulasi berikut untuk melihat cara kerja sorting dan filtering secara langsung. Kamu bisa mengurutkan data berdasarkan nilai atau menyaring data berdasarkan kelas, lalu klik "Reset" untuk mengembalikan data awal.
+          </p>
           <div className="flex justify-between mb-4 items-center">
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
               <div>
                 <label className="text-gray-700 mr-2">Urutkan berdasarkan nilai:</label>
                 <select
                   value={sortOrder}
                   onChange={(e) => handleSort(e.target.value)}
-                  className="p-2 border rounded"
+                  className="p-2 border rounded w-full sm:w-auto"
                 >
                   <option value="none">Tanpa Urutan</option>
                   <option value="ascending">Ascending (A-Z)</option>
@@ -552,7 +837,7 @@ export default function PengelolaanData() {
                 <select
                   value={filterKelas}
                   onChange={(e) => handleFilter(e.target.value)}
-                  className="p-2 border rounded"
+                  className="p-2 border rounded w-full sm:w-auto"
                 >
                   <option value="Semua">Semua Kelas</option>
                   <option value="8A">8A</option>
@@ -571,7 +856,6 @@ export default function PengelolaanData() {
               Reset
             </button>
           </div>
-
           <div className="overflow-x-auto">
             <table className="border-collapse border border-green-800 w-full text-center">
               <thead>
@@ -593,7 +877,84 @@ export default function PengelolaanData() {
             </table>
           </div>
         </div>
-      
+      </div>
+
+      {/* Kuis Pemahaman */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12">
+        <h3 className="font-semibold text-[#255F38] text-lg mb-2">Kuis Pemahaman: Pengelolaan Data</h3>
+        <p className="text-gray-700 text-base text-justify">
+          Jawab pertanyaan berikut untuk menguji pemahamanmu tentang sorting dan filtering:
+        </p>
+        <div className="bg-yellow-50 p-4 border border-yellow-300 rounded mt-4 shadow-md">
+          <div className="absolute -top-6 left-4 bg-yellow-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+            Soal {currentQuestion} dari 5
+          </div>
+          <div className="mt-8">
+            <h4 className="font-semibold text-yellow-800 text-base mb-2">
+              {questions[currentQuestion - 1].question}
+            </h4>
+            <div className="ml-6 text-gray-700 space-y-2">
+              {questions[currentQuestion - 1].options.map((option, index) => (
+                <div key={index} className="text-base">
+                  <label className="flex items-center border border-gray-300 p-2 mb-2 rounded">
+                    <input
+                      type="radio"
+                      name={`quiz${currentQuestion}`}
+                      value={option}
+                      checked={answers[currentQuestion] === option}
+                      onChange={() => handleAnswerChange(option)}
+                      className="mr-2"
+                    />
+                    {option}
+                  </label>
+                </div>
+              ))}
+            </div>
+            {feedback[currentQuestion] && (
+              <p
+                className={`text-base mt-2 font-bold ${
+                  feedback[currentQuestion].includes("Benar") ? "text-green-700" : "text-red-700"
+                }`}
+              >
+                {feedback[currentQuestion]}
+              </p>
+            )}
+            <div className="mt-4 flex justify-between">
+              <div className="flex space-x-2">
+                <button
+                  onClick={goToPrevious}
+                  className="bg-[#B0BEC5] text-white px-4 py-2 rounded-lg hover:bg-[#90A4AE] transition duration-300 disabled:opacity-50"
+                  disabled={currentQuestion === 1}
+                >
+                  Sebelumnya
+                </button>
+                {feedback[currentQuestion] && (
+                  <button
+                    onClick={resetQuizAnswer}
+                    className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+                  >
+                    Hapus
+                  </button>
+                )}
+              </div>
+              {isAnswered[currentQuestion] && (
+                <button
+                  onClick={goToNext}
+                  className="bg-yellow-800 text-white px-4 py-2 rounded-lg hover:bg-yellow-900 transition duration-300"
+                  disabled={currentQuestion === 5 && !isAnswered[currentQuestion]}
+                >
+                  {currentQuestion === 5 ? "Selesai" : "Soal Selanjutnya"}
+                </button>
+              )}
+            </div>
+            {currentQuestion === 5 && isAnswered[currentQuestion] && (
+              <p className="mt-4 text-center text-yellow-800 font-bold text-base">
+                Anda telah menyelesaikan semua soal! Klik "Sebelumnya" untuk meninjau.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8 px-4">

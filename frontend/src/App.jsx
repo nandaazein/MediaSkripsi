@@ -6,7 +6,6 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import Materi from "./pages/Materi";
 import Informasi from "./pages/Informasi";
-import Spreadsheet from "./pages/Spreadsheet";
 import LoginSiswa from "./pages/LoginSiswa";
 import LoginGuru from "./pages/LoginGuru";
 import RegisterSiswa from "./pages/RegisterSiswa";
@@ -17,7 +16,6 @@ import PengantarBab from "./pages/Pendahuluan/PengantarBab";
 import Pendahuluan from "./pages/Pendahuluan/Pendahuluan";
 import MengenalAnalisisData from "./pages/Pendahuluan/MengenalAnalisis";
 import PengenalanCT from "./pages/Pendahuluan/PengenalanCT";
-import PenerapanCT from "./pages/Pendahuluan/PenerapanCT";
 
 // Sub 1
 import PencarianLookup from "./pages/PencarianData/PencarianLookup";
@@ -69,6 +67,7 @@ import DataSiswa from "./pages/admin/DataSiswa";
 import DataNilai from "./pages/admin/DataNilai";
 import DataEvaluasi from "./pages/admin/DataEvaluasi";
 import KelolaSoal from "./pages/admin/KelolaSoal";
+import KKM from "./pages/admin/Pengaturan";
 
 
 
@@ -92,7 +91,6 @@ function App() {
         <Route path="/pendahuluan" element={<Pendahuluan />} />
         <Route path="/mengenal-analisis" element={<MengenalAnalisisData />} />
         <Route path="/pengenalan-ct" element={<PengenalanCT />} />
-        <Route path="/penerapan-ct" element={<PenerapanCT />} />
 
         {/* PENCARIAN */}
         <Route path="/pencarian-lookup" element={<PencarianLookup />} />
@@ -102,7 +100,7 @@ function App() {
         <Route path="/aktivitas-lookup" element={<AktivitasLookup />} />
         <Route path="/berlatih-lookup" element={<BerlatihLookup />} />
         <Route path="/rangkuman-pencarian" element={<RangkumanPencarianData />} />
-        <Route path="/petunjuk-quiz-pencarian" element={<PetunjukQuizPencarian />} />
+        <Route path="/petunjuk-pengerjaan-pencarian" element={<PetunjukQuizPencarian />} />
         <Route path="/kuis-pencarian" element={<KuisPencarianData />} />
         <Route path="/feedback1" element={<FeedbackPencarianData />} />
 
@@ -112,7 +110,7 @@ function App() {
         <Route path="/aktivitas-visualisasi" element={<AktivitasSiswaVisualisasi />} />
         <Route path="/mari-berlatih-visualisasi" element={<BerlatihVisualisasi />}/>
         <Route path="/rangkuman-visualisasi" element={<RangkumanVisualisasiData />} />
-        <Route path="/petunjuk-quiz-visualisasi" element={<PetunjukQuizVisualisasi />} />
+        <Route path="/petunjuk-pengerjaan-visualisasi" element={<PetunjukQuizVisualisasi />} />
         <Route path="/kuis-visualisasi" element={<KuisVisualisasiData />} />
         <Route path="/feedback2" element={<FeedbackVisualisasiData />} />
 
@@ -122,10 +120,9 @@ function App() {
         <Route path="/aktivitas-peringkasan" element={<AktivitasPeringkasan />}/>
         <Route path="/berlatih-peringkasan" element={<BerlatihPeringkasan />} />
         <Route path="/rangkuman-peringkasan" element={<RangkumanPeringkasanData />} />
-        <Route path="/petunjuk-quiz-peringkasan" element={<PetunjukQuizPeringkasan />} />
+        <Route path="/petunjuk-pengerjaan-peringkasan" element={<PetunjukQuizPeringkasan />} />
         <Route path="/kuis-peringkasan" element={<KuisPeringkasanData />} />
         <Route path="/feedback3" element={<FeedbackPeringkasanData />} />
-        <Route path="/spreadsheet" element={<Spreadsheet />} />
 
         {/* PENGELOLAAN DATA SUB 4 */}
         <Route path="/pengelolaan-data" element={<PengelolaanData />} />
@@ -144,6 +141,7 @@ function App() {
         <Route path="/data-nilai" element={<DataNilai />} />
         <Route path="/data-evaluasi" element={<DataEvaluasi />} />
         <Route path="/kelola-soal" element={<KelolaSoal />} />
+        <Route path="/pengaturan-kkm" element={<KKM />} />
 
       </Routes>
     </BrowserRouter>

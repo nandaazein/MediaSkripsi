@@ -4,6 +4,7 @@ import { config } from 'dotenv';
 import studentRoutes from './Route/SiswaRoute.js';
 import teacherRoutes from './Route/GuruRoute.js';
 import quizRoutes from './Route/QuizRoute.js';
+import kkmRoutes from './Route/KkmRoute.js';
 
 config();
 
@@ -15,13 +16,14 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(express.json({ limit: '10mb' })); // Tambahkan batas 10MB
-app.use(express.urlencoded({ limit: '10mb', extended: true })); // Untuk form data jika diperlukan
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Routes
 app.use('/api/students', studentRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/api/quizzes', quizRoutes);
+app.use('/api/kkm', kkmRoutes);
 
 // Error handling
 app.use((err, req, res, next) => {

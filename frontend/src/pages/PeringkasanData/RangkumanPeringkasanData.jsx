@@ -69,10 +69,10 @@ export default function RangkumanPeringkasanData() {
           onClick={() => (window.location.href = "/home")}
           className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 cursor-pointer transition duration-300"
         >
-          ← Kembali ke Beranda
+          sebelumnya
         </button>
         <button
-          onClick={() => (window.location.href = "/petunjuk-quiz-peringkasan")}
+          onClick={() => (window.location.href = "/petunjuk-pengerjaan-peringkasan")}
           className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] cursor-pointer transition duration-300"
         >
           Lanjut ke Kuis →

@@ -36,6 +36,7 @@ const sessionModel = {
     return null;
   },
 
+
   async delete(sessionId) {
     await pool.query('DELETE FROM sessions WHERE id = ?', [sessionId]);
   },

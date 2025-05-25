@@ -6,7 +6,6 @@ import { Footer } from "./Footer";
 export const Layout = ({ children }) => {
   return (
     <div className="flex flex-col h-screen">
-      {/* Navbar */}
       <Navbar />
 
       {/* Sidebar di bawah navbar untuk mobile, di samping untuk desktop */}

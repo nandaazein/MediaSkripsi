@@ -72,10 +72,10 @@ export default function RangkumanVisualisasiData() {
           onClick={() => (window.location.href = "/home")}
           className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 cursor-pointer transition duration-300"
         >
-          ← Kembali ke Beranda
+          Sebelumnya
         </button>
         <button
-          onClick={() => (window.location.href = "/petunjuk-quiz-visualisasi")}
+          onClick={() => (window.location.href = "/petunjuk-pengerjaan-visualisasi")}
           className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] cursor-pointer transition duration-300"
         >
           Lanjut ke Kuis →

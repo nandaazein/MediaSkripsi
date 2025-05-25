@@ -23,4 +23,5 @@ router.get('/scores', verifyToken, restrictTo('teacher'), studentController.getA
 
 
 
+
 export default router;

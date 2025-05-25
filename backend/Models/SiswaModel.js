@@ -66,14 +66,33 @@ const studentModel = {
   },
 
   async updateProgress(nis, progress) {
-    if (isNaN(progress) || progress < 0 || progress > 100) {
-      throw new Error('Progres tidak valid (0-100)');
+    if (isNaN(progress) || progress < 0) {
+      throw new Error('Progres tidak valid (harus angka positif)');
     }
-    const status = progress >= 100 ? 'SELESAI' : 'BELUM SELESAI';
+
+    // Ambil progres saat ini
+    const [currentRows] = await pool.query('SELECT progress FROM students WHERE nis = ?', [nis]);
+    if (!currentRows[0]) {
+      throw new Error('Siswa tidak ditemukan');
+    }
+    const currentProgress = currentRows[0].progress || 0;
+
+    // Tambahkan progres baru ke progres saat ini
+    const newProgress = currentProgress + progress;
+
+    // Batasi progres maksimal 100
+    const finalProgress = Math.min(newProgress, 100);
+
+    // Tentukan status berdasarkan progres akhir
+    const status = finalProgress >= 100 ? 'SELESAI' : 'BELUM SELESAI';
+
+    // Update progres dan status di database
     await pool.query(
       'UPDATE students SET progress = ?, status = ? WHERE nis = ?',
-      [progress, status, nis]
+      [finalProgress, status, nis]
     );
+
+    // Ambil data siswa yang diperbarui
     const [rows] = await pool.query('SELECT nis, full_name, class, status, progress FROM students WHERE nis = ?', [nis]);
     return rows[0];
   },
@@ -129,19 +148,46 @@ const studentModel = {
     }
   },
 
+  
+
   async getScores(nis) {
-    const [rows] = await pool.query(
-      'SELECT nis, kuis1, kuis2, kuis3, kuis4, latihan1, latihan2, latihan3, latihan4, evaluasi_akhir, created_at, updated_at FROM scores WHERE nis = ?',
-      [nis]
-    );
-    return rows[0];
+    try {
+      const [scoreRows] = await pool.query(
+        'SELECT nis, kuis1, kuis2, kuis3, kuis4, latihan1, latihan2, latihan3, latihan4, evaluasi_akhir, created_at, updated_at FROM scores WHERE nis = ?',
+        [nis]
+      );
+      const [kkmRows] = await pool.query(
+        'SELECT quiz_number, kkm FROM kkm_settings WHERE quiz_number IN (1, 2, 3, 4)'
+      );
+      const kkmMap = kkmRows.reduce((acc, row) => {
+        acc[`kuis${row.quiz_number}`] = row.kkm;
+        return acc;
+      }, { kuis1: 75, kuis2: 75, kuis3: 75, kuis4: 75 }); 
+      const scores = scoreRows[0] || {};
+      return { ...scores, kkm: kkmMap };
+    } catch (error) {
+      console.error('Error in getScores:', error);
+      throw new Error('Gagal mengambil skor siswa');
+    }
   },
 
   async getAllScores() {
-    const [rows] = await pool.query(
-      'SELECT st.nis, st.full_name, st.class, s.latihan1, s.latihan2, s.latihan3, s.latihan4, s.kuis1, s.kuis2, s.kuis3, s.kuis4, s.evaluasi_akhir FROM students st LEFT JOIN scores s ON st.nis = s.nis'
-    );
-    return rows;
+    try {
+      const [rows] = await pool.query(
+        'SELECT st.nis, st.full_name, st.class, s.latihan1, s.latihan2, s.latihan3, s.latihan4, s.kuis1, s.kuis2, s.kuis3, s.kuis4, s.evaluasi_akhir FROM students st LEFT JOIN scores s ON st.nis = s.nis'
+      );
+      const [kkmRows] = await pool.query(
+        'SELECT quiz_number, kkm FROM kkm_settings WHERE quiz_number IN (1, 2, 3, 4)'
+      );
+      const kkmMap = kkmRows.reduce((acc, row) => {
+        acc[`kuis${row.quiz_number}`] = row.kkm;
+        return acc;
+      }, { kuis1: 75, kuis2: 75, kuis3: 75, kuis4: 75 }); 
+      return rows.map(row => ({ ...row, kkm: kkmMap }));
+    } catch (error) {
+      console.error('Error in getAllScores:', error);
+      throw new Error('Gagal mengambil semua skor');
+    }
   },
 };
 

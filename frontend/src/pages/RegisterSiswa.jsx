@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -7,12 +6,15 @@ import registerImage from '../assets/register.png'; // Impor gambar dari folder 
 const RegisterSiswa = () => {
   const [nis, setNis] = useState('');
   const [fullName, setFullName] = useState('');
-  const [studentClass, setStudentClass] = useState('');
+  const [studentClass, setStudentClass] = useState(''); // Default kosong
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  // Daftar opsi kelas
+  const classOptions = ['8A', '8B', '8C', '8D'];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ const RegisterSiswa = () => {
         {/* Gambar di sisi kiri - Diimpor dari src/assets */}
         <div className="w-full md:w-1/2 mb-4 md:mb-0 md:pr-4">
           <img
-            src={registerImage} // Menggunakan gambar yang diimpor
+            src={registerImage}
             alt="Ilustrasi Register Siswa"
             className="w-full h-auto object-cover rounded-lg"
           />
@@ -69,13 +71,19 @@ const RegisterSiswa = () => {
             </div>
             <div>
               <label className="block text-gray-700 mb-1 text-sm">Kelas</label>
-              <input
-                type="text"
+              <select
                 value={studentClass}
                 onChange={(e) => setStudentClass(e.target.value)}
                 className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
                 required
-              />
+              >
+                <option value="" disabled>Pilih Kelas</option>
+                {classOptions.map((cls) => (
+                  <option key={cls} value={cls}>
+                    {cls}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
               <label className="block text-gray-700 mb-1 text-sm">Token</label>

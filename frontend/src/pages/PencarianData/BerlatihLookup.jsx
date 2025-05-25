@@ -2,7 +2,7 @@ import { useState } from "react";
 import Layout from "../../components/Layout";
 import axios from 'axios';
 
-export default function VlookupLesson() {
+export default function BerlatihPencarian() {
   const correctAnswers = {
     tableReference: "daftar kategori prestasi",
     studentCategory: "cukup",
@@ -19,67 +19,63 @@ export default function VlookupLesson() {
     searchChoose: ""
   });
 
-  const [feedback, setFeedback] = useState({
-    tableReference: null,
-    studentCategory: null,
-    unnecessaryInfo: null,
-    searchVlookup: null,
-    searchChoose: null
-  });
-
   const handleChange = (field, value) => {
     setAnswers((prev) => ({ ...prev, [field]: value }));
   };
 
-  const checkAnswer = (field) => {
-    const isCorrect =
-      answers[field].trim().toLowerCase() === correctAnswers[field].trim().toLowerCase();
-    setFeedback((prev) => ({ ...prev, [field]: isCorrect }));
-  };
-
-  const clearAnswer = (field) => {
-    setAnswers((prev) => ({ ...prev, [field]: "" }));
-    setFeedback((prev) => ({ ...prev, [field]: null }));
-  };
 
   const submitLatihan = async () => {
-    try {
-      let correctCount = 0;
-      Object.values(feedback).forEach((isCorrect) => {
-        if (isCorrect === true) correctCount++;
-      });
-      const score = (correctCount / 5) * 100;
-      const token = localStorage.getItem('token');
-      const nis = JSON.parse(localStorage.getItem('user')).nis;
+  try {
+    let correctCount = 0;
+    Object.keys(correctAnswers).forEach((field) => {
+      const isCorrect = answers[field].trim().toLowerCase() === correctAnswers[field].trim().toLowerCase();
+      if (isCorrect) correctCount++;
+    });
+    const score = (correctCount / 5) * 100;
+    const token = localStorage.getItem('token');
+    const nis = JSON.parse(localStorage.getItem('user')).nis;
 
-      await axios.post(
-        `http://localhost:5000/api/students/scores/${nis}`,
-        { latihan1: score, latihan2: null, latihan3: null, latihan4: null, kuis1: null, kuis2: null, kuis3: null, kuis4: null, evaluasi_akhir: null },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+    // Kirim hanya skor numerik ke database
+    await axios.post(
+      `http://localhost:5000/api/students/scores/${nis}`,
+      {
+        latihan1: score, // Kirim skor sebagai angka, bukan objek
+        latihan2: null,
+        latihan3: null,
+        latihan4: null,
+        kuis1: null,
+        kuis2: null,
+        kuis3: null,
+        kuis4: null,
+        evaluasi_akhir: null
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
-      alert(`Latihan selesai! Skor Anda: ${score}`);
-    } catch (error) {
-      console.error("Error submitting latihan:", error);
-      alert("Terjadi kesalahan saat mengirim skor latihan.");
-    }
-  };
+    alert(`Latihan selesai! Skor Anda: ${score}`);
+  } catch (error) {
+    console.error("Error saat mengirim latihan:", error);
+    alert("Terjadi kesalahan saat mengirim skor latihan.");
+  }
+};
 
   const renderFeedback = (field) => {
-    if (feedback[field] === null) return null;
-    return (
-      <div className={`flex items-center gap-2 mt-2 text-base font-semibold ${feedback[field] ? "text-green-700" : "text-red-700"}`}>
-        {feedback[field] ? (
-          <>
-            <span>✅ Jawaban benar!</span>
-          </>
-        ) : (
-          <>
-            <span>❌ Jawaban salah. Coba lagi!</span>
-          </>
-        )}
-      </div>
-    );
+    // Feedback hanya ditampilkan setelah submit
+    const isCorrect = answers[field].trim().toLowerCase() === correctAnswers[field].trim().toLowerCase();
+    if (!isCorrect && answers[field]) {
+      return (
+        <div className="flex items-center gap-2 mt-2 text-base font-semibold text-red-700">
+          <span>❌ Jawaban salah. Coba lagi!</span>
+        </div>
+      );
+    } else if (isCorrect && answers[field]) {
+      return (
+        <div className="flex items-center gap-2 mt-2 text-base font-semibold text-green-700">
+          <span>✅ Jawaban benar!</span>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -89,7 +85,7 @@ export default function VlookupLesson() {
       </div>
 
       <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-6">
-        <strong>Petunjuk:</strong> Baca cerita di bawah ini, lalu jawab pertanyaan di setiap bagian. Kolom Kategori Prestasi perlu kamu isi dengan bantuan rumus. Klik tombol <em>“Periksa”</em> untuk melihat apakah jawabanmu benar. Jika salah, kamu bisa mencoba lagi dengan tombol <em>“Hapus”</em>!
+        <strong>Petunjuk:</strong> Baca cerita di bawah ini, lalu jawab pertanyaan di setiap bagian. Kolom Kategori Prestasi perlu kamu isi dengan bantuan rumus. Jawaban akan diperiksa saat kamu klik tombol <em>“Selesai Latihan”</em>.
       </p>
 
       {/* Studi Kasus */}
@@ -108,7 +104,6 @@ export default function VlookupLesson() {
             src="https://sheet.zohopublic.com/sheet/published/jtwahc2a855af8e2a49cca0946a4458597bb2?mode=embed"
           />
         </div>
-       
       </div>
 
       {/* Fungsi membuat section */}
@@ -160,18 +155,6 @@ export default function VlookupLesson() {
             value={answers[key]}
             onChange={(e) => handleChange(key, e.target.value)}
           />
-          <button
-            className="mt-2 bg-[#255F38] text-white px-4 py-1 rounded hover:bg-[#2E6B4B] cursor-pointer"
-            onClick={() => checkAnswer(key)}
-          >
-            Periksa
-          </button>
-          <button
-            className="mt-2 ml-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 cursor-pointer"
-            onClick={() => clearAnswer(key)}
-          >
-            Hapus
-          </button>
           {renderFeedback(key)}
         </section>
       ))}
