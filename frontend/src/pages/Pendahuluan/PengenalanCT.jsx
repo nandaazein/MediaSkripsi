@@ -1,4 +1,3 @@
-
 import Layout from "../../components/Layout";
 import { BookOpen, Lightbulb, BarChart, Filter, Code, CheckCircle } from "lucide-react";
 import { useState } from "react";
@@ -23,7 +22,7 @@ const PengenalanCT = () => {
   const cekJawaban = () => {
     if (siap === "06.10" && berangkat === "06.30") {
       setFeedback(
-        "✅ Jawaban kamu benar! Aldi harus mulai bersiap pukul 06.10, dihitung dengan mengurangi 30 menit perjalanan dari 07.00 (menjadi 06.30) dan 20 menit bersiap-siap dari 06.30 (menjadi 06.10). "
+        "Jawaban kamu benar! Aldi harus mulai bersiap pukul 06.10, dihitung dengan mengurangi 30 menit perjalanan dari 07.00 (menjadi 06.30) dan 20 menit bersiap-siap dari 06.30 (menjadi 06.10). "
       );
     } else {
       setFeedback("Jawaban salah, ayo coba lagi.");
@@ -91,7 +90,7 @@ const PengenalanCT = () => {
       {/* Learning Objectives */}
       <section className="bg-green-100 rounded shadow-md p-4 mt-4">
         <h2 className="font-bold text-[#255F38] flex items-center">
-          <BookOpen className="w-5 h-5 mr-2" /> Tujuan Pembelajaran
+          Tujuan Pembelajaran
         </h2>
         <p className="text-gray-700 text-sm md:text-base">
           Memahami konsep dasar <i>Computational Thinking</i> (CT) dan menerapkannya dalam menyelesaikan masalah melalui studi kasus.
@@ -139,42 +138,36 @@ const PengenalanCT = () => {
         </div>
       </div>
 
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mt-6">
+        Penyelesaian dengan <span className="font-semibold italic">Computational Thinking:</span>
+      </p>
+
       {/* Decomposition */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
-        <h2 className="text-xl font-bold text-green-800 flex items-center">
-          <Lightbulb className="w-5 h-5 mr-2" /> Dekomposisi
-        </h2>
-        <p className="text-gray-600 text-sm md:text-base font-semibold">
-          Memecah masalah menjadi bagian kecil:
-        </p>
-        <p className="text-gray-600 text-sm md:text-base font-medium">Apa yang perlu dilakukan Aldi?</p>
-        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
-          <li>Bersiap-siap sebelum berangkat (20 menit).</li>
-          <li>Bersepeda ke sekolah (30 menit).</li>
-        </ul>
-        <p className="text-gray-600 text-sm md:text-base font-medium">Apa yang ingin diketahui?</p>
-        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
-          <li>Pukul berapa harus mulai bersiap?</li>
-          <li>Pukul berapa harus berangkat?</li>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Aldi ingin tiba di sekolah tepat pukul <span className="font-semibold">07.00</span>.</li>
+          <li>Masalahnya dapat dipecah menjadi dua bagian: waktu untuk <span className="font-semibold">berangkat</span> dan waktu untuk <span className="font-semibold">bersiap-siap</span>.</li>
+          <li>Kita perlu menghitung waktu berdasarkan <span className="font-semibold">30 menit perjalanan</span> dan <span className="font-semibold">20 menit bersiap-siap</span>.</li>
         </ul>
       </div>
 
       {/* Pattern Recognition */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
-        <h2 className="text-xl font-bold text-green-800 flex items-center">
-          <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
-        </h2>
-        <p className="text-gray-600 text-sm md:text-base font-medium">
-          Menemukan pola yang berlaku dalam masalah Aldi.
-        </p>
-        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
-          <li>Waktu bersiap-siap selalu 20 menit setiap hari.</li>
-          <li>Waktu perjalanan ke sekolah selalu 30 menit.</li>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <BarChart className="w-5 h-5 mr-2" /> PENGENALAN POLA
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Aldi mencatat waktu berangkatnya: <span className="font-semibold">Senin (06.30)</span>, <span className="font-semibold">Selasa (06.30)</span>, <span className="font-semibold">Rabu (06.30)</span>, <span className="font-semibold">Kamis (06.30)</span>, <span className="font-semibold">Jumat (06.30)</span>.</li>
+          <li>Polanya adalah Aldi selalu berangkat pada waktu yang sama setiap hari, yaitu pukul <span className="font-semibold">06.30</span>.</li>
+          <li>Untuk tiba tepat pukul <span className="font-semibold">07.00</span>, pola ini konsisten dengan waktu perjalanan <span className="font-semibold">30 menit</span>.</li>
         </ul>
-        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3">
-          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Interaktivitas: Mengenali Pola Waktu</h3>
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3 mt-4">
+          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Mengenali Pola Waktu</h3>
           <p className="text-gray-700 text-sm md:text-base text-justify">
-            Aldi mencatat waktu berangkatnya: Senin (06.30), Selasa (06.30), Rabu (06.30), Kamis (06.30), Jumat (06.30). Pilih waktu yang sesuai untuk hari Sabtu!
+            Pilih waktu yang sesuai untuk hari Sabtu berdasarkan pola yang ada!
           </p>
           <div className="space-y-2">
             {["06.00", "06.30", "07.00"].map((time) => (
@@ -218,19 +211,17 @@ const PengenalanCT = () => {
       </div>
 
       {/* Abstraction */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
-        <h2 className="text-xl font-bold text-green-800 flex items-center">
-          <Filter className="w-5 h-5 mr-2" /> Abstraksi
-        </h2>
-        <p className="text-gray-600 text-sm md:text-base font-medium">
-          Menyederhanakan masalah dengan mengabaikan detail yang tidak penting.
-        </p>
-        <ul className="list-disc list-inside text-gray-600 text-sm md:text-base pl-6">
-          <li>Tidak mempertimbangkan faktor seperti cuaca atau kondisi jalan.</li>
-          <li>Fokus pada waktu bersiap-siap (20 menit) dan perjalanan (30 menit).</li>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Filter className="w-5 h-5 mr-2" /> ABSTRAKSI
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Tidak perlu mempertimbangkan hal-hal seperti <span className="font-semibold">menu sarapan</span> atau <span className="font-semibold">jenis sepeda</span>, karena tidak relevan untuk menghitung waktu.</li>
+          <li>Fokus hanya pada informasi penting: <span className="font-semibold">waktu tiba (07.00)</span>, <span className="font-semibold">waktu perjalanan (30 menit)</span>, dan <span className="font-semibold">waktu bersiap-siap (20 menit)</span>.</li>
+          <li>Informasi lain dapat diabaikan untuk menyederhanakan penyelesaian masalah.</li>
         </ul>
-        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3">
-          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Interaktivitas: Memilih Informasi Penting</h3>
+        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3 mt-4">
+          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Memilih Informasi Penting</h3>
           <p className="text-gray-700 text-sm md:text-base text-justify">
             Pilih informasi yang relevan untuk membantu Aldi merencanakan jadwalnya!
           </p>
@@ -280,16 +271,24 @@ const PengenalanCT = () => {
       </div>
 
       {/* Algorithm */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
-        <h2 className="text-xl font-bold text-green-800 flex items-center">
-          <Code className="w-5 h-5 mr-2" /> Algoritma
-        </h2>
-        <p className="text-gray-600 text-sm md:text-base font-medium">Langkah-langkah penyelesaian:</p>
-        <ol className="list-decimal list-inside text-gray-600 text-sm md:text-base pl-6">
-          <li>Tentukan jam masuk sekolah (07.00).</li>
-          <li>Kurangi waktu perjalanan (30 menit) untuk menentukan waktu berangkat (06.30).</li>
-          <li>Kurangi waktu bersiap-siap (20 menit) untuk menentukan waktu mulai bersiap (06.10).</li>
-        </ol>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Code className="w-5 h-5 mr-2" /> ALGORITMA
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>
+            <span className="font-semibold">Tentukan waktu tiba</span><br />
+            Aldi harus tiba di sekolah pukul <span className="font-semibold">07.00</span>.
+          </li>
+          <li>
+            <span className="font-semibold">Hitung waktu berangkat</span><br />
+            Kurangi waktu perjalanan <span className="font-semibold">30 menit</span> dari <span className="font-semibold">07.00</span>, sehingga Aldi harus berangkat pukul <span className="font-semibold">06.30</span>.
+          </li>
+          <li>
+            <span className="font-semibold">Hitung waktu bersiap-siap</span><br />
+            Kurangi waktu bersiap-siap <span className="font-semibold">20 menit</span> dari <span className="font-semibold">06.30</span>, sehingga Aldi harus mulai bersiap pukul <span className="font-semibold">06.10</span>.
+          </li>
+        </ul>
       </div>
 
       {/* Conclusion and Analysis */}
@@ -334,7 +333,7 @@ const PengenalanCT = () => {
           </div>
           {feedback && (
             <p
-              className={`text-sm font-medium mt-3 ${
+              className={`text-sm mt-2 font-bold ${
                 feedback.includes("benar") ? "text-green-700" : "text-red-700"
               }`}
             >

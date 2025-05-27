@@ -42,36 +42,36 @@ const AktivitasVisualisasiGambar = () => {
   const handlePeriksa1 = () => {
     setIsTouched1(true);
     if (isCorrect(selected, "Line Chart")) {
-      setFeedback1("✅ Benar! Grafik garis (Line Chart) cocok untuk melihat perubahan dari waktu ke waktu.");
+      setFeedback1("Benar! Grafik garis (Line Chart) cocok untuk melihat perubahan dari waktu ke waktu.");
     } else {
-      setFeedback1("❌ Coba lagi. Grafik ini kurang tepat untuk melihat perubahan dari waktu ke waktu.");
+      setFeedback1("Jawaban salah, ayo coba lagi.");
     }
   };
 
   const handlePeriksa2 = () => {
     setIsTouched2(true);
     if (isCorrect(jawaban2, "Pie Chart")) {
-      setFeedback2("✅ Benar! Grafik Pie Chart cocok untuk menunjukkan persentase dari keseluruhan.");
+      setFeedback2("Benar! Grafik Pie Chart cocok untuk menunjukkan persentase dari keseluruhan.");
     } else {
-      setFeedback2("❌ Salah. Grafik ini kurang tepat untuk menunjukkan persentase dari keseluruhan.");
+      setFeedback2("Jawaban salah, ayo coba lagi.");
     }
   };
 
   const handlePeriksa3 = () => {
     setIsTouched3(true);
     if (isCorrect(jawaban3, "Line Chart")) {
-      setFeedback3("✅ Benar! Grafik garis cocok untuk melihat perubahan dari waktu ke waktu.");
+      setFeedback3("Benar! Grafik garis cocok untuk melihat perubahan dari waktu ke waktu.");
     } else {
-      setFeedback3("❌ Salah. Grafik ini kurang tepat untuk melihat perubahan dari waktu ke waktu.");
+      setFeedback3("Jawaban salah, ayo coba lagi.");
     }
   };
 
   const handlePeriksa4 = () => {
     setIsTouched4(true);
     if (isCorrect(jawaban4, "Bar Chart")) {
-      setFeedback4("✅ Benar! Grafik batang cocok untuk perbandingan nilai antar kategori.");
+      setFeedback4("Benar! Grafik batang cocok untuk perbandingan nilai antar kategori.");
     } else {
-      setFeedback4("❌ Salah. Grafik ini kurang tepat untuk perbandingan nilai antar kategori.");
+      setFeedback4("Jawaban salah, ayo coba lagi.");
     }
   };
 
@@ -89,12 +89,12 @@ const AktivitasVisualisasiGambar = () => {
         {/* Soal 1 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
-            <span className="text-lg font-bold text-green-700 mr-2">1️⃣</span>
+           <span className="text-lg font-bold text-green-700 mr-2">1.</span>
             Kamu ingin melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan terakhir. Grafik apa yang paling tepat untuk digunakan?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 selected === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setSelected("Line Chart")}
@@ -105,7 +105,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 selected === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setSelected("Bar Chart")}
@@ -116,7 +116,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 selected === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setSelected("Pie Chart")}
@@ -146,7 +146,7 @@ const AktivitasVisualisasiGambar = () => {
             </button>
           </div>
           {isTouched1 && selected && (
-            <div className={`mt-2 text-sm font-medium ${isCorrect(selected, "Line Chart") ? "text-green-600" : "text-red-600"}`}>
+            <div className={`text-sm mt-2 font-bold ${isCorrect(selected, "Line Chart") ? "text-green-700" : "text-red-700"}`}>
               {feedback1}
             </div>
           )}
@@ -155,12 +155,12 @@ const AktivitasVisualisasiGambar = () => {
         {/* Soal 2 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
-            <span className="text-lg font-bold text-green-700 mr-2">2️⃣</span>
+            <span className="text-lg font-bold text-green-700 mr-2">2.</span>
             Kelasmu melakukan survei tentang warna favorit. Grafik apa yang paling tepat untuk menunjukkan persentase warna favorit dari seluruh kelas?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban2 === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban2("Pie Chart")}
@@ -171,7 +171,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban2 === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban2("Bar Chart")}
@@ -182,7 +182,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban2 === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban2("Line Chart")}
@@ -212,7 +212,7 @@ const AktivitasVisualisasiGambar = () => {
             </button>
           </div>
           {isTouched2 && jawaban2 && (
-            <div className={`mt-2 text-sm font-medium ${isCorrect(jawaban2, "Pie Chart") ? "text-green-600" : "text-red-600"}`}>
+            <div className={`text-sm mt-2 font-bold ${isCorrect(jawaban2, "Pie Chart") ? "text-green-700" : "text-red-700"}`}>
               {feedback2}
             </div>
           )}
@@ -221,12 +221,12 @@ const AktivitasVisualisasiGambar = () => {
         {/* Soal 3 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
-            <span className="text-lg font-bold text-green-700 mr-2">3️⃣</span>
+            <span className="text-lg font-bold text-green-700 mr-2">3.</span>
             Kamu ingin melihat perubahan jumlah pengunjung perpustakaan sekolah dari waktu ke waktu setiap bulan. Grafik apa yang paling cocok?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban3 === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban3("Pie Chart")}
@@ -237,7 +237,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban3 === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban3("Bar Chart")}
@@ -248,7 +248,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban3 === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban3("Line Chart")}
@@ -278,7 +278,7 @@ const AktivitasVisualisasiGambar = () => {
             </button>
           </div>
           {isTouched3 && jawaban3 && (
-            <div className={`mt-2 text-sm font-medium ${isCorrect(jawaban3, "Line Chart") ? "text-green-600" : "text-red-600"}`}>
+            <div className={`text-sm mt-2 font-bold ${isCorrect(jawaban3, "Line Chart") ? "text-green-700" : "text-red-700"}`}>
               {feedback3}
             </div>
           )}
@@ -287,12 +287,12 @@ const AktivitasVisualisasiGambar = () => {
         {/* Soal 4 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
-            <span className="text-lg font-bold text-green-700 mr-2">4️⃣</span>
+            <span className="text-lg font-bold text-green-700 mr-2">4.</span>
             Kamu ingin melihat perbandingan nilai rata-rata siswa di pelajaran Matematika, IPA, dan Bahasa Indonesia. Grafik apa yang paling tepat?
           </p>
           <div className="grid grid-cols-1 gap-4 px-4 mb-5 md:grid-cols-3">
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban4 === "Pie Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban4("Pie Chart")}
@@ -303,7 +303,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban4 === "Bar Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban4("Bar Chart")}
@@ -314,7 +314,7 @@ const AktivitasVisualisasiGambar = () => {
               </p>
             </div>
             <div
-              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform hover:scale-105 ${
+              className={`border-4 rounded-xl p-2 cursor-pointer transition-transform transform ${
                 jawaban4 === "Line Chart" ? "border-blue-500" : "border-gray-200"
               }`}
               onClick={() => setJawaban4("Line Chart")}
@@ -344,7 +344,7 @@ const AktivitasVisualisasiGambar = () => {
             </button>
           </div>
           {isTouched4 && jawaban4 && (
-            <div className={`mt-2 text-sm font-medium ${isCorrect(jawaban4, "Bar Chart") ? "text-green-600" : "text-red-600"}`}>
+            <div className={`text-sm mt-2 font-bold ${isCorrect(jawaban4, "Bar Chart") ? "text-green-700" : "text-red-700"}`}>
               {feedback4}
             </div>
           )}
@@ -353,7 +353,7 @@ const AktivitasVisualisasiGambar = () => {
         {/* Soal 5 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
-            <span className="text-lg font-bold text-green-700 mr-2">5️⃣</span>
+             <span className="text-lg font-bold text-green-700 mr-2">5.</span>
             Lengkapi tabel berikut ini dengan jenis grafik yang paling sesuai berdasarkan deskripsi kasus.
           </p>
           <table className="w-full text-sm md:text-base">
@@ -411,15 +411,15 @@ const AktivitasVisualisasiGambar = () => {
             </button>
           </div>
           {isTouched5 && jawaban5.length > 0 && (
-            <div className="mt-2 text-sm font-medium">
+            <div className="mt-2 text-sm font-bold">
               {jawaban5.map((jawaban, index) => (
                 <div
                   key={index}
-                  className={isCorrect(jawaban, ["Pie Chart", "Line Chart"][index]) ? "text-green-600" : "text-red-600"}
+                  className={isCorrect(jawaban, ["Pie Chart", "Line Chart"][index]) ? "text-green-700" : "text-red-700"}
                 >
                   {isCorrect(jawaban, ["Pie Chart", "Line Chart"][index])
-                    ? `✅ Benar! Untuk kasus "${["Menunjukkan persentase warna favorit siswa dari seluruh kelas", "Melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan"][index]}".`
-                    : `❌ Salah. Untuk kasus "${["Menunjukkan persentase warna favorit siswa dari seluruh kelas", "Melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan"][index]}", seharusnya ${["Pie Chart", "Line Chart"][index]}.`}
+                    ? `Benar! Untuk kasus "${["Menunjukkan persentase warna favorit siswa dari seluruh kelas", "Melihat perubahan jumlah penjualan produk dari waktu ke waktu selama 4 bulan"][index]}".`
+                    : `Jawaban salah, ayo coba lagi. Seharusnya ${["Pie Chart", "Line Chart"][index]}.`}
                 </div>
               ))}
             </div>
@@ -427,21 +427,21 @@ const AktivitasVisualisasiGambar = () => {
         </div>
 
         {/* Tombol Navigasi */}
-        <div className="flex justify-between mt-8">
-          <a
-            href="/contoh-penerapan-visualisasi-data"
-            className="px-5 py-2 text-base text-white transition duration-300 bg-gray-500 rounded-lg shadow-md hover:bg-gray-600"
-          >
-            ← Sebelumnya
-          </a>
-          <a
-            href="/mari-berlatih-visualisasi"
-            className="px-5 py-2 text-base text-white transition duration-300 bg-green-800 rounded-lg shadow-md hover:bg-green-700"
-          >
-            Selanjutnya →
-          </a>
-        </div>
+        <div className="flex justify-between mt-8 px-4">
+        <button
+          onClick={() => window.location.href = '/contoh-penerapan-visualisasi-data'}
+          className="px-5 py-2 text-base text-white transition duration-300 bg-gray-500 rounded-lg shadow-md hover:bg-gray-600 cursor-pointer"
+        >
+          ← Sebelumnya
+        </button>
+        <button
+          onClick={() => window.location.href = '/berlatih-visualisasi'}
+          className="px-5 py-2 text-base text-white transition duration-300 bg-green-800 rounded-lg shadow-md hover:bg-green-700 cursor-pointer"
+        >
+          Selanjutnya →
+        </button>
       </div>
+            </div>
     </Layout>
   );
 };

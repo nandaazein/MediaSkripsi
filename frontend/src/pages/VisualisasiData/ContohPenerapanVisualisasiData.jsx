@@ -122,7 +122,7 @@ const ContohPenerapanVisualisasiData = () => {
       {/* Tabel Data Nilai Ulangan */}
       <div className="flex flex-col items-center mt-6">
         <p className="text-gray-600 text-sm text-center mb-2 italic">
-          Tabel 1. Data Nilai Ulangan Harian Budi
+          Tabel 8. Data Nilai Ulangan Harian Budi
         </p>
         <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
           <thead>

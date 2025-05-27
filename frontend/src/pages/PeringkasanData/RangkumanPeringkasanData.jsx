@@ -3,61 +3,63 @@ import Layout from "../../components/Layout";
 export default function RangkumanPeringkasanData() {
   return (
     <Layout>
-      <h1 className="text-xl md:text-2xl text-center font-bold mb-6 p-4 bg-[#255F38] text-white rounded-lg shadow-md">
-        Rangkuman Peringkasan Data
-      </h1>
+      <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
+        RANGKUMAN PERINGKASAN DATA
+      </div>
 
       <section className="p-6 bg-white shadow-lg">
         <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-4">
-          Materi ini membahas konsep peringkasan data menggunakan fungsi dalam aplikasi lembar kerja untuk menyajikan informasi secara singkat dan akurat, dengan pendekatan <strong>Computational Thinking</strong> untuk meringkas data secara efisien.
+          Materi ini membahas konsep peringkasan data menggunakan fungsi <strong>SUMIF, COUNTIF, SUMIFS,</strong> dan <strong>COUNTIFS</strong> dalam aplikasi lembar kerja untuk menyajikan informasi secara singkat, akurat, dan mudah dipahami.
         </p>
 
         <div className="space-y-6 px-4">
-          {/* Peringkasan Data */}
+          {/* Fungsi Peringkasan Data */}
           <div>
-            <h3 className="text-lg font-semibold text-green-700">1. Peringkasan Data</h3>
+            <h3 className="text-lg font-semibold text-green-700">1. Fungsi Peringkasan Data</h3>
             <p className="text-gray-700 text-sm md:text-base mt-2 leading-relaxed">
-              <strong>Tujuan:</strong> Mengolah data besar dan kompleks menjadi sederhana tanpa menghilangkan informasi penting menggunakan fungsi seperti <strong>SUMIF</strong>, <strong>COUNTIF</strong>, <strong>SUMIFS</strong>, dan <strong>COUNTIFS</strong>.
+              Fungsi peringkasan digunakan untuk mengolah data besar menjadi ringkas berdasarkan kriteria tertentu.
             </p>
             <ul className="list-disc ml-6 text-gray-700 mt-3 text-sm md:text-base space-y-1">
-              <li><strong>Manfaat:</strong> Menghemat waktu, membantu pengambilan keputusan, dan menampilkan informasi lebih jelas.</li>
-              <li><strong>Contoh:</strong> Menghitung jumlah pembelian makanan favorit di kantin atau total pengeluaran transportasi.</li>
+              <li><strong>SUMIF:</strong> Menjumlahkan data dengan satu syarat (contoh: total nilai siswa kelas "8A" dari tabel nilai).</li>
+              <li><strong>COUNTIF:</strong> Menghitung jumlah data dengan satu syarat (contoh: jumlah siswa dengan nilai di atas 75).</li>
+              <li><strong>SUMIFS:</strong> Menjumlahkan data dengan lebih dari satu syarat (contoh: total pendapatan kategori "Elektronik" di bulan "Januari").</li>
+              <li><strong>COUNTIFS:</strong> Menghitung jumlah data dengan lebih dari satu syarat (contoh: jumlah siswa perempuan kelas "8A" yang hadir).</li>
+              <li><strong>Manfaat:</strong> Menghemat waktu, membantu pengambilan keputusan, dan menyajikan informasi lebih jelas.</li>
             </ul>
           </div>
 
-          {/* Fungsi Peringkasan */}
+          {/* Langkah Peringkasan Data */}
           <div>
-            <h3 className="text-lg font-semibold text-green-700">2. Fungsi Peringkasan</h3>
+            <h3 className="text-lg font-semibold text-green-700">2. Langkah Peringkasan Data</h3>
             <p className="text-gray-700 text-sm md:text-base mt-2 leading-relaxed">
-              <strong>Tujuan:</strong> Menggunakan fungsi spreadsheet untuk menjumlahkan atau menghitung data berdasarkan kriteria tertentu.
+              Langkah-langkah untuk menerapkan peringkasan data menggunakan pendekatan Computational Thinking:
             </p>
             <ul className="list-disc ml-6 text-gray-700 mt-3 text-sm md:text-base space-y-1">
-              <li><strong>SUMIF:</strong> Menjumlahkan data dengan satu syarat (contoh: total pengeluaran untuk kategori makanan).</li>
-              <li><strong>SUMIFS:</strong> Menjumlahkan data dengan beberapa syarat (contoh: pengeluaran alat kebersihan di bulan Maret).</li>
-              <li><strong>COUNTIF:</strong> Menghitung jumlah data dengan satu syarat (contoh: jumlah film bergenre petualangan).</li>
-              <li><strong>COUNTIFS:</strong> Menghitung jumlah data dengan beberapa syarat (contoh: siswa perempuan kelas 8A yang hadir).</li>
+              <li><strong>Dekomposisi:</strong> Tentukan apa yang ingin diringkas (misalnya, total nilai atau jumlah siswa) dan identifikasi data yang relevan.</li>
+              <li><strong>Pengenalan Pola:</strong> Kenali pola dalam data, seperti kategori berulang, untuk memilih kriteria yang tepat.</li>
+              <li><strong>Abstraksi:</strong> Fokus pada data penting dan abaikan informasi yang tidak diperlukan.</li>
+              <li><strong>Algoritma:</strong> Tulis rumus dengan benar, seperti =SUMIF(range, criteria, sum_range), dengan range dan kriteria yang sesuai.</li>
             </ul>
           </div>
 
-          {/* Pendekatan Computational Thinking */}
+          {/* Contoh Penerapan */}
           <div>
-            <h3 className="text-lg font-semibold text-green-700">3. Pendekatan Computational Thinking</h3>
+            <h3 className="text-lg font-semibold text-green-700">3. Contoh Penerapan</h3>
             <p className="text-gray-700 text-sm md:text-base mt-2 leading-relaxed">
-              Pendekatan ini membantu memecah proses peringkasan data menjadi langkah-langkah sistematis:
+              Peringkasan data dapat diterapkan dalam berbagai situasi sehari-hari:
             </p>
             <ul className="list-disc ml-6 text-gray-700 mt-3 text-sm md:text-base space-y-1">
-              <li><strong>Dekomposisi:</strong> Memecah masalah menjadi langkah kecil, seperti mengidentifikasi tujuan dan kriteria peringkasan.</li>
-              <li><strong>Pengenalan Pola:</strong> Mengenali pola data, seperti pengelompokan berdasarkan kategori atau kriteria tertentu.</li>
-              <li><strong>Abstraksi:</strong> Fokus pada data relevan, mengabaikan informasi yang tidak diperlukan.</li>
-              <li><strong>Algoritma:</strong> Menyusun langkah peringkasan dengan rumus, seperti SUMIF atau COUNTIFS.</li>
+              <li><strong>SUMIF:</strong> Menghitung total iuran "Kebersihan" (Rp20.000) dari tabel pembayaran siswa.</li>
+              <li><strong>SUMIFS:</strong> Menjumlahkan pengeluaran "Alat Kebersihan" di bulan "Maret" (Rp75.000).</li>
+              <li><strong>COUNTIF:</strong> Menghitung jumlah film bergenre "Petualangan" (6 film) dari daftar tontonan.</li>
+              <li><strong>COUNTIFS:</strong> Menghitung jumlah siswa perempuan kelas "8A" yang hadir (4 siswa).</li>
             </ul>
           </div>
 
           {/* Kesimpulan */}
           <div>
-            <h3 className="text-lg font-semibold text-green-700">4. Kesimpulan</h3>
             <p className="text-gray-700 text-sm md:text-base mt-2 leading-relaxed">
-              Fungsi peringkasan (<strong>SUMIF</strong>, <strong>COUNTIF</strong>, <strong>SUMIFS</strong>, <strong>COUNTIFS</strong>) ideal untuk mengolah data besar menjadi informasi yang singkat dan jelas. Dengan pendekatan <strong>Computational Thinking</strong>, proses peringkasan menjadi lebih efisien dan akurat. Pastikan data terstruktur, gunakan kriteria yang konsisten, dan pilih fungsi sesuai kebutuhan untuk menghindari kesalahan dan mempercepat analisis.
+              Fungsi SUMIF dan COUNTIF cocok untuk peringkasan dengan satu kriteria, seperti total nilai atau jumlah siswa tertentu. Fungsi SUMIFS dan COUNTIFS ideal untuk analisis dengan beberapa kriteria, seperti pengeluaran berdasarkan kategori dan bulan. Pastikan data konsisten, gunakan range dan kriteria yang tepat, dan terapkan pendekatan Computational Thinking untuk hasil yang akurat dan efisien.
             </p>
           </div>
         </div>
@@ -69,7 +71,7 @@ export default function RangkumanPeringkasanData() {
           onClick={() => (window.location.href = "/home")}
           className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 cursor-pointer transition duration-300"
         >
-          sebelumnya
+          Sebelumnya
         </button>
         <button
           onClick={() => (window.location.href = "/petunjuk-pengerjaan-peringkasan")}

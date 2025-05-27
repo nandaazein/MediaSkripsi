@@ -21,7 +21,7 @@ const ContohPeringkasan = () => {
       </p>
 
       <div className="flex flex-col items-center">
-        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel. Daftar Pembayaran Iuran</p>
+        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel 9. Daftar Pembayaran Iuran</p>
         <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
           <thead>
             <tr className="bg-[#255F38] text-white">
@@ -65,9 +65,8 @@ const ContohPeringkasan = () => {
           <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Kamu ingin menghitung total iuran berdasarkan kategori: <span className="font-semibold">Kebersihan</span> dan <span className="font-semibold">Kas</span>.</li>
-          <li>Setiap baris berisi nama siswa, kategori, dan jumlah iuran.</li>
-          <li>Data kategori bisa sama tapi jumlahnya bisa berbeda.</li>
+          <li>Tentukan tujuan: menghitung total iuran untuk kategori "Kebersihan" dan "Kas".</li>
+          <li>Identifikasi data: tabel berisi kolom Nama Siswa, Kategori, dan Jumlah (Rp).</li>
         </ul>
       </div>
 
@@ -77,9 +76,8 @@ const ContohPeringkasan = () => {
           <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Beberapa siswa membayar untuk kategori yang sama.</li>
-          <li>Total uang untuk kategori tersebut dapat dijumlahkan.</li>
-          <li>Polanya: cari semua data dengan kategori yang sama, lalu jumlahkan uangnya.</li>
+          <li>Pola data: beberapa siswa membayar untuk kategori yang sama (Kebersihan atau Kas).</li>
+          <li>Pola dapat digunakan untuk menjumlahkan total berdasarkan kategori yang sama.</li>
         </ul>
       </div>
 
@@ -89,9 +87,9 @@ const ContohPeringkasan = () => {
           <Filter className="w-5 h-5 mr-2" /> Abstraksi
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Kita tidak perlu melihat kolom <span className="font-semibold">Nama Siswa</span>.</li>
-          <li>Fokus pada kolom <span className="font-semibold">Kategori</span> dan <span className="font-semibold">Jumlah (Rp)</span>.</li>
-          <li>Gunakan fungsi <span className="font-semibold">SUMIF</span> untuk menjumlahkan uang berdasarkan kategori.</li>
+          <li>Abaikan kolom "Nama Siswa" yang tidak relevan.</li>
+          <li>Fokus pada kolom "Kategori" dan "Jumlah (Rp)" untuk perhitungan.</li>
+          <li>Gunakan fungsi SUMIF untuk menyaring dan menjumlahkan data berdasarkan kategori.</li>
         </ul>
       </div>
 
@@ -101,22 +99,20 @@ const ContohPeringkasan = () => {
           <Code className="w-5 h-5 mr-2" /> Algoritma
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li><span className="font-semibold">Pilih sel tempat memasukkan hasil</span><br />Misalnya, kamu ingin total iuran “Kebersihan” muncul di sel <span className="font-semibold">G1</span>.</li>
-          <li><span className="font-semibold">Masukkan rumus SUMIF</span><br />
-            <code className="bg-gray-200 px-2 py-1 rounded">=SUMIF(C2:C9;"Kebersihan";D2:D9)</code>
-            <ul className="list-disc pl-6 ml-6 space-y-1 mt-2">
-              <li><span className="font-semibold">C2:C9</span> → Kolom kategori.</li>
-              <li><span className="font-semibold">"Kebersihan"</span> → Kriteria yang ingin dijumlahkan.</li>
-              <li><span className="font-semibold">D2:D9</span> → Kolom jumlah uang yang dijumlahkan.</li>
-            </ul>
+          <li>Pilih range data yang akan diperiksa: kolom "Kategori" (C2:C9).</li>
+          <li>Tentukan kriteria: "Kebersihan".</li>
+          <li>Pilih sum_range: kolom "Jumlah (Rp)" (D2:D9).</li>
+          <li>Masukkan rumus SUMIF di sel hasil (misal G1):
+            <code className="bg-gray-200 px-2 py-1 rounded">=SUMIF(C2:C9;"Kebersihan";D2:D9)</code><br />
           </li>
-          <li><span className="font-semibold">Tekan Enter</span><br />fungsi akan menghitung total uang iuran untuk kategori <span className="font-semibold">Kebersihan</span>.</li>
-          <li><span className="font-semibold">Ulangi untuk kategori lainnya</span><br />Misalnya untuk “Kas”, gunakan:
-            <code className="bg-gray-200 px-2 py-1 rounded ml-2">=SUMIF(C2:C9;"Kas";D2:D9)</code>
+          <li>Tekan Enter untuk mendapatkan total iuran "Kebersihan".</li>
+          <li>Hasil: Total iuran untuk "Kebersihan" adalah Rp20.000.</li>
+          <li>Ulangi untuk kategori "Kas" dengan rumus:
+            <code className="bg-gray-200 px-2 py-1 rounded">=SUMIF(C2:C9;"Kas";D2:D9)</code><br />
           </li>
+          <li>Tekan Enter untuk mendapatkan total iuran "Kas".</li>
+          <li>Hasil: Total iuran untuk "Kas" adalah Rp40.000.</li>
         </ul>
-        
-        {/* Spreadsheet */}
         <div className="flex justify-center">
           <iframe 
             width="80%" 
@@ -132,7 +128,7 @@ const ContohPeringkasan = () => {
       {/* KESIMPULAN DAN ANALISIS */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <CheckCircle className="w-5 h-5 mr-2" /> KESIMPULAN & ANALISIS
+          <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan & Analisis
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-6">
           Dengan <span className="font-semibold">SUMIF</span>, siswa dapat menghitung total pengeluaran sesuai kategori secara otomatis, lebih cepat, dan lebih akurat.
@@ -153,9 +149,8 @@ const ContohPeringkasan = () => {
         Kamu adalah bendahara kelas. Setiap bulan kamu mencatat pengeluaran kelas untuk berbagai keperluan, seperti alat kebersihan, dekorasi, dan konsumsi. Sekarang kamu ingin tahu berapa total pengeluaran untuk <span className="font-semibold">"Alat Kebersihan"</span> di bulan <span className="font-semibold">"Maret"</span>. Daripada menghitung satu per satu secara manual, kamu bisa menggunakan <span className="font-semibold">fungsi SUMIFS</span> agar hasilnya otomatis.
       </p>
 
-      {/* Tabel */}
       <div className="flex flex-col items-center mt-6">
-        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel. Pengeluaran Kelas</p>
+        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel 10. Pengeluaran Kelas</p>
         <table className="border-collapse border border-green-800 w-full md:w-3/4 text-center">
           <thead>
             <tr className="bg-[#255F38] text-white">
@@ -187,54 +182,54 @@ const ContohPeringkasan = () => {
         </table>
       </div>
 
-      {/* CT - Dekomposisi */}
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mt-6">
+        Penyelesaian dengan <span className="font-semibold italic">Computational Thinking:</span>
+      </p>
+
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Kamu ingin menghitung total pengeluaran untuk "Alat Kebersihan" di bulan "Maret".</li>
-          <li>Tabel berisi kolom Bulan, Jenis, dan Jumlah.</li>
+          <li>Tentukan tujuan: menghitung total pengeluaran untuk "Alat Kebersihan" di bulan "Maret".</li>
+          <li>Identifikasi data: tabel berisi kolom Bulan, Jenis, dan Jumlah.</li>
         </ul>
       </div>
 
-      {/* CT - Pengenalan Pola */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Setiap baris punya struktur yang sama: Bulan – Jenis – Jumlah.</li>
-          <li>Kamu perlu menjumlahkan "Jumlah" jika Bulan = Maret dan Jenis = Alat Kebersihan.</li>
+          <li>Pola data: setiap baris memiliki struktur Bulan, Jenis, dan Jumlah yang berulang.</li>
+          <li>Pola dapat digunakan untuk menjumlahkan "Jumlah" berdasarkan Bulan "Maret" dan Jenis "Alat Kebersihan".</li>
         </ul>
       </div>
 
-      {/* CT - Abstraksi */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Filter className="w-5 h-5 mr-2" /> Abstraksi
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Fokus hanya pada kolom Bulan, Jenis, dan Jumlah.</li>
-          <li>Gunakan fungsi <span className="font-semibold">SUMIFS</span> untuk menjumlahkan dengan 2 kriteria sekaligus.</li>
+          <li>Abaikan data yang tidak relevan, fokus pada kolom Bulan, Jenis, dan Jumlah.</li>
+          <li>Gunakan fungsi SUMIFS untuk menyaring berdasarkan dua kriteria: Bulan dan Jenis.</li>
         </ul>
       </div>
 
-      {/* CT - Algoritma */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Code className="w-5 h-5 mr-2" /> Algoritma
         </div>
         <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Pilih sel untuk menampilkan hasil (misal: E2).</li>
-          <li>Masukkan rumus:
-            <div className="bg-gray-100 p-2 rounded mt-1">
-              =SUMIFS(C2:C9;A2:A9;"Maret";B2:B9;"Alat Kebersihan")
-            </div>
+          <li>Pilih sum_range: kolom "Jumlah" (C2:C9).</li>
+          <li>Pilih criteria_range1: kolom "Bulan" (A2:A9) dan criteria1: "Maret".</li>
+          <li>Pilih criteria_range2: kolom "Jenis" (B2:B9) dan criteria2: "Alat Kebersihan".</li>
+          <li>Masukkan rumus SUMIFS di sel hasil (misal E2):
+            <code className="bg-gray-200 px-2 py-1 rounded">=SUMIFS(C2:C9;A2:A9;"Maret";B2:B9;"Alat Kebersihan")</code><br />
           </li>
-          <li>Tekan Enter untuk melihat total pengeluaran alat kebersihan di bulan Maret.</li>
+          <li>Tekan Enter untuk mendapatkan total pengeluaran.</li>
+          <li>Hasil: Total pengeluaran untuk "Alat Kebersihan" di bulan "Maret" adalah Rp75.000.</li>
         </ul>
-
         <div className="flex justify-center">
           <iframe 
             width="80%" 
@@ -247,7 +242,6 @@ const ContohPeringkasan = () => {
         </div>
       </div>
 
-      {/* Kesimpulan dan Analisis */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan & Analisis
@@ -271,9 +265,8 @@ const ContohPeringkasan = () => {
         Kamu sedang mencatat semua film yang kamu tonton selama liburan. Di spreadsheet, kamu menuliskan <span className="font-semibold">judul film, genre,</span> dan <span className="font-semibold">rating</span>. Sekarang kamu ingin tahu <span className="font-semibold">berapa banyak film bergenre "Petualangan"</span> yang sudah kamu tonton. Kamu akan menggunakan fungsi <span className="font-semibold">COUNTIF</span> untuk menghitungnya secara otomatis.
       </p>
 
-      {/* Tabel Data */}
       <div className="flex flex-col items-center mt-6">
-        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel. Daftar Film yang Ditonton</p>
+        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel 11. Daftar Film yang Ditonton</p>
         <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center text-sm">
           <thead>
             <tr className="bg-[#255F38] text-white">
@@ -306,58 +299,54 @@ const ContohPeringkasan = () => {
         </table>
       </div>
 
-      {/* Penyelesaian CT */}
-      <div className="space-y-8 mt-10">
-        {/* CT - Dekomposisi */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Kamu memiliki daftar film yang pernah ditonton.</li>
-            <li>Setiap film memiliki kolom Genre seperti Petualangan, Komedi, dan Aksi.</li>
-            <li>Kamu ingin tahu berapa banyak film yang termasuk genre "Petualangan".</li>
-          </ul>
-        </div>
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mt-6">
+        Penyelesaian dengan <span className="font-semibold italic">Computational Thinking:</span>
+      </p>
 
-        {/* CT - Pengenalan Pola */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Setiap baris mewakili 1 film yang sudah kamu tonton.</li>
-            <li>Kolom genre memiliki nilai berulang, seperti "Petualangan", "Fiksi Ilmiah", dan "Komedi".</li>
-          </ul>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
         </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Tentukan tujuan: menghitung jumlah film bergenre "Petualangan".</li>
+          <li>Identifikasi data: tabel berisi kolom Judul Film, Genre, dan Rating.</li>
+        </ul>
+      </div>
 
-        {/* CT - Abstraksi */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <Filter className="w-5 h-5 mr-2" /> Abstraksi
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Fokus hanya pada kolom "Genre".</li>
-            <li>Gunakan fungsi <span className="font-semibold">COUNTIF</span> untuk menghitung jumlah genre "Petualangan".</li>
-          </ul>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
         </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Pola data: setiap baris mewakili satu film dengan genre yang mungkin berulang (contoh: Petualangan).</li>
+          <li>Pola dapat digunakan untuk menghitung jumlah film dengan genre tertentu.</li>
+        </ul>
+      </div>
 
-        {/* CT - Algoritma */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <Code className="w-5 h-5 mr-2" /> Algoritma
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Pilih sel untuk menampilkan hasil (misal: F2).</li>
-            <li>Masukkan rumus:
-              <div className="bg-gray-100 p-2 rounded mt-1">
-                =COUNTIF(C2:C10;"Petualangan")
-              </div>
-            </li>
-            <li>Tekan Enter untuk melihat jumlah film bergenre "Petualangan" yang sudah kamu tonton.</li>
-          </ul>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Filter className="w-5 h-5 mr-2" /> Abstraksi
         </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Abaikan kolom "Judul Film" dan "Rating" yang tidak relevan.</li>
+          <li>Fokus pada kolom "Genre" untuk menghitung jumlah film tertentu.</li>
+          <li>Gunakan fungsi COUNTIF untuk menyaring berdasarkan satu kriteria.</li>
+        </ul>
+      </div>
 
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Code className="w-5 h-5 mr-2" /> Algoritma
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Pilih range data yang akan diperiksa: kolom "Genre" (C2:C11).</li>
+          <li>Tentukan kriteria: "Petualangan".</li>
+          <li>Masukkan rumus COUNTIF di sel hasil (misal F2):
+            <code className="bg-gray-200 px-2 py-1 rounded">=COUNTIF(C2:C11;"Petualangan")</code><br />
+          </li>
+          <li>Tekan Enter untuk mendapatkan jumlah film bergenre "Petualangan".</li>
+          <li>Hasil: Jumlah film bergenre "Petualangan" adalah 6.</li>
+        </ul>
         <div className="flex justify-center">
           <iframe 
             width="80%" 
@@ -370,7 +359,6 @@ const ContohPeringkasan = () => {
         </div>
       </div>
 
-      {/* CT - Kesimpulan dan Analisis */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan & Analisis
@@ -394,9 +382,8 @@ const ContohPeringkasan = () => {
         Sebagai anggota OSIS, kamu diminta untuk mendata kehadiran peserta dalam kegiatan "Senam Pagi". Kamu mencatat data peserta yang berisi <span className="font-semibold">nama, kelas, jenis kelamin,</span> dan <span className="font-semibold">status kehadiran</span>. Sekarang kamu ingin mengetahui <span className="font-semibold">berapa siswa perempuan dari kelas 8A yang hadir</span>. Untuk itu, kamu akan menggunakan fungsi <span className="font-semibold">COUNTIFS</span>.
       </p>
 
-      {/* Tabel Data */}
       <div className="flex flex-col items-center mt-6">
-        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel. Kehadiran Peserta Senam Pagi</p>
+        <p className="text-gray-600 text-sm text-center mb-2 italic">Tabel 12. Kehadiran Peserta Senam Pagi</p>
         <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center text-sm">
           <thead>
             <tr className="bg-[#255F38] text-white">
@@ -430,58 +417,55 @@ const ContohPeringkasan = () => {
         </table>
       </div>
 
-      {/* Penyelesaian CT */}
-      <div className="space-y-8 mt-10">
-        {/* CT - Dekomposisi */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Tabel berisi nama, kelas, jenis kelamin, dan kehadiran siswa.</li>
-            <li>Kriteria: kelas = 8A, jenis kelamin = Perempuan, kehadiran = Hadir.</li>
-          </ul>
-        </div>
+      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mt-6">
+        Penyelesaian dengan <span className="font-semibold italic">Computational Thinking:</span>
+      </p>
 
-        {/* CT - Pengenalan Pola */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Setiap baris mewakili 1 siswa dengan 3 informasi utama: kelas, jenis kelamin, dan kehadiran.</li>
-            <li>Data dapat difilter berdasarkan ketiga kolom tersebut.</li>
-          </ul>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
         </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Tentukan tujuan: menghitung jumlah siswa perempuan dari kelas 8A yang hadir.</li>
+          <li>Identifikasi data: tabel berisi kolom Nama, Kelas, Jenis Kelamin, dan Kehadiran.</li>
+        </ul>
+      </div>
 
-        {/* CT - Abstraksi */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <Filter className="w-5 h-5 mr-2" /> Abstraksi
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Fokus pada baris yang memiliki kelas = 8A, jenis kelamin = Perempuan, dan kehadiran = Hadir.</li>
-            <li>Gunakan fungsi COUNTIFS untuk menghitung jumlah data yang memenuhi 3 kriteria sekaligus.</li>
-          </ul>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
         </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Pola data: setiap baris mewakili satu siswa dengan informasi Kelas, Jenis Kelamin, dan Kehadiran yang berulang.</li>
+          <li>Pola dapat digunakan untuk menghitung jumlah siswa berdasarkan kriteria tertentu.</li>
+        </ul>
+      </div>
 
-        {/* CT - Algoritma */}
-        <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-          <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-            <Code className="w-5 h-5 mr-2" /> Algoritma
-          </div>
-          <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-            <li>Pilih sel kosong (misalnya G2).</li>
-            <li>Masukkan rumus:
-              <div className="bg-gray-100 p-2 rounded mt-1">
-                =COUNTIFS(C2:C11;"8A";D2:D11;"Perempuan";E2:E11;"Hadir")
-              </div>
-            </li>
-            <li>Tekan Enter untuk mendapatkan jumlah siswa perempuan 8A yang hadir.</li>
-          </ul>
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Filter className="w-5 h-5 mr-2" /> Abstraksi
         </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Abaikan kolom "Nama" yang tidak relevan.</li>
+          <li>Fokus pada kolom "Kelas", "Jenis Kelamin", dan "Kehadiran" untuk menghitung berdasarkan tiga kriteria.</li>
+          <li>Gunakan fungsi COUNTIFS untuk menyaring data berdasarkan beberapa kriteria.</li>
+        </ul>
+      </div>
 
-        {/* Spreadsheet */}
+      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
+        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
+          <Code className="w-5 h-5 mr-2" /> Algoritma
+        </div>
+        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
+          <li>Pilih criteria_range1: kolom "Kelas" (C2:C11) dan criteria1: "8A".</li>
+          <li>Pilih criteria_range2: kolom "Jenis Kelamin" (D2:D11) dan criteria2: "Perempuan".</li>
+          <li>Pilih criteria_range3: kolom "Kehadiran" (E2:E11) dan criteria3: "Hadir".</li>
+          <li>Masukkan rumus COUNTIFS di sel hasil (misal G2):
+            <code className="bg-gray-200 px-2 py-1 rounded">=COUNTIFS(C2:C11;"8A";D2:D11;"Perempuan";E2:E11;"Hadir")</code><br />
+          </li>
+          <li>Tekan Enter untuk mendapatkan jumlah siswa perempuan 8A yang hadir.</li>
+          <li>Hasil: Jumlah siswa perempuan dari kelas 8A yang hadir adalah 4.</li>
+        </ul>
         <div className="flex justify-center">
           <iframe 
             width="80%" 
@@ -494,7 +478,6 @@ const ContohPeringkasan = () => {
         </div>
       </div>
 
-      {/* CT - Kesimpulan dan Analisis */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan & Analisis

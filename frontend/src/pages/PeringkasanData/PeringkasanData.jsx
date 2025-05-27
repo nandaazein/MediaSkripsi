@@ -373,6 +373,89 @@ export default function PeringkasanData() {
         </li>
       </ul>
 
+      {/* Kalkulator SUMIF dan COUNTIF */}
+      <div className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
+        <h3 className="text-lg font-bold text-[#255F38] mb-2">Perhatikan Kalkulator di bawah ini!</h3>
+        <p className="text-gray-700 mb-4 text-justify">
+          Untuk memahami cara kerja fungsi SUMIF dan COUNTIF, cobalah kalkulator interaktif berikut. SUMIF akan membantu menjumlahkan nilai siswa berdasarkan kelas tertentu, sedangkan COUNTIF akan menghitung jumlah siswa yang memenuhi kriteria nilai tertentu. Masukkan kriteria untuk SUMIF (berdasarkan kelas, misalnya "8A") dan COUNTIF (berdasarkan nilai, misalnya ">75"), lalu klik "Hitung" untuk melihat hasilnya. Klik "Reset" untuk mengosongkan input.
+        </p>
+
+        <div className="flex flex-col items-center mb-6">
+          <p className="text-gray-600 text-sm text-center mb-2 italic">
+            Data Siswa untuk Kalkulator
+          </p>
+          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+            <thead>
+              <tr className="bg-[#255F38] text-white">
+                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                <th className="border border-green-600 px-4 py-2">Kelas</th>
+                <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr key={index} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
+                  <td className="border border-green-600 px-4 py-2">{item.name}</td>
+                  <td className="border border-green-600 px-4 py-2">{item.class}</td>
+                  <td className="border border-green-600 px-4 py-2">{item.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 items-start md:items-center mb-4">
+          <div className="flex flex-col w-full md:w-auto">
+            <label className="mb-1 text-[#255F38] font-semibold">
+              SUMIF - Kelas (misal: "8A"):
+            </label>
+            <input
+              type="text"
+              value={sumifCriteria}
+              onChange={(e) => setSumifCriteria(e.target.value)}
+              placeholder="Masukkan kelas"
+              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] w-full md:w-48"
+            />
+          </div>
+          <div className="flex flex-col w-full md:w-auto">
+            <label className="mb-1 text-[#255F38] font-semibold">
+              COUNTIF - Nilai (misal: ">75"):
+            </label>
+            <input
+              type="text"
+              value={countifCriteria}
+              onChange={(e) => setCountifCriteria(e.target.value)}
+              placeholder="Masukkan kondisi nilai"
+              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] w-full md:w-48"
+            />
+          </div>
+          <div className="flex space-x-2">
+            <button
+              onClick={calculate}
+              className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 shadow-md"
+            >
+              Hitung
+            </button>
+            <button
+              onClick={reset}
+              className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-gray-100 p-4 rounded-lg shadow-inner">
+          <p className="text-gray-700 mb-2">
+            <strong>Total Nilai (SUMIF) untuk kelas {sumifCriteria || "-"}:</strong> {sumifResult}
+          </p>
+          <p className="text-gray-700">
+            <strong>Jumlah Siswa (COUNTIF) dengan nilai {countifCriteria || "-"}:</strong> {countifResult}
+          </p>
+        </div>
+        <p className="text-gray-700 text-justify mt-2">Pada dasarnya, langkah kerja SUMIFS dan COUNTIFS sama dengan SUMIF dan COUNTIF: memilih rentang data, menetapkan kriteria, dan menghitung hasil. Hanya saja, SUMIFS dan COUNTIFS memungkinkan penambahan kriteria lebih lanjut untuk menyaring data secara lebih spesifik. Dengan demikian, jika Anda sudah memahami cara kerja SUMIF dan COUNTIF pada kalkulator, Anda juga akan dengan mudah memahami SUMIFS dan COUNTIFS karena konsep dasarnya serupa, hanya dengan tambahan kriteria.</p>
+      </div>
+
       {/* Dekomposisi */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
@@ -1081,90 +1164,6 @@ export default function PeringkasanData() {
               {algoritmaFeedback}
             </p>
           )}
-        </div>
-
-        {/* Kalkulator SUMIF dan COUNTIF */}
-        <div className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center text-lg mb-4">
-            <CheckCircle className="w-5 h-5 mr-2" /> Kalkulator SUMIF dan COUNTIF
-          </h3>
-          <p className="text-gray-700 mb-4 text-justify">
-            Gunakan kalkulator berikut untuk mencoba fungsi SUMIF dan COUNTIF pada data siswa di bawah ini. Masukkan kriteria untuk SUMIF (berdasarkan kelas) dan COUNTIF (berdasarkan nilai), lalu klik "Hitung" untuk melihat hasilnya, atau "Reset" untuk mengosongkan.
-          </p>
-
-          <div className="flex flex-col items-center mb-6">
-            <p className="text-gray-600 text-sm text-center mb-2 italic">
-              Data Siswa untuk Kalkulator
-            </p>
-            <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-              <thead>
-                <tr className="bg-[#255F38] text-white">
-                  <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-                  <th className="border border-green-600 px-4 py-2">Kelas</th>
-                  <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, index) => (
-                  <tr key={index} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
-                    <td className="border border-green-600 px-4 py-2">{item.name}</td>
-                    <td className="border border-green-600 px-4 py-2">{item.class}</td>
-                    <td className="border border-green-600 px-4 py-2">{item.score}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 items-start md:items-center mb-4">
-            <div className="flex flex-col w-full md:w-auto">
-              <label className="mb-1 text-[#255F38] font-semibold">
-                SUMIF - Kelas (misal: "8A"):
-              </label>
-              <input
-                type="text"
-                value={sumifCriteria}
-                onChange={(e) => setSumifCriteria(e.target.value)}
-                placeholder="Masukkan kelas"
-                className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] w-full md:w-48"
-              />
-            </div>
-            <div className="flex flex-col w-full md:w-auto">
-              <label className="mb-1 text-[#255F38] font-semibold">
-                COUNTIF - Nilai (misal: ">75"):
-              </label>
-              <input
-                type="text"
-                value={countifCriteria}
-                onChange={(e) => setCountifCriteria(e.target.value)}
-                placeholder="Masukkan kondisi nilai"
-                className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] w-full md:w-48"
-              />
-            </div>
-            <div className="flex space-x-2">
-              <button
-                onClick={calculate}
-                className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 shadow-md"
-              >
-                Hitung
-              </button>
-              <button
-                onClick={reset}
-                className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md"
-              >
-                Reset
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-gray-100 p-4 rounded-lg shadow-inner">
-            <p className="text-gray-700 mb-2">
-              <strong>Total Nilai (SUMIF) untuk kelas {sumifCriteria || "-"}:</strong> {sumifResult}
-            </p>
-            <p className="text-gray-700">
-              <strong>Jumlah Siswa (COUNTIF) dengan nilai {countifCriteria || "-"}:</strong> {countifResult}
-            </p>
-          </div>
         </div>
       </div>
 

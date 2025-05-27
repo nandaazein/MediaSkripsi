@@ -10,6 +10,7 @@ import LoginSiswa from "./pages/LoginSiswa";
 import LoginGuru from "./pages/LoginGuru";
 import RegisterSiswa from "./pages/RegisterSiswa";
 import RegisterGuru from "./pages/RegisterGuru";
+import DashboardSiswa from "./pages/DashboardSiswa";
 
 // Pendahuluan
 import PengantarBab from "./pages/Pendahuluan/PengantarBab";
@@ -59,6 +60,11 @@ import PetunjukQuizPengelolaan from "./pages/PengelolaanData/PetunjukQuizPengelo
 import KuisPengelolaanData from "./pages/PengelolaanData/KuisPengelolaanData";
 import FeedbackPengelolaanData from "./pages/PengelolaanData/Feedback4";
 
+import PetunjukPengerjaanEvaluasi from "./pages/Evaluasi/PetunjukPengerjaanEvaluasi";
+import EvaluasiAkhir from "./pages/Evaluasi/KuisEvaluasiAkhir";
+import FeedbackEvaluasiAkhir from "./pages/Evaluasi/FeedbackEvaluasi";
+
+
 
 // Admin
 import Dashboard from "./pages/admin/Dashboard";
@@ -68,6 +74,7 @@ import DataNilai from "./pages/admin/DataNilai";
 import DataEvaluasi from "./pages/admin/DataEvaluasi";
 import KelolaSoal from "./pages/admin/KelolaSoal";
 import KKM from "./pages/admin/Pengaturan";
+
 
 
 
@@ -85,6 +92,7 @@ function App() {
         <Route path="/login-guru" element={<LoginGuru />} />
         <Route path="/register-siswa" element={<RegisterSiswa />} />
         <Route path="/register-guru" element={<RegisterGuru />} />
+        <Route path="/dashboard-siswa" element={<DashboardSiswa />} />
 
         {/* PENDAHULUAN */}
         <Route path="/pengantar-bab" element={<PengantarBab />} />
@@ -108,7 +116,7 @@ function App() {
         <Route path="/visualisasi-data" element={<VisualisasiData />} />
         <Route path="/contoh-penerapan-visualisasi-data" element={<ContohPenerapan />}/>
         <Route path="/aktivitas-visualisasi" element={<AktivitasSiswaVisualisasi />} />
-        <Route path="/mari-berlatih-visualisasi" element={<BerlatihVisualisasi />}/>
+        <Route path="/berlatih-visualisasi" element={<BerlatihVisualisasi />}/>
         <Route path="/rangkuman-visualisasi" element={<RangkumanVisualisasiData />} />
         <Route path="/petunjuk-pengerjaan-visualisasi" element={<PetunjukQuizVisualisasi />} />
         <Route path="/kuis-visualisasi" element={<KuisVisualisasiData />} />
@@ -130,9 +138,14 @@ function App() {
         <Route path="/aktivitas-pengelolaan" element={<AktivitasSiswaPengelolaan />}/>
         <Route path="/berlatih-pengelolaan" element={<MariBerlatihPengelolaan />}/>    
         <Route path="/rangkuman-pengelolaan" element={<RangkumanPengelolaanData />} />
-        <Route path="/petunjuk-quiz-pengelolaan" element={<PetunjukQuizPengelolaan />} />
+        <Route path="/petunjuk-pengerjaan-pengelolaan" element={<PetunjukQuizPengelolaan />} />
         <Route path="/kuis-pengelolaan" element={<KuisPengelolaanData />} />
         <Route path="/feedback4" element={<FeedbackPengelolaanData />} />
+
+        {/* EVALUASI */}
+        <Route path="/petunjuk-pengerjaan-evaluasi" element={<PetunjukPengerjaanEvaluasi />} />
+        <Route path="/kuis-evaluasi" element={<EvaluasiAkhir />} />
+        <Route path="/feedback-evaluasi" element={<FeedbackEvaluasiAkhir />} />
 
         {/* Admin */}
         <Route path="/dashboard" element={<Dashboard />} />

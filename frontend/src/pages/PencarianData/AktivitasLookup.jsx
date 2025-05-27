@@ -9,6 +9,9 @@ const AktivitasPencarian = () => {
   const [indexFormula, setIndexFormula] = useState("");
   const [matchFormula, setMatchFormula] = useState("");
   const [chooseFormula, setChooseFormula] = useState("");
+  const [indexFeedback, setIndexFeedback] = useState(""); // State baru untuk feedback soal 3
+  const [matchFeedback, setMatchFeedback] = useState(""); // State baru untuk feedback soal 4
+  const [chooseFeedback, setChooseFeedback] = useState(""); // State baru untuk feedback soal 5
 
   const [isIndexCorrect, setIsIndexCorrect] = useState(null);
   const [isMatchCorrect, setIsMatchCorrect] = useState(null);
@@ -30,8 +33,8 @@ const AktivitasPencarian = () => {
     const isCorrect = selectedFormula === correctFormula;
     setFormulaFeedback(
       isCorrect
-        ? "✅ Jawaban benar! Formula ini mengecek status kelulusan berdasarkan nilai dengan pencarian lookup yang tepat."
-        : "❌ Jawaban salah. Ayo coba lagi!"
+        ? "Jawaban benar! Formula ini mengecek status kelulusan berdasarkan nilai dengan pencarian lookup yang tepat."
+        : "Jawaban salah. Ayo coba lagi!"
     );
   };
 
@@ -45,8 +48,8 @@ const AktivitasPencarian = () => {
     const isCorrect = trimmedOrder === correctOrder;
     setStepFeedback(
       isCorrect
-        ? "✅ Jawaban benar! Urutan ini mencerminkan langkah logis penggunaan fungsi Lookup."
-        : "❌ Jawaban salah. Ayo coba lagi!"
+        ? "Jawaban benar! Urutan ini mencerminkan langkah logis penggunaan fungsi Lookup."
+        : "Jawaban salah. Ayo coba lagi!"
     );
   };
 
@@ -60,6 +63,11 @@ const AktivitasPencarian = () => {
     const trimmed = indexFormula.trim().toLowerCase();
     const isCorrect = trimmed === correctIndex.toLowerCase();
     setIsIndexCorrect(isCorrect);
+    setIndexFeedback(
+      isCorrect
+        ? "Jawaban benar! Nilai 85 diambil dari baris ke-2, kolom ke-3 (Bahasa Inggris)."
+        : "❌ Jawaban salah. Ayo coba lagi!"
+    );
     if (isCorrect) {
       setIndexFormula("85"); // Menampilkan nilai yang benar
     }
@@ -69,12 +77,22 @@ const AktivitasPencarian = () => {
     const trimmed = matchFormula.trim().toLowerCase();
     const isCorrect = trimmed === correctMatch.toLowerCase();
     setIsMatchCorrect(isCorrect);
+    setMatchFeedback(
+      isCorrect
+        ? "Jawaban benar! Nilai 92 ada di posisi ke-2 dalam kolom Matematika."
+        : "Jawaban salah. Ayo coba lagi!"
+    );
   };
 
   const checkChoose = () => {
     const trimmed = chooseFormula.trim().toLowerCase();
     const isCorrect = trimmed === correctChoose.toLowerCase();
     setIsChooseCorrect(isCorrect);
+    setChooseFeedback(
+      isCorrect
+        ? "Jawaban benar! Pilihan ke-2 adalah Siti dari daftar."
+        : "Jawaban salah. Ayo coba lagi!"
+    );
   };
 
   const formulas = [
@@ -136,11 +154,12 @@ const AktivitasPencarian = () => {
               Hapus
             </button>
             {formulaFeedback && (
-              <p className="mt-2 text-sm font-medium">{formulaFeedback}</p>
+              <p className={`text-sm mt-2 font-bold ${selectedFormula === correctFormula ? "text-green-700" : "text-red-700"}`}>
+                {formulaFeedback}
+              </p>
             )}
           </div>
         </div>
-       
 
         {/* Soal 2 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
@@ -192,7 +211,7 @@ const AktivitasPencarian = () => {
               value={stepOrder}
               onChange={(e) => setStepOrder(e.target.value)}
               className="border p-2 w-40 rounded-lg text-center"
-              placeholder="Contoh: 4,1,3,2"
+              placeholder="Contoh: 1,2,3,4"
             />
             <button
               onClick={checkStepOrder}
@@ -201,14 +220,16 @@ const AktivitasPencarian = () => {
               Periksa
             </button>
             <button
-              onClick={() => clearInputsAndFeedback(setStepOrder, setStepFeedback, setIsIndexCorrect)} // Diperbaiki state
+              onClick={() => clearInputsAndFeedback(setStepOrder, setStepFeedback, setIsIndexCorrect)}
               className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
           {stepFeedback && (
-            <p className="text-center text-sm font-medium">{stepFeedback}</p>
+            <p className={`text-sm mt-2 font-bold ${stepFeedback.includes("benar") ? "text-green-700" : "text-red-700"}`}>
+              {stepFeedback}
+            </p>
           )}
         </div>
 
@@ -269,15 +290,15 @@ const AktivitasPencarian = () => {
               Periksa
             </button>
             <button
-              onClick={() => clearInputsAndFeedback(setIndexFormula, setStepFeedback, setIsIndexCorrect)}
+              onClick={() => clearInputsAndFeedback(setIndexFormula, setIndexFeedback, setIsIndexCorrect)}
               className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
-          {isIndexCorrect !== null && (
-            <p className="text-center mb-4 text-sm font-medium">
-              {isIndexCorrect ? "✅ Jawaban benar! Nilai 85 diambil dari baris ke-2, kolom ke-3 (Bahasa Inggris)." : "❌ Jawaban salah. Ayo coba lagi!"}
+          {indexFeedback && (
+            <p className={`text-sm mt-2 font-bold ${isIndexCorrect ? "text-green-700" : "text-red-700"}`}>
+              {indexFeedback}
             </p>
           )}
         </div>
@@ -337,15 +358,15 @@ const AktivitasPencarian = () => {
               Periksa
             </button>
             <button
-              onClick={() => clearInputsAndFeedback(setMatchFormula, setStepFeedback, setIsMatchCorrect)}
+              onClick={() => clearInputsAndFeedback(setMatchFormula, setMatchFeedback, setIsMatchCorrect)}
               className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
-          {isMatchCorrect !== null && (
-            <p className="text-center mb-4 text-sm font-medium">
-              {isMatchCorrect ? "✅ Jawaban benar! Nilai 92 ada di posisi ke-2 dalam kolom Matematika." : "❌ Jawaban salah. Ayo coba lagi!"}
+          {matchFeedback && (
+            <p className={`text-sm mt-2 font-bold ${isMatchCorrect ? "text-green-700" : "text-red-700"}`}>
+              {matchFeedback}
             </p>
           )}
         </div>
@@ -371,15 +392,15 @@ const AktivitasPencarian = () => {
               Periksa
             </button>
             <button
-              onClick={() => clearInputsAndFeedback(setChooseFormula, setStepFeedback, setIsChooseCorrect)}
+              onClick={() => clearInputsAndFeedback(setChooseFormula, setChooseFeedback, setIsChooseCorrect)}
               className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200"
             >
               Hapus
             </button>
           </div>
-          {isChooseCorrect !== null && (
-            <p className="text-center mb-4 text-sm font-medium">
-              {isChooseCorrect ? "✅ Jawaban benar! Pilihan ke-2 adalah Siti dari daftar." : "❌ Jawaban salah. Ayo coba lagi!"}
+          {chooseFeedback && (
+            <p className={`text-sm mt-2 font-bold ${isChooseCorrect ? "text-green-700" : "text-red-700"}`}>
+              {chooseFeedback}
             </p>
           )}
         </div>

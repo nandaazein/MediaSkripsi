@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const KuisVisualisasiData = () => {
+const EvaluasiAkhir = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
-  const [timeLeft, setTimeLeft] = useState(1200);
-  const [error, setError] = useState('');
+  const [timeLeft, setTimeLeft] = useState(2400); 
+  const [error, setError] = useState(null);
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate();
 
@@ -17,21 +17,23 @@ const KuisVisualisasiData = () => {
         const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user'));
         if (!token || !user || user.role !== 'student') {
-          console.log('Mengalihkan ke /masuk karena token atau pengguna tidak ada');
           window.location.href = '/masuk';
           return;
         }
-        const response = await axios.get('http://localhost:5000/api/quizzes/questions?quizNumber=2', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        const filteredQuestions = response.data.filter(q => q.quiz_number === 2);
+        const response = await axios.get(
+          'http://localhost:5000/api/quizzes/questions?quizNumber=5',
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const filteredQuestions = response.data;
         setQuestions(filteredQuestions || []);
         if (filteredQuestions.length === 0) {
-          setError('Tidak ada soal untuk Kuis 2.');
+          setError('Tidak ada soal untuk Evaluasi Akhir.');
         }
       } catch (err) {
-        setError(err.response?.data?.message || 'Gagal mengambil soal');
-        console.error('Kesalahan saat mengambil soal:', err);
+        setError(err.response?.data?.message || 'Gagal mengambil soal.');
+        console.error('Fetch questions error:', err);
       }
     };
     fetchQuestions();
@@ -58,7 +60,7 @@ const KuisVisualisasiData = () => {
     setSelectedAnswer(answer);
     setAnswers((prev) => ({
       ...prev,
-      [currentQuestionIndex]: answer
+      [currentQuestionIndex]: answer,
     }));
   };
 
@@ -79,18 +81,16 @@ const KuisVisualisasiData = () => {
   };
 
   const handleFinish = async () => {
-    console.log('Memulai handleFinish...');
     let score = 0;
     try {
       const token = localStorage.getItem('token');
       const user = JSON.parse(localStorage.getItem('user'));
       if (!token || !user) {
-        console.log('Autentikasi gagal: Token atau pengguna tidak ada');
-        throw new Error('Pengguna tidak terautentikasi');
+        throw new Error('Pengguna tidak terautentikasi.');
       }
 
-      console.log('Pengguna terautentikasi:', user);
-      console.log('NIS yang digunakan:', user.nis);
+      console.log('Token:', token);
+      console.log('User:', user);
 
       let correctCount = 0;
       questions.forEach((question, index) => {
@@ -99,51 +99,47 @@ const KuisVisualisasiData = () => {
         }
       });
       score = questions.length > 0 ? (correctCount / questions.length) * 100 : 0;
-      console.log('Skor dihitung:', score);
-      console.log('Jumlah soal:', questions.length);
-      console.log('Jawaban:', answers);
 
       try {
-        console.log('Menyimpan progres dengan data:');
-        const progressResponse = await axios.post(
-          'http://localhost:5000/api/students/progress',
-          { nis: user.nis, progress: 20 },
+        console.log('Sending progress request to /api/students/evaluation-progress');
+        await axios.post(
+          'http://localhost:5000/api/students/evaluation-progress',
+          { nis: user.nis, progress: 100 },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        console.log('Progress tersimpan:', progressResponse.data);
+        console.log('Progress saved successfully');
       } catch (progressError) {
-        console.error('Gagal menyimpan progres:', progressError);
-        alert('Gagal menyimpan progres: ' + (progressError.response?.data?.message || progressError.message));
+        const message = progressError.response?.data?.message || progressError.message;
+        console.error('Progress error:', progressError.response || progressError);
+        alert(`Gagal menyimpan progres: ${message}`);
       }
 
       try {
-        const currentQuizNumber = 2;
-        const scoreField = `kuis${currentQuizNumber}`;
-        console.log('Menyimpan skor dengan data:', { [scoreField]: score });
-        const scoreResponse = await axios.post(
-          `http://localhost:5000/api/students/scores/${user.nis}`,
-          { [scoreField]: score },
+        console.log('Sending score request to /api/students/evaluation-scores');
+        await axios.post(
+          `http://localhost:5000/api/students/evaluation-scores/${user.nis}`,
+          { evaluation_score: score },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        console.log('Skor tersimpan:', scoreResponse.data);
+        console.log('Score saved successfully');
       } catch (scoreError) {
-        console.error('Gagal menyimpan skor:', scoreError);
-        alert('Gagal menyimpan skor: ' + (scoreError.response?.data?.message || scoreError.message));
+        const message = scoreError.response?.data?.message || scoreError.message;
+        console.error('Score error:', scoreError.response || scoreError);
+        alert(`Gagal menyimpan skor: ${message}`);
       }
     } catch (err) {
-      console.error('Kesalahan tak terduga di handleFinish:', err);
-      alert('Terjadi kesalahan: ' + (err.response?.data?.message || err.message));
+      const message = err.response?.data?.message || err.message;
+      console.error('General error:', err);
+      alert(`Terjadi kesalahan: ${message}`);
     } finally {
-      console.log('Mengalihkan ke /feedback2 dengan state:', { score, answers, questions, totalQuestions: questions.length });
-      navigate('/feedback2', {
+      navigate('/feedback-evaluasi', {
         state: {
           score,
           answers,
           questions,
-          totalQuestions: questions.length
-        }
+          totalQuestions: questions.length,
+        },
       });
-      console.log('Pengalihan ke /feedback2 selesai');
     }
   };
 
@@ -152,20 +148,30 @@ const KuisVisualisasiData = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-green-800">Kuis 2 - Visualisasi Data</h2>
+        <h2 className="text-xl font-bold text-green-800">
+          Evaluasi Akhir - Pengelolaan Data
+        </h2>
         <div className="bg-red-100 p-2 rounded text-red-700">
           Waktu Tersisa: {formatTime(timeLeft)}
         </div>
       </div>
-      {/* Navigasi Soal dan Konten Soal */}
       <div className="flex h-full">
         <div className="w-1/4 pr-4">
           <div className="bg-gray-100 p-4 rounded shadow-lg h-full">
             {questions.map((_, index) => (
               <button
                 key={index}
-                onClick={() => { setCurrentQuestionIndex(index); setSelectedAnswer(answers[index] || ''); }}
-                className={`block w-full text-left p-2 mb-2 rounded ${currentQuestionIndex === index ? 'bg-green-200' : answers[index] ? 'bg-blue-200' : 'bg-gray-200'}`}
+                onClick={() => {
+                  setCurrentQuestionIndex(index);
+                  setSelectedAnswer(answers[index] || '');
+                }}
+                className={`block w-full text-left p-2 mb-2 rounded ${
+                  currentQuestionIndex === index
+                    ? 'bg-green-200'
+                    : answers[index]
+                    ? 'bg-blue-200'
+                    : 'bg-gray-200'
+                }`}
               >
                 Soal {index + 1}
               </button>
@@ -176,30 +182,48 @@ const KuisVisualisasiData = () => {
           {error ? (
             <p className="text-red-500">{error}</p>
           ) : currentQuestion ? (
-            <div className="bg-white p-3 rounded shadow-lg" style={{ maxHeight: '100%', overflowY: 'auto' }}>
+            <div
+              className="bg-white p-3 rounded shadow-lg"
+              style={{ maxHeight: '100%', overflowY: 'auto' }}
+            >
               <h3 className="text-lg font-semibold text-green-800 mb-2">
                 Soal {currentQuestionIndex + 1}
               </h3>
-              <p className="text-gray-700 mb-2">{currentQuestion.question_text || 'Pilih jawaban yang benar,'}</p>
+              <p className="text-gray-700 mb-2">
+                {currentQuestion.question_text || 'Pilih jawaban yang benar.'}
+              </p>
               {currentQuestion.image_url && (
-                <img src={currentQuestion.image_url} alt="Question Image" className="w-[512px] h-auto max-w-full object-contain mx-auto mb-2 rounded-lg" onError={(e) => { e.target.style.display = 'none'; }} />
+                <img
+                  src={currentQuestion.image_url}
+                  alt="Question"
+                  className="w-[512px] h-auto max-w-full object-contain mx-auto mb-8 rounded-lg"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
               )}
               <div className="mb-3">
-                {Array.isArray(currentQuestion.options) && currentQuestion.options.map((option, idx) => (
-                  <div key={idx} className="border border-gray-300 p-2 mb-2 rounded">
-                    <input
-                      type="radio"
-                      name="answer"
-                      value={String.fromCharCode(97 + idx)}
-                      checked={selectedAnswer === String.fromCharCode(97 + idx)}
-                      onChange={(e) => handleAnswerChange(e.target.value)}
-                      className="mr-2"
-                    />
-                    <label className="text-gray-700">
-                      {String.fromCharCode(97 + idx)}. {option || '-'}
-                    </label>
-                  </div>
-                ))}
+                {Array.isArray(currentQuestion.options) &&
+                  currentQuestion.options.map((option, idx) => (
+                    <div
+                      key={idx}
+                      className="border border-gray-300 p-2 mb-2 rounded"
+                    >
+                      <input
+                        type="radio"
+                        name="answer"
+                        value={String.fromCharCode(97 + idx)}
+                        checked={
+                          selectedAnswer === String.fromCharCode(97 + idx)
+                        }
+                        onChange={(e) => handleAnswerChange(e.target.value)}
+                        className="mr-2"
+                      />
+                      <label className="text-gray-700">
+                        {String.fromCharCode(97 + idx)}. {option.label || option}
+                      </label>
+                    </div>
+                  ))}
               </div>
               <div className="flex justify-between items-center mt-3">
                 <button
@@ -211,7 +235,7 @@ const KuisVisualisasiData = () => {
                 </button>
                 {currentQuestionIndex === questions.length - 1 ? (
                   <button
-                    onClick={handleNextOrFinish}
+                    onClick={handleFinish}
                     className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800"
                   >
                     Selesai
@@ -227,7 +251,9 @@ const KuisVisualisasiData = () => {
               </div>
             </div>
           ) : (
-            <p className="text-gray-500">Tidak ada soal yang tersedia untuk Kuis 2.</p>
+            <p className="text-gray-500">
+              Tidak ada soal yang tersedia untuk Evaluasi Akhir.
+            </p>
           )}
         </div>
       </div>
@@ -235,4 +261,4 @@ const KuisVisualisasiData = () => {
   );
 };
 
-export default KuisVisualisasiData;
+export default EvaluasiAkhir;

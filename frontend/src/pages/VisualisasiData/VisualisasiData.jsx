@@ -342,6 +342,8 @@ export default function VisualisasiData() {
         </p>
       </div>
 
+      <SimpleChart />
+
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-12 relative text-justify">
         <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Dekomposisi
@@ -736,8 +738,6 @@ export default function VisualisasiData() {
           )}
         </div>
       </div>
-
-      <SimpleChart />
 
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12">
         <h3 className="font-semibold text-[#255F38] text-lg mb-2">Kuis Pemahaman: Visualisasi Data</h3>

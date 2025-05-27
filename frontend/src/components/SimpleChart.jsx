@@ -62,12 +62,11 @@ const SimpleChart = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mt-8">
-      <h3 className="text-lg font-bold text-[#255F38] mb-2">Lihat Diagram</h3>
+    <div className="bg-white p-4 rounded-lg shadow-md mt-0">
+      <h3 className="text-lg font-bold text-[#255F38] mb-2">Perhatikan diagram di bawah ini!</h3>
       <p className="text-gray-700 mb-4">
         Untuk memahami bagaimana data disajikan dalam bentuk grafik, gunakan simulasi berikut.
         Pilih jenis diagram (Garis, Area, Batang, Kolom, atau Lingkaran) untuk melihat pola data yang berbeda. <br />
-        Ini mirip seperti saat menggunakan <strong>VLOOKUP</strong> — kamu mencoba menampilkan data tertentu dengan cara yang mudah dibaca dan dipahami.
       </p>
       <div className="flex gap-2 mb-4">
         {['line', 'area', 'bar', 'column', 'pie'].map((tipe) => (
@@ -79,14 +78,14 @@ const SimpleChart = () => {
             }`}
           >
             {tipe === 'line'
-              ? 'Garis'
+              ? 'Line Chart'
               : tipe === 'area'
-              ? 'Area'
+              ? 'Area Chart'
               : tipe === 'bar'
-              ? 'Batang'
+              ? 'Bar Chart'
               : tipe === 'column'
-              ? 'Kolom'
-              : 'Lingkaran'}
+              ? 'Column Chart'
+              : 'Pie Chart'}
           </button>
         ))}
       </div>

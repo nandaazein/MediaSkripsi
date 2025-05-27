@@ -18,8 +18,9 @@ export default function PengelolaanData() {
     { id: 4, nama: "Dani", nilai: 60, kelas: "8B" },
   ];
 
-  const [data, setData] = useState(initialData);
+  const [sortData, setSortData] = useState([...initialData]);
   const [sortOrder, setSortOrder] = useState("none");
+  const [filterData, setFilterData] = useState([...initialData]);
   const [filterKelas, setFilterKelas] = useState("Semua");
 
   // Fungsi untuk sorting
@@ -29,18 +30,18 @@ export default function PengelolaanData() {
     if (order === "ascending") {
       sortedData.sort((a, b) => a.nilai - b.nilai);
     } else if (order === "descending") {
-      sortedData.sort((a, b) => b.nilai - b.nilai);
+      sortedData.sort((a, b) => b.nilai - a.nilai); // Perbaikan: a.nilai - b.nilai diganti ke b.nilai - a.nilai untuk descending
     }
-    setData(sortedData);
+    setSortData(sortedData);
   };
 
   // Fungsi untuk filtering
   const handleFilter = (kelas) => {
     setFilterKelas(kelas);
     if (kelas === "Semua") {
-      setData(initialData);
+      setFilterData([...initialData]);
     } else {
-      setData(initialData.filter((item) => item.kelas === kelas));
+      setFilterData(initialData.filter((item) => item.kelas === kelas));
     }
   };
 
@@ -343,6 +344,112 @@ export default function PengelolaanData() {
         Pendekatan <i>Computational Thinking</i> (CT) membantu dalam mengelola data secara sistematis melalui beberapa langkah utama: <i>decomposition</i> (memecah masalah data yang kompleks menjadi bagian-bagian yang lebih kecil), <i>pattern recognition</i> (mengidentifikasi kesamaan atau pola dalam data), <i>abstraction</i> (memfokuskan pada informasi penting dan mengabaikan hal-hal yang tidak relevan).
       </p>
 
+      {/* Visualisasi Interaktif: Simulasi Sorting */}
+      <div className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
+        <h3 className="font-semibold text-[#255F38] flex items-center text-lg mb-4">
+          <CheckCircle className="w-5 h-5 mr-2" /> Simulasi Sorting
+        </h3>
+        <p className="text-gray-700 mb-4 text-justify">
+          Coba urutkan data berdasarkan nilai siswa. Pilih opsi pengurutan, lalu klik "Reset" untuk mengembalikan data awal.
+        </p>
+        <div className="flex justify-between mb-4 items-center">
+          <div>
+            <label className="text-gray-700 mr-2">Urutkan berdasarkan nilai:</label>
+            <select
+              value={sortOrder}
+              onChange={(e) => handleSort(e.target.value)}
+              className="p-2 border rounded w-full sm:w-auto"
+            >
+              <option value="none">Tanpa Urutan</option>
+              <option value="ascending">Ascending (A-Z)</option>
+              <option value="descending">Descending (Z-A)</option>
+            </select>
+          </div>
+          <button
+            onClick={() => {
+              setSortData([...initialData]);
+              setSortOrder("none");
+            }}
+            className="bg-[#255F38] text-white px-4 py-2 rounded hover:bg-[#1E4D2E]"
+          >
+            Reset
+          </button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="border-collapse border border-green-800 w-full text-center">
+            <thead>
+              <tr className="bg-[#255F38] text-white">
+                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                <th className="border border-green-600 px-4 py-2">Nilai</th>
+                <th className="border border-green-600 px-4 py-2">Kelas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortData.map((item, index) => (
+                <tr key={item.id} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
+                  <td className="border border-green-600 px-4 py-2">{item.nama}</td>
+                  <td className="border border-green-600 px-4 py-2">{item.nilai}</td>
+                  <td className="border border-green-600 px-4 py-2">{item.kelas}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Visualisasi Interaktif: Simulasi Filtering */}
+      <div className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
+        <h3 className="font-semibold text-[#255F38] flex items-center text-lg mb-4">
+          <CheckCircle className="w-5 h-5 mr-2" /> Simulasi Filtering
+        </h3>
+        <p className="text-gray-700 mb-4 text-justify">
+          Coba saring data berdasarkan kelas siswa. Pilih kelas yang diinginkan, lalu klik "Reset" untuk mengembalikan data awal.
+        </p>
+        <div className="flex justify-between mb-4 items-center">
+          <div>
+            <label className="text-gray-700 mr-2">Filter berdasarkan kelas:</label>
+            <select
+              value={filterKelas}
+              onChange={(e) => handleFilter(e.target.value)}
+              className="p-2 border rounded w-full sm:w-auto"
+            >
+              <option value="Semua">Semua Kelas</option>
+              <option value="8A">8A</option>
+              <option value="8B">8B</option>
+            </select>
+          </div>
+          <button
+            onClick={() => {
+              setFilterData([...initialData]);
+              setFilterKelas("Semua");
+            }}
+            className="bg-[#255F38] text-white px-4 py-2 rounded hover:bg-[#1E4D2E]"
+          >
+            Reset
+          </button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="border-collapse border border-green-800 w-full text-center">
+            <thead>
+              <tr className="bg-[#255F38] text-white">
+                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                <th className="border border-green-600 px-4 py-2">Nilai</th>
+                <th className="border border-green-600 px-4 py-2">Kelas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filterData.map((item, index) => (
+                <tr key={item.id} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
+                  <td className="border border-green-600 px-4 py-2">{item.nama}</td>
+                  <td className="border border-green-600 px-4 py-2">{item.nilai}</td>
+                  <td className="border border-green-600 px-4 py-2">{item.kelas}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* Dekomposisi */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
@@ -556,9 +663,6 @@ export default function PengelolaanData() {
           </li>
           <li className="text-justify">
             <strong>Menyaring data</strong> untuk fokus pada informasi relevan → Misalnya, hanya menampilkan siswa dari kelas 8A agar bisa fokus pada data kelas tersebut.
-          </li>
-          <li className="text-justify">
-            <strong>Mewakili data</strong> dalam bentuk yang lebih sederhana → Kita bisa menampilkan jumlah siswa dari kelas tertentu tanpa perlu melihat data setiap siswa satu per satu — misalnya menggunakan rumus <span className="italic">COUNTIF</span>.
           </li>
         </ul>
         {/* Latihan Pemahaman: Abstraksi */}
@@ -808,74 +912,6 @@ export default function PengelolaanData() {
               {algoritmaFeedback}
             </p>
           )}
-        </div>
-
-        {/* Visualisasi Interaktif */}
-        <div className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
-          <h3 className="font-semibold text-[#255F38] flex items-center text-lg mb-4">
-            <CheckCircle className="w-5 h-5 mr-2" /> Visualisasi Interaktif: Cara Kerja Sorting dan Filtering
-          </h3>
-          <p className="text-gray-700 mb-4 text-justify">
-            Cobalah simulasi berikut untuk melihat cara kerja sorting dan filtering secara langsung. Kamu bisa mengurutkan data berdasarkan nilai atau menyaring data berdasarkan kelas, lalu klik "Reset" untuk mengembalikan data awal.
-          </p>
-          <div className="flex justify-between mb-4 items-center">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-              <div>
-                <label className="text-gray-700 mr-2">Urutkan berdasarkan nilai:</label>
-                <select
-                  value={sortOrder}
-                  onChange={(e) => handleSort(e.target.value)}
-                  className="p-2 border rounded w-full sm:w-auto"
-                >
-                  <option value="none">Tanpa Urutan</option>
-                  <option value="ascending">Ascending (A-Z)</option>
-                  <option value="descending">Descending (Z-A)</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-gray-700 mr-2">Filter berdasarkan kelas:</label>
-                <select
-                  value={filterKelas}
-                  onChange={(e) => handleFilter(e.target.value)}
-                  className="p-2 border rounded w-full sm:w-auto"
-                >
-                  <option value="Semua">Semua Kelas</option>
-                  <option value="8A">8A</option>
-                  <option value="8B">8B</option>
-                </select>
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                setData(initialData);
-                setSortOrder("none");
-                setFilterKelas("Semua");
-              }}
-              className="bg-[#255F38] text-white px-4 py-2 rounded hover:bg-[#1E4D2E]"
-            >
-              Reset
-            </button>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="border-collapse border border-green-800 w-full text-center">
-              <thead>
-                <tr className="bg-[#255F38] text-white">
-                  <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-                  <th className="border border-green-600 px-4 py-2">Nilai</th>
-                  <th className="border border-green-600 px-4 py-2">Kelas</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, index) => (
-                  <tr key={item.id} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
-                    <td className="border border-green-600 px-4 py-2">{item.nama}</td>
-                    <td className="border border-green-600 px-4 py-2">{item.nilai}</td>
-                    <td className="border border-green-600 px-4 py-2">{item.kelas}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
 

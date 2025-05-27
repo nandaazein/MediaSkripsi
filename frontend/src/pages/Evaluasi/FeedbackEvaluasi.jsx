@@ -1,9 +1,13 @@
+import React, { useState, useEffect } from 'react';
 import Layout from "../../components/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
-const FeedbackPeringkasanData = () => {
+const FeedbackEvaluasiAkhir = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [kkm, setKKM] = useState(70); // Default KKM
+  const [error, setError] = useState('');
 
   // Default state jika data tidak tersedia
   const { score, answers, questions, totalQuestions } = state || {
@@ -12,6 +16,23 @@ const FeedbackPeringkasanData = () => {
     questions: [],
     totalQuestions: 0,
   };
+
+  // Fetch KKM untuk Evaluasi Akhir
+  useEffect(() => {
+    const fetchKKM = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:5000/api/kkm/5', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setKKM(response.data.kkm);
+      } catch (err) {
+        console.error('Fetch KKM error:', err);
+        setError('Gagal mengambil KKM, menggunakan default (70)');
+      }
+    };
+    fetchKKM();
+  }, []);
 
   // Hitung correctCount berdasarkan answers dan questions
   const correctCount = questions.reduce((count, question, index) => {
@@ -26,21 +47,20 @@ const FeedbackPeringkasanData = () => {
   }, {});
   const answerOptions = questions.reduce((acc, question, index) => {
     acc[`q${index + 1}`] = question.options.reduce((opts, opt, idx) => {
-      opts[String.fromCharCode(97 + idx)] = opt;
+      opts[String.fromCharCode(97 + idx)] = opt.label || opt;
       return opts;
     }, {});
     return acc;
   }, {});
 
-  const KKM = 70;
   const incorrectCount = totalQuestions - correctCount;
 
   const feedbackMessage =
-    score >= KKM
-      ? "Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!"
-      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!";
+    score >= kkm
+      ? "Selamat, kamu telah menyelesaikan Evaluasi Akhir dengan baik!"
+      : "Skor kamu belum memenuhi KKM. Ayo ulang evaluasi untuk meningkatkan hasil!";
 
-  console.log("FeedbackPeringkasanData state:", state); // Debugging
+  console.log("FeedbackEvaluasiAkhir state:", state);
 
   // Jika data tidak lengkap, tampilkan pesan error
   if (!state || !questions.length) {
@@ -49,10 +69,10 @@ const FeedbackPeringkasanData = () => {
         <div className="p-6 text-center">
           <p className="text-red-500 text-lg">Data feedback tidak ditemukan. Silakan coba lagi.</p>
           <button
-            onClick={() => navigate("/kuis-peringkasan")}
+            onClick={() => navigate("/evaluasi-akhir")}
             className="mt-4 bg-green-800 text-white px-4 py-2 rounded hover:bg-green-700"
           >
-            Kembali ke Kuis
+            Kembali ke Evaluasi
           </button>
         </div>
       </Layout>
@@ -61,14 +81,12 @@ const FeedbackPeringkasanData = () => {
 
   return (
     <Layout>
-      {/* Header Judul */}
       <div>
         <h1 className="mt-5 text-xl md:text-2xl text-center sm:text-lg font-bold mb-12 p-4 bg-[#255F38] text-white">
-          Hasil Kuis 3
+          Hasil Evaluasi Akhir
         </h1>
       </div>
-
-      {/* Ringkasan Hasil */}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Ringkasan
@@ -83,11 +101,12 @@ const FeedbackPeringkasanData = () => {
           <strong>Jawaban Salah:</strong> {incorrectCount} soal
         </p>
         <p className="text-gray-700 text-sm md:text-base">
+          <strong>KKM:</strong> {kkm}
+        </p>
+        <p className="text-gray-700 text-sm md:text-base">
           <strong>Feedback:</strong> {feedbackMessage}
         </p>
       </div>
-
-      {/* Detail Jawaban */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Detail Jawaban
@@ -123,22 +142,20 @@ const FeedbackPeringkasanData = () => {
           </tbody>
         </table>
       </div>
-
-      {/* Tombol Navigasi */}
       <div className="flex justify-center mt-8 space-x-4">
-        {score >= KKM ? (
+        {score >= kkm ? (
           <button
-            onClick={() => navigate("/pengelolaan-data")} 
-            className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md cursor-pointer"
+            onClick={() => navigate("/dashboard-siswa")}
+            className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
           >
-            Lanjut Materi
+            Kembali ke Dashboard
           </button>
         ) : (
           <button
-            onClick={() => navigate("/kuis-peringkasan")}
-            className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md cursor-pointer"
+            onClick={() => navigate("/evaluasi-akhir")}
+            className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md"
           >
-            Ulang Kuis
+            Ulang Evaluasi
           </button>
         )}
       </div>
@@ -146,5 +163,4 @@ const FeedbackPeringkasanData = () => {
   );
 };
 
-export default FeedbackPeringkasanData;
-
+export default FeedbackEvaluasiAkhir;
