@@ -1,12 +1,42 @@
 import React from "react";
-import Layout from "../../components/Admin/Layout";
+import Layout from "../../components/admin/Layout";
 
 const DataEvaluasi = () => {
   // Dummy data to simulate database fetch
   const dummyData = [
-    { no: 1, bab: "Kuis 1", soal: "Apa ibu kota Indonesia?", a: "Jakarta", b: "Bandung", c: "Surabaya", d: "Medan", e: "Makassar", jawaban: "A" },
-    { no: 2, bab: "Kuis 1", soal: "Coba", a: "Jakarta", b: "Bandung", c: "Surabaya", d: "Medan", e: "Makassar", jawaban: "A" },
-    { no: 3, bab: "Kuis 1", soal: "Coba", a: "a", b: "a1a", c: "a", d: "a", e: "a", jawaban: "D" },
+    {
+      no: 1,
+      bab: "Kuis 1",
+      soal: "Apa ibu kota Indonesia?",
+      a: "Jakarta",
+      b: "Bandung",
+      c: "Surabaya",
+      d: "Medan",
+      e: "Makassar",
+      jawaban: "A",
+    },
+    {
+      no: 2,
+      bab: "Kuis 1",
+      soal: "Coba",
+      a: "Jakarta",
+      b: "Bandung",
+      c: "Surabaya",
+      d: "Medan",
+      e: "Makassar",
+      jawaban: "A",
+    },
+    {
+      no: 3,
+      bab: "Kuis 1",
+      soal: "Coba",
+      a: "a",
+      b: "a1a",
+      c: "a",
+      d: "a",
+      e: "a",
+      jawaban: "D",
+    },
   ];
 
   return (
@@ -15,9 +45,11 @@ const DataEvaluasi = () => {
         Data Evaluasi
       </div>
 
-      <section className="bg-gray-100 p-6 rounded shadow-md mt-1 mb-6 text-center">
-        <h2 className="text-2xl font-bold text-[#255F38] mb-4">Data Evaluasi</h2>
-        <div className="flex justify-between mb-4 items-center space-x-4">
+      <section className="p-6 mt-1 mb-6 text-center bg-gray-100 rounded shadow-md">
+        <h2 className="text-2xl font-bold text-[#255F38] mb-4">
+          Data Evaluasi
+        </h2>
+        <div className="flex items-center justify-between mb-4 space-x-4">
           <div className="flex items-center space-x-4">
             <select className="p-2 border rounded" defaultValue="5 data">
               <option value="5 data">Menampilkan 5 data</option>
@@ -36,15 +68,15 @@ const DataEvaluasi = () => {
             <input
               type="text"
               placeholder="Cari soal..."
-              className="p-2 border rounded w-64"
+              className="w-64 p-2 border rounded"
             />
-            <button className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">
+            <button className="px-4 py-2 text-white bg-blue-500 rounded cursor-pointer">
               Tambah Soal
             </button>
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-sm text-gray-700">
+          <table className="w-full text-sm text-gray-700 border-collapse">
             <thead>
               <tr>
                 <th className="p-1 border">No</th>
@@ -71,9 +103,13 @@ const DataEvaluasi = () => {
                   <td className="p-1 border">{item.d}</td>
                   <td className="p-1 border">{item.e}</td>
                   <td className="p-1 border">{item.jawaban}</td>
-                  <td className="p-1 flex space-x-2 justify-center border">
-                    <button className="px-2 py-1 bg-green-500 text-white rounded cursor-pointer">Perbarui</button>
-                    <button className="px-2 py-1 bg-red-500 text-white rounded cursor-pointer">Hapus</button>
+                  <td className="flex justify-center p-1 space-x-2 border">
+                    <button className="px-2 py-1 text-white bg-green-500 rounded cursor-pointer">
+                      Perbarui
+                    </button>
+                    <button className="px-2 py-1 text-white bg-red-500 rounded cursor-pointer">
+                      Hapus
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -81,9 +117,15 @@ const DataEvaluasi = () => {
           </table>
         </div>
         <div className="flex justify-end mt-4 space-x-2">
-          <button className="px-4 py-2 bg-gray-300 rounded cursor-pointer">«</button>
-          <button className="px-4 py-2 bg-gray-300 rounded cursor-pointer">1</button>
-          <button className="px-4 py-2 bg-gray-300 rounded cursor-pointer">»</button>
+          <button className="px-4 py-2 bg-gray-300 rounded cursor-pointer">
+            «
+          </button>
+          <button className="px-4 py-2 bg-gray-300 rounded cursor-pointer">
+            1
+          </button>
+          <button className="px-4 py-2 bg-gray-300 rounded cursor-pointer">
+            »
+          </button>
         </div>
       </section>
     </Layout>

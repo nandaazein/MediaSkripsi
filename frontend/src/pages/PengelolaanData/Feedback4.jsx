@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import LayoutSiswa from '../../components/Layout';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import LayoutSiswa from "../../components/Layout";
 
 const FeedbackPengelolaanData = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [kkm, setKKM] = useState(70); // Default KKM
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Default state if data is not available
   const { score, answers, questions, totalQuestions } = state || {
@@ -21,14 +21,14 @@ const FeedbackPengelolaanData = () => {
   useEffect(() => {
     const fetchKKM = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/kkm/4', {
-          headers: { Authorization: `Bearer ${token}` }
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:5000/api/kkm/4", {
+          headers: { Authorization: `Bearer ${token}` },
         });
         setKKM(response.data.kkm);
       } catch (err) {
-        console.error('Fetch KKM error:', err);
-        setError('Gagal mengambil KKM, menggunakan default (70)');
+        console.error("Fetch KKM error:", err);
+        setError("Gagal mengambil KKM, menggunakan default (70)");
       }
     };
     fetchKKM();
@@ -36,8 +36,12 @@ const FeedbackPengelolaanData = () => {
 
   // Calculate correctCount based on answers and questions
   const correctCount = questions.reduce((count, question, index) => {
-    const answerKey = String.fromCharCode(97 + (answers[index] || '').charCodeAt(0) - 97);
-    return answers[index] && answerKey === question.correct_answer ? count + 1 : count;
+    const answerKey = String.fromCharCode(
+      97 + (answers[index] || "").charCodeAt(0) - 97
+    );
+    return answers[index] && answerKey === question.correct_answer
+      ? count + 1
+      : count;
   }, 0);
 
   // Prepare correctAnswers and answerOptions
@@ -57,20 +61,22 @@ const FeedbackPengelolaanData = () => {
 
   const feedbackMessage =
     score >= kkm
-      ? 'Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!'
-      : 'Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!';
+      ? "Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!"
+      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!";
 
-  console.log('FeedbackPengelolaanData state:', state);
+  console.log("FeedbackPengelolaanData state:", state);
 
   // If data is incomplete, show error message
   if (!state || !questions.length) {
     return (
       <LayoutSiswa>
         <div className="p-6 text-center">
-          <p className="text-red-500 text-lg">Data feedback tidak ditemukan. Silakan coba lagi.</p>
+          <p className="text-lg text-red-500">
+            Data feedback tidak ditemukan. Silakan coba lagi.
+          </p>
           <button
-            onClick={() => navigate('/kuis-pengelolaan')}
-            className="mt-4 bg-green-800 text-white px-4 py-2 rounded hover:bg-green-700"
+            onClick={() => navigate("/kuis-pengelolaan")}
+            className="px-4 py-2 mt-4 text-white bg-green-800 rounded hover:bg-green-700"
           >
             Kembali ke Kuis
           </button>
@@ -86,50 +92,58 @@ const FeedbackPengelolaanData = () => {
           Hasil Kuis 4 - Pengelolaan Data
         </h1>
       </div>
-      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+      {error && <p className="mb-4 text-center text-red-500">{error}</p>}
+      <div className="relative p-5 mt-10 space-y-4 bg-white border-gray-300">
+        <div className="absolute px-5 py-2 text-lg font-bold text-white bg-green-800 rounded-t-lg shadow-lg -top-6 left-4">
           Ringkasan
         </div>
-        <p className="text-gray-700 text-sm md:text-base mt-6">
+        <p className="mt-6 text-sm text-gray-700 md:text-base">
           <strong>Skor:</strong> {score.toFixed(2)}/100
         </p>
-        <p className="text-gray-700 text-sm md:text-base">
+        <p className="text-sm text-gray-700 md:text-base">
           <strong>Jawaban Benar:</strong> {correctCount} soal
         </p>
-        <p className="text-gray-700 text-sm md:text-base">
+        <p className="text-sm text-gray-700 md:text-base">
           <strong>Jawaban Salah:</strong> {incorrectCount} soal
         </p>
-        <p className="text-gray-700 text-sm md:text-base">
+        <p className="text-sm text-gray-700 md:text-base">
           <strong>KKM:</strong> {kkm}
         </p>
-        <p className="text-gray-700 text-sm md:text-base">
+        <p className="text-sm text-gray-700 md:text-base">
           <strong>Feedback:</strong> {feedbackMessage}
         </p>
       </div>
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold shadow-lg">
+      <div className="relative p-5 mt-10 space-y-4 bg-white border-gray-300">
+        <div className="absolute px-5 py-2 text-lg font-bold text-white bg-green-800 rounded-t-lg shadow-lg -top-6 left-4">
           Detail Jawaban
         </div>
-        <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center text-sm mx-auto mt-6">
+        <table className="w-full mx-auto mt-6 text-sm text-center border border-collapse border-green-800 md:w-2/3">
           <thead>
             <tr className="bg-[#255F38] text-white">
-              <th className="border border-green-600 px-4 py-2">Soal</th>
-              <th className="border border-green-600 px-4 py-2">Jawaban Anda</th>
-              <th className="border border-green-600 px-4 py-2">Status</th>
+              <th className="px-4 py-2 border border-green-600">Soal</th>
+              <th className="px-4 py-2 border border-green-600">
+                Jawaban Anda
+              </th>
+              <th className="px-4 py-2 border border-green-600">Status</th>
             </tr>
           </thead>
           <tbody>
             {questions.map((question, index) => {
-              const answerKey = answers[index] || '';
+              const answerKey = answers[index] || "";
               const isCorrect = answerKey === question.correct_answer;
               return (
-                <tr key={index} className={index % 2 === 0 ? 'bg-green-50' : 'bg-white'}>
-                  <td className="border border-green-600 px-4 py-2">{index + 1}</td>
-                  <td className="border border-green-600 px-4 py-2">
-                    {answerOptions[`q${index + 1}`][answerKey] || 'Tidak dijawab'}
+                <tr
+                  key={index}
+                  className={index % 2 === 0 ? "bg-green-50" : "bg-white"}
+                >
+                  <td className="px-4 py-2 border border-green-600">
+                    {index + 1}
                   </td>
-                  <td className="border border-green-600 px-4 py-2">
+                  <td className="px-4 py-2 border border-green-600">
+                    {answerOptions[`q${index + 1}`][answerKey] ||
+                      "Tidak dijawab"}
+                  </td>
+                  <td className="px-4 py-2 border border-green-600">
                     {isCorrect ? (
                       <span className="text-green-600">Benar</span>
                     ) : (
@@ -145,15 +159,15 @@ const FeedbackPengelolaanData = () => {
       <div className="flex justify-center mt-8 space-x-4">
         {score >= kkm ? (
           <button
-            onClick={() => navigate('/pengelolaan-data')}
-            className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
+            onClick={() => navigate("/kuis-evaluasi")}
+            className="px-5 py-2 text-base text-white transition duration-300 bg-green-800 rounded-lg shadow-md hover:bg-green-700"
           >
             Lanjut Evaluasi Akhir
           </button>
         ) : (
           <button
-            onClick={() => navigate('/kuis-pengelolaan')}
-            className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md"
+            onClick={() => navigate("/kuis-pengelolaan")}
+            className="px-5 py-2 text-base text-white transition duration-300 bg-red-600 rounded-lg shadow-md hover:bg-red-700"
           >
             Ulang Kuis
           </button>
