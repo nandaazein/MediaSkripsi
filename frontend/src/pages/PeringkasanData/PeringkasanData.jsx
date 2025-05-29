@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import {
   BookOpen,
@@ -10,175 +10,29 @@ import {
 } from "lucide-react";
 
 export default function PeringkasanData() {
-  // State untuk kalkulator SUMIF dan COUNTIF
-  const [sumifCriteria, setSumifCriteria] = useState("");
-  const [countifCriteria, setCountifCriteria] = useState("");
-  const [sumifResult, setSumifResult] = useState("-");
-  const [countifResult, setCountifResult] = useState("-");
-
-  // Data siswa untuk kalkulator
-  const data = [
-    { name: "Aisyah", class: "8A", score: 80 },
-    { name: "Budi", class: "8B", score: 65 },
-    { name: "Citra", class: "8A", score: 90 },
-    { name: "Dani", class: "8A", score: 70 },
-    { name: "Eko", class: "8B", score: 85 },
-  ];
-
-  // Fungsi untuk menghitung SUMIF dan COUNTIF
-  const calculate = () => {
-    let sumifRes = "-";
-    if (sumifCriteria) {
-      sumifRes = data
-        .filter((item) => item.class === sumifCriteria)
-        .reduce((sum, item) => sum + item.score, 0);
-      setSumifResult(sumifRes);
-    } else {
-      setSumifResult("-");
-    }
-
-    let countifRes = "-";
-    if (countifCriteria) {
-      if (countifCriteria.startsWith(">")) {
-        const value = parseInt(countifCriteria.slice(1));
-        countifRes = data.filter((item) => item.score > value).length;
-        setCountifResult(countifRes);
-      } else if (countifCriteria.startsWith("<")) {
-        const value = parseInt(countifCriteria.slice(1));
-        countifRes = data.filter((item) => item.score < value).length;
-        setCountifResult(countifRes);
-      } else {
-        const value = parseInt(countifCriteria);
-        countifRes = data.filter((item) => item.score === value).length;
-        setCountifResult(countifRes);
-      }
-    } else {
-      setCountifResult("-");
-    }
-  };
-
-  // Fungsi untuk reset kalkulator
-  const reset = () => {
-    setSumifCriteria("");
-    setCountifCriteria("");
-    setSumifResult("-");
-    setCountifResult("-");
-  };
-
-  // State untuk Latihan Pemahaman: Dekomposisi
-  const [dekomposisiAnswers, setDekomposisiAnswers] = useState({
-    step1: false,
-    step2: false,
-    step3: false,
-  });
-  const [dekomposisiFeedback, setDekomposisiFeedback] = useState("");
-  const [dekomposisiAnswered, setDekomposisiAnswered] = useState(false);
-
-  const handleDekomposisiChange = (step) => {
-    setDekomposisiAnswers((prev) => ({ ...prev, [step]: !prev[step] }));
-  };
-
-  const checkDekomposisiAnswers = () => {
-    const correctAnswers = { step1: true, step2: true, step3: false };
-    const isCorrect =
-      dekomposisiAnswers.step1 === correctAnswers.step1 &&
-      dekomposisiAnswers.step2 === correctAnswers.step2 &&
-      dekomposisiAnswers.step3 === correctAnswers.step3;
-    setDekomposisiFeedback(
-      isCorrect
-        ? "Benar! Langkah yang tepat adalah menentukan tujuan dan memilih fungsi yang sesuai."
-        : "Jawaban salah, ayo coba lagi."
-    );
-    setDekomposisiAnswered(true);
-  };
-
-  const resetDekomposisiAnswers = () => {
-    setDekomposisiAnswers({ step1: false, step2: false, step3: false });
-    setDekomposisiFeedback("");
-    setDekomposisiAnswered(false);
-  };
-
-  // State untuk Latihan Pemahaman: Pengenalan Pola
-  const [polaAnswer, setPolaAnswer] = useState("");
-  const [polaFeedback, setPolaFeedback] = useState("");
-  const [polaAnswered, setPolaAnswered] = useState(false);
-
-  const handlePolaChange = (value) => {
-    setPolaAnswer(value);
-  };
-
-  const checkPolaAnswer = () => {
-    const correctAnswer = "COUNTIF";
-    setPolaFeedback(
-      polaAnswer === correctAnswer
-        ? "Benar! COUNTIF digunakan untuk menghitung jumlah siswa berdasarkan kriteria nilai."
-        : "Jawaban salah, ayo coba lagi."
-    );
-    setPolaAnswered(true);
-  };
-
-  const resetPolaAnswer = () => {
-    setPolaAnswer("");
-    setPolaFeedback("");
-    setPolaAnswered(false);
-  };
-
   // State untuk Latihan Pemahaman: Abstraksi
-  const [abstraksiAnswers, setAbstraksiAnswers] = useState({
-    info1: false,
-    info2: false,
-    info3: false,
-  });
+  const [abstraksiAnswer, setAbstraksiAnswer] = useState("");
   const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
   const [abstraksiAnswered, setAbstraksiAnswered] = useState(false);
 
-  const handleAbstraksiChange = (info) => {
-    setAbstraksiAnswers((prev) => ({ ...prev, [info]: !prev[info] }));
+  const handleAbstraksiChange = (value) => {
+    setAbstraksiAnswer(value);
   };
 
-  const checkAbstraksiAnswers = () => {
-    const correctAnswers = { info1: true, info2: false, info3: false };
-    const isCorrect =
-      abstraksiAnswers.info1 === correctAnswers.info1 &&
-      abstraksiAnswers.info2 === correctAnswers.info2 &&
-      abstraksiAnswers.info3 === correctAnswers.info3;
+  const checkAbstraksiAnswer = () => {
+    const correctAnswer = "Kolom Nilai Ujian";
     setAbstraksiFeedback(
-      isCorrect
+      abstraksiAnswer === correctAnswer
         ? "Benar! Hanya kolom Nilai Ujian yang diperlukan untuk menghitung jumlah siswa lulus."
         : "Jawaban salah, ayo coba lagi."
     );
     setAbstraksiAnswered(true);
   };
 
-  const resetAbstraksiAnswers = () => {
-    setAbstraksiAnswers({ info1: false, info2: false, info3: false });
+  const resetAbstraksiAnswer = () => {
+    setAbstraksiAnswer("");
     setAbstraksiFeedback("");
     setAbstraksiAnswered(false);
-  };
-
-  // State untuk Latihan Pemahaman: Algoritma
-  const [algoritmaAnswer, setAlgoritmaAnswer] = useState("");
-  const [algoritmaFeedback, setAlgoritmaFeedback] = useState("");
-  const [algoritmaAnswered, setAlgoritmaAnswered] = useState(false);
-
-  const handleAlgoritmaChange = (value) => {
-    setAlgoritmaAnswer(value);
-  };
-
-  const checkAlgoritmaAnswer = () => {
-    const correctAnswer = "Langkah-langkah COUNTIFS";
-    setAlgoritmaFeedback(
-      algoritmaAnswer === correctAnswer
-        ? "Benar! Langkah-langkah COUNTIFS melibatkan pemilihan rentang data, penentuan kriteria untuk kelas dan nilai, serta penerapan rumus untuk menghitung jumlah siswa yang memenuhi kedua kriteria."
-        : "Jawaban salah, ayo coba lagi. Pastikan Anda memilih langkah yang mencakup semua aspek algoritma untuk COUNTIFS."
-    );
-    setAlgoritmaAnswered(true);
-  };
-
-  const resetAlgoritmaAnswer = () => {
-    setAlgoritmaAnswer("");
-    setAlgoritmaFeedback("");
-    setAlgoritmaAnswered(false);
   };
 
   // State untuk Kuis Pemahaman
@@ -312,6 +166,242 @@ export default function PeringkasanData() {
     }
   };
 
+  // State untuk visualisasi langkah-langkah SUMIF, SUMIFS, COUNTIF, COUNTIFS
+  const [sumifStep, setSumifStep] = useState(0);
+  const [sumifsStep, setSumifsStep] = useState(0);
+  const [countifStep, setCountifStep] = useState(0);
+  const [countifsStep, setCountifsStep] = useState(0);
+
+  // Data untuk visualisasi
+  const sumifData = [
+    { name: "Aisyah", class: "8A", score: 80 },
+    { name: "Budi", class: "8B", score: 65 },
+    { name: "Citra", class: "8A", score: 90 },
+    { name: "Dani", class: "8A", score: 70 },
+    { name: "Eko", class: "8B", score: 85 },
+  ];
+
+  const sumifsData = [
+    { product: "Laptop", category: "Elektronik", revenue: 8500000, month: "Januari" },
+    { product: "Printer", category: "Elektronik", revenue: 2000000, month: "Februari" },
+    { product: "Roti", category: "Makanan", revenue: 500000, month: "Januari" },
+    { product: "Mouse", category: "Elektronik", revenue: 150000, month: "Januari" },
+    { product: "Susu", category: "Makanan", revenue: 800000, month: "Januari" },
+  ];
+
+  const countifData = [
+    { name: "Aisyah", score: 80 },
+    { name: "Budi", score: 65 },
+    { name: "Citra", score: 90 },
+    { name: "Dani", score: 70 },
+    { name: "Eko", score: 85 },
+  ];
+
+  const countifsData = [
+    { name: "Aisyah", class: "8A", score: 80 },
+    { name: "Budi", class: "8B", score: 65 },
+    { name: "Citra", class: "8A", score: 90 },
+    { name: "Dani", class: "8A", score: 70 },
+    { name: "Eko", class: "8B", score: 85 },
+  ];
+
+  // Langkah-langkah visualisasi untuk SUMIF
+  const sumifSteps = [
+    {
+      description: "Pilih range kriteria: Kolom 'Kelas' (B2:B6).",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Tetapkan kriteria: '8A'.",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Cocokkan setiap sel di range kriteria dengan '8A': Aisyah (8A) → Cocok.",
+      highlightedRows: [0],
+      result: null,
+    },
+    {
+      description: "Budi (8B) → Tidak cocok.",
+      highlightedRows: [1],
+      result: null,
+    },
+    {
+      description: "Citra (8A) → Cocok.",
+      highlightedRows: [2],
+      result: null,
+    },
+    {
+      description: "Dani (8A) → Cocok.",
+      highlightedRows: [3],
+      result: null,
+    },
+    {
+      description: "Eko (8B) → Tidak cocok.",
+      highlightedRows: [4],
+      result: null,
+    },
+    {
+      description: "Jumlahkan nilai yang cocok: 80 + 90 + 70 = 240.",
+      highlightedRows: [0, 2, 3],
+      result: 240,
+    },
+  ];
+
+  // Langkah-langkah visualisasi untuk SUMIFS
+  const sumifsSteps = [
+    {
+      description: "Pilih sum range: Kolom 'Pendapatan (Rp)' (C2:C6).",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Pilih criteria range 1: Kolom 'Kategori' (B2:B6), criteria: 'Elektronik'.",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Pilih criteria range 2: Kolom 'Bulan' (D2:D6), criteria: 'Januari'.",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Cocokkan: Laptop (Elektronik, Januari) → Cocok → Ambil 8.500.000.",
+      highlightedRows: [0],
+      result: null,
+    },
+    {
+      description: "Printer (Elektronik, Februari) → Tidak cocok.",
+      highlightedRows: [1],
+      result: null,
+    },
+    {
+      description: "Roti (Makanan, Januari) → Tidak cocok.",
+      highlightedRows: [2],
+      result: null,
+    },
+    {
+      description: "Mouse (Elektronik, Januari) → Cocok → Ambil 150.000.",
+      highlightedRows: [3],
+      result: null,
+    },
+    {
+      description: "Susu (Makanan, Januari) → Tidak cocok.",
+      highlightedRows: [4],
+      result: null,
+    },
+    {
+      description: "Jumlahkan nilai yang cocok: 8.500.000 + 150.000 = 8.650.000.",
+      highlightedRows: [0, 3],
+      result: 8650000,
+    },
+  ];
+
+  // Langkah-langkah visualisasi untuk COUNTIF
+  const countifSteps = [
+    {
+      description: "Pilih range kriteria: Kolom 'Nilai Ujian' (B2:B6).",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Tetapkan kriteria: '>75'.",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Cocokkan: Aisyah (80) → Cocok.",
+      highlightedRows: [0],
+      result: 1,
+    },
+    {
+      description: "Budi (65) → Tidak cocok.",
+      highlightedRows: [1],
+      result: 1,
+    },
+    {
+      description: "Citra (90) → Cocok.",
+      highlightedRows: [2],
+      result: 2,
+    },
+    {
+      description: "Dani (70) → Tidak cocok.",
+      highlightedRows: [3],
+      result: 2,
+    },
+    {
+      description: "Eko (85) → Cocok.",
+      highlightedRows: [4],
+      result: 3,
+    },
+    {
+      description: "Hasil: 3 siswa dengan nilai di atas 75.",
+      highlightedRows: [0, 2, 4],
+      result: 3,
+    },
+  ];
+
+  // Langkah-langkah visualisasi untuk COUNTIFS
+  const countifsSteps = [
+    {
+      description: "Pilih criteria range 1: Kolom 'Kelas' (B2:B6), criteria: '8A'.",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Pilih criteria range 2: Kolom 'Nilai Ujian' (C2:C6), criteria: '>75'.",
+      highlightedRows: [],
+      result: null,
+    },
+    {
+      description: "Cocokkan: Aisyah (8A, 80) → Cocok.",
+      highlightedRows: [0],
+      result: 1,
+    },
+    {
+      description: "Budi (8B, 65) → Tidak cocok.",
+      highlightedRows: [1],
+      result: 1,
+    },
+    {
+      description: "Citra (8A, 90) → Cocok.",
+      highlightedRows: [2],
+      result: 2,
+    },
+    {
+      description: "Dani (8A, 70) → Tidak cocok.",
+      highlightedRows: [3],
+      result: 2,
+    },
+    {
+      description: "Eko (8B, 85) → Tidak cocok.",
+      highlightedRows: [4],
+      result: 2,
+    },
+    {
+      description: "Hasil: 2 siswa dari kelas 8A dengan nilai di atas 75.",
+      highlightedRows: [0, 2],
+      result: 2,
+    },
+  ];
+
+  const nextStep = (currentStep, setStep, maxSteps) => {
+    if (currentStep < maxSteps - 1) {
+      setStep(currentStep + 1);
+    }
+  };
+
+  const prevStep = (currentStep, setStep) => {
+    if (currentStep > 0) {
+      setStep(currentStep - 1);
+    }
+  };
+
+  const resetStep = (setStep) => {
+    setStep(0);
+  };
+
   return (
     <Layout>
       <div className="p-4 bg-[#255F38] mb-4 text-white font-bold text-lg text-center rounded-lg shadow-lg">
@@ -326,12 +416,8 @@ export default function PeringkasanData() {
             spreadsheet untuk menyajikan informasi secara singkat dan akurat
           </li>
           <li>
-            Menggunakan pendekatan Computational Thinking (CT) untuk meringkas
+            Menerapkan pendekatan Computational Thinking (CT) untuk meringkas
             data dengan fungsi perhitungan otomatis.
-          </li>
-          <li>
-            Menerapkan fungsi SUMIF, COUNTIF, SUMIFS, dan COUNTIFS dalam studi
-            kasus peringkasan data di lembar kerja.
           </li>
         </ol>
       </section>
@@ -361,7 +447,7 @@ export default function PeringkasanData() {
       <h2 className="font-bold text-[#255F38] mt-6 px-4">
         Contoh Peringkasan Data dalam Kehidupan Sehari-hari
       </h2>
-      <ul className="list-decimal list-inside mt-4 ml-6 text-gray-700 px-4 space-y-2">
+      <ul className="list-disc list-inside mt-4 ml-6 text-gray-700 px-4 space-y-2">
         <li className="text-justify">
           <strong>Seorang siswa</strong> ingin tahu berapa kali ia membeli makanan favorit di kantin dalam satu minggu → Dengan COUNTIF, ia bisa langsung mendapatkan jumlahnya.
         </li>
@@ -372,89 +458,6 @@ export default function PeringkasanData() {
           <strong>Seorang guru</strong> ingin tahu berapa siswa yang mendapat nilai di atas 75 → Dengan COUNTIF, ia bisa langsung mengetahui jumlah siswa yang lulus.
         </li>
       </ul>
-
-      {/* Kalkulator SUMIF dan COUNTIF */}
-      <div className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
-        <h3 className="text-lg font-bold text-[#255F38] mb-2">Perhatikan Kalkulator di bawah ini!</h3>
-        <p className="text-gray-700 mb-4 text-justify">
-          Untuk memahami cara kerja fungsi SUMIF dan COUNTIF, cobalah kalkulator interaktif berikut. SUMIF akan membantu menjumlahkan nilai siswa berdasarkan kelas tertentu, sedangkan COUNTIF akan menghitung jumlah siswa yang memenuhi kriteria nilai tertentu. Masukkan kriteria untuk SUMIF (berdasarkan kelas, misalnya "8A") dan COUNTIF (berdasarkan nilai, misalnya ">75"), lalu klik "Hitung" untuk melihat hasilnya. Klik "Reset" untuk mengosongkan input.
-        </p>
-
-        <div className="flex flex-col items-center mb-6">
-          <p className="text-gray-600 text-sm text-center mb-2 italic">
-            Data Siswa untuk Kalkulator
-          </p>
-          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-            <thead>
-              <tr className="bg-[#255F38] text-white">
-                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-                <th className="border border-green-600 px-4 py-2">Kelas</th>
-                <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item, index) => (
-                <tr key={index} className={index % 2 === 0 ? "bg-green-50" : "bg-white"}>
-                  <td className="border border-green-600 px-4 py-2">{item.name}</td>
-                  <td className="border border-green-600 px-4 py-2">{item.class}</td>
-                  <td className="border border-green-600 px-4 py-2">{item.score}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 items-start md:items-center mb-4">
-          <div className="flex flex-col w-full md:w-auto">
-            <label className="mb-1 text-[#255F38] font-semibold">
-              SUMIF - Kelas (misal: "8A"):
-            </label>
-            <input
-              type="text"
-              value={sumifCriteria}
-              onChange={(e) => setSumifCriteria(e.target.value)}
-              placeholder="Masukkan kelas"
-              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] w-full md:w-48"
-            />
-          </div>
-          <div className="flex flex-col w-full md:w-auto">
-            <label className="mb-1 text-[#255F38] font-semibold">
-              COUNTIF - Nilai (misal: ">75"):
-            </label>
-            <input
-              type="text"
-              value={countifCriteria}
-              onChange={(e) => setCountifCriteria(e.target.value)}
-              placeholder="Masukkan kondisi nilai"
-              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#255F38] w-full md:w-48"
-            />
-          </div>
-          <div className="flex space-x-2">
-            <button
-              onClick={calculate}
-              className="bg-[#255F38] text-white px-5 py-2 rounded-lg hover:bg-[#1E4D2E] transition duration-300 shadow-md"
-            >
-              Hitung
-            </button>
-            <button
-              onClick={reset}
-              className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md"
-            >
-              Reset
-            </button>
-          </div>
-        </div>
-
-        <div className="bg-gray-100 p-4 rounded-lg shadow-inner">
-          <p className="text-gray-700 mb-2">
-            <strong>Total Nilai (SUMIF) untuk kelas {sumifCriteria || "-"}:</strong> {sumifResult}
-          </p>
-          <p className="text-gray-700">
-            <strong>Jumlah Siswa (COUNTIF) dengan nilai {countifCriteria || "-"}:</strong> {countifResult}
-          </p>
-        </div>
-        <p className="text-gray-700 text-justify mt-2">Pada dasarnya, langkah kerja SUMIFS dan COUNTIFS sama dengan SUMIF dan COUNTIF: memilih rentang data, menetapkan kriteria, dan menghitung hasil. Hanya saja, SUMIFS dan COUNTIFS memungkinkan penambahan kriteria lebih lanjut untuk menyaring data secara lebih spesifik. Dengan demikian, jika Anda sudah memahami cara kerja SUMIF dan COUNTIF pada kalkulator, Anda juga akan dengan mudah memahami SUMIFS dan COUNTIFS karena konsep dasarnya serupa, hanya dengan tambahan kriteria.</p>
-      </div>
 
       {/* Dekomposisi */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
@@ -571,73 +574,6 @@ export default function PeringkasanData() {
             </div>
           </li>
         </ul>
-        {/* Latihan Pemahaman: Dekomposisi */}
-        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
-          <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
-            Latihan Pemahaman: Memecah Masalah Peringkasan Data
-          </h3>
-          <p className="text-gray-700 text-base text-justify mb-2">
-            Seorang guru ingin menjumlahkan nilai siswa dari kelas 8A menggunakan SUMIF. Pilih langkah-langkah yang tepat:
-          </p>
-          <div className="ml-6 text-gray-700 space-y-2">
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={dekomposisiAnswers.step1}
-                  onChange={() => handleDekomposisiChange("step1")}
-                  className="mr-2"
-                />
-                1. Tentukan tujuan: menjumlahkan nilai siswa kelas 8A.
-              </label>
-            </div>
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={dekomposisiAnswers.step2}
-                  onChange={() => handleDekomposisiChange("step2")}
-                  className="mr-2"
-                />
-                2. Pilih fungsi SUMIF untuk menjumlahkan berdasarkan kelas.
-              </label>
-            </div>
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={dekomposisiAnswers.step3}
-                  onChange={() => handleDekomposisiChange("step3")}
-                  className="mr-2"
-                />
-                3. Hitung rata-rata nilai siswa.
-              </label>
-            </div>
-          </div>
-          <div className="mt-4 flex space-x-2">
-            <button
-              onClick={checkDekomposisiAnswers}
-              className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
-            >
-              Periksa
-            </button>
-            <button
-              onClick={resetDekomposisiAnswers}
-              className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
-            >
-              Hapus
-            </button>
-          </div>
-          {dekomposisiFeedback && (
-            <p
-              className={`text-base mt-2 font-bold ${
-                dekomposisiFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
-              }`}
-            >
-              {dekomposisiFeedback}
-            </p>
-          )}
-        </div>
       </div>
 
       {/* Pengenalan Pola */}
@@ -666,79 +602,6 @@ export default function PeringkasanData() {
             <strong>Menghitung jumlah</strong> data berdasarkan lebih dari satu kriteria → Dengan COUNTIFS, kita bisa menghitung berapa transaksi yang terjadi di bulan tertentu untuk produk tertentu.
           </li>
         </ul>
-        {/* Latihan Pemahaman: Pengenalan Pola */}
-        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
-          <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
-            Latihan Pemahaman: Memilih Fungsi yang Tepat
-          </h3>
-          <p className="text-gray-700 text-base text-justify mb-2">
-            Guru ingin menghitung jumlah siswa yang mendapat nilai di atas 75. Fungsi apa yang tepat?
-          </p>
-          <div className="ml-6 text-gray-700 space-y-2">
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="pattern"
-                  value="SUMIF"
-                  checked={polaAnswer === "SUMIF"}
-                  onChange={() => handlePolaChange("SUMIF")}
-                  className="mr-2"
-                />
-                1. SUMIF
-              </label>
-            </div>
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="pattern"
-                  value="COUNTIF"
-                  checked={polaAnswer === "COUNTIF"}
-                  onChange={() => handlePolaChange("COUNTIF")}
-                  className="mr-2"
-                />
-                2. COUNTIF
-              </label>
-            </div>
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="pattern"
-                  value="SUMIFS"
-                  checked={polaAnswer === "SUMIFS"}
-                  onChange={() => handlePolaChange("SUMIFS")}
-                  className="mr-2"
-                />
-                3. SUMIFS
-              </label>
-            </div>
-          </div>
-          <div className="mt-4 flex space-x-2">
-            <button
-              onClick={checkPolaAnswer}
-              className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
-            >
-              Periksa
-            </button>
-            <button
-              onClick={resetPolaAnswer}
-              className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
-            >
-              Hapus
-            </button>
-          </div>
-          {polaFeedback && (
-            <p
-              className={`text-base mt-2 font-bold ${
-                polaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
-              }`}
-            >
-              {polaFeedback}
-            </p>
-          )}
-        </div>
       </div>
 
       {/* Abstraksi */}
@@ -758,7 +621,7 @@ export default function PeringkasanData() {
             <strong>Gunakan rumus</strong> yang tepat → Jika hanya butuh jumlah siswa yang lulus, cukup gunakan COUNTIF tanpa perlu SUMIF.
           </li>
         </ul>
-        {/* Latihan Pemahaman: Abstraksi */}
+        {/* Latihan Pemahaman: Abstraksi (Menggunakan Radio Button) */}
         <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
           <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
             Latihan Pemahaman: Memilih Data Penting
@@ -770,46 +633,52 @@ export default function PeringkasanData() {
             <div className="text-base">
               <label className="flex items-center">
                 <input
-                  type="checkbox"
-                  checked={abstraksiAnswers.info1}
-                  onChange={() => handleAbstraksiChange("info1")}
+                  type="radio"
+                  name="abstraction"
+                  value="Kolom Nilai Ujian"
+                  checked={abstraksiAnswer === "Kolom Nilai Ujian"}
+                  onChange={() => handleAbstraksiChange("Kolom Nilai Ujian")}
                   className="mr-2"
                 />
-                1. Kolom Nilai Ujian.
+                1. Kolom Nilai Ujian
               </label>
             </div>
             <div className="text-base">
               <label className="flex items-center">
                 <input
-                  type="checkbox"
-                  checked={abstraksiAnswers.info2}
-                  onChange={() => handleAbstraksiChange("info2")}
+                  type="radio"
+                  name="abstraction"
+                  value="Kolom Nama Siswa"
+                  checked={abstraksiAnswer === "Kolom Nama Siswa"}
+                  onChange={() => handleAbstraksiChange("Kolom Nama Siswa")}
                   className="mr-2"
                 />
-                2. Kolom Nama Siswa.
+                2. Kolom Nama Siswa
               </label>
             </div>
             <div className="text-base">
               <label className="flex items-center">
                 <input
-                  type="checkbox"
-                  checked={abstraksiAnswers.info3}
-                  onChange={() => handleAbstraksiChange("info3")}
+                  type="radio"
+                  name="abstraction"
+                  value="Kolom Kelas"
+                  checked={abstraksiAnswer === "Kolom Kelas"}
+                  onChange={() => handleAbstraksiChange("Kolom Kelas")}
                   className="mr-2"
                 />
-                3. Kolom Kelas.
+                3. Kolom Kelas
               </label>
             </div>
           </div>
           <div className="mt-4 flex space-x-2">
             <button
-              onClick={checkAbstraksiAnswers}
+              onClick={checkAbstraksiAnswer}
               className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
             >
               Periksa
             </button>
             <button
-              onClick={resetAbstraksiAnswers}
+              onClick={resetAbstraksiAnswer}
               className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
             >
               Hapus
@@ -838,332 +707,288 @@ export default function PeringkasanData() {
           spreadsheet.
         </p>
 
-        <p className="text-gray-700 text-sm md:text-base mt-4">
-          📌 SUMIF untuk Menjumlahkan Data dengan Satu Kriteria:
-        </p>
-        <div className="flex flex-col items-center mt-4">
-          <p className="text-gray-600 text-sm text-center mb-2 italic">
-            Tabel 7. Contoh Data SUMIF
-          </p>
-          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-            <thead>
-              <tr className="bg-[#255F38] text-white">
-                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-                <th className="border border-green-600 px-4 py-2">Kelas</th>
-                <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Aisyah</td>
-                <td className="border border-green-600 px-4 py-2">8A</td>
-                <td className="border border-green-600 px-4 py-2">80</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Budi</td>
-                <td className="border border-green-600 px-4 py-2">8B</td>
-                <td className="border border-green-600 px-4 py-2">65</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Citra</td>
-                <td className="border border-green-600 px-4 py-2">8A</td>
-                <td className="border border-green-600 px-4 py-2">90</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Dani</td>
-                <td className="border border-green-600 px-4 py-2">8A</td>
-                <td className="border border-green-600 px-4 py-2">70</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Eko</td>
-                <td className="border border-green-600 px-4 py-2">8B</td>
-                <td className="border border-green-600 px-4 py-2">85</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Pilih range</strong> data yang akan diperiksa kriterianya → Misalnya, kolom "Kelas" untuk mencari siswa kelas 8A.
-          </li>
-          <li className="text-justify">
-            <strong>Tentukan kriteria</strong> → Misalnya, hanya siswa dari kelas 8A.
-          </li>
-          <li className="text-justify">
-            <strong>Pilih sum_range</strong> → Data yang akan dijumlahkan, yaitu kolom "Nilai Ujian".
-          </li>
-          <li className="text-justify">
-            <strong>Gunakan rumus</strong> SUMIF → Untuk menjumlahkan nilai siswa dari kelas 8A.
-          </li>
-        </ul>
-        <pre className="bg-gray-200 p-2 rounded ml-12 mt-2 text-gray-800">
-          =SUMIF(B2:B6, "8A", C2:C6)
-        </pre>
-
-        <p className="text-gray-700 text-sm md:text-base mt-4">
-          📌 COUNTIF untuk Menghitung Data dengan Satu Kriteria:
-        </p>
-        <div className="flex flex-col items-center mt-4">
-          <p className="text-gray-600 text-sm text-center mb-2 italic">
-            Tabel 8. Contoh Data COUNTIF
-          </p>
-          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-            <thead>
-              <tr className="bg-[#255F38] text-white">
-                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-                <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Aisyah</td>
-                <td className="border border-green-600 px-4 py-2">80</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Budi</td>
-                <td className="border border-green-600 px-4 py-2">65</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Citra</td>
-                <td className="border border-green-600 px-4 py-2">90</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Dani</td>
-                <td className="border border-green-600 px-4 py-2">70</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Eko</td>
-                <td className="border border-green-600 px-4 py-2">85</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Pilih range</strong> data yang akan diperiksa kriterianya → Misalnya, kolom "Nilai Ujian".
-          </li>
-          <li className="text-justify">
-            <strong>Tentukan kriteria</strong> → Misalnya, nilai lebih dari 75.
-          </li>
-          <li className="text-justify">
-            <strong>Gunakan rumus</strong> COUNTIF → Untuk menghitung jumlah siswa yang memiliki nilai lebih dari 75.
-          </li>
-        </ul>
-        <pre className="bg-gray-200 p-2 rounded ml-12 mt-2 text-gray-800">
-          =COUNTIF(B2:B6, ">75")
-        </pre>
-
-        <p className="text-gray-700 text-sm md:text-base mt-4">
-          📌 SUMIFS untuk Menjumlahkan Data dengan Banyak Kriteria:
-        </p>
-        <div className="flex flex-col items-center mt-4">
-          <p className="text-gray-600 text-sm text-center mb-2 italic">
-            Tabel 9. Contoh Data SUMIFS
-          </p>
-          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-            <thead>
-              <tr className="bg-[#255F38] text-white">
-                <th className="border border-green-600 px-4 py-2">Nama Produk</th>
-                <th className="border border-green-600 px-4 py-2">Kategori</th>
-                <th className="border border-green-600 px-4 py-2">Pendapatan (Rp)</th>
-                <th className="border border-green-600 px-4 py-2">Bulan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Laptop</td>
-                <td className="border border-green-600 px-4 py-2">Elektronik</td>
-                <td className="border border-green-600 px-4 py-2">8.500.000</td>
-                <td className="border border-green-600 px-4 py-2">Januari</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Printer</td>
-                <td className="border border-green-600 px-4 py-2">Elektronik</td>
-                <td className="border border-green-600 px-4 py-2">2.000.000</td>
-                <td className="border border-green-600 px-4 py-2">Februari</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Roti</td>
-                <td className="border border-green-600 px-4 py-2">Makanan</td>
-                <td className="border border-green-600 px-4 py-2">500.000</td>
-                <td className="border border-green-600 px-4 py-2">Januari</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Mouse</td>
-                <td className="border border-green-600 px-4 py-2">Elektronik</td>
-                <td className="border border-green-600 px-4 py-2">150.000</td>
-                <td className="border border-green-600 px-4 py-2">Januari</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Susu</td>
-                <td className="border border-green-600 px-4 py-2">Makanan</td>
-                <td className="border border-green-600 px-4 py-2">800.000</td>
-                <td className="border border-green-600 px-4 py-2">Januari</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Pilih sum_range</strong> → Data yang akan dijumlahkan, yaitu kolom "Pendapatan (Rp)".
-          </li>
-          <li className="text-justify">
-            <strong>Pilih criteria_range1</strong> → Kolom "Kategori".
-          </li>
-          <li className="text-justify">
-            <strong>Tentukan criteria1</strong> → Hanya menjumlahkan kategori Elektronik.
-          </li>
-          <li className="text-justify">
-            <strong>Pilih criteria_range2</strong> → Kolom "Bulan".
-          </li>
-          <li className="text-justify">
-            <strong>Tentukan criteria2</strong> → Hanya menjumlahkan transaksi di Januari.
-          </li>
-          <li className="text-justify">
-            <strong>Gunakan rumus</strong> SUMIFS → Untuk menjumlahkan pendapatan yang memenuhi kedua kriteria.
-          </li>
-        </ul>
-        <pre className="bg-gray-200 p-2 rounded ml-12 mt-2 text-gray-800">
-          =SUMIFS(C2:C6, B2:B6, "Elektronik", D2:D6, "Januari")
-        </pre>
-
-        <p className="text-gray-700 text-sm md:text-base mt-4">
-          📌 COUNTIFS untuk Menghitung Data dengan Banyak Kriteria:
-        </p>
-        <div className="flex flex-col items-center mt-4">
-          <p className="text-gray-600 text-sm text-center mb-2 italic">
-            Tabel 10. Contoh Data COUNTIFS
-          </p>
-          <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
-            <thead>
-              <tr className="bg-[#255F38] text-white">
-                <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
-                <th className="border border-green-600 px-4 py-2">Kelas</th>
-                <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Aisyah</td>
-                <td className="border border-green-600 px-4 py-2">8A</td>
-                <td className="border border-green-600 px-4 py-2">80</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Budi</td>
-                <td className="border border-green-600 px-4 py-2">8B</td>
-                <td className="border border-green-600 px-4 py-2">65</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Citra</td>
-                <td className="border border-green-600 px-4 py-2">8A</td>
-                <td className="border border-green-600 px-4 py-2">90</td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2">Dani</td>
-                <td className="border border-green-600 px-4 py-2">8A</td>
-                <td className="border border-green-600 px-4 py-2">70</td>
-              </tr>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2">Eko</td>
-                <td className="border border-green-600 px-4 py-2">8B</td>
-                <td className="border border-green-600 px-4 py-2">85</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <ul className="list-disc list-inside ml-6 text-gray-700 space-y-2">
-          <li className="text-justify">
-            <strong>Pilih criteria_range1</strong> → Kolom "Kelas".
-          </li>
-          <li className="text-justify">
-            <strong>Tentukan criteria1</strong> → Hanya menghitung siswa dari kelas 8A.
-          </li>
-          <li className="text-justify">
-            <strong>Pilih criteria_range2</strong> → Kolom "Nilai Ujian".
-          </li>
-          <li className="text-justify">
-            <strong>Tentukan criteria2</strong> → Hanya menghitung siswa yang nilainya lebih dari 75.
-          </li>
-          <li className="text-justify">
-            <strong>Gunakan rumus</strong> COUNTIFS → Untuk menghitung jumlah siswa yang memenuhi kedua kriteria.
-          </li>
-        </ul>
-        <pre className="bg-gray-200 p-2 rounded ml-12 mt-2 text-gray-800">
-          =COUNTIFS(B2:B6, "8A", C2:C6, ">75")
-        </pre>
-
-        {/* Latihan Pemahaman: Algoritma */}
-        <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded mt-4 shadow-md">
-          <h3 className="font-semibold text-[#2E7D32] text-base mb-2">
-            Latihan Pemahaman: Langkah Algoritmik untuk Peringkasan Data
+        {/* Visualisasi SUMIF */}
+        <div className="mt-6">
+          <h3 className="font-semibold text-[#255F38] text-lg mb-2">
+            MARI MENGAMATI CARA KERJA SUMIF
           </h3>
-          <p className="text-gray-700 text-base text-justify mb-2">
-            Guru ingin menghitung jumlah siswa kelas 8A dengan nilai di atas 75 menggunakan COUNTIFS. Manakah langkah algoritmik yang benar?
+          <p className="text-gray-700 text-base mb-4">
+            Klik tombol untuk melihat langkah-langkah kerja fungsi SUMIF dalam menjumlahkan nilai siswa kelas 8A.
           </p>
-          <div className="ml-6 text-gray-700 space-y-2">
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="algorithm"
-                  value="Langkah-langkah COUNTIFS"
-                  checked={algoritmaAnswer === "Langkah-langkah COUNTIFS"}
-                  onChange={() => handleAlgoritmaChange("Langkah-langkah COUNTIFS")}
-                  className="mr-2"
-                />
-                1. Pilih kolom Kelas dan Nilai Ujian sebagai rentang kriteria, tetapkan kriteria '8A' dan '>75', lalu gunakan COUNTIFS.
-              </label>
-            </div>
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="algorithm"
-                  value="Langkah-langkah SUMIF"
-                  checked={algoritmaAnswer === "Langkah-langkah SUMIF"}
-                  onChange={() => handleAlgoritmaChange("Langkah-langkah SUMIF")}
-                  className="mr-2"
-                />
-                2. Pilih kolom Nilai Ujian, tetapkan kriteria '>75', lalu gunakan SUMIF untuk menjumlahkan nilai.
-              </label>
-            </div>
-            <div className="text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="algorithm"
-                  value="Langkah-langkah COUNTIF"
-                  checked={algoritmaAnswer === "Langkah-langkah COUNTIF"}
-                  onChange={() => handleAlgoritmaChange("Langkah-langkah COUNTIF")}
-                  className="mr-2"
-                />
-                3. Pilih kolom Nilai Ujian, tetapkan kriteria '>75', lalu gunakan COUNTIF tanpa memeriksa kelas.
-              </label>
-            </div>
+          <div className="flex flex-col items-center mt-4">
+            <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                  <th className="border border-green-600 px-4 py-2">Kelas</th>
+                  <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sumifData.map((item, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      sumifSteps[sumifStep].highlightedRows.includes(index)
+                        ? "bg-yellow-200"
+                        : index % 2 === 0
+                        ? "bg-green-50"
+                        : "bg-white"
+                    }
+                  >
+                    <td className="border border-green-600 px-4 py-2">{item.name}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.class}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4">
+            <p className="text-gray-700 text-base">
+              <strong>Langkah {sumifStep + 1}:</strong> {sumifSteps[sumifStep].description}
+            </p>
+            {sumifSteps[sumifStep].result !== null && (
+              <p className="text-gray-700 text-base mt-2">
+                <strong>Hasil:</strong> {sumifSteps[sumifStep].result}
+              </p>
+            )}
           </div>
           <div className="mt-4 flex space-x-2">
             <button
-              onClick={checkAlgoritmaAnswer}
-              className="bg-[#1B5E20] text-white px-5 py-2 rounded hover:bg-[#145A20] transition duration-300"
+              onClick={() => prevStep(sumifStep, setSumifStep)}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 disabled:opacity-50"
+              disabled={sumifStep === 0}
             >
-              Periksa
+              Sebelumnya
             </button>
             <button
-              onClick={resetAlgoritmaAnswer}
-              className="bg-[#D32F2F] text-white px-5 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+              onClick={() => nextStep(sumifStep, setSumifStep, sumifSteps.length)}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] disabled:opacity-50"
+              disabled={sumifStep === sumifSteps.length - 1}
             >
-              Hapus
+              Selanjutnya
+            </button>
+            <button
+              onClick={() => resetStep(setSumifStep)}
+              className="bg-[#D32F2F] text-white px-4 py-2 rounded-lg hover:bg-[#B71C1C]"
+            >
+              Reset
             </button>
           </div>
-          {algoritmaFeedback && (
-            <p
-              className={`text-base mt-2 font-bold ${
-                algoritmaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
-              }`}
-            >
-              {algoritmaFeedback}
+        </div>
+
+        {/* Visualisasi COUNTIF */}
+        <div className="mt-6">
+          <h3 className="font-semibold text-[#255F38] text-lg mb-2">
+             MARI MENGAMATI CARA KERJA COUNTIF
+          </h3>
+          <p className="text-gray-700 text-base mb-4">
+            Klik tombol untuk melihat langkah-langkah kerja fungsi COUNTIF dalam menghitung jumlah siswa dengan nilai di atas 75.
+          </p>
+          <div className="flex flex-col items-center mt-4">
+            <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                  <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
+                </tr>
+              </thead>
+              <tbody>
+                {countifData.map((item, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      countifSteps[countifStep].highlightedRows.includes(index)
+                        ? "bg-yellow-200"
+                        : index % 2 === 0
+                        ? "bg-green-50"
+                        : "bg-white"
+                    }
+                  >
+                    <td className="border border-green-600 px-4 py-2">{item.name}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4">
+            <p className="text-gray-700 text-base">
+              <strong>Langkah {countifStep + 1}:</strong> {countifSteps[countifStep].description}
             </p>
-          )}
+            {countifSteps[countifStep].result !== null && (
+              <p className="text-gray-700 text-base mt-2">
+                <strong>Hasil Sementara:</strong> {countifSteps[countifStep].result}
+              </p>
+            )}
+          </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={() => prevStep(countifStep, setCountifStep)}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 disabled:opacity-50"
+              disabled={countifStep === 0}
+            >
+              Sebelumnya
+            </button>
+            <button
+              onClick={() => nextStep(countifStep, setCountifStep, countifSteps.length)}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] disabled:opacity-50"
+              disabled={countifStep === countifSteps.length - 1}
+            >
+              Selanjutnya
+            </button>
+            <button
+              onClick={() => resetStep(setCountifStep)}
+              className="bg-[#D32F2F] text-white px-4 py-2 rounded-lg hover:bg-[#B71C1C]"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+
+        {/* Visualisasi SUMIFS */}
+        <div className="mt-6">
+          <h3 className="font-semibold text-[#255F38] text-lg mb-2">
+            MARI MENGAMATI CARA KERJA SUMIFS
+          </h3>
+          <p className="text-gray-700 text-base mb-4">
+            Klik tombol untuk melihat langkah-langkah kerja fungsi SUMIFS dalam menjumlahkan pendapatan kategori Elektronik pada bulan Januari.
+          </p>
+          <div className="flex flex-col items-center mt-4">
+            <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-4 py-2">Nama Produk</th>
+                  <th className="border border-green-600 px-4 py-2">Kategori</th>
+                  <th className="border border-green-600 px-4 py-2">Pendapatan (Rp)</th>
+                  <th className="border border-green-600 px-4 py-2">Bulan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sumifsData.map((item, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      sumifsSteps[sumifsStep].highlightedRows.includes(index)
+                        ? "bg-yellow-200"
+                        : index % 2 === 0
+                        ? "bg-green-50"
+                        : "bg-white"
+                    }
+                  >
+                    <td className="border border-green-600 px-4 py-2">{item.product}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.category}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.revenue.toLocaleString()}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.month}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4">
+            <p className="text-gray-700 text-base">
+              <strong>Langkah {sumifsStep + 1}:</strong> {sumifsSteps[sumifsStep].description}
+            </p>
+            {sumifsSteps[sumifsStep].result !== null && (
+              <p className="text-gray-700 text-base mt-2">
+                <strong>Hasil:</strong> {sumifsSteps[sumifsStep].result.toLocaleString()}
+              </p>
+            )}
+          </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={() => prevStep(sumifsStep, setSumifsStep)}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 disabled:opacity-50"
+              disabled={sumifsStep === 0}
+            >
+              Sebelumnya
+            </button>
+            <button
+              onClick={() => nextStep(sumifsStep, setSumifsStep, sumifsSteps.length)}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] disabled:opacity-50"
+              disabled={sumifsStep === sumifsSteps.length - 1}
+            >
+              Selanjutnya
+            </button>
+            <button
+              onClick={() => resetStep(setSumifsStep)}
+              className="bg-[#D32F2F] text-white px-4 py-2 rounded-lg hover:bg-[#B71C1C]"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+
+        {/* Visualisasi COUNTIFS */}
+        <div className="mt-6">
+          <h3 className="font-semibold text-[#255F38] text-lg mb-2">
+            MARI MENGAMATI CARA KERJA COUNTIFS
+          </h3>
+          <p className="text-gray-700 text-base mb-4">
+            Klik tombol untuk melihat langkah-langkah kerja fungsi COUNTIFS dalam menghitung jumlah siswa kelas 8A dengan nilai di atas 75.
+          </p>
+          <div className="flex flex-col items-center mt-4">
+            <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
+              <thead>
+                <tr className="bg-[#255F38] text-white">
+                  <th className="border border-green-600 px-4 py-2">Nama Siswa</th>
+                  <th className="border border-green-600 px-4 py-2">Kelas</th>
+                  <th className="border border-green-600 px-4 py-2">Nilai Ujian</th>
+                </tr>
+              </thead>
+              <tbody>
+                {countifsData.map((item, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      countifsSteps[countifsStep].highlightedRows.includes(index)
+                        ? "bg-yellow-200"
+                        : index % 2 === 0
+                        ? "bg-green-50"
+                        : "bg-white"
+                    }
+                  >
+                    <td className="border border-green-600 px-4 py-2">{item.name}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.class}</td>
+                    <td className="border border-green-600 px-4 py-2">{item.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4">
+            <p className="text-gray-700 text-base">
+              <strong>Langkah {countifsStep + 1}:</strong> {countifsSteps[countifsStep].description}
+            </p>
+            {countifsSteps[countifsStep].result !== null && (
+              <p className="text-gray-700 text-base mt-2">
+                <strong>Hasil Sementara:</strong> {countifsSteps[countifsStep].result}
+              </p>
+            )}
+          </div>
+          <div className="mt-4 flex space-x-2">
+            <button
+              onClick={() => prevStep(countifsStep, setCountifsStep)}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 disabled:opacity-50"
+              disabled={countifsStep === 0}
+            >
+              Sebelumnya
+            </button>
+            <button
+              onClick={() => nextStep(countifsStep, setCountifsStep, countifsSteps.length)}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] disabled:opacity-50"
+              disabled={countifsStep === countifsSteps.length - 1}
+            >
+              Selanjutnya
+            </button>
+            <button
+              onClick={() => resetStep(setCountifsStep)}
+              className="bg-[#D32F2F] text-white px-4 py-2 rounded-lg hover:bg-[#B71C1C]"
+            >
+              Reset
+            </button>
+          </div>
         </div>
       </div>
 

@@ -122,7 +122,7 @@ const ContohPenerapanVisualisasiData = () => {
       {/* Tabel Data Nilai Ulangan */}
       <div className="flex flex-col items-center mt-6">
         <p className="text-gray-600 text-sm text-center mb-2 italic">
-          Tabel 8. Data Nilai Ulangan Harian Budi
+          Tabel 9. Data Nilai Ulangan Harian Budi
         </p>
         <table className="border-collapse border border-green-800 w-full md:w-2/3 text-center">
           <thead>
@@ -274,71 +274,6 @@ const ContohPenerapanVisualisasiData = () => {
             Secara keseluruhan, tren nilai Budi menunjukkan kenaikan, meskipun sempat menurun di April. Ini berarti Budi sudah berada di jalur yang baik, tetapi perlu menjaga konsistensi belajar.
           </li>
         </ul>
-      </div>
-
-      {/* Modifikasi Chart */}
-      <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
-        <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <CheckCircle className="w-5 h-5 mr-2" /> MODIFIKASI CHART
-        </div>
-        <p className="mt-4 text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4">
-          Setelah membuat grafik, kita bisa memodifikasi tampilannya agar lebih informatif.
-        </p>
-        <div className="flex flex-col items-center mt-6">
-          <table className="border-collapse border border-green-800 w-full md:w-4/5 text-center">
-            <thead>
-              <tr className="bg-[#255F38] text-white">
-                <th className="border border-green-600 px-4 py-2">Langkah</th>
-                <th className="border border-green-600 px-4 py-2">Tampilan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-green-50">
-                <td className="border border-green-600 px-4 py-2 text-justify">
-                  Mengubah Tipe Chart. Sebagai contoh, ubah Diagram Garis menjadi Area Chart untuk melihat tren nilai Budi dengan tampilan yang berbeda.
-                  <ol className="list-decimal pl-6 mt-2">
-                    <li>Pilih Diagram Garis yang sudah dibuat.</li>
-                    <li>
-                      Pada tab Chart Design, klik Chart Type, lalu pilih Area Chart sebagai jenis grafik yang sesuai.
-                    </li>
-                  </ol>
-                </td>
-                <td className="border border-green-600 px-4 py-2">
-                  <div className="mt-4 border border-gray-300 p-2">
-                    <img
-                      src={chart}
-                      alt="Area Chart Nilai Budi"
-                      className="w-[500px] h-[300px] object-contain mx-auto"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr className="bg-white">
-                <td className="border border-green-600 px-4 py-2 text-justify">
-                  Beralih dari Row ke Column atau sebaliknya. Dalam Diagram Garis ini, kita bisa mencoba menukar susunan data, meskipun efeknya mungkin minimal karena hanya ada satu seri data (nilai Budi).
-                  <ol className="list-decimal pl-6 mt-2">
-                    <li>Pilih Diagram Garis yang sudah dibuat.</li>
-                    <li>
-                      Pada tab Chart Design, klik Switch Row/Column untuk menukar susunan data pada chart.
-                    </li>
-                  </ol>
-                  <p className="mt-2">
-                    Catatan: Dalam kasus ini, efeknya tidak terlalu terlihat karena hanya ada satu seri data. Namun, langkah ini berguna jika ada beberapa seri data (misalnya, membandingkan nilai Budi dengan nilai teman lainnya).
-                  </p>
-                </td>
-                <td className="border border-green-600 px-4 py-2">
-                  <div className="mt-4 border border-gray-300 p-2">
-                    <img
-                      src={switchh}
-                      alt="Diagram Garis setelah Switch Row/Column"
-                      className="w-[500px] h-[300px] object-contain mx-auto"
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
 
       {/* Tombol Navigasi */}

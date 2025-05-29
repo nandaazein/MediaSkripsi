@@ -151,7 +151,7 @@ const Pendahuluan = () => {
                 onClick={checkAnswers}
                 className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
               >
-                Periksa Jawaban
+                Periksa 
               </button>
               <button
                 onClick={resetAnswers}

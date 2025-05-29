@@ -64,10 +64,10 @@ export default function RangkumanPengelolaanData() {
       {/* Navigasi */}
       <div className="flex justify-between mt-10 px-4">
         <button
-          onClick={() => (window.location.href = "/home")}
+          onClick={() => (window.location.href = "/berlatih-pengelolaan")}
           className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 cursor-pointer transition duration-300"
         >
-          Sebelumnya
+          Sebelumnya→
         </button>
         <button
           onClick={() => (window.location.href = "/petunjuk-pengerjaan-pengelolaan")}

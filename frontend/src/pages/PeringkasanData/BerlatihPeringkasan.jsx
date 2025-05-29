@@ -5,7 +5,7 @@ import axios from "axios";
 export default function SummaryLesson() {
   const correctAnswers = {
     sumif: ["nama dan poin", "nama", "poin"],
-    sumifs: ["C2:C11 dan D2:D11", "C2:C11", "D2:D11"],
+    sumifs: ["C2:C11 dan D2:D11", "C2:C11", "D2:D11" , "C2:C11 D2:D11"],
     countif: ["kolom kegiatan", "kegiatan"],
     countifs: '=COUNTIFS(C2:C11;"8A";D2:D11;"Kebersihan")',
   };
@@ -100,12 +100,16 @@ export default function SummaryLesson() {
         MARI BERLATIH PERINGKASAN DATA
       </div>
 
-      <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed px-4 mb-6">
-        <strong>Petunjuk:</strong> Baca cerita di bawah ini, lalu jawab pertanyaan
-        di setiap bagian. Gunakan data di sheet untuk mengisi jawaban sesuai rumus
-        yang tepat. Setelah selesai, klik tombol{" "}
-        <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.
-      </p>
+     
+      {/* Petunjuk Umum */}
+      <section className="p-4 bg-green-100 rounded shadow-md mb-6">
+        <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
+          <li>Bacalah studi kasus di bawah ini dengan saksama.</li>
+          <li>Jawab setiap pertanyaan pada bagian yang yang telah disediakan.</li>
+          <li>Setelah selesai menjawab semua pertanyaan, klik tombol <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.</li>
+        </ol>
+      </section>
 
       {/* Studi Kasus */}
       <div className="p-6 bg-white rounded shadow-lg mt-6">
@@ -156,9 +160,9 @@ export default function SummaryLesson() {
           key: "countif",
           title: "3. Mengabaikan yang Tidak Penting (Abstraksi)",
           question:
-            "Kolom mana yang digunakan untuk menghitung jumlah siswa yang ikut kegiatan Olahraga dengan fungsi COUNTIF?",
+            "Kolom mana yang digunakan untuk menghitung jumlah siswa yang ikut Olahraga dengan fungsi COUNTIF?",
           points: [
-            "Fokus pada kolom yang berisi jenis kegiatan saja.",
+            "Fokus pada kolom yang didalamnya berisi olahraga.",
             "Abaikan kolom lain seperti nama siswa atau kelas yang tidak diperlukan.",
           ],
         },
@@ -166,7 +170,7 @@ export default function SummaryLesson() {
           key: "countifs",
           title: "4. Membuat Langkah-langkah (Algoritma)",
           question:
-            "Tulis rumus COUNTIFS yang tepat untuk menghitung jumlah siswa kelas 8A yang ikut kegiatan Kebersihan.",
+            "Tulis rumus COUNTIFS yang tepat untuk menghitung jumlah siswa kelas 8A yang mengikuti kegiatan Kebersihan.",
           points: [
             "Gunakan range kolom kelas sebagai kriteria pertama.",
             "Gunakan range kolom kegiatan sebagai kriteria kedua.",

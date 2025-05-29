@@ -1,84 +1,221 @@
 import Layout from "../../components/Layout";
 import { BookOpen, Lightbulb, BarChart, Filter, Code, CheckCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const PengenalanCT = () => {
-  // State for case study interactivity (Aldi's schedule)
-  const [siap, setSiap] = useState("");
-  const [berangkat, setBerangkat] = useState("");
+  // State untuk interaktivitas kesimpulan (daftar belanja Rina)
+  const [totalBelanja, setTotalBelanja] = useState("");
   const [feedback, setFeedback] = useState("");
 
-  // State for pattern recognition interactivity
-  const [selectedColor, setSelectedColor] = useState("");
+  // State untuk interaktivitas pengenalan pola
+  const [selectedPattern, setSelectedPattern] = useState("");
   const [polaFeedback, setPolaFeedback] = useState("");
-  const correctColor = "06.30";
+  const correctPattern = "Harga barang selalu kecil dan mudah dijumlahkan";
 
-  // State for abstraction interactivity
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  // State untuk interaktivitas abstraksi
+  const [selectedOption, setSelectedOption] = useState("");
   const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
-  const correctAnswersCheckbox = ["1", "2"];
+  const correctAnswerRadio = "1"; // Hanya satu jawaban benar
 
-  // Handlers for case study interactivity
+  // State untuk drag-and-drop dekomposisi (dianacakan)
+  const [dekomposisiItems, setDekomposisiItems] = useState([
+    "Tulis daftar barang yang akan dibeli.",
+    "Cek harga masing-masing barang.",
+    "Jumlahkan harga barang untuk memastikan sesuai anggaran.",
+  ]);
+  const [dropZoneItems, setDropZoneItems] = useState(["", "", ""]);
+  const [dekomposisiFeedback, setDekomposisiFeedback] = useState("");
+
+  // State untuk drag-and-drop algoritma (dianacakan)
+  const [algorithmItems, setAlgorithmItems] = useState([
+    "Tulis daftar barang: pensil, buku, penghapus.",
+    "Jumlahkan harga: Rp2.000 + Rp5.000 + Rp1.000 = Rp8.000.",
+    "Bandingkan dengan anggaran: Rp8.000 < Rp20.000, sehingga bisa beli semua.",
+  ]);
+  const [algorithmDropZone, setAlgorithmDropZone] = useState(["", "", ""]);
+  const [algorithmFeedback, setAlgorithmFeedback] = useState("");
+
+  // Fungsi untuk mengacak array
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // Acak item saat komponen dimuat
+  useEffect(() => {
+    setDekomposisiItems(shuffleArray([
+      "Tulis daftar barang yang akan dibeli.",
+      "Cek harga masing-masing barang.",
+      "Jumlahkan harga barang untuk memastikan sesuai anggaran.",
+    ]));
+    setAlgorithmItems(shuffleArray([
+      "Tulis daftar barang: pensil, buku, penghapus.",
+      "Jumlahkan harga: Rp2.000 + Rp5.000 + Rp1.000 = Rp8.000.",
+      "Bandingkan dengan anggaran: Rp8.000 < Rp20.000, sehingga bisa beli semua.",
+    ]));
+  }, []);
+
+  // Handler untuk interaktivitas kesimpulan
   const cekJawaban = () => {
-    if (siap === "06.10" && berangkat === "06.30") {
+    if (totalBelanja === "8000") {
       setFeedback(
-        "Jawaban kamu benar! Aldi harus mulai bersiap pukul 06.10, dihitung dengan mengurangi 30 menit perjalanan dari 07.00 (menjadi 06.30) dan 20 menit bersiap-siap dari 06.30 (menjadi 06.10). "
+        "Jawaban kamu benar! Total belanja Rina adalah Rp8.000, dan ini sesuai dengan anggaran Rp20.000."
       );
     } else {
-      setFeedback("Jawaban salah, ayo coba lagi.");
+      setFeedback("Jawaban salah, ayo coba lagi. Jumlahkan harga pensil (Rp2.000), buku (Rp5.000), dan penghapus (Rp1.000).");
     }
   };
 
   const handleHapus = () => {
-    setSiap("");
-    setBerangkat("");
+    setTotalBelanja("");
     setFeedback("");
   };
 
-  // Handlers for pattern recognition interactivity
-  const handleColorChange = (e) => {
-    setSelectedColor(e.target.value);
+  // Handler untuk interaktivitas pengenalan pola
+  const handlePatternChange = (e) => {
+    setSelectedPattern(e.target.value);
     setPolaFeedback("");
   };
 
   const checkPolaAnswers = () => {
-    const isCorrect = selectedColor === correctColor;
+    const isCorrect = selectedPattern === correctPattern;
     setPolaFeedback(
       isCorrect
-        ? "Jawaban Anda benar! 06.30 sesuai dengan pola waktu berangkat Aldi."
+        ? "Jawaban Anda benar! Harga barang kecil dan mudah dijumlahkan, sehingga membantu Rina menghitung total belanja."
         : "Jawaban salah, ayo coba lagi."
     );
   };
 
   const resetPolaAnswers = () => {
-    setSelectedColor("");
+    setSelectedPattern("");
     setPolaFeedback("");
   };
 
-  // Handlers for abstraction interactivity
-  const handleCheckboxChange = (event) => {
-    const { value } = event.target;
-    setSelectedOptions((prev) =>
-      prev.includes(value) ? prev.filter((opt) => opt !== value) : [...prev, value]
-    );
+  // Handler untuk interaktivitas abstraksi
+  const handleRadioChange = (e) => {
+    setSelectedOption(e.target.value);
     setAbstraksiFeedback("");
   };
 
   const checkAbstraksiAnswers = () => {
-    const isCorrect =
-      selectedOptions.length === correctAnswersCheckbox.length &&
-      selectedOptions.every((val) => correctAnswersCheckbox.includes(val));
+    const isCorrect = selectedOption === correctAnswerRadio;
     setAbstraksiFeedback(
       isCorrect
-        ? "Jawaban Anda benar! 'Waktu bersiap-siap' dan 'Waktu perjalanan' adalah informasi relevan."
+        ? "Jawaban Anda benar! Harga barang adalah informasi paling relevan untuk menghitung total belanja."
         : "Jawaban salah, ayo coba lagi."
     );
   };
 
   const resetAbstraksiAnswers = () => {
-    setSelectedOptions([]);
+    setSelectedOption("");
     setAbstraksiFeedback("");
   };
+
+  // Handler Drag and Drop untuk Dekomposisi
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.setData("text/plain", index);
+  };
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault();
+    const dragIndex = e.dataTransfer.getData("text/plain");
+    const newDropZoneItems = [...dropZoneItems];
+    newDropZoneItems[dropIndex] = dekomposisiItems[dragIndex];
+    setDropZoneItems(newDropZoneItems);
+
+    const newDekomposisiItems = dekomposisiItems.filter((_, i) => i !== parseInt(dragIndex));
+    setDekomposisiItems(newDekomposisiItems);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const checkDekomposisiAnswers = () => {
+    const correctOrder = [
+      "Tulis daftar barang yang akan dibeli.",
+      "Cek harga masing-masing barang.",
+      "Jumlahkan harga barang untuk memastikan sesuai anggaran.",
+    ];
+    const isCorrect = dropZoneItems.every((item, index) => item === correctOrder[index]);
+    setDekomposisiFeedback(
+      isCorrect
+        ? "Jawaban Anda benar! Urutan langkah dekomposisi sudah tepat."
+        : "Jawaban salah, ayo coba susun ulang langkah-langkahnya."
+    );
+  };
+
+  const resetDekomposisi = () => {
+    setDekomposisiItems(shuffleArray([
+      "Tulis daftar barang yang akan dibeli.",
+      "Cek harga masing-masing barang.",
+      "Jumlahkan harga barang untuk memastikan sesuai anggaran.",
+    ]));
+    setDropZoneItems(["", "", ""]);
+    setDekomposisiFeedback("");
+  };
+
+  // Handler Drag and Drop untuk Algoritma
+  const handleAlgorithmDragStart = (e, index) => {
+    e.dataTransfer.setData("text/plain", index);
+  };
+
+  const handleAlgorithmDrop = (e, dropIndex) => {
+    e.preventDefault();
+    const dragIndex = e.dataTransfer.getData("text/plain");
+    const newAlgorithmDropZone = [...algorithmDropZone];
+    newAlgorithmDropZone[dropIndex] = algorithmItems[dragIndex];
+    setAlgorithmDropZone(newAlgorithmDropZone);
+
+    const newAlgorithmItems = algorithmItems.filter((_, i) => i !== parseInt(dragIndex));
+    setAlgorithmItems(newAlgorithmItems);
+  };
+
+  const handleAlgorithmDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const checkAlgorithmAnswers = () => {
+    const correctOrder = [
+      "Tulis daftar barang: pensil, buku, penghapus.",
+      "Jumlahkan harga: Rp2.000 + Rp5.000 + Rp1.000 = Rp8.000.",
+      "Bandingkan dengan anggaran: Rp8.000 < Rp20.000, sehingga bisa beli semua.",
+    ];
+    const isCorrect = algorithmDropZone.every((item, index) => item === correctOrder[index]);
+    setAlgorithmFeedback(
+      isCorrect
+        ? "Jawaban Anda benar! Urutan algoritma sudah tepat."
+        : "Jawaban salah, ayo coba susun ulang langkah-langkahnya."
+    );
+  };
+
+  const resetAlgorithm = () => {
+    setAlgorithmItems(shuffleArray([
+      "Tulis daftar barang: pensil, buku, penghapus.",
+      "Jumlahkan harga: Rp2.000 + Rp5.000 + Rp1.000 = Rp8.000.",
+      "Bandingkan dengan anggaran: Rp8.000 < Rp20.000, sehingga bisa beli semua.",
+    ]));
+    setAlgorithmDropZone(["", "", ""]);
+    setAlgorithmFeedback("");
+  };
+
+  // Keterangan untuk area penempatan Dekomposisi
+  const dekomposisiHints = [
+    "Langkah 1: Apa yang harus Rina lakukan pertama kali? ",
+    "Langkah 2: Apa langkah berikutnya? ",
+    "Langkah 3: Apa langkah terakhir? ",
+  ];
+
+  // Keterangan untuk area penempatan Algoritma
+  const algorithmHints = [
+    "Langkah 1: Apa langkah pertama? (Petunjuk: Tulis daftar barang)",
+    "Langkah 2: Apa langkah kedua? (Petunjuk: Hitung total harga)",
+    "Langkah 3: Apa langkah terakhir? (Petunjuk: Bandingkan dengan anggaran)",
+  ];
 
   return (
     <Layout>
@@ -87,54 +224,60 @@ const PengenalanCT = () => {
         Pengenalan Computational Thinking
       </h1>
 
-      {/* Learning Objectives */}
+      {/* Tujuan Pembelajaran */}
       <section className="bg-green-100 rounded shadow-md p-4 mt-4">
-        <h2 className="font-bold text-[#255F38] flex items-center">
-          Tujuan Pembelajaran
-        </h2>
+        <h2 className="font-bold text-[#255F38] flex items-center">Tujuan Pembelajaran</h2>
         <p className="text-gray-700 text-sm md:text-base">
-          Memahami konsep dasar <i>Computational Thinking</i> (CT) dan menerapkannya dalam menyelesaikan masalah melalui studi kasus.
+          Memahami konsep dasar <i>Computational Thinking</i> (CT) dan menerapkannya dalam menyelesaikan masalah sederhana melalui studi kasus.
         </p>
       </section>
 
-      {/* Introduction to Computational Thinking */}
+      {/* Pengenalan Computational Thinking */}
       <div className="bg-white p-5 border-gray-300 mt-4 space-y-4">
         <h2 className="text-2xl font-bold text-green-800 mb-2">Apa Itu Computational Thinking?</h2>
         <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          <span className="font-bold">Computational Thinking (CT)</span> adalah pendekatan berpikir terstruktur untuk memecahkan masalah secara efektif dan efisien. Menggunakan konsep ilmu komputer, CT membantu kita berpikir logis dan menyusun solusi sistematis, tidak hanya untuk pemrograman tetapi juga untuk kehidupan sehari-hari.
+          <span className="font-bold">Computational Thinking (CT)</span> adalah cara berpikir untuk memecahkan masalah dengan langkah-langkah yang jelas dan sederhana, seperti yang dilakukan komputer. CT membantu kita menyelesaikan masalah sehari-hari, seperti berbelanja atau mengatur waktu.
         </p>
         <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
-          CT terdiri dari empat fondasi: <b>Dekomposisi</b>, <b>Pengenalan Pola</b>, <b>Abstraksi</b>, dan <b>Algoritma</b>. Kita akan menerapkannya pada studi kasus berikut.
+          CT terdiri dari empat langkah: <b>Dekomposisi</b>, <b>Pengenalan Pola</b>, <b>Abstraksi</b>, dan <b>Algoritma</b>. Mari kita coba terapkan pada studi kasus berikut.
         </p>
       </div>
 
-      {/* Case Study */}
+      {/* Studi Kasus */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-5">
         <h2 className="text-xl font-bold text-green-800 flex items-center">
           <BookOpen className="w-5 h-5 mr-2" /> Studi Kasus
         </h2>
-        <p className="text-gray-600 text-sm md:text-base text-justify">
-          Aldi ingin tiba di sekolah tepat pukul 07.00. Ia naik sepeda, yang memakan waktu 30 menit dari rumah ke sekolah. Sebelum berangkat, Aldi perlu 20 menit untuk bersiap-siap (mandi, sarapan, memakai seragam). Pertanyaan: pukul berapa Aldi harus mulai bersiap dan berangkat?
+        <p className="text-gray-700 text-sm md:text-base text-justify leading-relaxed">
+          Mari kita gunakan Computational Thinking untuk membantu Rina berbelanja dengan cerdas.
         </p>
-        {/* Timeline Graphic */}
-        <div className="flex justify-center mt-4">
-          <div className="relative w-full max-w-md">
-            <div className="absolute w-full h-1 bg-green-300 top-6"></div>
-            <div className="flex justify-between items-center">
-              <div className="text-center">
-                <div className="w-4 h-4 bg-green-600 rounded-full mx-auto"></div>
-                <p className="text-sm text-gray-600 mt-2">Bersiap (20 menit)</p>
-              </div>
-              <div className="text-center">
-                <div className="w-4 h-4 bg-green-600 rounded-full mx-auto"></div>
-                <p className="text-sm text-gray-600 mt-2">Berangkat (30 menit)</p>
-              </div>
-              <div className="text-center">
-                <div className="w-4 h-4 bg-green-600 rounded-full mx-auto"></div>
-                <p className="text-sm text-gray-600 mt-2">Tiba 07.00</p>
-              </div>
-            </div>
-          </div>
+        <p className="text-gray-600 text-sm md:text-base text-justify">
+          Rina ingin membeli 3 barang: <b>pensil</b>, <b>buku</b>, dan <b>penghapus</b>. Dia punya uang Rp20.000. Harga barang-barang tersebut adalah: pensil Rp2.000, buku Rp5.000, dan penghapus Rp1.000. Rina ingin memastikan dia bisa membeli semua barang tanpa melebihi anggaran. Bagaimana langkah-langkahnya?
+        </p>
+        {/* Tabel Sederhana untuk Item */}
+        <div className="mt-4 overflow-x-auto text-center">
+          <table className="border-collapse border border-green-800 mx-auto max-w-xs sm:max-w-sm md:max-w-md">
+            <thead>
+              <tr className="bg-[#255F38] text-white">
+                <th className="border border-green-600 px-2 py-1">Barang</th>
+                <th className="border border-green-600 px-2 py-1">Harga</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="bg-green-50">
+                <td className="border border-green-600 px-2 py-1">Pensil</td>
+                <td className="border border-green-600 px-2 py-1">Rp2.000</td>
+              </tr>
+              <tr className="bg-white">
+                <td className="border border-green-600 px-2 py-1">Buku</td>
+                <td className="border border-green-600 px-2 py-1">Rp5.000</td>
+              </tr>
+              <tr className="bg-green-50">
+                <td className="border border-green-600 px-2 py-1">Penghapus</td>
+                <td className="border border-green-600 px-2 py-1">Rp1.000</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -142,45 +285,108 @@ const PengenalanCT = () => {
         Penyelesaian dengan <span className="font-semibold italic">Computational Thinking:</span>
       </p>
 
-      {/* Decomposition */}
+      {/* Dekomposisi */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-12 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
           <Lightbulb className="mr-2 w-5 h-5" /> Dekomposisi
         </div>
-        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Aldi ingin tiba di sekolah tepat pukul <span className="font-semibold">07.00</span>.</li>
-          <li>Masalahnya dapat dipecah menjadi dua bagian: waktu untuk <span className="font-semibold">berangkat</span> dan waktu untuk <span className="font-semibold">bersiap-siap</span>.</li>
-          <li>Kita perlu menghitung waktu berdasarkan <span className="font-semibold">30 menit perjalanan</span> dan <span className="font-semibold">20 menit bersiap-siap</span>.</li>
-        </ul>
+        <p className="text-gray-700 text-sm md:text-base text-justify font-semibold mt-4">
+          Penjelasan: Dekomposisi adalah memecah masalah besar menjadi langkah-langkah kecil yang lebih mudah.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base text-justify mt-4">
+          Rina memecah masalah berbelanja menjadi langkah-langkah sederhana. Susun langkah-langkah berikut dengan menyeret ke area yang tepat!
+        </p>
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="w-full md:w-1/2 bg-gray-100 p-4 rounded-lg">
+            <h3 className="font-semibold text-green-800 mb-2">Item yang Bisa Digerakkan</h3>
+            {dekomposisiItems.map((item, index) => (
+              <div
+                key={index}
+                draggable
+                onDragStart={(e) => handleDragStart(e, index)}
+                className="bg-white p-2 mb-2 border border-gray-300 rounded cursor-move"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+          <div className="w-full md:w-1/2 bg-gray-100 p-4 rounded-lg">
+            <h3 className="font-semibold text-green-800 mb-2">Area Penempatan</h3>
+            {dropZoneItems.map((item, index) => (
+              <div
+                key={index}
+                onDrop={(e) => handleDrop(e, index)}
+                onDragOver={handleDragOver}
+                className="bg-white p-2 mb-2 border-2 border-dashed border-green-500 rounded min-h-[80px] flex flex-col items-center justify-center"
+              >
+                {item ? (
+                  <span>{item}</span>
+                ) : (
+                  <>
+                    <span className="text-gray-500 text-sm italic">{dekomposisiHints[index]}</span>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex space-x-2 mt-4">
+          <button
+            onClick={checkDekomposisiAnswers}
+            className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
+          >
+            Periksa 
+          </button>
+          <button
+            onClick={resetDekomposisi}
+            className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+          >
+            Hapus
+          </button>
+        </div>
+        {dekomposisiFeedback && (
+          <p
+            className={`text-sm mt-2 font-bold ${
+              dekomposisiFeedback.includes("benar") ? "text-green-700" : "text-red-700"
+            }`}
+          >
+            {dekomposisiFeedback}
+          </p>
+        )}
       </div>
 
-      {/* Pattern Recognition */}
+      {/* Pengenalan Pola */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <BarChart className="w-5 h-5 mr-2" /> PENGENALAN POLA
+          <BarChart className="w-5 h-5 mr-2" /> Pengenalan Pola
         </div>
-        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Aldi mencatat waktu berangkatnya: <span className="font-semibold">Senin (06.30)</span>, <span className="font-semibold">Selasa (06.30)</span>, <span className="font-semibold">Rabu (06.30)</span>, <span className="font-semibold">Kamis (06.30)</span>, <span className="font-semibold">Jumat (06.30)</span>.</li>
-          <li>Polanya adalah Aldi selalu berangkat pada waktu yang sama setiap hari, yaitu pukul <span className="font-semibold">06.30</span>.</li>
-          <li>Untuk tiba tepat pukul <span className="font-semibold">07.00</span>, pola ini konsisten dengan waktu perjalanan <span className="font-semibold">30 menit</span>.</li>
-        </ul>
+        <p className="text-gray-700 text-sm md:text-base text-justify font-semibold mt-4">
+          Penjelasan: Pengenalan Pola adalah mencari kesamaan atau pola dalam data untuk mempermudah penyelesaian.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base text-justify mt-4">
+          Rina melihat harga barang: pensil Rp2.000, buku Rp5.000, penghapus Rp1.000. Apa pola yang membantu Rina menghitung total belanja dengan mudah?
+        </p>
         <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3 mt-4">
-          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Mengenali Pola Waktu</h3>
+          <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Mengenali Pola Harga</h3>
           <p className="text-gray-700 text-sm md:text-base text-justify">
-            Pilih waktu yang sesuai untuk hari Sabtu berdasarkan pola yang ada!
+            Pilih pola yang benar berdasarkan harga barang!
           </p>
           <div className="space-y-2">
-            {["06.00", "06.30", "07.00"].map((time) => (
-              <label key={time} className="flex items-center space-x-2">
+            {[
+              "Harga barang selalu kecil dan mudah dijumlahkan",
+              "Harga barang selalu sama",
+              "Harga barang sangat besar",
+            ].map((pattern, index) => (
+              <label key={index} className="flex items-center space-x-2">
                 <input
                   type="radio"
-                  name="color"
-                  value={time}
-                  checked={selectedColor === time}
-                  onChange={handleColorChange}
+                  name="pattern"
+                  value={pattern}
+                  checked={selectedPattern === pattern}
+                  onChange={handlePatternChange}
                   className="form-radio"
                 />
-                <span>{time}</span>
+                <span>{pattern}</span>
               </label>
             ))}
           </div>
@@ -189,7 +395,7 @@ const PengenalanCT = () => {
               onClick={checkPolaAnswers}
               className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
             >
-              Periksa Jawaban
+              Periksa 
             </button>
             <button
               onClick={resetPolaAnswers}
@@ -210,35 +416,36 @@ const PengenalanCT = () => {
         </div>
       </div>
 
-      {/* Abstraction */}
+      {/* Abstraksi */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <Filter className="w-5 h-5 mr-2" /> ABSTRAKSI
+          <Filter className="w-5 h-5 mr-2" /> Abstraksi
         </div>
-        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>Tidak perlu mempertimbangkan hal-hal seperti <span className="font-semibold">menu sarapan</span> atau <span className="font-semibold">jenis sepeda</span>, karena tidak relevan untuk menghitung waktu.</li>
-          <li>Fokus hanya pada informasi penting: <span className="font-semibold">waktu tiba (07.00)</span>, <span className="font-semibold">waktu perjalanan (30 menit)</span>, dan <span className="font-semibold">waktu bersiap-siap (20 menit)</span>.</li>
-          <li>Informasi lain dapat diabaikan untuk menyederhanakan penyelesaian masalah.</li>
-        </ul>
+        <p className="text-gray-700 text-sm md:text-base text-justify font-semibold mt-4">
+          Penjelasan: Abstraksi adalah mengabaikan informasi yang tidak penting dan fokus pada yang relevan.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base text-justify mt-4">
+          Rina tidak perlu memikirkan warna barang atau lokasi toko. Yang penting adalah harga barang dan anggaran. Apa informasi yang paling relevan?
+        </p>
         <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3 mt-4">
           <h3 className="text-[#2E7D32] font-bold text-sm md:text-base">Memilih Informasi Penting</h3>
           <p className="text-gray-700 text-sm md:text-base text-justify">
-            Pilih informasi yang relevan untuk membantu Aldi merencanakan jadwalnya!
+            Pilih informasi yang paling relevan untuk membantu Rina berbelanja!
           </p>
           <div className="space-y-2">
             {[
-              { value: "1", label: "Waktu bersiap-siap" },
-              { value: "2", label: "Waktu perjalanan" },
-              { value: "3", label: "Jenis sepeda" },
-              { value: "4", label: "Menu sarapan" },
+              { value: "1", label: "Harga barang" },
+              { value: "2", label: "Warna barang" },
+              { value: "3", label: "Lokasi toko" },
             ].map((option) => (
               <label key={option.value} className="flex items-center space-x-2">
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="abstraction"
                   value={option.value}
-                  checked={selectedOptions.includes(option.value)}
-                  onChange={handleCheckboxChange}
-                  className="form-checkbox"
+                  checked={selectedOption === option.value}
+                  onChange={handleRadioChange}
+                  className="form-radio"
                 />
                 <span>{option.label}</span>
               </label>
@@ -249,7 +456,7 @@ const PengenalanCT = () => {
               onClick={checkAbstraksiAnswers}
               className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
             >
-              Periksa Jawaban
+              Periksa 
             </button>
             <button
               onClick={resetAbstraksiAnswers}
@@ -270,59 +477,101 @@ const PengenalanCT = () => {
         </div>
       </div>
 
-      {/* Algorithm */}
+      {/* Algoritma */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10 relative">
         <div className="absolute -top-6 left-4 bg-green-800 text-white px-5 py-2 rounded-t-lg text-lg font-bold flex items-center shadow-lg">
-          <Code className="w-5 h-5 mr-2" /> ALGORITMA
+          <Code className="w-5 h-5 mr-2" /> Algoritma
         </div>
-        <ul className="text-gray-700 list-disc pl-6 ml-6 space-y-1 mt-6">
-          <li>
-            <span className="font-semibold">Tentukan waktu tiba</span><br />
-            Aldi harus tiba di sekolah pukul <span className="font-semibold">07.00</span>.
-          </li>
-          <li>
-            <span className="font-semibold">Hitung waktu berangkat</span><br />
-            Kurangi waktu perjalanan <span className="font-semibold">30 menit</span> dari <span className="font-semibold">07.00</span>, sehingga Aldi harus berangkat pukul <span className="font-semibold">06.30</span>.
-          </li>
-          <li>
-            <span className="font-semibold">Hitung waktu bersiap-siap</span><br />
-            Kurangi waktu bersiap-siap <span className="font-semibold">20 menit</span> dari <span className="font-semibold">06.30</span>, sehingga Aldi harus mulai bersiap pukul <span className="font-semibold">06.10</span>.
-          </li>
-        </ul>
+        <p className="text-gray-700 text-sm md:text-base text-justify font-semibold mt-4">
+          Penjelasan: Algoritma adalah langkah-langkah berurutan untuk menyelesaikan masalah.
+        </p>
+        <p className="text-gray-700 text-sm md:text-base text-justify mt-4">
+          Rina menyusun langkah-langkah untuk berbelanja. Susun langkah-langkah berikut dengan menyeret ke area yang tepat!
+        </p>
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="w-full md:w-1/2 bg-gray-100 p-4 rounded-lg">
+            <h3 className="font-semibold text-green-800 mb-2">Item yang Bisa Digerakkan</h3>
+            {algorithmItems.map((item, index) => (
+              <div
+                key={index}
+                draggable
+                onDragStart={(e) => handleAlgorithmDragStart(e, index)}
+                className="bg-white p-2 mb-2 border border-gray-300 rounded cursor-move"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+          <div className="w-full md:w-1/2 bg-gray-100 p-4 rounded-lg">
+            <h3 className="font-semibold text-green-800 mb-2">Area Penempatan</h3>
+            {algorithmDropZone.map((item, index) => (
+              <div
+                key={index}
+                onDrop={(e) => handleAlgorithmDrop(e, index)}
+                onDragOver={handleAlgorithmDragOver}
+                className="bg-white p-2 mb-2 border-2 border-dashed border-green-500 rounded min-h-[80px] flex flex-col items-center justify-center"
+              >
+                {item ? (
+                  <span>{item}</span>
+                ) : (
+                  <>
+                    <span className="text-gray-500 text-sm italic">{algorithmHints[index]}</span>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex space-x-2 mt-4">
+          <button
+            onClick={checkAlgorithmAnswers}
+            className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
+          >
+            Periksa 
+          </button>
+          <button
+            onClick={resetAlgorithm}
+            className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+          >
+            Hapus
+          </button>
+        </div>
+        {algorithmFeedback && (
+          <p
+            className={`text-sm mt-2 font-bold ${
+              algorithmFeedback.includes("benar") ? "text-green-700" : "text-red-700"
+            }`}
+          >
+            {algorithmFeedback}
+          </p>
+        )}
       </div>
 
-      {/* Conclusion and Analysis */}
+      {/* Kesimpulan */}
       <div className="bg-white p-5 border-gray-300 space-y-4 mt-10">
         <h2 className="text-xl font-bold text-green-800 flex items-center">
-          <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan & Saran
+          <CheckCircle className="w-5 h-5 mr-2" /> Kesimpulan
         </h2>
         <div className="bg-[#F0FFF4] p-4 border border-[#81C784] rounded-lg shadow-md space-y-3">
           <p className="text-gray-600 text-sm md:text-base font-semibold">
-            Coba isikan waktu yang sesuai untuk Aldi:
+            Coba hitung total belanja Rina:
           </p>
           <p className="text-gray-600 text-sm md:text-base text-justify">
-            Isikan jam Aldi mulai bersiap dan berangkat agar tidak terlambat ke sekolah.
+            Berapa total harga barang yang dibeli Rina? (Isi dalam rupiah, tanpa tanda Rp atau titik, misal: 10000)
           </p>
           <input
             type="text"
-            placeholder="Jam mulai bersiap (misal: 06.00)"
-            value={siap}
-            onChange={(e) => setSiap(e.target.value)}
+            placeholder="Total belanja (misal: 10000)"
+            value={totalBelanja}
+            onChange={(e) => setTotalBelanja(e.target.value)}
             className="w-full border px-3 py-1 text-sm rounded mt-2"
-          />
-          <input
-            type="text"
-            placeholder="Jam berangkat (misal: 06.00)"
-            value={berangkat}
-            onChange={(e) => setBerangkat(e.target.value)}
-            className="w-full border px-3 py-1 text-sm rounded mt-3"
           />
           <div className="flex space-x-2 mt-3">
             <button
               onClick={cekJawaban}
               className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
             >
-              Periksa Jawaban
+              Periksa 
             </button>
             <button
               onClick={handleHapus}
@@ -342,23 +591,18 @@ const PengenalanCT = () => {
           )}
         </div>
         {feedback ===
-          "✅ Jawaban kamu benar! Aldi harus mulai bersiap pukul 06.10, dihitung dengan mengurangi 30 menit perjalanan dari 07.00 (menjadi 06.30) dan 20 menit bersiap-siap dari 06.30 (menjadi 06.10). Ini sesuai dengan langkah algoritma dalam Computational Thinking." && (
+          "Jawaban kamu benar! Total belanja Rina adalah Rp8.000, dan ini sesuai dengan anggaran Rp20.000." && (
           <div>
             <p className="text-gray-600 text-sm md:text-base mt-4 font-semibold">Kesimpulan:</p>
             <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-2 space-y-2">
-              <li>Dengan CT, Aldi dapat merencanakan jadwalnya secara sistematis untuk tiba tepat waktu.</li>
-              <li>Memecah masalah, mengenali pola, menyederhanakan informasi, dan menyusun algoritma membantu menyelesaikan masalah secara efisien.</li>
-            </ul>
-            <p className="text-gray-600 text-sm md:text-base mt-4 font-semibold">Saran:</p>
-            <ul className="list-disc list-inside text-gray-600 text-sm md:text-base mt-2 space-y-2">
-              <li>Aldi bisa berangkat lebih awal untuk mengantisipasi gangguan seperti cuaca.</li>
-              <li>CT dapat diterapkan pada masalah lain, seperti mengatur tugas sekolah atau menganalisis pengeluaran harian.</li>
+              <li>Dengan CT, Rina bisa berbelanja dengan langkah-langkah yang jelas dan tidak melebihi anggaran.</li>
+              <li>Memecah masalah, mencari pola, mengabaikan yang tidak penting, dan menyusun langkah-langkah membantu Rina berbelanja dengan efisien.</li>
             </ul>
           </div>
         )}
       </div>
 
-      {/* Navigation Buttons */}
+      {/* Tombol Navigasi */}
       <div className="flex justify-between mt-8 px-4">
         <a
           href="/mengenal-analisis"

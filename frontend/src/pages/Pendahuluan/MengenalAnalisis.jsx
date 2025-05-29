@@ -17,8 +17,8 @@ const MengenalAnalisisData = () => {
   const checkQuizAnswer = () => {
     setQuizFeedback(
       quizAnswer === correctQuizAnswer
-        ? "✅ Benar! Analisis data membantu kita membuat keputusan yang lebih baik, seperti memilih strategi terbaik dalam permainan."
-        : "❌ Belum tepat. Coba pikir, apa yang membuat analisis data begitu penting?"
+        ? "Benar! Analisis data membantu kita membuat keputusan yang lebih baik, seperti memilih strategi terbaik dalam permainan."
+        : "Belum tepat. Coba pikir, apa yang membuat analisis data begitu penting?"
     );
   };
 
@@ -51,7 +51,7 @@ const MengenalAnalisisData = () => {
           <Lightbulb className="w-5 h-5 mr-2" /> Apa Itu Analisis Data?
         </h2>
         <p className="text-sm md:text-base text-gray-700 leading-relaxed text-justify">
-          Bayangkan analisis data seperti memecahkan teka-teki! Ini adalah cara kita mengolah angka, kata, atau informasi lain untuk menemukan pola atau jawaban. Misalnya, kamu bisa tahu siapa yang paling sering menang dalam permainan favoritmu atau camilan apa yang paling disukai temen-temen!
+          Analisis data adalah proses mengolah dan memahami informasi dalam bentuk angka, teks, atau kategori tertentu untuk menemukan pola, mengambil keputusan, atau menyelesaikan masalah.
         </p>
       </div>
 
@@ -118,7 +118,7 @@ const MengenalAnalisisData = () => {
             onClick={checkQuizAnswer}
             className="bg-green-800 text-white px-4 py-2 rounded hover:bg-green-700"
           >
-            Periksa Jawaban
+            Periksa
           </button>
           <button
             onClick={resetQuiz}
@@ -130,7 +130,7 @@ const MengenalAnalisisData = () => {
         {quizFeedback && (
           <p
             className={`text-sm mt-2 font-bold ${
-              quizFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+              quizFeedback.includes("Benar") ? "text-[#255F38]" : "text-red-700"
             }`}
           >
             {quizFeedback}
@@ -138,26 +138,26 @@ const MengenalAnalisisData = () => {
         )}
       </div>
 
-      {/* Steps of Data Analysis */}
+          {/* Steps of Data Analysis */}
       <div className="bg-white p-5 border-gray-300 mt-4 space-y-4 rounded-lg shadow-md">
         <h2 className="text-xl font-bold text-green-800 flex items-center">
           <Table className="w-5 h-5 mr-2" /> Langkah-Langkah Analisis Data
         </h2>
         <p className="text-sm md:text-base text-gray-700 leading-relaxed text-justify">
-          Analisis data punya beberapa langkah seru yang bisa kamu pelajari:
+          Analisis data dilakukan dengan beberapa langkah utama yang sesuai dengan materi yang akan dipelajari dalam bab ini:
         </p>
         <ul className="list-disc ml-8 space-y-2 text-sm md:text-base text-gray-700">
           <li>
-            <span className="font-semibold">Pencarian Data (Lookup dan Reference)</span>: Seperti mencari nama temanmu di daftar nilai kelas. Cepat dan mudah, seperti menemukan skor tertinggi di game!
+            <span className="font-semibold">Pencarian Data (Lookup dan Reference)</span> – Menemukan informasi dalam sekumpulan data besar dengan cara yang lebih efisien. Misalnya, mencari nilai seorang siswa dalam daftar nilai menggunakan tabel referensi.
           </li>
           <li>
-            <span className="font-semibold">Visualisasi Data</span>: Membuat grafik keren, seperti diagram batang untuk melihat siapa yang paling banyak menang lomba atau nilai rata-rata kelas.
+            <span className="font-semibold">Visualisasi Data</span> – Mengubah data mentah menjadi grafik atau diagram agar lebih mudah dipahami. Contohnya, menyajikan nilai rata-rata kelas dalam bentuk diagram batang.
           </li>
           <li>
-            <span className="font-semibold">Peringkasan Data (SUMIF, SUMIFS, COUNTIF, COUNTIFS)</span>: Menghitung sesuatu, seperti jumlah teman yang nilai matematikanya di atas 80 atau total poin timmu.
+            <span className="font-semibold">Peringkasan Data (SUMIF, SUMIFS, COUNTIF, COUNTIFS)</span> – Menghitung dan menganalisis data berdasarkan kategori tertentu, seperti menghitung jumlah siswa yang mendapatkan nilai di atas KKM.
           </li>
           <li>
-            <span className="font-semibold">Pengelolaan Data (Sorting dan Filtering)</span>: Mengurutkan daftar nama atau menyaring hanya nilai terbaik, biar rapi, seperti menyusun daftar pemain berdasarkan skor!
+            <span className="font-semibold">Pengelolaan Data (Sorting dan Filtering)</span> – Mengurutkan dan menyaring data agar lebih rapi dan mudah dianalisis, seperti mengurutkan daftar siswa berdasarkan nilai tertinggi ke terendah.
           </li>
         </ul>
       </div>
@@ -169,16 +169,16 @@ const MengenalAnalisisData = () => {
           <CheckCircle className="w-5 h-5 mr-2" /> Apa yang Bisa Kamu Lakukan?
         </h2>
         <p className="text-sm md:text-base text-gray-700 leading-relaxed text-justify">
-          Dengan analisis data, kamu bisa:
+          Dalam bab ini, kalian akan belajar bagaimana menerapkan analisis data untuk berbagai keperluan, seperti:
         </p>
         <ul className="list-disc ml-8 space-y-2 text-sm md:text-base text-gray-700">
-          <li>Cepat menemukan informasi, seperti nilai temanmu menggunakan fungsi pencarian data.</li>
-          <li>Menganalisis tren, seperti apakah nilai kelas semakin bagus atau kehadiran siswa.</li>
-          <li>Menghitung data, seperti berapa banyak teman yang suka es krim atau total pengeluaran bulanan.</li>
-          <li>Mengatur data agar rapi, seperti daftar nama berdasarkan abjad atau menyaring nilai tertinggi.</li>
+          <li>Mencari informasi dengan lebih cepat menggunakan fungsi pencarian data.</li>
+          <li>Menganalisis tren nilai ujian atau kehadiran siswa melalui visualisasi data.</li>
+          <li>Mengolah data keuangan atau statistik lainnya dengan teknik peringkasan data.</li>
+          <li>Mengorganisasi data dalam tabel agar lebih terstruktur menggunakan sorting dan filtering.</li>
         </ul>
         <p className="text-sm md:text-base text-gray-700 leading-relaxed text-justify">
-          Analisis data seperti alat ajaib yang membuat informasi lebih mudah dipahami dan masalah lebih gampang diselesaikan!
+          Dengan memahami analisis data dan cara menggunakannya, kita dapat mengelola informasi dengan lebih baik, membuat keputusan yang lebih tepat, dan menyelesaikan masalah secara efektif.
         </p>
       </div>
 

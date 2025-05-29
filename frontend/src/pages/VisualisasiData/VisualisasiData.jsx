@@ -65,26 +65,18 @@ export default function VisualisasiData() {
   };
 
   // State untuk Aktivitas Abstraksi
-  const [abstraksiAnswers, setAbstraksiAnswers] = useState({
-    info1: false,
-    info2: false,
-    info3: false,
-  });
+  const [abstraksiAnswer, setAbstraksiAnswer] = useState(""); // Mengubah state menjadi string untuk radio button
   const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
   const [abstraksiAnswered, setAbstraksiAnswered] = useState(false);
 
-  const handleAbstraksiChange = (info) => {
-    setAbstraksiAnswers((prev) => ({ ...prev, [info]: !prev[info] }));
+  const handleAbstraksiChange = (value) => {
+    setAbstraksiAnswer(value);
   };
 
   const checkAbstraksiAnswers = () => {
-    const correctAnswers = { info1: false, info2: true, info3: false };
-    const isCorrect =
-      abstraksiAnswers.info1 === correctAnswers.info1 &&
-      abstraksiAnswers.info2 === correctAnswers.info2 &&
-      abstraksiAnswers.info3 === correctAnswers.info3;
+    const correctAnswer = "Jumlah siswa di setiap ekstrakurikuler";
     setAbstraksiFeedback(
-      isCorrect
+      abstraksiAnswer === correctAnswer
         ? "Benar! Hanya jumlah siswa di setiap ekstrakurikuler yang relevan untuk Pie Chart."
         : "Jawaban salah, ayo coba lagi."
     );
@@ -92,7 +84,7 @@ export default function VisualisasiData() {
   };
 
   const resetAbstraksiAnswers = () => {
-    setAbstraksiAnswers({ info1: false, info2: false, info3: false });
+    setAbstraksiAnswer("");
     setAbstraksiFeedback("");
     setAbstraksiAnswered(false);
   };
@@ -278,13 +270,10 @@ export default function VisualisasiData() {
         <h2 className="font-bold text-[#255F38] text-lg">Tujuan Pembelajaran:</h2>
         <ol className="list-decimal list-inside space-y-1 sm:space-y-2 mt-2 sm:mt-4 text-gray-700">
           <li className="text-sm md:text-base">
-            Memahami konsep visualisasi data dan bagaimana cara menyajikan informasi dalam bentuk chart, tabel, atau grafik.
+            Memahami konsep visualisasi data serta manfaatnya dalam menyajikan informasi melalui chart, tabel, atau grafik agar lebih mudah dipahami.
           </li>
           <li className="text-sm md:text-base">
-            Menggunakan pendekatan Computational Thinking untuk memvisualisasikan data secara efektif.
-          </li>
-          <li className="text-sm md:text-base">
-            Menerapkan berbagai jenis visualisasi dalam studi kasus visualisasi data di lembar kerja.
+            Menerapkan pendekatan Computational Thinking untuk memvisualisasikan data secara efektif.
           </li>
         </ol>
       </section>
@@ -447,36 +436,38 @@ export default function VisualisasiData() {
           Pengenalan Pola
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6">
-          Setelah mengumpulkan data, kita perlu <span className="font-semibold">mengenali pola</span> untuk memilih chart yang tepat.
+          Setelah mengumpulkan data, kita perlu <span className="font-semibold">mengenali pola</span> untuk memilih chart yang tepat. Berikut adalah pola data yang dapat dikenali:
         </p>
-        <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-2 sm:space-y-4">
+        <ul className="list-none space-y-4 sm:space-y-5 text-gray-700">
           <li className="text-sm md:text-base">
-            <strong>Data yang berubah seiring waktu</strong>
-            <ol className="list-decimal pl-6 sm:pl-8 mt-1 sm:mt-2 text-gray-700 space-y-1 sm:space-y-2">
-              <li>
-                <span className="font-medium">Line Chart:</span> Menunjukkan perubahan data, seperti nilai ujian per bulan.
+            <strong className="text-gray-800">Data yang menunjukkan perubahan seiring waktu:</strong>
+            <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-2">
+              <li className="text-sm md:text-base">
+                <span className="font-medium text-gray-700">Line Chart:</span> Digunakan untuk menunjukkan perkembangan data dari waktu ke waktu, seperti perubahan nilai ujian siswa per bulan.
               </li>
-              <li>
-                <span className="font-medium">Area Chart:</span> Menunjukkan jumlah total, seperti jumlah tugas yang dikumpulkan.
+              <li className="text-sm md:text-base">
+                <span className="font-medium text-gray-700">Area Chart:</span> Digunakan untuk menampilkan akumulasi total data seiring waktu, seperti jumlah siswa yang mengumpulkan tugas setiap minggu.
               </li>
-            </ol>
+            </ul>
           </li>
           <li className="text-sm md:text-base">
-            <strong>Data untuk membandingkan jumlah</strong>
-            <ol className="list-decimal pl-6 sm:pl-8 mt-1 sm:mt-2 text-gray-700 space-y-1 sm:space-y-2">
-              <li>
-                <span className="font-medium">Bar Chart:</span> Membandingkan data, seperti jumlah siswa di tiap klub.
+            <strong className="text-gray-800">Data yang membandingkan antar kategori:</strong>
+            <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-2">
+              <li className="text-sm md:text-base">
+                <span className="font-medium text-gray-700">Bar Chart:</span> Cocok untuk membandingkan jumlah antar kategori secara vertikal, seperti jumlah siswa di setiap ekstrakurikuler.
               </li>
-              <li>
-                <span className="font-medium">Column Chart:</span> Membandingkan data, seperti nilai ujian antar pelajaran.
+              <li className="text-sm md:text-base">
+                <span className="font-medium text-gray-700">Column Chart:</span> Digunakan untuk membandingkan jumlah antar kategori secara horizontal, seperti nilai rata-rata antar mata pelajaran.
               </li>
-            </ol>
+            </ul>
           </li>
           <li className="text-sm md:text-base">
-            <strong>Data persentase</strong>
-            <p className="pl-6 sm:pl-8 mt-1 sm:mt-2">
-              <span className="font-medium">Pie Chart:</span> Menunjukkan persentase, seperti pengeluaran untuk makanan dan transportasi.
-            </p>
+            <strong className="text-gray-800">Data yang menunjukkan proporsi:</strong>
+            <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-2">
+              <li className="text-sm md:text-base">
+                <span className="font-medium text-gray-700">Pie Chart:</span> Digunakan untuk menunjukkan proporsi atau persentase masing-masing kategori terhadap keseluruhan, seperti proporsi pengeluaran bulanan.
+              </li>
+            </ul>
           </li>
         </ul>
 
@@ -584,9 +575,11 @@ export default function VisualisasiData() {
             <div className="text-sm md:text-base">
               <label className="flex items-center">
                 <input
-                  type="checkbox"
-                  checked={abstraksiAnswers.info1}
-                  onChange={() => handleAbstraksiChange("info1")}
+                  type="radio"
+                  name="abstraksi"
+                  value="Nama siswa"
+                  checked={abstraksiAnswer === "Nama siswa"}
+                  onChange={() => handleAbstraksiChange("Nama siswa")}
                   className="mr-2"
                 />
                 Nama siswa.
@@ -595,9 +588,11 @@ export default function VisualisasiData() {
             <div className="text-sm md:text-base">
               <label className="flex items-center">
                 <input
-                  type="checkbox"
-                  checked={abstraksiAnswers.info3}
-                  onChange={() => handleAbstraksiChange("info3")}
+                  type="radio"
+                  name="abstraksi"
+                  value="Jadwal ekstrakurikuler"
+                  checked={abstraksiAnswer === "Jadwal ekstrakurikuler"}
+                  onChange={() => handleAbstraksiChange("Jadwal ekstrakurikuler")}
                   className="mr-2"
                 />
                 Jadwal ekstrakurikuler.
@@ -606,9 +601,11 @@ export default function VisualisasiData() {
             <div className="text-sm md:text-base">
               <label className="flex items-center">
                 <input
-                  type="checkbox"
-                  checked={abstraksiAnswers.info2}
-                  onChange={() => handleAbstraksiChange("info2")}
+                  type="radio"
+                  name="abstraksi"
+                  value="Jumlah siswa di setiap ekstrakurikuler"
+                  checked={abstraksiAnswer === "Jumlah siswa di setiap ekstrakurikuler"}
+                  onChange={() => handleAbstraksiChange("Jumlah siswa di setiap ekstrakurikuler")}
                   className="mr-2"
                 />
                 Jumlah siswa di setiap ekstrakurikuler.

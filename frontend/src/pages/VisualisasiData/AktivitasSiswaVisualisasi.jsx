@@ -112,7 +112,7 @@ const AktivitasVisualisasiGambar = () => {
             >
               <img src={satuBar} alt="Bar Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
-                Bar Chart
+                Column Chart
               </p>
             </div>
             <div
@@ -178,7 +178,7 @@ const AktivitasVisualisasiGambar = () => {
             >
               <img src={duaBar} alt="Bar Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
-                Bar Chart
+                Column Chart
               </p>
             </div>
             <div
@@ -244,7 +244,7 @@ const AktivitasVisualisasiGambar = () => {
             >
               <img src={tigaBar} alt="Bar Chart" className="rounded-lg" />
               <p className="mt-2 text-sm font-semibold text-center text-gray-700 md:text-base">
-                Bar Chart
+                Column Chart
               </p>
             </div>
             <div

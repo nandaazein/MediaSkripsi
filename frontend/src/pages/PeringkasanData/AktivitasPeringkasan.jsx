@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 
 const langkahSUMIF = [
-  "Gunakan rumus SUMIF untuk menjumlahkan total penjualan berdasarkan kategori 'Makanan'",
   "Pilih range kriteria, yaitu kolom Kategori (C2:C9)",
   "Tentukan kriteria, yaitu hanya menjumlahkan transaksi dengan kategori 'Makanan'",
   "Pilih sum_range, yaitu kolom Total Penjualan (F2:F9) yang akan dijumlahkan",
+  "Gunakan rumus SUMIF untuk menjumlahkan total penjualan berdasarkan kategori 'Makanan'",
 ];
 
 const langkahCOUNTIFS = [
-  "Gunakan rumus COUNTIFS untuk menghitung jumlah transaksi yang memenuhi kedua kriteria",
   "Pilih criteria_range1, yaitu kolom kategori (C2:C9)",
   "Tentukan criteria1, yaitu hanya menghitung transaksi dengan kategori 'Makanan'",
   "Pilih criteria_range2, yaitu kolom jumlah terjual (E2:E9)",
   "Tentukan criteria2, yaitu hanya menghitung transaksi dengan jumlah terjual lebih dari 3",
+   "Gunakan rumus COUNTIFS untuk menghitung jumlah transaksi yang memenuhi kedua kriteria",
 ];
 
 const shuffleArray = (array) => {
@@ -116,8 +116,6 @@ const AktivitasPeringkasan = () => {
     setBank5(shuffleArray(langkahSUMIF));
   };
 
-  // Hapus variabel semuaBenar karena tombol "Mulai Kuis" akan selalu aktif
-  // const semuaBenar = [feedback1, feedback2, feedback3, feedback4, feedback5].every((f) => f.startsWith("Jawaban benar!"));
 
   const handleDrag = (event, item) => {
     event.dataTransfer.setData("text/plain", item);
@@ -253,7 +251,7 @@ const AktivitasPeringkasan = () => {
             />
             <input
               type="text"
-              placeholder="Kriteria (misal: 'Makanan')"
+               placeholder={`Kriteria (misal: "Makanan")`}
               className="border p-2 rounded-lg w-full max-w-md text-sm md:text-base text-gray-700"
               value={jawaban3b}
               onChange={(e) => setJawaban3b(e.target.value)}

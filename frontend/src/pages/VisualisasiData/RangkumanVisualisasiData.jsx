@@ -57,19 +57,7 @@ export default function RangkumanVisualisasiData() {
             </ul>
           </div>
 
-          {/* Modifikasi Chart */}
-          <div>
-            <h3 className="text-lg font-semibold text-green-700">4. Modifikasi Chart</h3>
-            <p className="text-gray-700 text-sm md:text-base mt-2 leading-relaxed">
-              Chart dapat dimodifikasi agar lebih informatif dan sesuai kebutuhan, seperti mengubah tipe chart, menukar susunan data, dan memilih data penting untuk ditampilkan.
-            </p>
-            <ul className="list-disc ml-6 text-gray-700 mt-3 text-sm md:text-base space-y-1">
-              <li>Ubah tipe chart (contoh: dari Line Chart ke Area Chart untuk tren nilai Budi).</li>
-              <li>Tukar susunan data (contoh: tukar Row ke Column jika ada beberapa seri data seperti nilai Budi dan teman).</li>
-              <li>Fokus pada data penting (contoh: gunakan hanya bulan dan nilai rata-rata Budi, bukan jumlah ulangan).</li>
-              <li>Analisis pola (contoh: nilai Budi naik dari 75 ke 90, meskipun turun di April, menunjukkan tren positif).</li>
-            </ul>
-          </div>
+         
         </div>
       </section>
 

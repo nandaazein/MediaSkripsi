@@ -290,7 +290,7 @@ const ContohLookup = () => {
           </li>
           <li>
             <span className="font-semibold">Pilih tabel referensi</span><br />
-            Gunakan rentang <span className="font-semibold">$F$1:$I$2</span> (Hari di F1:I2, Poin di F2:I2).
+            Gunakan rentang <span className="font-semibold">$F$2:$I$3</span> (Hari di F2:I2, Poin di F3:I3).
           </li>
           <li>
             <span className="font-semibold">Tentukan nomor baris</span><br />
@@ -303,7 +303,7 @@ const ContohLookup = () => {
           <li>
             <span className="font-semibold">Masukkan rumus HLOOKUP</span><br />
             Klik sel <span className="font-semibold">D3</span>, masukkan:
-            <code className="bg-gray-200 px-2 py-1 rounded">=HLOOKUP(C2;$F$1:$I$2;2;FALSE)</code><br />
+            <code className="bg-gray-200 px-2 py-1 rounded">=HLOOKUP(C3;$F$2:$I$3;2;FALSE)</code><br />
             Tekan <span className="font-semibold">Enter</span> untuk menampilkan poin.
           </li>
           <li>

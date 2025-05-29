@@ -237,7 +237,7 @@ const AktivitasPencarian = () => {
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
             <span className="text-lg font-bold text-green-700 mr-2">3.</span>
-            Gunakan fungsi INDEX untuk menampilkan nilai dari baris ke-2 dan kolom ke-3 dari tabel berikut:
+            Tuliskan fungsi INDEX untuk menampilkan nilai dari baris ke-2 dan kolom ke-3 dari tabel berikut:
           </p>
           <div className="overflow-x-auto px-4 mt-2 mb-4">
             <table className="w-full border text-sm border-gray-400 text-gray-800 rounded-lg">
@@ -307,7 +307,7 @@ const AktivitasPencarian = () => {
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
             <span className="text-lg font-bold text-green-700 mr-2">4.</span>
-            Gunakan fungsi MATCH untuk menemukan posisi nilai 92 pada kolom Matematika berikut:
+            Tuliskan fungsi MATCH untuk menemukan posisi nilai 92 pada kolom Matematika berikut:
           </p>
           <div className="overflow-x-auto px-4 mt-2 mb-4">
             <table className="w-full border text-sm border-gray-400 text-gray-800 rounded-lg">
@@ -375,7 +375,7 @@ const AktivitasPencarian = () => {
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">
             <span className="text-lg font-bold text-green-700 mr-2">5.</span>
-            Gunakan fungsi CHOOSE untuk memilih siswa ke-2 dari daftar berikut: Ali, Siti, Budi.
+            Tuliskan fungsi CHOOSE untuk memilih siswa ke-2 dari daftar berikut: Ali, Siti, Budi.
           </p>
           <div className="flex items-center px-4 mb-2">
             <input
