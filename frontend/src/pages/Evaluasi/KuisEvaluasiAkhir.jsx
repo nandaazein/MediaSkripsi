@@ -6,7 +6,7 @@ const EvaluasiAkhir = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [timeLeft, setTimeLeft] = useState(2400);
+  const [timeLeft, setTimeLeft] = useState(2400); // 40 menit
   const [error, setError] = useState(null);
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate();
@@ -27,9 +27,13 @@ const EvaluasiAkhir = () => {
           }
         );
         const filteredQuestions = response.data;
-        setQuestions(filteredQuestions || []);
-        if (filteredQuestions.length === 0) {
-          setError("Tidak ada soal untuk Evaluasi Akhir");
+        if (filteredQuestions.length < 20) {
+          setError(
+            `Hanya ${filteredQuestions.length} soal tersedia. Diperlukan 20 soal untuk Evaluasi Akhir.`
+          );
+          setQuestions(filteredQuestions || []);
+        } else {
+          setQuestions(filteredQuestions.slice(0, 20)); // Ambil hanya 20 soal
         }
       } catch (err) {
         setError(err.response?.data?.message || "Gagal mengambil soal.");
@@ -150,22 +154,22 @@ const EvaluasiAkhir = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="min-h-screen bg-gray-50 font-open-sans flex items-center justify-center p-6">
-      <div className="max-w-screen-xl w-full mx-auto">
+    <div className="flex items-center justify-center min-h-screen p-6 bg-gray-50 font-open-sans">
+      <div className="w-full max-w-screen-xl mx-auto">
         {/* Judul */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-green-800 text-center">
+          <h2 className="text-2xl font-bold text-center text-green-800">
             Evaluasi Akhir - Pengelolaan Data
           </h2>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-6 h-full">
+        <div className="flex flex-col h-full gap-6 md:flex-row">
           {/* Bagian Soal (Kiri) */}
           <div className="w-full md:w-3/4 bg-white rounded-lg shadow-lg p-6 flex flex-col min-h-[600px] overflow-x-hidden">
             {error ? (
               <p className="text-red-500">{error}</p>
             ) : currentQuestion ? (
-              <div className="flex-1 flex flex-col">
+              <div className="flex flex-col flex-1">
                 <h3 className="mb-2 text-lg font-semibold text-green-800">
                   Soal {currentQuestionIndex + 1}:
                 </h3>
@@ -184,18 +188,20 @@ const EvaluasiAkhir = () => {
                     />
                   </div>
                 )}
-                <div className="mb-4 space-y-2 max-w-full">
+                <div className="max-w-full mb-4 space-y-2">
                   {Array.isArray(currentQuestion.options) &&
                     currentQuestion.options.map((option, idx) => (
                       <div
                         key={idx}
-                        className="p-2 mb-2 border border-gray-300 rounded flex items-center max-w-full overflow-hidden"
+                        className="flex items-center max-w-full p-2 mb-2 overflow-hidden border border-gray-300 rounded"
                       >
                         <input
                           type="radio"
                           name="answer"
                           value={String.fromCharCode(97 + idx)}
-                          checked={selectedAnswer === String.fromCharCode(97 + idx)}
+                          checked={
+                            selectedAnswer === String.fromCharCode(97 + idx)
+                          }
                           onChange={(e) => handleAnswerChange(e.target.value)}
                           className="mr-2"
                         />
@@ -245,23 +251,25 @@ const EvaluasiAkhir = () => {
           {/* Bagian Kanan */}
           <div className="w-full md:w-1/4 flex flex-col gap-4 min-h-[600px]">
             {/* Div Waktu dan Daftar Soal */}
-            <div className="flex-1 bg-white rounded-lg shadow-lg p-3 flex flex-col">
-              <div className="mb-3 p-2 text-gray-700 bg-gray-200 rounded text-center">
+            <div className="flex flex-col px-3 py-0.5 bg-white rounded-lg shadow-lg">
+              <div className="p-2 mb-1 text-center text-gray-700 bg-gray-200 rounded">
                 Waktu Tersisa: {formatTime(timeLeft)}
               </div>
-              <h3 className="text-lg font-semibold text-green-800 mb-3">
+              <h3 className="mb-1 text-lg font-semibold text-center text-green-800">
                 Daftar Soal
               </h3>
-              <div className="grid grid-cols-5 gap-2 flex-grow">
-                {[...Array(10)].map((_, index) => (
+              <div className="grid grid-cols-5 mb-1 gap-y-1 place-items-center">
+                {[...Array(20)].map((_, index) => (
                   <button
                     key={index}
                     onClick={() => {
-                      setCurrentQuestionIndex(index);
-                      setSelectedAnswer(answers[index] || "");
+                      if (index < questions.length) {
+                        setCurrentQuestionIndex(index);
+                        setSelectedAnswer(answers[index] || "");
+                      }
                     }}
                     disabled={index >= questions.length}
-                    className={`w-12 h-12 rounded-full flex items-center justify-center text-gray-700 font-semibold text-lg ${
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-gray-700 font-semibold text-base ${
                       index >= questions.length
                         ? "bg-gray-300 cursor-not-allowed"
                         : currentQuestionIndex === index
@@ -278,23 +286,27 @@ const EvaluasiAkhir = () => {
             </div>
 
             {/* Div Keterangan */}
-            <div className="bg-white rounded-lg shadow-lg p-3">
-              <h4 className="text-sm font-semibold text-green-800 mb-2">
+            <div className="p-3 bg-white rounded-lg shadow-lg">
+              <h4 className="mb-2 text-sm font-semibold text-green-800">
                 Keterangan
               </h4>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-4 h-4 rounded-full bg-green-200"></div>
+                <div className="w-4 h-4 bg-green-200 rounded-full"></div>
                 <span className="text-sm text-gray-700">
                   Nomor soal saat ini
                 </span>
               </div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-4 h-4 rounded-full bg-blue-200"></div>
-                <span className="text-sm text-gray-700">Soal sudah dijawab</span>
+                <div className="w-4 h-4 bg-blue-200 rounded-full"></div>
+                <span className="text-sm text-gray-700">
+                  Soal sudah dijawab
+                </span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-red-200"></div>
-                <span className="text-sm text-gray-700">Soal belum dijawab</span>
+                <div className="w-4 h-4 bg-red-200 rounded-full"></div>
+                <span className="text-sm text-gray-700">
+                  Soal belum dijawab
+                </span>
               </div>
             </div>
           </div>

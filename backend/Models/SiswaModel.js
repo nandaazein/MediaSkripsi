@@ -145,6 +145,32 @@ const studentModel = {
     try {
       await connection.beginTransaction();
 
+      // Log quiz attempt if kuis1-4 is provided
+      if (kuis1 !== undefined) {
+        await connection.query(
+          "INSERT INTO quiz_attempts (nis, quiz_number, score) VALUES (?, ?, ?)",
+          [nis, 1, kuis1]
+        );
+      }
+      if (kuis2 !== undefined) {
+        await connection.query(
+          "INSERT INTO quiz_attempts (nis, quiz_number, score) VALUES (?, ?, ?)",
+          [nis, 2, kuis2]
+        );
+      }
+      if (kuis3 !== undefined) {
+        await connection.query(
+          "INSERT INTO quiz_attempts (nis, quiz_number, score) VALUES (?, ?, ?)",
+          [nis, 3, kuis3]
+        );
+      }
+      if (kuis4 !== undefined) {
+        await connection.query(
+          "INSERT INTO quiz_attempts (nis, quiz_number, score) VALUES (?, ?, ?)",
+          [nis, 4, kuis4]
+        );
+      }
+
       // Ambil data skor saat ini dan status kuis
       const [scoreRows] = await connection.query(
         "SELECT kuis1, kuis2, kuis3, kuis4 FROM scores WHERE nis = ?",
@@ -387,6 +413,28 @@ const studentModel = {
     } catch (error) {
       console.error("Error in getScores:", error);
       throw new Error("Gagal mengambil skor siswa");
+    }
+  },
+
+  async getQuizAttempts(nis) {
+    try {
+      const [rows] = await pool.query(
+        `SELECT qa.quiz_number, qa.score, qa.attempt_time, k.kkm
+         FROM quiz_attempts qa
+         LEFT JOIN kkm_settings k ON qa.quiz_number = k.quiz_number
+         WHERE qa.nis = ?
+         ORDER BY qa.attempt_time DESC`,
+        [nis]
+      );
+      return rows.map((row) => ({
+        quizNumber: row.quiz_number,
+        score: row.score || 0,
+        attemptTime: row.attempt_time,
+        kkm: row.kkm || 75,
+      }));
+    } catch (error) {
+      console.error("Error in getQuizAttempts:", error);
+      throw new Error("Gagal mengambil riwayat kuis");
     }
   },
 

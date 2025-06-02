@@ -148,7 +148,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Layout from "../../components/admin/layout";
+import Layout from "../../components/admin/Layout";
 import Swal from "sweetalert2";
 
 const PengaturanKKM = () => {
@@ -253,7 +253,8 @@ const PengaturanKKM = () => {
       fetchKKM();
     } catch (err) {
       console.error("Save KKM error:", err);
-      const errorMessage = err.response?.data?.message || "Gagal menyimpan pengaturan KKM";
+      const errorMessage =
+        err.response?.data?.message || "Gagal menyimpan pengaturan KKM";
       setError(errorMessage);
       Swal.fire({
         title: "Gagal",
@@ -299,7 +300,9 @@ const PengaturanKKM = () => {
           <button
             onClick={handleSave}
             disabled={loading}
-            className={`px-4 py-2 text-sm text-white bg-[#255F38] rounded hover:bg-[#1E4D2E] transition duration-300 cursor-pointer ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`px-4 py-2 text-sm text-white bg-[#255F38] rounded hover:bg-[#1E4D2E] transition duration-300 cursor-pointer ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
             Simpan Pengaturan
           </button>
