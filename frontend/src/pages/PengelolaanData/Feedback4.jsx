@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import LayoutSiswa from "../../components/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import LayoutSiswa from "../../components/Layout";
 
 const FeedbackPengelolaanData = () => {
   const { state } = useLocation();
@@ -9,7 +9,7 @@ const FeedbackPengelolaanData = () => {
   const [kkm, setKKM] = useState(70); // Default KKM
   const [error, setError] = useState("");
 
-  // Default state if data is not available
+  // Default state jika data tidak tersedia
   const { score, answers, questions, totalQuestions } = state || {
     score: 0,
     answers: {},
@@ -34,7 +34,7 @@ const FeedbackPengelolaanData = () => {
     fetchKKM();
   }, []);
 
-  // Calculate correctCount based on answers and questions
+  // Hitung correctCount berdasarkan answers dan questions
   const correctCount = questions.reduce((count, question, index) => {
     const answerKey = String.fromCharCode(
       97 + (answers[index] || "").charCodeAt(0) - 97
@@ -44,7 +44,7 @@ const FeedbackPengelolaanData = () => {
       : count;
   }, 0);
 
-  // Prepare correctAnswers and answerOptions
+  // Siapkan correctAnswers dan answerOptions
   const correctAnswers = questions.reduce((acc, question, index) => {
     acc[`q${index + 1}`] = question.correct_answer;
     return acc;
@@ -61,12 +61,12 @@ const FeedbackPengelolaanData = () => {
 
   const feedbackMessage =
     score >= kkm
-      ? "Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!"
-      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!";
+      ? "Selamat, skor kamu sudah mencapai KKM!"
+      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis atau belajar lagi!";
 
   console.log("FeedbackPengelolaanData state:", state);
 
-  // If data is incomplete, show error message
+  // Jika data tidak lengkap, tampilkan pesan error
   if (!state || !questions.length) {
     return (
       <LayoutSiswa>
@@ -158,19 +158,35 @@ const FeedbackPengelolaanData = () => {
       </div>
       <div className="flex justify-center mt-8 space-x-4">
         {score >= kkm ? (
-          <button
-            onClick={() => navigate("/kuis-evaluasi")}
-            className="px-5 py-2 text-base text-white transition duration-300 bg-green-800 rounded-lg shadow-md hover:bg-green-700"
-          >
-            Lanjut Evaluasi Akhir
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/rangkuman-pengelolaan")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/kuis-evaluasi")}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px] cursor-pointer"
+            >
+              Lanjut Evaluasi Akhir
+            </button>
+          </>
         ) : (
-          <button
-            onClick={() => navigate("/kuis-pengelolaan")}
-            className="px-5 py-2 text-base text-white transition duration-300 bg-red-600 rounded-lg shadow-md hover:bg-red-700"
-          >
-            Ulang Kuis
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/rangkuman-pengelolaan")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/kuis-pengelolaan")}
+              className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md cursor-pointer"
+            >
+              Ulang Kuis
+            </button>
+          </>
         )}
       </div>
     </LayoutSiswa>

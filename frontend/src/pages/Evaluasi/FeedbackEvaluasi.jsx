@@ -61,8 +61,8 @@ const FeedbackEvaluasiAkhir = () => {
 
   const feedbackMessage =
     score >= kkm
-      ? "Selamat, kamu telah menyelesaikan Evaluasi Akhir dengan baik!"
-      : "Skor kamu belum memenuhi KKM. Ayo ulang evaluasi untuk meningkatkan hasil!";
+      ? "Selamat, skor kamu sudah mencapai KKM!"
+      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis atau belajar lagi!";
 
   console.log("FeedbackEvaluasiAkhir state:", state);
 
@@ -75,7 +75,7 @@ const FeedbackEvaluasiAkhir = () => {
             Data feedback tidak ditemukan. Silakan coba lagi.
           </p>
           <button
-            onClick={() => navigate("/evaluasi-akhir")}
+            onClick={() => navigate("/kuis-evaluasi")}
             className="px-4 py-2 mt-4 text-white bg-green-800 rounded hover:bg-green-700"
           >
             Kembali ke Evaluasi
@@ -158,19 +158,35 @@ const FeedbackEvaluasiAkhir = () => {
       </div>
       <div className="flex justify-center mt-8 space-x-4">
         {score >= kkm ? (
-          <button
-            onClick={() => navigate("/dashboard-siswa")}
-            className="px-5 py-2 text-base text-white transition duration-300 bg-green-800 rounded-lg shadow-md hover:bg-green-700"
-          >
-            Kembali ke Dashboard
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/pencarian-lookup")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/dashboard-siswa")}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Dashboard
+            </button>
+          </>
         ) : (
-          <button
-            onClick={() => navigate("/kuis-evaluasi")}
-            className="px-5 py-2 text-base text-white transition duration-300 bg-red-600 rounded-lg shadow-md hover:bg-red-700"
-          >
-            Ulang Evaluasi
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/pencarian-lookup")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/kuis-evaluasi")}
+              className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md cursor-pointer"
+            >
+              Ulang Evaluasi
+            </button>
+          </>
         )}
       </div>
     </Layout>

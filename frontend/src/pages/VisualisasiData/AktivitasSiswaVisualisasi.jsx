@@ -85,7 +85,18 @@ const AktivitasVisualisasiGambar = () => {
         AKTIVITAS VISUALISASI DATA
       </div>
 
+
+
       <div className="p-6 bg-white">
+        {/* Petunjuk Umum */}
+        <section className="p-4 bg-green-100 rounded shadow-md mb-6">
+          <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
+          <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
+            <li>Halaman ini terdiri dari lima soal yang masing-masing menguji pemahaman Anda mengenai visualisasi data.</li>
+            <li>Setiap soal memiliki kolom masukan untuk menjawab, tombol Periksa untuk memeriksa jawaban, dan tombol Hapus untuk mengosongkan jawaban jika ingin mencoba lagi.</li>
+            <li>Bacalah soal dengan cermat, masukkan jawaban Anda, dan periksa hasilnya untuk mendapatkan umpan balik.</li>
+          </ol>
+        </section>
         {/* Soal 1 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">

@@ -156,6 +156,15 @@ const AktivitasPeringkasan = () => {
       </div>
 
       <div className="p-6 bg-white">
+        {/* Petunjuk Umum */}
+        <section className="p-4 bg-green-100 rounded shadow-md mb-6">
+          <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
+          <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
+            <li>Halaman ini terdiri dari lima soal yang masing-masing menguji pemahaman Anda mengenai peringkasan data.</li>
+            <li>Setiap soal memiliki kolom masukan untuk menjawab, tombol Periksa untuk memeriksa jawaban, dan tombol Hapus untuk mengosongkan jawaban jika ingin mencoba lagi.</li>
+            <li>Bacalah soal dengan cermat, masukkan jawaban Anda, dan periksa hasilnya untuk mendapatkan umpan balik.</li>
+          </ol>
+        </section>
         <div className="flex justify-center px-4 mb-6">
           <iframe
             width="100%"

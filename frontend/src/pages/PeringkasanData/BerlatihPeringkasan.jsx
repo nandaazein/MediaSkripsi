@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function SummaryLesson() {
+  const navigate = useNavigate();
+
   const correctAnswers = {
     sumif: ["nama dan poin", "nama", "poin"],
     sumifs: ["C2:C11 dan D2:D11", "C2:C11", "D2:D11" , "C2:C11 D2:D11"],
@@ -26,7 +30,13 @@ export default function SummaryLesson() {
       (answer) => answer.trim() !== ""
     );
     if (!allAnswered) {
-      alert("Anda belum menyelesaikan semua soal yang ada");
+      Swal.fire({
+        title: "Belum Selesai",
+        text: "Anda belum menyelesaikan semua soal yang ada",
+        icon: "warning",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      });
       return;
     }
 
@@ -51,12 +61,24 @@ export default function SummaryLesson() {
       const token = localStorage.getItem("token");
       const user = localStorage.getItem("user");
       if (!token || !user) {
-        alert("Token atau data pengguna tidak ditemukan. Silakan login kembali.");
+        Swal.fire({
+          title: "Autentikasi Gagal",
+          text: "Token atau data pengguna tidak ditemukan. Silakan login kembali.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
         return;
       }
       const nis = JSON.parse(user).nis;
       if (!nis) {
-        alert("NIS tidak ditemukan dalam data pengguna.");
+        Swal.fire({
+          title: "Kesalahan",
+          text: "NIS tidak ditemukan dalam data pengguna.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
         return;
       }
 
@@ -76,20 +98,43 @@ export default function SummaryLesson() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      alert("Sudah selesai mengerjakan Mari Berlatih");
-      window.location.href = "/rangkuman-peringkasan";
+      Swal.fire({
+        title: "Berhasil",
+        text: "Sudah selesai mengerjakan Mari Berlatih",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      }).then(() => {
+        navigate("/rangkuman-peringkasan");
+      });
     } catch (error) {
       console.error("Error saat mengirim latihan:", error);
       if (error.response) {
-        alert(
-          `Gagal mengirim skor: ${
+        Swal.fire({
+          title: "Kesalahan",
+          text: `Gagal mengirim skor: ${
             error.response.data.message || error.response.statusText
-          }`
-        );
+          }`,
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
       } else if (error.request) {
-        alert("Tidak ada respons dari server. Periksa koneksi atau server.");
+        Swal.fire({
+          title: "Kesalahan",
+          text: "Tidak ada respons dari server. Periksa koneksi atau server.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
       } else {
-        alert(`Terjadi kesalahan: ${error.message}`);
+        Swal.fire({
+          title: "Kesalahan",
+          text: `Terjadi kesalahan: ${error.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
       }
     }
   };
@@ -201,7 +246,7 @@ export default function SummaryLesson() {
       <div className="flex justify-center mt-8">
         <button
           onClick={submitLatihan}
-          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
+          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md cursor-pointer"
         >
           Selesai Latihan
         </button>

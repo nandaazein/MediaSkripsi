@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import "remixicon/fonts/remixicon.css";
-import pustakawan from "../../assets/Pendahuluan/pustakawan.jpg";
+import analisis from "../../assets/Pendahuluan/analisis.jpg";
 import { useState } from "react";
 
 const Pendahuluan = () => {
@@ -65,7 +65,7 @@ const Pendahuluan = () => {
         {/* Gambar */}
         <div className="flex justify-center mt-4">
           <img 
-            src={pustakawan} 
+            src={analisis} 
             alt="Siswa Mengelola Data" 
             className="w-full max-w-md rounded-lg shadow-md"
           />

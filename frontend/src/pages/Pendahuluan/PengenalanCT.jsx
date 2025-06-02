@@ -228,7 +228,7 @@ const PengenalanCT = () => {
       <section className="bg-green-100 rounded shadow-md p-4 mt-4">
         <h2 className="font-bold text-[#255F38] flex items-center">Tujuan Pembelajaran</h2>
         <p className="text-gray-700 text-sm md:text-base">
-          Memahami konsep dasar <i>Computational Thinking</i> (CT) dan menerapkannya dalam menyelesaikan masalah sederhana melalui studi kasus.
+          Peserta didik mampu memahami konsep dasar Computational Thinking (CT) dan menerapkannya dalam menyelesaikan masalah sederhana melalui studi kasus.
         </p>
       </section>
 
@@ -371,7 +371,7 @@ const PengenalanCT = () => {
           <p className="text-gray-700 text-sm md:text-base text-justify">
             Pilih pola yang benar berdasarkan harga barang!
           </p>
-          <div className="space-y-2">
+          <div className="space-y-2 text-sm md:text-base text-gray-700">
             {[
               "Harga barang selalu kecil dan mudah dijumlahkan",
               "Harga barang selalu sama",
@@ -390,7 +390,7 @@ const PengenalanCT = () => {
               </label>
             ))}
           </div>
-          <div className="flex space-x-2 mt-4">
+          <div className="flex space-x-2 mt-4 ">
             <button
               onClick={checkPolaAnswers}
               className="bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#145A20] transition duration-300"
@@ -432,7 +432,7 @@ const PengenalanCT = () => {
           <p className="text-gray-700 text-sm md:text-base text-justify">
             Pilih informasi yang paling relevan untuk membantu Rina berbelanja!
           </p>
-          <div className="space-y-2">
+          <div className="space-y-2 text-sm md:text-base text-gray-700">
             {[
               { value: "1", label: "Harga barang" },
               { value: "2", label: "Warna barang" },

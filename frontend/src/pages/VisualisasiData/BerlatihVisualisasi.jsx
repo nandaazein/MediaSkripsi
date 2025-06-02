@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function ChartLesson() {
   useEffect(() => {
@@ -117,7 +118,13 @@ export default function ChartLesson() {
     const allAnswered = Object.values(answers).every(answer => answer.trim() !== "");
     
     if (!allAnswered) {
-      alert("Anda belum menyelesaikan semua soal yang ada");
+      Swal.fire({
+        title: "Belum Selesai",
+        text: "Anda belum menyelesaikan semua soal yang ada.",
+        icon: "warning",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      });
       return;
     }
 
@@ -141,12 +148,24 @@ export default function ChartLesson() {
       const token = localStorage.getItem('token');
       const user = localStorage.getItem('user');
       if (!token || !user) {
-        alert("Token atau data pengguna tidak ditemukan. Silakan login kembali.");
+        Swal.fire({
+          title: "Autentikasi Gagal",
+          text: "Token atau data pengguna tidak ditemukan. Silakan login kembali.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
         return;
       }
       const nis = JSON.parse(user).nis;
       if (!nis) {
-        alert("NIS tidak ditemukan dalam data pengguna.");
+        Swal.fire({
+          title: "Kesalahan",
+          text: "NIS tidak ditemukan dalam data pengguna.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
         return;
       }
 
@@ -166,16 +185,41 @@ export default function ChartLesson() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      alert("Sudah selesai mengerjakan Mari Berlatih");
-      window.location.href = "/rangkuman-visualisasi";
+      Swal.fire({
+        title: "Berhasil",
+        text: "Sudah selesai mengerjakan Mari Berlatih!",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      }).then(() => {
+        window.location.href = "/rangkuman-visualisasi";
+      });
     } catch (error) {
       console.error("Error saat mengirim latihan:", error);
       if (error.response) {
-        alert(`Gagal mengirim skor: ${error.response.data.message || error.response.statusText}`);
+        Swal.fire({
+          title: "Kesalahan",
+          text: `Gagal mengirim skor: ${error.response.data.message || error.response.statusText}`,
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
       } else if (error.request) {
-        alert("Tidak ada respons dari server. Periksa koneksi atau server.");
+        Swal.fire({
+          title: "Kesalahan",
+          text: "Tidak ada respons dari server. Periksa koneksi atau server.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
       } else {
-        alert(`Terjadi kesalahan: ${error.message}`);
+        Swal.fire({
+          title: "Kesalahan",
+          text: `Terjadi kesalahan: ${error.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
       }
     }
   };
@@ -274,7 +318,6 @@ export default function ChartLesson() {
           </div>
         ))}
       </section>
-
 
       {/* Tombol Selesai */}
       <div className="flex justify-center mt-8">

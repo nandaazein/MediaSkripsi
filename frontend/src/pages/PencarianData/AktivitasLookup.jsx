@@ -9,10 +9,9 @@ const AktivitasPencarian = () => {
   const [indexFormula, setIndexFormula] = useState("");
   const [matchFormula, setMatchFormula] = useState("");
   const [chooseFormula, setChooseFormula] = useState("");
-  const [indexFeedback, setIndexFeedback] = useState(""); // State baru untuk feedback soal 3
-  const [matchFeedback, setMatchFeedback] = useState(""); // State baru untuk feedback soal 4
-  const [chooseFeedback, setChooseFeedback] = useState(""); // State baru untuk feedback soal 5
-
+  const [indexFeedback, setIndexFeedback] = useState("");
+  const [matchFeedback, setMatchFeedback] = useState("");
+  const [chooseFeedback, setChooseFeedback] = useState("");
   const [isIndexCorrect, setIsIndexCorrect] = useState(null);
   const [isMatchCorrect, setIsMatchCorrect] = useState(null);
   const [isChooseCorrect, setIsChooseCorrect] = useState(null);
@@ -69,7 +68,7 @@ const AktivitasPencarian = () => {
         : "❌ Jawaban salah. Ayo coba lagi!"
     );
     if (isCorrect) {
-      setIndexFormula("85"); // Menampilkan nilai yang benar
+      setIndexFormula("85");
     }
   };
 
@@ -109,6 +108,16 @@ const AktivitasPencarian = () => {
       </div>
 
       <div className="p-6 bg-white">
+        {/* Petunjuk Umum */}
+        <section className="p-4 bg-green-100 rounded shadow-md mb-6">
+          <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
+          <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
+            <li>Halaman ini terdiri dari lima soal yang masing-masing menguji pemahaman Anda tentang fungsi pencarian data.</li>
+            <li>Setiap soal memiliki kolom masukan untuk menjawab, tombol Periksa untuk memeriksa jawaban, dan tombol Hapus untuk mengosongkan jawaban jika ingin mencoba lagi.</li>
+            <li>Bacalah soal dengan cermat, masukkan jawaban Anda, dan periksa hasilnya untuk mendapatkan umpan balik.</li>
+          </ol>
+        </section>
+
         {/* Soal 1 */}
         <div className="p-6 mb-6 bg-green-50 border border-green-200 rounded-lg shadow-md">
           <p className="px-4 mb-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base flex items-center">

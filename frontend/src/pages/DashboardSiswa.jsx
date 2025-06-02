@@ -63,15 +63,15 @@ const DashboardSiswa = () => {
   if (!siswa || !scores) return <div className="p-6 text-center">Data tidak ditemukan</div>;
 
   return (
-    <div>
-      {/* Menggunakan Navbar yang sudah ada */}
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar */}
       <Navbar />
 
-      {/* Konten Utama */}
-      <div className="p-6 bg-white min-h-screen">
+      {/* Main Content */}
+      <main className="flex-1 p-6 max-w-5xl mx-auto">
         {/* Judul Halaman */}
         <div className="p-4 bg-gradient-to-r from-[#255F38] to-[#2E8B57] mb-6 text-white font-bold text-lg text-center rounded-lg shadow-lg">
-          DASHBOARD SISWA
+          INFORMASI SISWA
         </div>
 
         {/* Profil Siswa */}
@@ -151,17 +151,18 @@ const DashboardSiswa = () => {
         {/* Tombol Kembali */}
         <div className="mt-6 flex justify-end">
           <button
-            onClick={() => navigate("/home")} // Ganti dengan rute yang sesuai
+            onClick={() => navigate("/home")}
             className="px-5 py-2 text-base text-white transition duration-300 bg-gray-500 rounded-lg shadow-md hover:bg-gray-600 cursor-pointer"
           >
             Kembali
           </button>
         </div>
+      </main>
 
-        <footer className="bg-white p-4 text-center text-[#1D6F35] w-full">
-             <span className="font-bold">AnalyticsLearn</span> © 2025 PilkomMedia
-         </footer>
-      </div>
+      {/* Footer */}
+      <footer className=" p-4 text-center text-[#1D6F35] w-full">
+        <span className="font-bold">AnalyticsLearn</span> © 2025 PilkomMedia
+      </footer>
     </div>
   );
 };

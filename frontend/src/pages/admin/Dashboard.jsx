@@ -45,7 +45,7 @@ const Dashboard = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || user.role !== "teacher") {
-      navigate("/masuk");
+      navigate("/login-guru");
     }
 
     // Fetch classes

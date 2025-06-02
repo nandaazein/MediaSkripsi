@@ -1,8 +1,13 @@
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function BerlatihPencarian() {
+  const navigate = useNavigate();
+  
   const correctAnswers = {
     tableReference: ["daftar kategori prestasi", "kategori prestasi"],
     studentCategory: "cukup",
@@ -28,7 +33,13 @@ export default function BerlatihPencarian() {
     const allAnswered = Object.values(answers).every(answer => answer.trim() !== "");
     
     if (!allAnswered) {
-      alert("Anda belum menyelesaikan semua soal yang ada");
+      Swal.fire({
+        title: "Belum Selesai",
+        text: "Anda belum menyelesaikan semua soal yang ada.",
+        icon: "warning",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      });
       return;
     }
 
@@ -38,7 +49,13 @@ export default function BerlatihPencarian() {
       const nis = user?.nis;
 
       if (!token || !nis) {
-        alert("Autentikasi gagal. Silakan login kembali.");
+        Swal.fire({
+          title: "Autentikasi Gagal",
+          text: "Silakan login kembali.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#255F38",
+        });
         return;
       }
 
@@ -74,12 +91,25 @@ export default function BerlatihPencarian() {
       );
 
       console.log("Score sent to database successfully");
-      // Tampilkan alert dan arahkan ke halaman rangkuman setelah klik OK
-      alert("Sudah selesai mengerjakan Mari Berlatih");
-      window.location.href = "/rangkuman-pencarian";
+      // Tampilkan SweetAlert2 dan arahkan ke halaman rangkuman setelah klik OK
+      Swal.fire({
+        title: "Berhasil",
+        text: "Sudah selesai mengerjakan Mari Berlatih!",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      }).then(() => {
+        navigate("/rangkuman-pencarian");
+      });
     } catch (error) {
       console.error("Error saat mengirim latihan:", error.response?.data || error.message);
-      alert("Terjadi kesalahan saat mengirim skor latihan: " + (error.response?.data?.message || error.message));
+      Swal.fire({
+        title: "Kesalahan",
+        text: `Terjadi kesalahan saat mengirim skor latihan: ${error.response?.data?.message || error.message}`,
+        icon: "error",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      });
     }
   };
 
@@ -178,21 +208,11 @@ export default function BerlatihPencarian() {
         ))}
       </section>
 
-      {/* Catatan Penting */}
-      <section className="p-4 bg-yellow-50 rounded shadow-md mb-6">
-        <h3 className="text-lg font-semibold text-yellow-800 mb-2">Catatan Penting</h3>
-        <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm md:text-base">
-          <li>Pastikan jawabanmu sesuai dengan langkah-langkah Computational Thinking (Dekomposisi, Pengenalan Pola, Abstraksi, Algoritma).</li>
-          <li>Gunakan data yang relevan dari studi kasus untuk mendukung jawabanmu.</li>
-          <li>Setelah selesai, jangan lupa klik tombol <em>“Selesai Latihan”</em> untuk mengumpulkan hasil latihanmu.</li>
-        </ul>
-      </section>
-
       {/* Tombol untuk submit latihan */}
       <div className="flex justify-center mt-8">
         <button
           onClick={submitLatihan}
-          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
+          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md cursor-pointer"
         >
           Selesai Latihan
         </button>

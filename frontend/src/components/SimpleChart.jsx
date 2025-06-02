@@ -56,11 +56,11 @@ const SimpleChart = () => {
   };
 
   const keteranganDiagram = {
-    line: 'Diagram Garis digunakan untuk melihat perubahan nilai secara bertahap dari satu waktu ke waktu lain.',
-    area: 'Diagram Area menunjukkan tren seperti garis, tetapi dengan warna latar yang memperjelas besarnya nilai.',
-    bar: 'Diagram Batang menunjukkan perbandingan antar kategori secara vertikal.',
-    column: 'Diagram Kolom menampilkan perbandingan nilai secara horizontal.',
-    pie: 'Diagram Lingkaran menunjukkan proporsi bagian terhadap keseluruhan dalam bentuk potongan.',
+    line: 'Line Chart digunakan untuk melihat perubahan nilai secara bertahap dari satu waktu ke waktu lain.',
+    area: 'Area Chart menunjukkan tren seperti garis, tetapi dengan warna latar yang memperjelas besarnya nilai.',
+    bar: 'Bar Chart menunjukkan perbandingan antar kategori secara vertikal.',
+    column: 'Column Chart menampilkan perbandingan nilai secara horizontal.',
+    pie: 'Pie Chart menunjukkan proporsi bagian terhadap keseluruhan dalam bentuk potongan.',
   };
 
   // Data untuk tabel berdasarkan jenis diagram
@@ -73,8 +73,7 @@ const SimpleChart = () => {
     <div className="bg-white p-4 rounded-lg shadow-md mt-4">
       <h3 className="text-lg font-bold text-[#255F38] mb-2">MARI MENGAMATI</h3>
       <p className="text-gray-700 mb-4">
-        Untuk memahami bagaimana data disajikan dalam bentuk chart, gunakan simulasi berikut.
-        Pilih jenis chart (Garis, Area, Batang, Kolom, atau Lingkaran) untuk melihat pola data yang berbeda. <br />
+      Untuk mempelajari cara data disajikan dalam bentuk visual, coba simulasi berikut. Pilih jenis chart (Garis, Area, Batang, Kolom, atau Lingkaran) untuk mengamati berbagai pola data secara interaktif. <br />
       </p>
 
       {/* Tabel Data */}

@@ -6,9 +6,10 @@ import axios from 'axios';
 const FeedbackVisualisasiData = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [kkm, setKKM] = useState(70);
+  const [kkm, setKKM] = useState(70); // Default KKM
   const [error, setError] = useState('');
 
+  // Default state jika data tidak tersedia
   const { score, answers, questions, totalQuestions } = state || {
     score: 0,
     answers: {},
@@ -16,11 +17,12 @@ const FeedbackVisualisasiData = () => {
     totalQuestions: 0,
   };
 
+  // Fetch KKM for Kuis 2
   useEffect(() => {
     const fetchKKM = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/kkm/2', {
+        const response = await axios.get('b', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setKKM(response.data.kkm);
@@ -32,11 +34,13 @@ const FeedbackVisualisasiData = () => {
     fetchKKM();
   }, []);
 
+  // Hitung correctCount berdasarkan answers dan questions
   const correctCount = questions.reduce((count, question, index) => {
     const answerKey = String.fromCharCode(97 + (answers[index] || '').charCodeAt(0) - 97);
     return answers[index] && answerKey === question.correct_answer ? count + 1 : count;
   }, 0);
 
+  // Siapkan correctAnswers dan answerOptions
   const correctAnswers = questions.reduce((acc, question, index) => {
     acc[`q${index + 1}`] = question.correct_answer;
     return acc;
@@ -53,11 +57,12 @@ const FeedbackVisualisasiData = () => {
 
   const feedbackMessage =
     score >= kkm
-      ? "Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!"
-      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!";
+      ? "Selamat, skor kamu sudah mencapai KKM!"
+      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis atau belajar lagi!";
 
   console.log("FeedbackVisualisasiData state:", state);
 
+  // Jika data tidak lengkap, tampilkan pesan error
   if (!state || !questions.length) {
     return (
       <Layout>
@@ -139,19 +144,35 @@ const FeedbackVisualisasiData = () => {
       </div>
       <div className="flex justify-center mt-8 space-x-4">
         {score >= kkm ? (
-          <button
-            onClick={() => navigate("/peringkasan-data")} // Ganti dengan path materi berikutnya
-            className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
-          >
-            Lanjut Materi
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/rangkuman-visualisasi")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/peringkasan-data")}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px] cursor-pointer"
+            >
+              Lanjut Materi
+            </button>
+          </>
         ) : (
-          <button
-            onClick={() => navigate("/kuis-visualisasi")}
-            className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md"
-          >
-            Ulang Kuis
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/rangkuman-visualisasi")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/kuis-visualisasi")}
+              className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md cursor-pointer"
+            >
+              Ulang Kuis
+            </button>
+          </>
         )}
       </div>
     </Layout>

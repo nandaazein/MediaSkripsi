@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import registerImage from '../assets/register.png'; // Impor gambar dari folder src/assets
 
 const RegisterSiswa = () => {
@@ -28,10 +29,36 @@ const RegisterSiswa = () => {
     try {
       const payload = { nis, fullName, password, confirmPassword, class: studentClass, token };
       await axios.post('http://localhost:5000/api/students/register', payload);
-      navigate('/login-siswa');
+
+      // Tampilkan SweetAlert2 untuk notifikasi registrasi berhasil
+      Swal.fire({
+        title: "Berhasil Daftar Akun",
+        text: "Akun Anda telah berhasil dibuat. Silakan login untuk melanjutkan.",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      }).then(() => {
+        // Redirect ke halaman login setelah konfirmasi
+        navigate('/login-siswa');
+      });
     } catch (err) {
       setError(err.response?.data?.message || 'Registrasi gagal');
     }
+  };
+
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    // Tampilkan SweetAlert2 untuk notifikasi menuju login
+    Swal.fire({
+      title: "Menuju Login",
+      text: "Anda akan diarahkan ke halaman login siswa.",
+      icon: "info",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#255F38",
+    }).then(() => {
+      // Redirect ke halaman login
+      navigate('/login-siswa');
+    });
   };
 
   return (
@@ -120,22 +147,19 @@ const RegisterSiswa = () => {
             {error && <p className="text-red-500 text-xs">{error}</p>}
             <button
               type="submit"
-              className="w-full bg-green-700 text-white py-1 rounded-lg hover:bg-green-800 text-sm"
+              className="w-full bg-green-700 text-white py-1 rounded-lg hover:bg-green-800 text-sm cursor-pointer"
             >
               Daftar
             </button>
           </form>
-          <p className="mt-3 text-xs text-center text-gray-600">
+          <p className="mt-3 text-xs text-center text-gray-600 cursor-pointer">
             Sudah punya akun?{' '}
-            <a href="/student-login" className="text-green-700 font-medium hover:underline">
+            <button
+              onClick={handleLoginClick}
+              className="text-green-700 font-medium hover:underline cursor-pointer"
+            >
               Masuk di sini
-            </a>
-          </p>
-          <p className="mt-1 text-xs text-center text-gray-600">
-            Daftar sebagai guru?{' '}
-            <a href="/register-guru" className="text-green-700 font-medium hover:underline">
-              Klik di sini
-            </a>
+            </button>
           </p>
         </div>
       </div>

@@ -29,12 +29,14 @@ const PengantarBab = () => {
           <i className="ri-check-double-line text-[#255F38] text-xl mr-2"></i> Tujuan Pembelajaran
         </h2>
         <ul className="list-disc pl-6 mt-2 text-gray-700">
-          <li>Peserta didik mampu memahami konsep analisis data dan pentingnya dalam pengolahan informasi.</li>
-          <li>Peserta didik mampu menerapkan Computational Thinking (CT) dalam analisis data.</li>
-          <li>Peserta didik mampu menggunakan fungsi pencarian data.</li>
-          <li>Peserta didik mampu menyajikan data dalam bentuk visualisasi yang efektif.</li>
-          <li>Peserta didik mampu menentukan kriteria dan meringkas data berdasarkan kategori tertentu.</li>
-          <li>Peserta didik mampu mengelola data dengan sorting dan filtering untuk mempermudah analisis.</li>
+          <li>Peserta didik mampu memahami konsep dasar analisis data dan pentingnya dalam kehidupan sehari-hari.</li>
+          <li>Peserta didik mampu memahami konsep dasar Computational Thinking (CT) dan menerapkannya dalam menyelesaikan masalah sederhana melalui studi kasus.</li>
+          <li>Peserta didik mampu menggunakan fungsi Lookup dan Reference untuk melakukan pencarian data secara tepat.</li>
+          <li>Peserta didik mampu menyajikan informasi dalam bentuk visualisasi data.</li>
+          <li>Peserta didik mampu merangkum data menggunakan fungsi peringkasan.</li>
+          <li>Peserta didik mampu mengelola data menggunakan teknik Sorting dan Filtering.</li>
+          <li>Peserta didik mampu menerapkan pendekatan Computational Thinking dalam menyelesaikan permasalahan yang berkaitan dengan pencarian data, visualisasi data, peringkasan data, dan pengelolaan data.</li>
+
         </ul>
       </div>
 

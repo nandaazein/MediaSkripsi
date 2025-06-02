@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import loginImage from '../assets/login.png'; // Impor gambar dari folder src/assets
+import Swal from 'sweetalert2';
+import loginImage from '../assets/login.png'; 
 
 const LoginSiswa = () => {
   const [nis, setNis] = useState('');
@@ -17,13 +18,39 @@ const LoginSiswa = () => {
       const response = await axios.post('http://localhost:5000/api/students/login', { nis, password });
       const { token, user } = response.data;
 
+      // Simpan token dan data pengguna
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      navigate('/home');
+      // Tampilkan SweetAlert2 untuk notifikasi login berhasil
+      Swal.fire({
+        title: "Berhasil Masuk",
+        text: "Anda telah berhasil masuk ke sistem.",
+        icon: "success",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#255F38",
+      }).then(() => {
+        // Redirect ke dashboard setelah konfirmasi
+        navigate('/home');
+      });
     } catch (err) {
       setError(err.response?.data?.message || 'Login gagal');
     }
+  };
+
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    // Tampilkan SweetAlert2 untuk notifikasi pendaftaran
+    Swal.fire({
+      title: "Menuju Pendaftaran",
+      text: "Anda akan diarahkan ke halaman pendaftaran siswa.",
+      icon: "info",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#255F38",
+    }).then(() => {
+      // Redirect ke halaman pendaftaran
+      navigate('/register-siswa');
+    });
   };
 
   return (
@@ -64,16 +91,19 @@ const LoginSiswa = () => {
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <button
               type="submit"
-              className="w-full bg-green-700 text-white py-2 rounded-lg hover:bg-green-800"
+              className="w-full bg-green-700 text-white py-2 rounded-lg hover:bg-green-800 cursor-pointer"
             >
               Masuk
             </button>
           </form>
-          <p className="mt-4 text-sm text-center text-gray-600">
+          <p className="mt-4 text-sm text-center text-gray-600 cursor-pointer">
             Belum punya akun?{' '}
-            <a href="/register-siswa" className="text-green-700 font-medium hover:underline">
+            <button
+              onClick={handleRegisterClick}
+              className="text-green-700 font-medium hover:underline cursor-pointer"
+            >
               Daftar sekarang
-            </a>
+            </button>
           </p>
         </div>
       </div>

@@ -41,7 +41,7 @@ const MengenalAnalisisData = () => {
           Tujuan Pembelajaran
         </h2>
         <p className="text-sm md:text-base text-gray-700 text-justify leading-relaxed">
-          Memperkenalkan konsep dasar dari analisis data.
+          Peserta didik mampu memahami konsep dasar analisis data dan pentingnya dalam kehidupan sehari-hari.
         </p>
       </section>
 
@@ -78,7 +78,7 @@ const MengenalAnalisisData = () => {
         <p className="text-sm md:text-base text-gray-700">
           Pilih alasan utama mengapa kita menggunakan analisis data:
         </p>
-        <div className="space-y-2">
+        <div className="space-y-2 text-sm md:text-base text-gray-700">
           <label className="flex items-center space-x-2">
             <input
               type="radio"

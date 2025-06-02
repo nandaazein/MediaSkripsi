@@ -1,6 +1,5 @@
-
-import Layout from "../../components/Layout";
 import { useState } from "react";
+import Layout from "../../components/Layout";
 import SimpleChart from "../../components/SimpleChart";
 
 export default function VisualisasiData() {
@@ -65,7 +64,7 @@ export default function VisualisasiData() {
   };
 
   // State untuk Aktivitas Abstraksi
-  const [abstraksiAnswer, setAbstraksiAnswer] = useState(""); // Mengubah state menjadi string untuk radio button
+  const [abstraksiAnswer, setAbstraksiAnswer] = useState("");
   const [abstraksiFeedback, setAbstraksiFeedback] = useState("");
   const [abstraksiAnswered, setAbstraksiAnswered] = useState(false);
 
@@ -87,41 +86,6 @@ export default function VisualisasiData() {
     setAbstraksiAnswer("");
     setAbstraksiFeedback("");
     setAbstraksiAnswered(false);
-  };
-
-  // State untuk Aktivitas Algoritma
-  const [algoritmaAnswers, setAlgoritmaAnswers] = useState({
-    step1: false,
-    step2: false,
-    step3: false,
-    step4: false,
-  });
-  const [algoritmaFeedback, setAlgoritmaFeedback] = useState("");
-  const [algoritmaAnswered, setAlgoritmaAnswered] = useState(false);
-
-  const handleAlgoritmaChange = (step) => {
-    setAlgoritmaAnswers((prev) => ({ ...prev, [step]: !prev[step] }));
-  };
-
-  const checkAlgoritmaAnswers = () => {
-    const correctAnswers = { step1: true, step2: true, step3: true, step4: false };
-    const isCorrect =
-      algoritmaAnswers.step1 === correctAnswers.step1 &&
-      algoritmaAnswers.step2 === correctAnswers.step2 &&
-      algoritmaAnswers.step3 === correctAnswers.step3 &&
-      algoritmaAnswers.step4 === correctAnswers.step4;
-    setAlgoritmaFeedback(
-      isCorrect
-        ? "Benar! Langkah-langkah ini adalah urutan yang tepat untuk membuat chart di spreadsheet."
-        : "Jawaban salah, ayo coba lagi."
-    );
-    setAlgoritmaAnswered(true);
-  };
-
-  const resetAlgoritmaAnswers = () => {
-    setAlgoritmaAnswers({ step1: false, step2: false, step3: false, step4: false });
-    setAlgoritmaFeedback("");
-    setAlgoritmaAnswered(false);
   };
 
   // State untuk Kuis Pemahaman
@@ -148,63 +112,63 @@ export default function VisualisasiData() {
     5: false,
   });
 
-  const questions = [
-    {
-      question: "Apa manfaat utama visualisasi data?",
-      options: [
-        "A. Membantu melihat pola dengan cepat",
-        "B. Membuat data lebih rumit",
-        "C. Mengurangi jumlah data",
-        "D. Menghapus data yang salah",
-      ],
-      correctAnswer: "A. Membantu melihat pola dengan cepat",
-      explanation: "Visualisasi data membantu kita melihat pola dan tren dengan cepat melalui chart atau tabel.",
-    },
-    {
-      question: "Langkah memecah masalah menjadi bagian kecil disebut?",
-      options: [
-        "A. Dekomposisi",
-        "B. Abstraksi",
-        "C. Pengenalan Pola",
-        "D. Algoritma",
-      ],
-      correctAnswer: "A. Dekomposisi",
-      explanation: "Dekomposisi adalah proses memecah masalah besar menjadi langkah-langkah kecil untuk memudahkan pemahaman dan penyelesaian.",
-    },
-    {
-      question: "Chart apa yang cocok untuk menunjukkan persentase pengeluaran?",
-      options: [
-        "A. Pie Chart",
-        "B. Line Chart",
-        "C. Bar Chart",
-        "D. Area Chart",
-      ],
-      correctAnswer: "A. Pie Chart",
-      explanation: "Pie Chart cocok untuk menunjukkan persentase, seperti pembagian pengeluaran dalam kategori tertentu.",
-    },
-    {
-      question: "Memilih data penting untuk chart disebut?",
-      options: [
-        "A. Abstraksi",
-        "B. Dekomposisi",
-        "C. Pengenalan Pola",
-        "D. Algoritma",
-      ],
-      correctAnswer: "A. Abstraksi",
-      explanation: "Abstraksi adalah proses memilih data yang relevan dan mengabaikan informasi yang tidak perlu untuk membuat chart yang jelas.",
-    },
-    {
-      question: "Apa langkah pertama membuat chart di spreadsheet?",
-      options: [
-        "A. Siapkan data dalam tabel",
-        "B. Pilih jenis chart",
-        "C. Hitung rata-rata data",
-        "D. Simpan chart",
-      ],
-      correctAnswer: "A. Siapkan data dalam tabel",
-      explanation: "Langkah pertama dalam membuat chart adalah menyiapkan data dalam tabel yang rapi untuk memastikan chart akurat.",
-    },
-  ];
+ const questions = [
+  {
+    question: "Manfaat utama visualisasi data adalah....",
+    options: [
+      "A. Membantu melihat pola dengan cepat",
+      "B. Membuat data lebih rumit",
+      "C. Mengurangi jumlah data",
+      "D. Menghapus data yang salah",
+    ],
+    correctAnswer: "A. Membantu melihat pola dengan cepat",
+    explanation: "Visualisasi data membantu kita melihat pola dan tren dengan cepat melalui chart atau tabel.",
+  },
+  {
+    question: "Proses memecah masalah besar menjadi langkah-langkah kecil disebut....",
+    options: [
+      "A. Dekomposisi",
+      "B. Abstraksi",
+      "C. Pengenalan Pola",
+      "D. Algoritma",
+    ],
+    correctAnswer: "A. Dekomposisi",
+    explanation: "Dekomposisi adalah proses memecah masalah besar menjadi langkah-langkah kecil untuk memudahkan pemahaman dan penyelesaian.",
+  },
+  {
+    question: "Jenis chart yang digunakan untuk menunjukkan persentase pengeluaran adalah....",
+    options: [
+      "A. Pie Chart",
+      "B. Line Chart",
+      "C. Bar Chart",
+      "D. Area Chart",
+    ],
+    correctAnswer: "A. Pie Chart",
+    explanation: "Pie Chart cocok untuk menunjukkan persentase, seperti pembagian pengeluaran dalam kategori tertentu.",
+  },
+  {
+    question: "Proses memilih data relevan untuk chart disebut....",
+    options: [
+      "A. Abstraksi",
+      "B. Dekomposisi",
+      "C. Pengenalan Pola",
+      "D. Algoritma",
+    ],
+    correctAnswer: "A. Abstraksi",
+    explanation: "Abstraksi adalah proses memilih data yang relevan dan mengabaikan informasi yang tidak perlu untuk membuat chart yang jelas.",
+  },
+  {
+    question: "Langkah awal dalam membuat chart di spreadsheet adalah....",
+    options: [
+      "A. Siapkan data dalam tabel",
+      "B. Pilih jenis chart",
+      "C. Hitung rata-rata data",
+      "D. Simpan chart",
+    ],
+    correctAnswer: "A. Siapkan data dalam tabel",
+    explanation: "Langkah pertama dalam membuat chart adalah menyiapkan data dalam tabel yang rapi untuk memastikan chart akurat.",
+  },
+];
 
   const handleAnswerChange = (option) => {
     setAnswers((prev) => ({ ...prev, [currentQuestion]: option }));
@@ -270,10 +234,10 @@ export default function VisualisasiData() {
         <h2 className="font-bold text-[#255F38] text-lg">Tujuan Pembelajaran:</h2>
         <ol className="list-decimal list-inside space-y-1 sm:space-y-2 mt-2 sm:mt-4 text-gray-700">
           <li className="text-sm md:text-base">
-            Memahami konsep visualisasi data serta manfaatnya dalam menyajikan informasi melalui chart, tabel, atau grafik agar lebih mudah dipahami.
+            Peserta didik mampu menyajikan informasi dalam bentuk visualisasi data.
           </li>
           <li className="text-sm md:text-base">
-            Menerapkan pendekatan Computational Thinking untuk memvisualisasikan data secara efektif.
+            Peserta didik mampu menerapkan pendekatan Computational Thinking dalam menyelesaikan permasalahan yang berkaitan dengan visualisasi data.
           </li>
         </ol>
       </section>
@@ -331,14 +295,12 @@ export default function VisualisasiData() {
         </p>
       </div>
 
-      <SimpleChart />
-
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-12 relative text-justify">
         <div className="absolute -top-4 sm:-top-6 left-2 sm:left-4 bg-green-800 text-white px-3 sm:px-5 py-1 sm:py-2 rounded-t-lg text-lg font-bold shadow-lg">
           Dekomposisi
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6">
-          Membuat chart lebih mudah jika kita <span className="font-semibold">memecah prosesnya menjadi langkah kecil.</span> Dekomposisi membantu kita memahami setiap langkah.
+          Dekomposisi adalah proses <span className="font-semibold">memecah tugas kompleks menjadi langkah-langkah kecil</span> yang lebih mudah dikelola. Dalam membuat chart, dekomposisi membantu kita merencanakan setiap tahap dengan jelas untuk menghasilkan visualisasi yang efektif.
         </p>
         <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
           <li className="text-sm md:text-base">
@@ -357,7 +319,7 @@ export default function VisualisasiData() {
             Latihan Pemahaman: Pecah Langkah Membuat Chart
           </h3>
           <p className="text-gray-700 text-sm md:text-base mb-2">
-            Kamu ingin membuat chart untuk membandingkan penjualan jajanan: bakpao (50 porsi), siomay (30 porsi), cilok (20 porsi). Pilih langkah yang benar:
+            Kamu ingin membuat chart untuk membandingkan penjualan jajanan: bakpao (50 porsi), siomay (30 porsi), cilok (20 porsi). Pecah proses membuat chart menjadi langkah-langkah kecil berikut, lalu pilih yang benar:
           </p>
           <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
             <div className="text-sm md:text-base">
@@ -408,13 +370,13 @@ export default function VisualisasiData() {
           <div className="mt-4 flex space-x-2">
             <button
               onClick={checkDekomposisiAnswers}
-              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300 cursor-pointer"
             >
               Periksa
             </button>
             <button
               onClick={resetDekomposisiAnswers}
-              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300 cursor-pointer"
             >
               Hapus
             </button>
@@ -436,7 +398,7 @@ export default function VisualisasiData() {
           Pengenalan Pola
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6">
-          Setelah mengumpulkan data, kita perlu <span className="font-semibold">mengenali pola</span> untuk memilih chart yang tepat. Berikut adalah pola data yang dapat dikenali:
+          Setelah memecah masalah menjadi langkah-langkah kecil melalui dekomposisi, kita perlu <span className="font-semibold">mengenali pola</span> dalam data untuk memilih chart yang paling sesuai dengan tujuan visualisasi. Berikut adalah pola data yang dapat dikenali:
         </p>
         <ul className="list-none space-y-4 sm:space-y-5 text-gray-700">
           <li className="text-sm md:text-base">
@@ -471,78 +433,11 @@ export default function VisualisasiData() {
           </li>
         </ul>
 
-        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 sm:mt-6 shadow-md">
-          <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
-            Latihan Pemahaman: Pilih Chart yang Tepat
-          </h3>
-          <p className="text-gray-700 text-sm md:text-base mb-2">
-            Kamu punya data kehadiran siswa: Senin (90 siswa), Selasa (85 siswa), Rabu (88 siswa), Kamis (92 siswa), Jumat (80 siswa). Pilih chart yang cocok untuk menunjukkan perubahan kehadiran:
-          </p>
-          <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
-            <div className="text-sm md:text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="pattern"
-                  value="Bar Chart"
-                  checked={polaAnswer === "Bar Chart"}
-                  onChange={() => handlePolaChange("Bar Chart")}
-                  className="mr-2"
-                />
-                Bar Chart
-              </label>
-            </div>
-            <div className="text-sm md:text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="pattern"
-                  value="Line Chart"
-                  checked={polaAnswer === "Line Chart"}
-                  onChange={() => handlePolaChange("Line Chart")}
-                  className="mr-2"
-                />
-                Line Chart
-              </label>
-            </div>
-            <div className="text-sm md:text-base">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="pattern"
-                  value="Pie Chart"
-                  checked={polaAnswer === "Pie Chart"}
-                  onChange={() => handlePolaChange("Pie Chart")}
-                  className="mr-2"
-                />
-                Pie Chart
-              </label>
-            </div>
-          </div>
-          <div className="mt-4 flex space-x-2">
-            <button
-              onClick={checkPolaAnswer}
-              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
-            >
-              Periksa
-            </button>
-            <button
-              onClick={resetPolaAnswer}
-              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
-            >
-              Hapus
-            </button>
-          </div>
-          {polaFeedback && (
-            <p
-              className={`text-sm mt-2 font-bold ${
-                polaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
-              }`}
-            >
-              {polaFeedback}
-            </p>
-          )}
-        </div>
+        <SimpleChart />
+
+        <p className="text-gray-700 text-sm md:text-base mt-4">
+          Dengan mengenali pola data, kita bisa memilih chart yang tepat. Selanjutnya, kita perlu menyaring data yang relevan melalui proses abstraksi untuk memastikan chart kita jelas dan fokus.
+        </p>
       </div>
 
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-4 sm:mt-10 relative">
@@ -550,7 +445,7 @@ export default function VisualisasiData() {
           Abstraksi
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-4">
-          Untuk membuat chart yang jelas, kita harus pilih data yang penting dan abaikan data yang tidak perlu.
+          Setelah mengenali pola data dan memilih jenis chart yang sesuai, kita perlu melakukan <span className="font-semibold">abstraksi</span> untuk memilih data yang penting dan mengabaikan informasi yang tidak relevan agar chart lebih jelas dan mudah dipahami.
         </p>
         <p className="text-gray-700 text-sm md:text-base mt-1 sm:mt-2">
           📌 Yang perlu diperhatikan:
@@ -582,7 +477,7 @@ export default function VisualisasiData() {
                   onChange={() => handleAbstraksiChange("Nama siswa")}
                   className="mr-2"
                 />
-                Nama siswa.
+                Nama siswa
               </label>
             </div>
             <div className="text-sm md:text-base">
@@ -595,7 +490,7 @@ export default function VisualisasiData() {
                   onChange={() => handleAbstraksiChange("Jadwal ekstrakurikuler")}
                   className="mr-2"
                 />
-                Jadwal ekstrakurikuler.
+                Jadwal ekstrakurikuler
               </label>
             </div>
             <div className="text-sm md:text-base">
@@ -608,20 +503,20 @@ export default function VisualisasiData() {
                   onChange={() => handleAbstraksiChange("Jumlah siswa di setiap ekstrakurikuler")}
                   className="mr-2"
                 />
-                Jumlah siswa di setiap ekstrakurikuler.
+                Jumlah siswa di setiap ekstrakurikuler
               </label>
             </div>
           </div>
           <div className="mt-4 flex space-x-2">
             <button
               onClick={checkAbstraksiAnswers}
-              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300 cursor-pointer"
             >
               Periksa
             </button>
             <button
               onClick={resetAbstraksiAnswers}
-              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300 cursor-pointer"
             >
               Hapus
             </button>
@@ -643,7 +538,7 @@ export default function VisualisasiData() {
           Algoritma
         </div>
         <p className="text-gray-600 text-sm md:text-base mt-4 sm:mt-4">
-          Untuk membuat chart di spreadsheet, ikuti langkah-langkah ini:
+          Setelah memilih data yang relevan melalui abstraksi, kita menyusun <span className="font-semibold">algoritma</span>, yaitu langkah-langkah terstruktur untuk membuat chart di spreadsheet. Berikut adalah langkah-langkahnya:
         </p>
         <ul className="list-disc list-inside ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
           <li className="text-sm md:text-base">
@@ -656,84 +551,6 @@ export default function VisualisasiData() {
             <strong>Klik Insert Chart</strong> → Pilih jenis chart, seperti Line Chart atau Bar Chart.
           </li>
         </ul>
-
-        <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 sm:mt-6 shadow-md">
-          <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
-            Latihan Pemahaman: Urutkan Langkah Membuat Chart
-          </h3>
-          <p className="text-gray-700 text-sm md:text-base mb-2">
-            Kamu ingin membuat Line Chart untuk nilai ujian: Januari (80), Februari (85), Maret (90). Pilih langkah yang benar:
-          </p>
-          <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
-            <div className="text-sm md:text-base">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={algoritmaAnswers.step1}
-                  onChange={() => handleAlgoritmaChange("step1")}
-                  className="mr-2"
-                />
-                Siapkan data dalam tabel.
-              </label>
-            </div>
-            <div className="text-sm md:text-base">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={algoritmaAnswers.step4}
-                  onChange={() => handleAlgoritmaChange("step4")}
-                  className="mr-2"
-                />
-                Hitung rata-rata nilai ujian.
-              </label>
-            </div>
-            <div className="text-sm md:text-base">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={algoritmaAnswers.step2}
-                  onChange={() => handleAlgoritmaChange("step2")}
-                  className="mr-2"
-                />
-                Blok data untuk chart.
-              </label>
-            </div>
-            <div className="text-sm md:text-base">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={algoritmaAnswers.step3}
-                  onChange={() => handleAlgoritmaChange("step3")}
-                  className="mr-2"
-                />
-                Klik Insert Chart, pilih Line Chart.
-              </label>
-            </div>
-          </div>
-          <div className="mt-4 flex space-x-2">
-            <button
-              onClick={checkAlgoritmaAnswers}
-              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
-            >
-              Periksa
-            </button>
-            <button
-              onClick={resetAlgoritmaAnswers}
-              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
-            >
-              Hapus
-            </button>
-          </div>
-          {algoritmaFeedback && (
-            <p
-              className={`text-sm mt-2 font-bold ${
-                algoritmaFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
-              }`}
-            >
-              {algoritmaFeedback}
-            </p>
-          )}
-        </div>
       </div>
 
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12">
@@ -779,7 +596,7 @@ export default function VisualisasiData() {
               <div className="flex space-x-2">
                 <button
                   onClick={goToPrevious}
-                  className="bg-[#B0BEC5] text-white px-4 py-2 rounded-lg hover:bg-[#90A4AE] transition duration-300 disabled:opacity-50"
+                  className="bg-[#B0BEC5] text-white px-4 py-2 rounded-lg hover:bg-[#90A4AE] transition duration-300 disabled:opacity-50 cursor-pointer"
                   disabled={currentQuestion === 1}
                 >
                   Sebelumnya
@@ -787,7 +604,7 @@ export default function VisualisasiData() {
                 {feedback[currentQuestion] && (
                   <button
                     onClick={resetQuizAnswer}
-                    className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+                    className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300 cursor-pointer"
                   >
                     Hapus
                   </button>
@@ -796,7 +613,7 @@ export default function VisualisasiData() {
               {isAnswered[currentQuestion] && (
                 <button
                   onClick={goToNext}
-                  className="bg-yellow-800 text-white px-4 py-2 rounded-lg hover:bg-yellow-900 transition duration-300"
+                  className="bg-yellow-800 text-white px-4 py-2 rounded-lg hover:bg-yellow-900 transition duration-300 cursor-pointer"
                   disabled={currentQuestion === 5 && !isAnswered[currentQuestion]}
                 >
                   {currentQuestion === 5 ? "Selesai" : "Soal Selanjutnya"}
@@ -813,18 +630,18 @@ export default function VisualisasiData() {
       </div>
 
       <div className="flex justify-between items-center px-2 sm:px-4 py-2 mt-4 sm:mt-8">
-        <a
-          href="/contoh-lookup"
-          className="bg-gray-500 text-white px-4 sm:px-5 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px]"
+        <button
+          onClick={() => (window.location.href = "/contoh-lookup")}
+          className="bg-gray-500 text-white px-4 sm:px-5 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
         >
           ← Sebelumnya
-        </a>
-        <a
-          href="/contoh-penerapan-visualisasi-data"
-          className="bg-[#255F38] text-white px-4 sm:px-5 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px]"
+        </button>
+        <button
+          onClick={() => (window.location.href = "/contoh-penerapan-visualisasi-data")}
+          className="bg-[#255F38] text-white px-4 sm:px-5 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px] cursor-pointer"
         >
           Selanjutnya →
-        </a>
+        </button>
       </div>
     </Layout>
   );

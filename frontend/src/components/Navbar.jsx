@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { UserCircle, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const Navbar = () => {
   const [studentName, setStudentName] = useState("Siswa");
@@ -23,11 +24,20 @@ export const Navbar = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    // Clear authentication data from localStorage
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    // Redirect to student login page
-    navigate("/");
+    // Tampilkan SweetAlert2 untuk notifikasi logout
+    Swal.fire({
+      title: "Berhasil Logout",
+      text: "Anda telah berhasil logout dari sistem.",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#255F38",
+    }).then(() => {
+      // Clear authentication data from localStorage
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      // Redirect to student login page
+      navigate("/");
+    });
   };
 
   const handleDashboard = () => {
@@ -63,16 +73,16 @@ export const Navbar = () => {
             />
           </div>
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50 ">
               <button
                 onClick={handleDashboard}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-lg"
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-lg cursor-pointer"
               >
                 Dashboard
               </button>
               <button
                 onClick={handleLogout}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-b-lg"
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-b-lg cursor-pointer"
               >
                 Logout
               </button>

@@ -57,8 +57,8 @@ const FeedbackPencarianData = () => {
 
   const feedbackMessage =
     score >= kkm
-      ? "Selamat, skor kamu memenuhi untuk lanjut ke materi berikutnya!"
-      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis untuk belajar lagi!";
+      ? "Selamat, skor kamu sudah mencapai KKM!"
+      : "Skor kamu belum memenuhi KKM. Ayo ulang kuis atau belajar lagi!";
 
   console.log("FeedbackPencarianData state:", state);
 
@@ -144,19 +144,37 @@ const FeedbackPencarianData = () => {
       </div>
       <div className="flex justify-center mt-8 space-x-4">
         {score >= kkm ? (
-          <button
-            onClick={() => navigate("/visualisasi-data")}
-            className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
-          >
-            Lanjut Materi
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/rangkuman-pencarian")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/visualisasi-data")}
+              className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px] cursor-pointer"
+            >
+              Lanjut Materi
+            </button>
+     
+          </>
         ) : (
-          <button
-            onClick={() => navigate("/kuis-pencarian")}
-            className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md"
-          >
-            Ulang Kuis
-          </button>
+          <>
+            <button
+              onClick={() => navigate("/rangkuman-pencarian")}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
+            >
+              Kembali ke Materi
+            </button>
+            <button
+              onClick={() => navigate("/kuis-pencarian")}
+              className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition duration-300 text-base shadow-md cursor-pointer"
+            >
+              Ulang Kuis
+            </button>
+  
+          </>
         )}
       </div>
     </Layout>

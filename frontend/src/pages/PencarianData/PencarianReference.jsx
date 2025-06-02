@@ -134,13 +134,13 @@ export default function PencarianReference() {
 
   const questions = [
     {
-      question: "Fungsi apa yang digunakan untuk mengambil data berdasarkan baris dan kolom?",
+      question: "Fungsi yang digunakan untuk mengambil data berdasarkan baris dan kolom adalah ....",
       options: ["A. INDEX", "B. MATCH", "C. CHOOSE", "D. VLOOKUP"],
       correctAnswer: "A. INDEX",
       explanation: "INDEX digunakan untuk mengambil data dari tabel berdasarkan nomor baris dan kolom.",
     },
     {
-      question: "Apa fungsi MATCH dalam pencarian data?",
+      question: "Fungsi MATCH dalam pencarian data berfungsi untuk ....",
       options: [
         "A. Mengambil data dari tabel",
         "B. Mencari posisi suatu nilai",
@@ -151,7 +151,7 @@ export default function PencarianReference() {
       explanation: "MATCH digunakan untuk menemukan posisi suatu nilai dalam daftar.",
     },
     {
-      question: "Apa yang dilakukan fungsi CHOOSE?",
+      question: "Fungsi CHOOSE bertugas untuk ....",
       options: [
         "A. Mencari data berdasarkan kode",
         "B. Memilih nilai berdasarkan indeks",
@@ -162,7 +162,7 @@ export default function PencarianReference() {
       explanation: "CHOOSE memilih satu nilai dari daftar berdasarkan nomor indeks yang diberikan.",
     },
     {
-      question: "Langkah apa yang termasuk dalam dekomposisi pencarian data?",
+      question: "Langkah-langkah yang termasuk dalam dekomposisi pencarian data adalah ....",
       options: [
         "A. Menentukan tujuan pencarian",
         "B. Menggambar grafik",
@@ -173,7 +173,7 @@ export default function PencarianReference() {
       explanation: "Dekomposisi melibatkan menentukan tujuan pencarian untuk memecah masalah menjadi langkah-langkah kecil.",
     },
     {
-      question: "Dalam abstraksi, apa yang harus dilakukan?",
+      question: "Dalam proses abstraksi, yang harus dilakukan adalah ....",
       options: [
         "A. Mengabaikan data yang tidak relevan",
         "B. Mengumpulkan semua data",
@@ -257,9 +257,8 @@ export default function PencarianReference() {
       <section className="bg-green-100 p-2 sm:p-4 rounded shadow-md mt-2 sm:mt-6 mb-2 sm:mb-6">
         <h2 className="font-bold text-[#255F38] text-lg">Tujuan Pembelajaran:</h2>
         <div className="ml-4 sm:ml-6 space-y-1 sm:space-y-2 mt-2 text-gray-700">
-          <div className="text-sm md:text-base">1. Memahami konsep pencarian data menggunakan fungsi Lookup.</div>
-          <div className="text-sm md:text-base">2. Memahami konsep pencarian data menggunakan fungsi Reference.</div>
-          <div className="text-sm md:text-base">3. Menerapkan pendekatan Computational Thinking untuk menyelesaikan masalah pencarian data.</div>
+          <div className="text-sm md:text-base">1. Peserta didik mampu menggunakan fungsi Lookup dan Reference untuk melakukan pencarian data secara tepat.</div>
+          <div className="text-sm md:text-base">2. Peserta didik mampu menerapkan pendekatan Computational Thinking dalam menyelesaikan permasalahan yang berkaitan dengan pencarian data.</div>
         </div>
       </section>
 
@@ -324,7 +323,7 @@ export default function PencarianReference() {
           Dekomposisi
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6 text-justify">
-          Sebelum menggunakan fungsi Reference, kita perlu memecah masalah pencarian data menjadi langkah-langkah kecil agar lebih mudah dipahami.
+          Sebelum menggunakan fungsi Reference, kita perlu <span className="font-semibold">memecah masalah pencarian </span>data menjadi langkah-langkah kecil agar lebih mudah dipahami.
         </p>
         <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
           <div className="text-sm md:text-base text-justify">
@@ -401,7 +400,7 @@ export default function PencarianReference() {
           Pengenalan Pola
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6 text-justify">
-          Setelah memecah masalah, kita perlu menemukan pola dalam data untuk memilih fungsi Reference yang tepat.
+          Setelah memecah masalah, kita perlu <span className="font-semibold">menemukan pola</span> dalam data untuk memilih fungsi Reference yang tepat.
         </p>
         <p className="text-gray-700 text-sm md:text-base mt-1 sm:mt-2 text-justify">📌 Pola umum dalam pencarian Reference:</p>
         <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
@@ -416,12 +415,11 @@ export default function PencarianReference() {
           </div>
         </div>
         <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
-          <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
-            Aktivitas: Cocokkan Contoh dengan Fungsi Reference
-          </h3>
+          <h3 className="text-lg font-bold text-[#255F38] mb-2">MARI MENGAMATI POLA</h3>
           <p className="text-gray-700 text-sm md:text-base text-justify mb-2">
-            Susun contoh penggunaan nyata berikut dengan menyeret ke area yang tepat (INDEX, MATCH, CHOOSE).
+            Perhatikan contoh penggunaan fungsi INDEX, MATCH, dan CHOOSE dalam situasi nyata. Amati bagaimana setiap fungsi bekerja dan pola apa yang muncul dari cara kerjanya. Setelah itu, seret setiap contoh ke kotak fungsi yang paling sesuai. Aktivitas ini akan membantumu mengenali perbedaan dan kegunaan masing-masing fungsi secara lebih mudah dan menyenangkan.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="w-full sm:w-1/2 bg-gray-100 p-4 rounded-lg">
               <h3 className="font-semibold text-green-800 mb-2">Item yang Bisa Digerakkan</h3>
@@ -457,13 +455,13 @@ export default function PencarianReference() {
           <div className="mt-4 flex space-x-2">
             <button
               onClick={checkPatternAnswers}
-              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300 cursor-pointer"
             >
               Periksa
             </button>
             <button
               onClick={resetPattern}
-              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300 cursor-pointer"
             >
               Hapus
             </button>
@@ -486,26 +484,27 @@ export default function PencarianReference() {
           Abstraksi
         </div>
         <p className="text-gray-700 text-sm md:text-base mt-4 sm:mt-6 text-justify">
-          Setelah menemukan pola, kita hanya perlu fokus pada data yang penting dan mengabaikan informasi yang tidak diperlukan.
+          Abstraksi adalah kemampuan untuk menyaring informasi dan hanya <span className="font-semibold">fokus pada hal-hal yang penting saja</span>. Dengan melakukan abstraksi, kita bisa lebih mudah memahami inti permasalahan, membuat tabel lebih rapi, dan menghindari kebingungan akibat data yang tidak relevan.
         </p>
-        <p className="text-gray-700 text-sm md:text-base mt-1 sm:mt-2 text-justify">📌 Hal yang perlu diperhatikan:</p>
+        <p className="text-gray-700 text-sm md:text-base mt-1 sm:mt-2 text-justify"> Hal yang perlu diperhatikan saat melakukan abstraksi:</p>
         <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
           <div className="text-sm md:text-base text-justify">
-            <strong>1. Pilih data penting</strong> → Hanya gunakan data yang dibutuhkan, seperti nomor absen dan nama.
+            <strong>1. Pilih data penting</strong> → Gunakan hanya data yang dibutuhkan untuk menjawab pertanyaan, misalnya hanya kolom “Nomor Absen” dan “Nama”.
           </div>
           <div className="text-sm md:text-base text-justify">
-            <strong>2. Abaikan data lain</strong> → Jangan gunakan informasi yang tidak relevan, seperti nilai ujian.
+            <strong>2. Abaikan data yang tidak relevan</strong> → Hindari menggunakan informasi yang tidak berpengaruh terhadap analisis, seperti nilai ujian atau jadwal pelajaran.
           </div>
           <div className="text-sm md:text-base text-justify">
-            <strong>3. Pastikan data jelas</strong> → Tabel harus rapi dan mudah dibaca.
+            <strong>3. Pastikan data mudah dibaca</strong> → Atur data dalam tabel agar rapi dan jelas sehingga memudahkan saat mengambil informasi.
           </div>
         </div>
+
         <div className="bg-[#F0FFF4] p-3 sm:p-4 border border-[#81C784] rounded mt-4 shadow-md">
           <h3 className="font-semibold text-[#2E7D32] text-sm md:text-base mb-2">
             Latihan Pemahaman: Memilih Data Penting
           </h3>
           <p className="text-gray-700 text-sm md:text-base text-justify mb-2">
-            Pak Guru ingin mencari nama siswa berdasarkan nomor absen dari tabel yang berisi nomor absen, nama, dan nilai matematika. Pilih data yang diperlukan:
+           Pak Guru ingin menentukan nama siswa berdasarkan nomor absen menggunakan tabel yang berisi data nomor absen, nama siswa, dan nilai matematika. Pilih kolom data yang relevan untuk melakukan pencarian ini.
           </p>
           <div className="ml-4 sm:ml-6 text-gray-700 space-y-1 sm:space-y-2">
             <div className="text-sm md:text-base">
@@ -551,13 +550,13 @@ export default function PencarianReference() {
           <div className="mt-4 flex space-x-2">
             <button
               onClick={checkAbstraksiAnswers}
-              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300"
+              className="bg-[#1B5E20] text-white px-3 py-1 rounded hover:bg-[#145A20] transition duration-300 cursor-pointer"
             >
               Periksa
             </button>
             <button
               onClick={resetAbstraksiAnswers}
-              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300"
+              className="bg-[#D32F2F] text-white px-3 py-1 rounded hover:bg-[#B71C1C] transition duration-300 cursor-pointer"
             >
               Hapus
             </button>
@@ -565,7 +564,7 @@ export default function PencarianReference() {
           {abstraksiFeedback && (
             <p
               className={`text-sm mt-2 font-bold ${
-                abstraksiFeedback.includes("Benar") ? "text-green-700" : "text-red-700"
+                abstraksiFeedback.includes("Benar") ? "bg-[#1B5E20]" : "text-red-700"
               }`}
             >
               {abstraksiFeedback}
@@ -574,49 +573,53 @@ export default function PencarianReference() {
         </div>
       </div>
 
+
+      {/* ALGORITMA */}
       <div className="bg-white p-4 sm:p-6 border border-gray-200 rounded-lg shadow-md space-y-4 sm:space-y-6 mt-6 sm:mt-8 relative">
-  <div className="absolute -top-5 sm:-top-7 left-3 sm:left-5 bg-green-800 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-t-lg text-lg sm:text-xl font-bold shadow-lg">
-    Algoritma
-  </div>
-  <p className="text-gray-700 text-sm md:text-base mt-6 sm:mt-8 text-justify">
-    Setelah memahami data yang penting, berikut adalah langkah-langkah untuk menggunakan fungsi Reference (INDEX, MATCH, dan CHOOSE) secara efektif.
-  </p>
-  <div className="space-y-4 sm:space-y-5">
-    <div>
-      <p className="text-gray-700 text-sm md:text-base font-semibold flex items-center">
-        <span className="text-green-600 mr-2">📌</span> Langkah-langkah menggunakan INDEX:
+      <div className="absolute -top-5 sm:-top-7 left-3 sm:left-5 bg-green-800 text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-t-lg text-lg sm:text-xl font-bold shadow-lg">
+        Algoritma
+      </div>
+      <p className="text-gray-700 text-sm md:text-base mt-6 sm:mt-8 text-justify">
+        Setelah memahami dan menyederhanakan masalah melalui proses abstraksi, kita dapat fokus pada elemen-elemen kunci dari data dan tujuan pencarian. Abstraksi membantu kita mengidentifikasi pola dan hubungan penting tanpa terjebak pada detail yang kompleks. Berikut adalah <span className="font-semibold">angkah-langkah sistematis</span>luntuk menggunakan fungsi INDEX, MATCH, dan CHOOSE secara efektif:
       </p>
-      <ol className="ml-6 sm:ml-8 text-gray-700 text-sm md:text-base list-decimal space-y-1 sm:space-y-2">
-        <li>Pilih tabel data yang akan digunakan.</li>
-        <li>Tentukan nomor baris dan kolom data yang ingin diambil.</li>
-        <li>Tulis rumus INDEX dengan benar.</li>
-      </ol>
-    </div>
-    <div>
-      <p className="text-gray-700 text-sm md:text-base font-semibold flex items-center">
-        <span className="text-green-600 mr-2">📌</span> Langkah-langkah menggunakan MATCH:
-      </p>
-      <ol className="ml-6 sm:ml-8 text-gray-700 text-sm md:text-base list-decimal space-y-1 sm:space-y-2">
-        <li>Tentukan nilai yang ingin dicari.</li>
-        <li>Pilih daftar tempat mencari nilai.</li>
-        <li>Tulis rumus MATCH dengan benar.</li>
-      </ol>
-    </div>
-    <div>
-      <p className="text-gray-700 text-sm md:text-base font-semibold flex items-center">
-        <span className="text-green-600 mr-2">📌</span> Langkah-langkah menggunakan CHOOSE:
-      </p>
-      <ol className="ml-6 sm:ml-8 text-gray-700 text-sm md:text-base list-decimal space-y-1 sm:space-y-2">
-        <li>Tentukan nomor urut (indeks) yang akan dipilih.</li>
-        <li>Tulis daftar nilai yang bisa dipilih.</li>
-        <li>Tulis rumus CHOOSE dengan benar.</li>
-      </ol>
-    </div>
-  </div>
-</div>
 
-   
+      <div className="space-y-4 sm:space-y-5">
+        <div>
+          <p className="text-gray-700 text-sm md:text-base font-semibold">
+            Langkah-langkah menggunakan fungsi <span className="font-bold">INDEX</span>:
+          </p>
+          <ol className="ml-6 sm:ml-8 text-gray-700 text-sm md:text-base list-decimal space-y-1 sm:space-y-2 mt-2">
+            <li>Pilih tabel data yang akan digunakan.</li>
+            <li>Tentukan nomor baris dan kolom dari data yang ingin diambil.</li>
+            <li>Tulis rumus <code>=INDEX(tabel; baris; kolom)</code> dengan benar.</li>
+          </ol>
+        </div>
 
+        <div>
+          <p className="text-gray-700 text-sm md:text-base font-semibold">
+            Langkah-langkah menggunakan fungsi <span className="font-bold">MATCH</span>:
+          </p>
+          <ol className="ml-6 sm:ml-8 text-gray-700 text-sm md:text-base list-decimal space-y-1 sm:space-y-2 mt-2">
+            <li>Tentukan nilai yang ingin dicari.</li>
+            <li>Pilih daftar atau rentang tempat mencari nilai.</li>
+            <li>Tulis rumus <code>=MATCH(nilai; rentang; match_type)</code> dengan benar.</li>
+          </ol>
+        </div>
+
+        <div>
+          <p className="text-gray-700 text-sm md:text-base font-semibold">
+            Langkah-langkah menggunakan fungsi <span className="font-bold">CHOOSE</span>:
+          </p>
+          <ol className="ml-6 sm:ml-8 text-gray-700 text-sm md:text-base list-decimal space-y-1 sm:space-y-2 mt-2">
+            <li>Tentukan nomor urut (indeks) yang akan dipilih.</li>
+            <li>Tulis daftar nilai yang tersedia dalam urutan tertentu.</li>
+            <li>Tulis rumus <code>=CHOOSE(indeks; nilai1; nilai2; ...)</code> dengan benar.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+     
       {/* KUIS PEMAHAMAN */}
       <div className="bg-white p-3 sm:p-5 border-gray-300 space-y-2 sm:space-y-4 mt-6 sm:mt-12">
         <h3 className="font-semibold text-[#255F38] text-lg mb-2">Kuis Pemahaman: Pencarian Reference</h3>
@@ -661,7 +664,7 @@ export default function PencarianReference() {
               <div className="flex space-x-2">
                 <button
                   onClick={goToPrevious}
-                  className="bg-[#B0BEC5] text-white px-4 py-2 rounded-lg hover:bg-[#90A4AE] transition duration-300 disabled:opacity-50"
+                  className="bg-[#B0BEC5] text-white px-4 py-2 rounded-lg hover:bg-[#90A4AE] transition duration-300 disabled:opacity-50 cursor-pointer"
                   disabled={currentQuestion === 1}
                 >
                   Sebelumnya
@@ -669,7 +672,7 @@ export default function PencarianReference() {
                 {feedback[currentQuestion] && (
                   <button
                     onClick={resetQuizAnswer}
-                    className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300"
+                    className="bg-[#D32F2F] text-white px-4 py-2 rounded hover:bg-[#B71C1C] transition duration-300 cursor-pointer"
                   >
                     Hapus
                   </button>
@@ -678,7 +681,7 @@ export default function PencarianReference() {
               {isAnswered[currentQuestion] && (
                 <button
                   onClick={goToNext}
-                  className="bg-yellow-800 text-white px-4 py-2 rounded-lg hover:bg-yellow-900 transition duration-300"
+                  className="bg-yellow-800 text-white px-4 py-2 rounded-lg hover:bg-yellow-900 transition duration-300 cursor-pointer"
                   disabled={currentQuestion === 5 && !isAnswered[currentQuestion]}
                 >
                   {currentQuestion === 5 ? "Selesai" : "Soal Selanjutnya"}
@@ -698,13 +701,13 @@ export default function PencarianReference() {
       <div className="flex justify-between items-center px-2 sm:px-6 py-2 mt-4">
         <button
           onClick={navigateToPrevious}
-          className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px]"
+          className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-center min-w-[100px] cursor-pointer"
         >
           ← Sebelumnya
         </button>
         <button
           onClick={navigateToNext}
-          className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px]"
+          className="bg-[#255F38] text-white px-4 py-2 rounded-lg hover:bg-[#1E4D2E] text-center min-w-[100px] cursor-pointer"
         >
           Selanjutnya →
         </button>
