@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
@@ -24,7 +23,9 @@ export default function PetunjukPengerjaanPeringkasan() {
 
         // Fetch scores for the current student
         const response = await axios.get(
-          `http://localhost:5000/api/students/scores/${user.nis}`,
+          `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${
+            user.nis
+          }`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -73,8 +74,8 @@ export default function PetunjukPengerjaanPeringkasan() {
           </h1>
           <div className="p-6 text-left bg-gray-100 rounded-lg">
             <p className="mb-4 text-gray-600">
-              Latihan ini bertujuan untuk menguji pengetahuan Anda tentang materi
-              Peringkasan Data dengan ketentuan sebagai berikut:
+              Latihan ini bertujuan untuk menguji pengetahuan Anda tentang
+              materi Peringkasan Data dengan ketentuan sebagai berikut:
             </p>
             <ul className="ml-6 space-y-2 text-gray-600 list-disc list-outside">
               <li>

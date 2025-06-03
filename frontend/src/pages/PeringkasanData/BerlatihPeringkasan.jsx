@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function SummaryLesson() {
   const navigate = useNavigate();
 
   const correctAnswers = {
     sumif: ["nama dan poin", "nama", "poin"],
-    sumifs: ["C2:C11 dan D2:D11", "C2:C11", "D2:D11" , "C2:C11 D2:D11"],
+    sumifs: ["C2:C11 dan D2:D11", "C2:C11", "D2:D11", "C2:C11 D2:D11"],
     countif: ["kolom kegiatan", "kegiatan"],
     countifs: '=COUNTIFS(C2:C11;"8A";D2:D11;"Kebersihan")',
   };
@@ -47,7 +47,8 @@ export default function SummaryLesson() {
         if (Array.isArray(correctAnswers[field])) {
           isCorrect = correctAnswers[field].some(
             (answer) =>
-              answers[field].trim().toLowerCase() === answer.trim().toLowerCase()
+              answers[field].trim().toLowerCase() ===
+              answer.trim().toLowerCase()
           );
         } else {
           isCorrect =
@@ -83,7 +84,7 @@ export default function SummaryLesson() {
       }
 
       await axios.post(
-        `http://localhost:5000/api/students/scores/${nis}`,
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${nis}`,
         {
           latihan1: null,
           latihan2: null,
@@ -145,14 +146,20 @@ export default function SummaryLesson() {
         MARI BERLATIH PERINGKASAN DATA
       </div>
 
-     
       {/* Petunjuk Umum */}
       <section className="p-4 bg-green-100 rounded shadow-md mb-6">
-        <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
+        <h3 className="text-lg font-semibold text-[#255F38] mb-2">
+          Petunjuk Umum
+        </h3>
         <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
           <li>Bacalah studi kasus di bawah ini dengan saksama.</li>
-          <li>Jawab setiap pertanyaan pada bagian yang yang telah disediakan.</li>
-          <li>Setelah selesai menjawab semua pertanyaan, klik tombol <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.</li>
+          <li>
+            Jawab setiap pertanyaan pada bagian yang yang telah disediakan.
+          </li>
+          <li>
+            Setelah selesai menjawab semua pertanyaan, klik tombol{" "}
+            <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.
+          </li>
         </ol>
       </section>
 
@@ -163,8 +170,9 @@ export default function SummaryLesson() {
         </h3>
         <p className="text-gray-700 mt-3 leading-relaxed text-justify">
           Kamu anggota OSIS yang sedang merekap data partisipasi siswa dalam
-          kegiatan sekolah. Gunakan fungsi <strong>SUMIF, SUMIFS, COUNTIF,</strong> dan{" "}
-          <strong>COUNTIFS</strong> untuk membantu analisis berikut.
+          kegiatan sekolah. Gunakan fungsi{" "}
+          <strong>SUMIF, SUMIFS, COUNTIF,</strong> dan <strong>COUNTIFS</strong>{" "}
+          untuk membantu analisis berikut.
         </p>
         <div className="w-full flex justify-center px-4 mt-5">
           <iframe
@@ -219,7 +227,7 @@ export default function SummaryLesson() {
           points: [
             "Gunakan range kolom kelas sebagai kriteria pertama.",
             "Gunakan range kolom kegiatan sebagai kriteria kedua.",
-            "Gunakan fungsi COUNTIFS dengan kriteria \"8A\" dan \"Kebersihan\".",
+            'Gunakan fungsi COUNTIFS dengan kriteria "8A" dan "Kebersihan".',
           ],
         },
       ].map(({ key, title, question, points }) => (

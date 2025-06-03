@@ -53,7 +53,7 @@ const Dashboard = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:5000/api/students/classes",
+          `${import.meta.env.VITE_API_ENDPOINT}/api/students/classes`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,7 +80,7 @@ const Dashboard = () => {
         setLoading(true);
         setError(null);
         const response = await axios.get(
-          "http://localhost:5000/api/students/dashboard",
+          `${import.meta.env.VITE_API_ENDPOINT}/api/students/dashboard`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

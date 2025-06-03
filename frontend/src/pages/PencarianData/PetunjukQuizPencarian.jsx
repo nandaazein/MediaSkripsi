@@ -23,7 +23,9 @@ export default function Pendahuluan() {
 
         // Fetch scores for the current student
         const response = await axios.get(
-          `http://localhost:5000/api/students/scores/${user.nis}`,
+          `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${
+            user.nis
+          }`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

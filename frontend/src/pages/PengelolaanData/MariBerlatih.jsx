@@ -99,7 +99,7 @@
 //       }
 
 //       await axios.post(
-//         `http://localhost:5000/api/students/scores/${nis}`,
+//         `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${nis}`,
 //         {
 //           latihan1: null,
 //           latihan2: null,
@@ -134,26 +134,25 @@
 //         BERLATIH PENGELOLAAN DATA
 //       </div>
 
-     
 //       {/* Petunjuk Umum */}
-//       <section className="p-4 bg-green-100 rounded shadow-md mb-6">
+//       <section className="p-4 mb-6 bg-green-100 rounded shadow-md">
 //         <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
-//         <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
+//         <ol className="space-y-1 text-sm text-gray-700 list-decimal list-inside md:text-base">
 //           <li>Bacalah studi kasus di bawah ini dengan saksama.</li>
 //           <li>Jawab setiap pertanyaan pada bagian yang yang telah disediakan.</li>
 //           <li>Setelah selesai menjawab semua pertanyaan, klik tombol <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.</li>
 //         </ol>
 //       </section>
 
-//       <div className="p-6 bg-white rounded shadow-lg mt-6">
-//         <h3 className="text-md font-semibold text-green-700">
+//       <div className="p-6 mt-6 bg-white rounded shadow-lg">
+//         <h3 className="font-semibold text-green-700 text-md">
 //           Kasus: Kelola Data Lomba Pidato
 //         </h3>
-//         <p className="text-gray-700 mt-3 leading-relaxed text-justify">
+//         <p className="mt-3 leading-relaxed text-justify text-gray-700">
 //           Kamu membantu Budi mengelola data lomba pidato. Gunakan <strong>sorting</strong> untuk mengurutkan skor dan <strong>filtering</strong> untuk menampilkan siswa kelas 8A.
 //         </p>
 
-//         <div className="w-full flex justify-center px-4">
+//         <div className="flex justify-center w-full px-4">
 //           <div id="spreadsheet1" className="w-full max-w-full md:max-w-screen-md" style={{ height: "400px" }}></div>
 //         </div>
 //       </div>
@@ -197,18 +196,18 @@
 //           ],
 //         },
 //       ].map(({ key, title, question, points }) => (
-//         <section key={key} className="p-6 bg-white rounded shadow-lg mt-6">
-//           <h3 className="text-md font-semibold text-green-700">{title}</h3>
-//           <p className="text-gray-700 mt-3 leading-relaxed">
+//         <section key={key} className="p-6 mt-6 bg-white rounded shadow-lg">
+//           <h3 className="font-semibold text-green-700 text-md">{title}</h3>
+//           <p className="mt-3 leading-relaxed text-gray-700">
 //             <strong>Pertanyaan:</strong> {question}
 //           </p>
-//           <ul className="list-disc ml-6 text-gray-700 mt-2 text-sm md:text-base">
+//           <ul className="mt-2 ml-6 text-sm text-gray-700 list-disc md:text-base">
 //             {points.map((point, idx) => (
 //               <li key={idx}>{point}</li>
 //             ))}
 //           </ul>
 //           <input
-//             className="border p-2 rounded w-full mt-3"
+//             className="w-full p-2 mt-3 border rounded"
 //             placeholder="Jawaban Anda"
 //             value={answers[key]}
 //             onChange={(e) => handleChange(key, e.target.value)}
@@ -219,7 +218,7 @@
 //       <div className="flex justify-center mt-8">
 //         <button
 //           onClick={submitLatihan}
-//           className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md"
+//           className="px-5 py-2 text-base text-white transition duration-300 bg-green-800 rounded-lg shadow-md hover:bg-green-700"
 //         >
 //           Selesai Latihan
 //         </button>
@@ -232,7 +231,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function SummaryLesson() {
   const navigate = useNavigate();
@@ -241,7 +240,7 @@ export default function SummaryLesson() {
     sorting: "skor",
     customSort: ["Adi dan Eka", "Adi", "Eka", "Adi Eka", "Adi,Eka", "Adi, Eka"],
     filtering: "kelas",
-    filterCriteria: ["Sorting", "Sort", "Sort Z to A", "Descending"]
+    filterCriteria: ["Sorting", "Sort", "Sort Z to A", "Descending"],
   };
 
   const [answers, setAnswers] = useState({
@@ -252,19 +251,32 @@ export default function SummaryLesson() {
   });
 
   useEffect(() => {
-    if (!document.querySelector('link[href="https://cdn.syncfusion.com/ej2/19.1.56/material.css"]')) {
+    if (
+      !document.querySelector(
+        'link[href="https://cdn.syncfusion.com/ej2/19.1.56/material.css"]'
+      )
+    ) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
       link.href = "https://cdn.syncfusion.com/ej2/19.1.56/material.css";
       document.head.appendChild(link);
     }
 
-    if (!document.querySelector('script[src="https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js"]')) {
+    if (
+      !document.querySelector(
+        'script[src="https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js"]'
+      )
+    ) {
       const script = document.createElement("script");
       script.src = "https://cdn.syncfusion.com/ej2/19.1.56/dist/ej2.min.js";
       script.async = true;
       script.onload = () => {
-        if (window.ej && window.ej.spreadsheet && document.getElementById("spreadsheet1") && !document.querySelector("#spreadsheet1 .e-spreadsheet")) {
+        if (
+          window.ej &&
+          window.ej.spreadsheet &&
+          document.getElementById("spreadsheet1") &&
+          !document.querySelector("#spreadsheet1 .e-spreadsheet")
+        ) {
           new window.ej.spreadsheet.Spreadsheet({
             sheets: [
               {
@@ -273,17 +285,101 @@ export default function SummaryLesson() {
                 rows: [
                   {
                     cells: [
-                      { value: "Nama Siswa", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center" } },
-                      { value: "Kelas", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center" } },
-                      { value: "Skor", style: { fontWeight: "bold", color: "white", backgroundColor: "darkgreen", textAlign: "center" } },
+                      {
+                        value: "Nama Siswa",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                      {
+                        value: "Kelas",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
+                      {
+                        value: "Skor",
+                        style: {
+                          fontWeight: "bold",
+                          color: "white",
+                          backgroundColor: "darkgreen",
+                          textAlign: "center",
+                        },
+                      },
                     ],
                   },
-                  { cells: [{ value: "Rani", style: { textAlign: "center" } }, { value: "8A", style: { textAlign: "center" } }, { value: 92, format: "#,##0", style: { textAlign: "center" } }] },
-                  { cells: [{ value: "Adi", style: { textAlign: "center" } }, { value: "8B", style: { textAlign: "center" } }, { value: 78, format: "#,##0", style: { textAlign: "center" } }] },
-                  { cells: [{ value: "Siti", style: { textAlign: "center" } }, { value: "8C", style: { textAlign: "center" } }, { value: 85, format: "#,##0", style: { textAlign: "center" } }] },
-                  { cells: [{ value: "Dedi", style: { textAlign: "center" } }, { value: "8A", style: { textAlign: "center" } }, { value: 88, format: "#,##0", style: { textAlign: "center" } }] },
-                  { cells: [{ value: "Eka", style: { textAlign: "center" } }, { value: "8B", style: { textAlign: "center" } }, { value: 75, format: "#,##0", style: { textAlign: "center" } }] },
-                  { cells: [{ value: "Fani", style: { textAlign: "center" } }, { value: "8C", style: { textAlign: "center" } }, { value: 90, format: "#,##0", style: { textAlign: "center" } }] },
+                  {
+                    cells: [
+                      { value: "Rani", style: { textAlign: "center" } },
+                      { value: "8A", style: { textAlign: "center" } },
+                      {
+                        value: 92,
+                        format: "#,##0",
+                        style: { textAlign: "center" },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Adi", style: { textAlign: "center" } },
+                      { value: "8B", style: { textAlign: "center" } },
+                      {
+                        value: 78,
+                        format: "#,##0",
+                        style: { textAlign: "center" },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Siti", style: { textAlign: "center" } },
+                      { value: "8C", style: { textAlign: "center" } },
+                      {
+                        value: 85,
+                        format: "#,##0",
+                        style: { textAlign: "center" },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Dedi", style: { textAlign: "center" } },
+                      { value: "8A", style: { textAlign: "center" } },
+                      {
+                        value: 88,
+                        format: "#,##0",
+                        style: { textAlign: "center" },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Eka", style: { textAlign: "center" } },
+                      { value: "8B", style: { textAlign: "center" } },
+                      {
+                        value: 75,
+                        format: "#,##0",
+                        style: { textAlign: "center" },
+                      },
+                    ],
+                  },
+                  {
+                    cells: [
+                      { value: "Fani", style: { textAlign: "center" } },
+                      { value: "8C", style: { textAlign: "center" } },
+                      {
+                        value: 90,
+                        format: "#,##0",
+                        style: { textAlign: "center" },
+                      },
+                    ],
+                  },
                 ],
               },
             ],
@@ -299,7 +395,9 @@ export default function SummaryLesson() {
   };
 
   const submitLatihan = async () => {
-    const allAnswered = Object.values(answers).every((answer) => answer.trim() !== "");
+    const allAnswered = Object.values(answers).every(
+      (answer) => answer.trim() !== ""
+    );
     if (!allAnswered) {
       Swal.fire({
         title: "Belum Selesai",
@@ -317,10 +415,14 @@ export default function SummaryLesson() {
         let isCorrect = false;
         if (Array.isArray(correctAnswers[field])) {
           isCorrect = correctAnswers[field].some(
-            (correct) => answers[field].trim().toLowerCase() === correct.trim().toLowerCase()
+            (correct) =>
+              answers[field].trim().toLowerCase() ===
+              correct.trim().toLowerCase()
           );
         } else {
-          isCorrect = answers[field].trim().toLowerCase() === correctAnswers[field].trim().toLowerCase();
+          isCorrect =
+            answers[field].trim().toLowerCase() ===
+            correctAnswers[field].trim().toLowerCase();
         }
         if (isCorrect) correctCount++;
       });
@@ -351,7 +453,7 @@ export default function SummaryLesson() {
       }
 
       await axios.post(
-        `http://localhost:5000/api/students/scores/${nis}`,
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${nis}`,
         {
           latihan1: null,
           latihan2: null,
@@ -380,7 +482,9 @@ export default function SummaryLesson() {
       if (error.response) {
         Swal.fire({
           title: "Kesalahan",
-          text: `Gagal mengirim skor: ${error.response.data.message || error.response.statusText}`,
+          text: `Gagal mengirim skor: ${
+            error.response.data.message || error.response.statusText
+          }`,
           icon: "error",
           confirmButtonText: "OK",
           confirmButtonColor: "#255F38",
@@ -412,25 +516,38 @@ export default function SummaryLesson() {
       </div>
 
       {/* Petunjuk Umum */}
-      <section className="p-4 bg-green-100 rounded shadow-md mb-6">
-        <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
-        <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
+      <section className="p-4 mb-6 bg-green-100 rounded shadow-md">
+        <h3 className="text-lg font-semibold text-[#255F38] mb-2">
+          Petunjuk Umum
+        </h3>
+        <ol className="space-y-1 text-sm text-gray-700 list-decimal list-inside md:text-base">
           <li>Bacalah studi kasus di bawah ini dengan saksama.</li>
-          <li>Jawab setiap pertanyaan pada bagian yang yang telah disediakan.</li>
-          <li>Setelah selesai menjawab semua pertanyaan, klik tombol <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.</li>
+          <li>
+            Jawab setiap pertanyaan pada bagian yang yang telah disediakan.
+          </li>
+          <li>
+            Setelah selesai menjawab semua pertanyaan, klik tombol{" "}
+            <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.
+          </li>
         </ol>
       </section>
 
-      <div className="p-6 bg-white rounded shadow-lg mt-6">
-        <h3 className="text-md font-semibold text-green-700">
+      <div className="p-6 mt-6 bg-white rounded shadow-lg">
+        <h3 className="font-semibold text-green-700 text-md">
           Kasus: Kelola Data Lomba Pidato
         </h3>
-        <p className="text-gray-700 mt-3 leading-relaxed text-justify">
-          Kamu membantu Budi mengelola data lomba pidato. Gunakan <strong>sorting</strong> untuk mengurutkan skor dan <strong>filtering</strong> untuk menampilkan siswa kelas 8A.
+        <p className="mt-3 leading-relaxed text-justify text-gray-700">
+          Kamu membantu Budi mengelola data lomba pidato. Gunakan{" "}
+          <strong>sorting</strong> untuk mengurutkan skor dan{" "}
+          <strong>filtering</strong> untuk menampilkan siswa kelas 8A.
         </p>
 
-        <div className="w-full flex justify-center px-4">
-          <div id="spreadsheet1" className="w-full max-w-full md:max-w-screen-md" style={{ height: "400px" }}></div>
+        <div className="flex justify-center w-full px-4">
+          <div
+            id="spreadsheet1"
+            className="w-full max-w-full md:max-w-screen-md"
+            style={{ height: "400px" }}
+          ></div>
         </div>
       </div>
 
@@ -447,7 +564,8 @@ export default function SummaryLesson() {
         {
           key: "customSort",
           title: "2. Mencari Pola (Pengenalan Pola)",
-          question: "Setelah diterapkan filter untuk kelas 8B, siapa saja yang muncul di tabel?",
+          question:
+            "Setelah diterapkan filter untuk kelas 8B, siapa saja yang muncul di tabel?",
           points: [
             "Lihat data yang muncul setelah filter kelas diubah menjadi 8B.",
             "Perhatikan kolom nama dan skor.",
@@ -457,7 +575,8 @@ export default function SummaryLesson() {
         {
           key: "filtering",
           title: "3. Mengabaikan yang Tidak Penting (Abstraksi)",
-          question: "Kolom apa yang dapat diterapkan filtering jika ingin menampilkan siswa berdasarkan informasi 8A, 8B dan 8c?",
+          question:
+            "Kolom apa yang dapat diterapkan filtering jika ingin menampilkan siswa berdasarkan informasi 8A, 8B dan 8c?",
           points: [
             "Pilih kolom yang dapat diterapkan filtering.",
             "Abaikan kolom yang tidak relevan.",
@@ -466,25 +585,26 @@ export default function SummaryLesson() {
         {
           key: "filterCriteria",
           title: "4. Membuat Langkah-langkah (Algoritma)",
-          question: "Jika ingin menampilkan siswa dari yang skor tertinggi ke terendah, apa yang harus digunakan?",
+          question:
+            "Jika ingin menampilkan siswa dari yang skor tertinggi ke terendah, apa yang harus digunakan?",
           points: [
             "Lihat kolom skor dan perhatikan apakah data memerlukan sorting atau filtering.",
             "Data tidak dihilangkan, hanya diubah urutannya.",
           ],
         },
       ].map(({ key, title, question, points }) => (
-        <section key={key} className="p-6 bg-white rounded shadow-lg mt-6">
-          <h3 className="text-md font-semibold text-green-700">{title}</h3>
-          <p className="text-gray-700 mt-3 leading-relaxed">
+        <section key={key} className="p-6 mt-6 bg-white rounded shadow-lg">
+          <h3 className="font-semibold text-green-700 text-md">{title}</h3>
+          <p className="mt-3 leading-relaxed text-gray-700">
             <strong>Pertanyaan:</strong> {question}
           </p>
-          <ul className="list-disc ml-6 text-gray-700 mt-2 text-sm md:text-base">
+          <ul className="mt-2 ml-6 text-sm text-gray-700 list-disc md:text-base">
             {points.map((point, idx) => (
               <li key={idx}>{point}</li>
             ))}
           </ul>
           <input
-            className="border p-2 rounded w-full mt-3"
+            className="w-full p-2 mt-3 border rounded"
             placeholder="Jawaban Anda"
             value={answers[key]}
             onChange={(e) => handleChange(key, e.target.value)}
@@ -495,7 +615,7 @@ export default function SummaryLesson() {
       <div className="flex justify-center mt-8">
         <button
           onClick={submitLatihan}
-          className="bg-green-800 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition duration-300 text-base shadow-md cursor-pointer"
+          className="px-5 py-2 text-base text-white transition duration-300 bg-green-800 rounded-lg shadow-md cursor-pointer hover:bg-green-700"
         >
           Selesai Latihan
         </button>

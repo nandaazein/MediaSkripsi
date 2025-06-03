@@ -21,7 +21,9 @@ const EvaluasiAkhir = () => {
           return;
         }
         const response = await axios.get(
-          "http://localhost:5000/api/quizzes/questions?quizNumber=5",
+          `${
+            import.meta.env.VITE_API_ENDPOINT
+          }/api/quizzes/questions?quizNumber=5`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -128,7 +130,9 @@ const EvaluasiAkhir = () => {
 
       try {
         await axios.post(
-          `http://localhost:5000/api/students/evaluation-scores/${user.nis}`,
+          `${
+            import.meta.env.VITE_API_ENDPOINT
+          }/api/students/evaluation-scores/${user.nis}`,
           { evaluation_score: score },
           { headers: { Authorization: `Bearer ${token}` } }
         );

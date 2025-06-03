@@ -96,7 +96,7 @@
 //       let response;
 //       if (isEditMode) {
 //         response = await axios.put(
-//           `http://localhost:5000/api/quizzes/questions/${selectedQuestion.id}`,
+//           `${import.meta.env.VITE_API_ENDPOINT}/api/quizzes/questions/${selectedQuestion.id}`,
 //           updatedData,
 //           { headers: { Authorization: `Bearer ${token}` } }
 //         );
@@ -126,7 +126,7 @@
 //     try {
 //       const token = localStorage.getItem('token');
 //       if (!token) throw new Error('Token tidak ditemukan');
-//       const response = await axios.delete(`http://localhost:5000/api/quizzes/questions/${id}`, {
+//       const response = await axios.delete(`${import.meta.env.VITE_API_ENDPOINT}/api/quizzes/questions/${id}`, {
 //         headers: { Authorization: `Bearer ${token}` }
 //       });
 //       alert(response.data.message);
@@ -459,7 +459,7 @@ const KelolaSoal = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Token tidak ditemukan");
       const response = await axios.get(
-        "http://localhost:5000/api/quizzes/questions",
+        `${import.meta.env.VITE_API_ENDPOINT}/api/quizzes/questions`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -543,13 +543,15 @@ const KelolaSoal = () => {
       let response;
       if (isEditMode) {
         response = await axios.put(
-          `http://localhost:5000/api/quizzes/questions/${selectedQuestion.id}`,
+          `${import.meta.env.VITE_API_ENDPOINT}/api/quizzes/questions/${
+            selectedQuestion.id
+          }`,
           updatedData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/quizzes/questions",
+          `${import.meta.env.VITE_API_ENDPOINT}/api/quizzes/questions`,
           updatedData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -610,7 +612,7 @@ const KelolaSoal = () => {
           const token = localStorage.getItem("token");
           if (!token) throw new Error("Token tidak ditemukan");
           const response = await axios.delete(
-            `http://localhost:5000/api/quizzes/questions/${id}`,
+            `${import.meta.env.VITE_API_ENDPOINT}/api/quizzes/questions/${id}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

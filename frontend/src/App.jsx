@@ -90,7 +90,7 @@ const ProtectedRoute = ({ element, allowedRoles }) => {
       try {
         // Verify token with backend
         const response = await axios.get(
-          "http://localhost:5000/api/verify-token",
+          `${import.meta.env.VITE_API_ENDPOINT}/api/verify-token`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

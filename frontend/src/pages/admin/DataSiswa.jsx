@@ -96,7 +96,7 @@
 //       }
 
 //       const response = await axios.put(
-//         `http://localhost:5000/api/students/${selectedStudent.nis}`,
+//         `${import.meta.env.VITE_API_ENDPOINT}/api/students/${selectedStudent.nis}`,
 //         updatedData,
 //         { headers: { Authorization: `Bearer ${token}` } }
 //       );
@@ -115,7 +115,7 @@
 //     try {
 //       const token = localStorage.getItem('token');
 //       console.log('Deleting student with NIS:', nis);
-//       await axios.delete(`http://localhost:5000/api/students/${nis}`, {
+//       await axios.delete(`${import.meta.env.VITE_API_ENDPOINT}/api/students/${nis}`, {
 //         headers: { Authorization: `Bearer ${token}` }
 //       });
 //       console.log('Student deleted successfully');
@@ -355,7 +355,7 @@ const DataSiswa = () => {
       const token = localStorage.getItem("token");
       console.log("Fetching classes with token:", token);
       const response = await axios.get(
-        "http://localhost:5000/api/students/classes",
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/classes`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -411,7 +411,9 @@ const DataSiswa = () => {
       }
 
       const response = await axios.put(
-        `http://localhost:5000/api/students/${selectedStudent.nis}`,
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/${
+          selectedStudent.nis
+        }`,
         updatedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -454,9 +456,12 @@ const DataSiswa = () => {
         try {
           const token = localStorage.getItem("token");
           console.log("Deleting student with NIS:", nis);
-          await axios.delete(`http://localhost:5000/api/students/${nis}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          await axios.delete(
+            `${import.meta.env.VITE_API_ENDPOINT}/api/students/${nis}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
           console.log("Student deleted successfully");
 
           Swal.fire({

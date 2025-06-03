@@ -3,7 +3,7 @@
 # Setelah menjalankan Student Login atau Teacher Login, salin 'token' dari respons
 # dan tempel ke @token = <token_anda_di_sini>
 
-@host = http://localhost:5000
+@host = https://host-backend-production-569d.up.railway.app
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3NDY1MzcyODQsImV4cCI6MTc0NjU0MDg4NH0.r1BVQ9xR9AwIFochr6LQPdyHmOw4zxOnTlZWuEt_lbo
 
 ### Registrasi Siswa
@@ -34,9 +34,9 @@ POST {{host}}/api/teachers/register
 Content-Type: application/json
 
 {
-  "nip": "COBA",
-  "fullName": "Jane Smith",
-  "school": "SMA Negeri 1",
+  "nip": "123",
+  "fullName": "nanda",
+  "school": "ULM",
   "password": "123",
   "confirmPassword": "123"
 }

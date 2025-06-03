@@ -35,7 +35,7 @@ const DataNilai = () => {
       }
       console.log("Mengambil data nilai dengan token:", token);
       const response = await axios.get(
-        "http://localhost:5000/api/students/scores",
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -61,7 +61,7 @@ const DataNilai = () => {
       }
       console.log("Mengambil daftar kelas dengan token:", token);
       const response = await axios.get(
-        "http://localhost:5000/api/students/classes",
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/classes`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -119,7 +119,9 @@ const DataNilai = () => {
       );
 
       const response = await axios.post(
-        `http://localhost:5000/api/students/scores/${selectedScore.nis}`,
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${
+          selectedScore.nis
+        }`,
         updatedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

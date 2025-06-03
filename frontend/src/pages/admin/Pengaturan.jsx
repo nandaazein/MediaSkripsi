@@ -236,7 +236,7 @@ const PengaturanKKM = () => {
 
       console.log("Saving KKM:", kkmValues);
       await axios.put(
-        "http://localhost:5000/api/kkm",
+        `${import.meta.env.VITE_API_ENDPOINT}/api/kkm`,
         { kkmValues },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function ChartLesson() {
   useEffect(() => {
@@ -100,7 +100,14 @@ export default function ChartLesson() {
     decomposition: "jumlah anggota",
     pattern: "pramuka",
     abstraction: "nomor",
-    algorithm: ["kolom", "batang", "bar", "column", "bar chart", "column chart"],
+    algorithm: [
+      "kolom",
+      "batang",
+      "bar",
+      "column",
+      "bar chart",
+      "column chart",
+    ],
   };
 
   const [answers, setAnswers] = useState({
@@ -115,8 +122,10 @@ export default function ChartLesson() {
   };
 
   const submitLatihan = async () => {
-    const allAnswered = Object.values(answers).every(answer => answer.trim() !== "");
-    
+    const allAnswered = Object.values(answers).every(
+      (answer) => answer.trim() !== ""
+    );
+
     if (!allAnswered) {
       Swal.fire({
         title: "Belum Selesai",
@@ -133,8 +142,10 @@ export default function ChartLesson() {
       Object.keys(correctAnswers).forEach((field) => {
         let isCorrect = false;
         if (Array.isArray(correctAnswers[field])) {
-          isCorrect = correctAnswers[field].some(answer =>
-            answers[field].trim().toLowerCase() === answer.trim().toLowerCase()
+          isCorrect = correctAnswers[field].some(
+            (answer) =>
+              answers[field].trim().toLowerCase() ===
+              answer.trim().toLowerCase()
           );
         } else {
           isCorrect =
@@ -145,8 +156,8 @@ export default function ChartLesson() {
       });
       const score = (correctCount / 4) * 100;
 
-      const token = localStorage.getItem('token');
-      const user = localStorage.getItem('user');
+      const token = localStorage.getItem("token");
+      const user = localStorage.getItem("user");
       if (!token || !user) {
         Swal.fire({
           title: "Autentikasi Gagal",
@@ -170,7 +181,7 @@ export default function ChartLesson() {
       }
 
       await axios.post(
-        `http://localhost:5000/api/students/scores/${nis}`,
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${nis}`,
         {
           latihan1: null,
           latihan2: score,
@@ -180,7 +191,7 @@ export default function ChartLesson() {
           kuis2: null,
           kuis3: null,
           kuis4: null,
-          evaluasi_akhir: null
+          evaluasi_akhir: null,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -199,7 +210,9 @@ export default function ChartLesson() {
       if (error.response) {
         Swal.fire({
           title: "Kesalahan",
-          text: `Gagal mengirim skor: ${error.response.data.message || error.response.statusText}`,
+          text: `Gagal mengirim skor: ${
+            error.response.data.message || error.response.statusText
+          }`,
           icon: "error",
           confirmButtonText: "OK",
           confirmButtonColor: "#255F38",
@@ -232,19 +245,33 @@ export default function ChartLesson() {
 
       {/* Petunjuk Umum */}
       <section className="p-4 bg-green-100 rounded shadow-md mb-6">
-        <h3 className="text-lg font-semibold text-[#255F38] mb-2">Petunjuk Umum</h3>
+        <h3 className="text-lg font-semibold text-[#255F38] mb-2">
+          Petunjuk Umum
+        </h3>
         <ol className="list-decimal list-inside text-gray-700 space-y-1 text-sm md:text-base">
           <li>Bacalah studi kasus berikut dengan saksama.</li>
-          <li>Jawab setiap pertanyaan pada bagian yang yang telah disediakan.</li>
-          <li>Setelah selesai menjawab semua pertanyaan, klik tombol <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.</li>
+          <li>
+            Jawab setiap pertanyaan pada bagian yang yang telah disediakan.
+          </li>
+          <li>
+            Setelah selesai menjawab semua pertanyaan, klik tombol{" "}
+            <em>“Selesai Latihan”</em> untuk mengumpulkan jawabanmu.
+          </li>
         </ol>
       </section>
 
       {/* Studi Kasus */}
       <section className="p-6 bg-white rounded shadow-lg mb-6">
-        <h3 className="text-lg font-semibold text-green-700 mb-3">Studi Kasus: Berlatih Visualisasi Data</h3>
+        <h3 className="text-lg font-semibold text-green-700 mb-3">
+          Studi Kasus: Berlatih Visualisasi Data
+        </h3>
         <p className="px-4 text-sm leading-relaxed text-justify text-gray-700 md:text-base">
-          Sebagai pengurus OSIS, kamu diminta membuat laporan untuk kepala sekolah mengenai minat siswa terhadap kegiatan ekstrakurikuler. Data jumlah anggota tiap ekstrakurikuler sudah dicatat dalam bentuk tabel, namun sulit dipahami jika hanya dilihat begitu saja. Untuk mempermudah analisis dan presentasi, kamu akan menyajikan data ini dalam bentuk grafik yang lebih mudah dibaca.
+          Sebagai pengurus OSIS, kamu diminta membuat laporan untuk kepala
+          sekolah mengenai minat siswa terhadap kegiatan ekstrakurikuler. Data
+          jumlah anggota tiap ekstrakurikuler sudah dicatat dalam bentuk tabel,
+          namun sulit dipahami jika hanya dilihat begitu saja. Untuk mempermudah
+          analisis dan presentasi, kamu akan menyajikan data ini dalam bentuk
+          grafik yang lebih mudah dibaca.
         </p>
         <div className="flex justify-center w-full px-4 mt-5">
           <div
@@ -257,47 +284,52 @@ export default function ChartLesson() {
 
       {/* Soal Latihan */}
       <section className="mb-6">
-       
         {[
           {
             key: "decomposition",
             title: "1. Memecah Masalah (Dekomposisi)",
-            question: "Data utama apa yang diperlukan untuk membuat grafik perbandingan jumlah anggota ekstrakurikuler?",
+            question:
+              "Data utama apa yang diperlukan untuk membuat grafik perbandingan jumlah anggota ekstrakurikuler?",
             points: [
               "Identifikasi elemen penting dari data yang akan digunakan untuk membuat grafik.",
-              "Fokus pada angka atau informasi yang akan divisualisasikan."
+              "Fokus pada angka atau informasi yang akan divisualisasikan.",
             ],
           },
           {
             key: "pattern",
             title: "2. Mencari Pola (Pengenalan Pola)",
-            question: "Ekstrakurikuler apa yang memiliki anggota paling banyak?",
+            question:
+              "Ekstrakurikuler apa yang memiliki anggota paling banyak?",
             points: [
               "Bandingkan jumlah anggota pada setiap ekstrakurikuler.",
-              "Cari nilai tertinggi dari data yang tersedia."
+              "Cari nilai tertinggi dari data yang tersedia.",
             ],
           },
           {
             key: "abstraction",
             title: "3. Mengabaikan yang Tidak Penting (Abstraksi)",
-            question: "Kolom atau informasi apa yang tidak diperlukan dalam grafik perbandingan jumlah anggota ekstrakurikuler?",
+            question:
+              "Kolom atau informasi apa yang tidak diperlukan dalam grafik perbandingan jumlah anggota ekstrakurikuler?",
             points: [
               "Tentukan informasi yang tidak relevan untuk tujuan visualisasi perbandingan.",
-              "Fokus hanya pada data yang mendukung tujuan grafik."
+              "Fokus hanya pada data yang mendukung tujuan grafik.",
             ],
           },
           {
             key: "algorithm",
             title: "4. Membuat Langkah-langkah (Algoritma)",
-            question: "Jenis grafik apa yang paling cocok untuk membandingkan jumlah anggota ekstrakurikuler?",
+            question:
+              "Jenis grafik apa yang paling cocok untuk membandingkan jumlah anggota ekstrakurikuler?",
             points: [
               "Pilih jenis grafik yang sesuai untuk membandingkan data antar kategori.",
-              "Pastikan grafik yang dipilih memudahkan pembaca untuk melihat perbandingan dengan jelas."
+              "Pastikan grafik yang dipilih memudahkan pembaca untuk melihat perbandingan dengan jelas.",
             ],
           },
         ].map(({ key, title, question, points }) => (
           <div key={key} className="p-6 bg-white rounded shadow-lg mb-6">
-            <h4 className="text-md font-semibold text-green-700 mb-3">{title}</h4>
+            <h4 className="text-md font-semibold text-green-700 mb-3">
+              {title}
+            </h4>
             <p className="text-gray-700 leading-relaxed">
               <strong>Pertanyaan:</strong> {question}
             </p>

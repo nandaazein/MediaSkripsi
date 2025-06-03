@@ -21,7 +21,9 @@ const KuisPengelolaanData = () => {
           return;
         }
         const response = await axios.get(
-          "http://localhost:5000/api/quizzes/questions?quizNumber=4",
+          `${
+            import.meta.env.VITE_API_ENDPOINT
+          }/api/quizzes/questions?quizNumber=4`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -121,7 +123,7 @@ const KuisPengelolaanData = () => {
         questions.length > 0 ? (correctCount / questions.length) * 100 : 0;
 
       await axios.post(
-        `http://localhost:5000/api/students/scores/${user.nis}`,
+        `${import.meta.env.VITE_API_ENDPOINT}/api/students/scores/${user.nis}`,
         { kuis4: score },
         { headers: { Authorization: `Bearer ${token}` } }
       );
